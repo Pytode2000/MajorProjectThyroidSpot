@@ -1,0 +1,78 @@
+/********** <Global stylesheet> **********/
+
+:root {
+  font-size: 16px;
+  font-family: 'Open Sans';
+  --transition-speed: 600ms;
+  --text-primary: #b6b6b6;
+  --text-secondary: #ececec;
+  --bg-primary: #23232e;
+  --bg-secondary: #141418;
+}
+
+body {
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  margin: 0;
+  padding: 0;
+}
+
+/*** <Scrollbar> ***/
+body::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+body::-webkit-scrollbar-thumb {
+  background: lightgrey;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: darkgray;
+}
+
+/*** </Scrollbar> ***/
+
+
+/*** <Main> ***/
+main {
+  transition: var(--transition-speed);
+  margin-left: 5rem;
+
+}
+
+.content {
+  padding: 1rem;
+}
+
+#navbar-html:hover+main {
+  transition: var(--transition-speed);
+  filter: grayscale(100%) opacity(0.3);
+}
+
+/*** </Main> ***/
+
+
+/***** <Small Screens> *****/
+@media only screen and (max-width: 600px) {
+  main {
+    margin: 0;
+  }
+
+  #navbar-html:hover+main {
+    filter: grayscale(0%) opacity(1);
+  }
+
+  /* id="botcopy-embedder-d7lcfheammjct" */
+  .botcopy--minimized-box {
+    display: hidden !important;
+  }
+}
+
+/***** </Small Screens> *****/
+
+
+/********** </Global stylesheet> **********/
