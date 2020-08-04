@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="StudentDetailsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Student1">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="studentName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="studentClass" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="studentCourse" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="StudentDetailsModelStoreContainer">
+    <EntitySet Name="Student1" EntityType="Self.Student1" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
