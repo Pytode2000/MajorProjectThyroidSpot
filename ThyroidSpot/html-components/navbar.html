@@ -20,14 +20,14 @@
         </li>
 
         <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="index.html" class="nav-link">
                 <i class="svg-inline--fa fas fa-home fa-primary fa-w-16 fa-2x"></i>
                 <span class="link-text">Home</span>
             </a>
         </li>
 
         <li class="nav-item" id="nav-tab-account">
-            <a href="#" class="nav-link">
+            <a href="account.html" class="nav-link">
                 <i class="svg-inline--fa fas fa-user fa-primary fa-w-16 fa-2x"></i>
                 <span class="link-text">Account</span>
             </a>
@@ -81,7 +81,16 @@
     </ul>
 </nav>
 
+<!-- When loading, this animation will be activated. -->
+<div class="loader-wrapper">
+    <span class="loader"><span class="loader-inner"></span></span>
+</div>
+
 <script>
+    $(window).on("load", function () {
+        $(".loader-wrapper").fadeOut("slow");
+    });
+
     function navigation_control() {
         /* Check if user is logged in or not. */
 
@@ -117,8 +126,6 @@
         if (user_logged_in == "n" || user_account_type != "admin") {
             document.getElementById('nav-tab-manage').style.display = "none";
         }
-
-
     }
 
     navigation_control();
