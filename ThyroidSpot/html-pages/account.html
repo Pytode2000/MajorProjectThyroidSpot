@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" />
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="../js/signInFunction.js"></script>
 
 
     <title>Thyroid Spot</title>
@@ -17,22 +18,47 @@
 
 <body>
     <div id="navbar-html"></div>
-
     <main>
-        <div class="content">
+        <div>
+            <form>
+                <div style="font-size:1.5vw;">
+                    <div id="signUpForm" style="display: none;">
+                        <label for="nric"><b>NRIC</b></label>
+                        <input type="text" placeholder="Enter NRIC"><br>
 
-            <h1>Heading lorem ipsum</h1>
+                        <label for="fullName"><b>Full Name</b></label>
+                        <input type="text" placeholder="Enter Full Name"><br>
 
-            <p>
-                I'm baby kale chips affogato ennui lumbersexual, williamsburg paleo quinoa iceland normcore tumeric. Kitsch coloring book
-                retro, seitan schlitz tattooed biodiesel vexillologist neutra. Synth mumblecore deep v, umami selfies normcore
-                gluten-free snackwave. Seitan ramps drinking vinegar venmo keytar, humblebrag VHS post-ironic tacos godard
-                pour-over.
-            </p>
+                        <label for="birthDate"><b>Birth Date</b></label>
+                        <input type="date" placeholder="Enter Birth Date"><br>
 
+
+                        <input type="radio" id="male" name="gender" value="male">
+                        <label for="gender"><b>Male</b></label>
+
+                        <input type="radio" id="female" name="gender" value="female">
+                        <label for="gender"><b>Female</b></label><br>                       
+
+                        <label for="diagnosis"><b>Diagnosis</b></label>
+                        <select id="diagnosis" name="diagnosis">
+                            <option value="test1">Test1</option>
+                            <option value="test2">Test2</option>
+                            <option value="test3">Test3</option>
+                        </select><br>
+                    </div>
+
+                    <label for="email"><b>Email</b></label>
+                    <input type="email" placeholder="Enter Email"><br>
+              
+                    <label for="password"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password"><br>
+
+                    <input id="submitBtn" type="button" value="Sign In">
+                    <input id="signUpFormBtn" onclick = "showSignUpForm()" type="button" value="Sign Up For An Account">
+                    <input id="signInFormBtn" style="display: none;" onclick = "showSignInForm()" type="button" value="Already Have An Account">
+                </div>
+            </form>
         </div>
-
-        <div id="footer-html"></div>
     </main>
 
     <script type="text/javascript">
@@ -43,7 +69,5 @@
         });
     </script>
 </body>
-
-
 
 </html>
