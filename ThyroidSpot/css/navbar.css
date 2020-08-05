@@ -64,6 +64,10 @@
     transition: var(--transition-speed);
 }
 
+#nav-tab-diseases:hover .nav-link i {
+    transform: rotate(180deg);
+}
+
 .fa-primary {
     color: #ff7eee;
 }

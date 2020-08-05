@@ -19,15 +19,15 @@
             </a>
         </li>
 
-        <li class="nav-item">
-            <a href="index.html" class="nav-link">
+        <!-- <li class="nav-item">
+            <a href="#" class="nav-link">
                 <i class="svg-inline--fa fas fa-home fa-primary fa-w-16 fa-2x"></i>
                 <span class="link-text">Home</span>
             </a>
-        </li>
+        </li> -->
 
         <li class="nav-item" id="nav-tab-account">
-            <a href="account.html" class="nav-link">
+            <a href="#" class="nav-link">
                 <i class="svg-inline--fa fas fa-user fa-primary fa-w-16 fa-2x"></i>
                 <span class="link-text">Account</span>
             </a>
@@ -45,6 +45,13 @@
             <a href="#" class="nav-link">
                 <i class="svg-inline--fa fas fa-notes-medical fa-primary fa-w-16 fa-2x"></i>
                 <span class="link-text">Health</span>
+            </a>
+        </li>
+
+        <li class="nav-item" id="nav-tab-diseases">
+            <a href="#" class="nav-link">
+                <i class="svg-inline--fa fas fa-lungs-virus fa-primary fa-w-16 fa-2x fa-rotate-180"></i>
+                <span class="link-text">Diseases</span>
             </a>
         </li>
 
@@ -83,7 +90,7 @@
 
 <!-- When loading, this animation will be activated. -->
 <div class="loader-wrapper">
-    <span class="loader"><span class="loader-inner"></span></span>
+    <span class="loader"><span class="loader-inner"><b style="font-size:1.5rem; color: var(--text-secondary)">A&#42;</b></span></span>
 </div>
 
 <script>
@@ -95,12 +102,9 @@
         /* Check if user is logged in or not. */
 
         // If user is *not* logged in, "Logout" button in navbar will not show. 
-        if (user_logged_in == "n") {
-            document.getElementById('nav-tab-logout').style.display = "none";
-        }
-
         // If user is *not* logged in, "Profile" button in navbar will not show. 
         if (user_logged_in == "n") {
+            document.getElementById('nav-tab-logout').style.display = "none";
             document.getElementById('nav-tab-profile').style.display = "none";
         }
 
@@ -115,6 +119,7 @@
         // If user is *not* logged in OR account type is not patient, "Health" button (used by account_type="patient") in navbar will not show.
         if (user_logged_in == "n" || user_account_type != "patient") {
             document.getElementById('nav-tab-health').style.display = "none";
+            document.getElementById('nav-tab-diseases').style.display = "none";
         }
 
         // If user is *not* logged in OR account type is not clinician, "Patients" button (used by account_type="clinician") in navbar will not show.
