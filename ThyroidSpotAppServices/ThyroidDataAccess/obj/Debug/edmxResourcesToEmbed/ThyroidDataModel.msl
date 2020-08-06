@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ThyroidDataModelStoreContainer" CdmEntityContainer="ThyroidDataEntities">
+    <EntitySetMapping Name="disease_information">
+      <EntityTypeMapping TypeName="ThyroidDataModel.disease_information">
+        <MappingFragment StoreEntitySet="disease_information">
+          <ScalarProperty Name="disease" ColumnName="disease" />
+          <ScalarProperty Name="thumbnail" ColumnName="thumbnail" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="disease_content" ColumnName="disease_content" />
+          <ScalarProperty Name="symptom" ColumnName="symptom" />
+          <ScalarProperty Name="cause" ColumnName="cause" />
+          <ScalarProperty Name="treatment" ColumnName="treatment" />
+          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="patient_information">
+      <EntityTypeMapping TypeName="ThyroidDataModel.patient_information">
+        <MappingFragment StoreEntitySet="patient_information">
+          <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="diagnosis" ColumnName="diagnosis" />
+          <ScalarProperty Name="ic_number" ColumnName="ic_number" />
+          <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="blood_type" ColumnName="blood_type" />
+          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="patient_report">
+      <EntityTypeMapping TypeName="ThyroidDataModel.patient_report">
+        <MappingFragment StoreEntitySet="patient_report">
+          <ScalarProperty Name="report_id" ColumnName="report_id" />
+          <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+          <ScalarProperty Name="FT4" ColumnName="FT4" />
+          <ScalarProperty Name="TSH" ColumnName="TSH" />
+          <ScalarProperty Name="drug_dose" ColumnName="drug_dose" />
+          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
