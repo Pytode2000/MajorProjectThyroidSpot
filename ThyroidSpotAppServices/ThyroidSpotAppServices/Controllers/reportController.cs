@@ -62,7 +62,7 @@ namespace ThyroidSpotAppServices.Controllers
                 patient_report reportid = entities.patient_report.Find(id);
                 entities.patient_report.Remove(reportid);
                 entities.SaveChanges();
-                return "Deleted Successfully";
+                return "Report Deleted Successfully";
             }
         }
 
