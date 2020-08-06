@@ -1,0 +1,11 @@
+C:\Users\Potato\Documents\GitHub\TestingASP\StudentDataAccess\bin\Debug\StudentDataAccess.dll.config
+C:\Users\Potato\Documents\GitHub\TestingASP\StudentDataAccess\bin\Debug\StudentDataAccess.dll
+C:\Users\Potato\Documents\GitHub\TestingASP\StudentDataAccess\bin\Debug\StudentDataAccess.pdb
+C:\Users\Potato\Documents\GitHub\TestingASP\StudentDataAccess\bin\Debug\EntityFramework.dll
+C:\Users\Potato\Documents\GitHub\TestingASP\StudentDataAccess\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Potato\Documents\GitHub\TestingASP\StudentDataAccess\bin\Debug\EntityFramework.xml
+C:\Users\Potato\Documents\GitHub\TestingASP\StudentDataAccess\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Potato\Documents\GitHub\TestingASP\StudentDataAccess\obj\Debug\StudentDataAccess.csproj.CoreCompileInputs.cache
+C:\Users\Potato\Documents\GitHub\TestingASP\StudentDataAccess\obj\Debug\StudentDataAccess.csproj.CopyComplete
+C:\Users\Potato\Documents\GitHub\TestingASP\StudentDataAccess\obj\Debug\StudentDataAccess.dll
+C:\Users\Potato\Documents\GitHub\TestingASP\StudentDataAccess\obj\Debug\StudentDataAccess.pdb

@@ -1,0 +1,99 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="functions.js"></script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Song Library</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+    <h1 style="text-align: center;">List of Students</h1>
+    <div class="container">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>Class</th>
+                    <th>Course</th>
+                    <th></th>
+                    <th>
+
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newBookModal">
+                            New Student
+                        </button>
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+
+    </div>
+
+    <!-- New BookModal -->
+    <div class="modal fade" id="newBookModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Enter New Student</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Student Name</label>
+                        <input type="text" class="form-control" id="newName" placeholder="Enter Name Here">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Student Class:</label>
+                        <input type="text" class="form-control" id="newClass" placeholder="Enter Class Here">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Student Course:</label>
+                        <input type="text" class="form-control" id="newCourse" placeholder="Enter Course Here">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="newProductBtn">Upload</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Update|Delete BookModal -->
+    <div class="modal fade" id="updateBookModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Update Data</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="updateID">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Name</label>
+                        <input type="text" class="form-control" id="updateStudentName" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Class</label>
+                        <input type="text" class="form-control" id="updateStudentClass" placeholder="Class">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Course</label>
+                        <input type="text" class="form-control" id="updateStudentCourse" placeholder="Course">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="updateProduct();">Update</button>
+                    <button type="button" class="btn btn-danger" onclick="deleteProduct();">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
