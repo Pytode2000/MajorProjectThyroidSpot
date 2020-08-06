@@ -1,5 +1,5 @@
 /*** <Navbar> ***/
-.navbar {
+.navbar-main {
     position: fixed;
     z-index: 1000;
     background-color: var(--bg-primary);
@@ -108,7 +108,7 @@
     transition: var(--transition-speed);
 }
 
-.navbar:hover .logo svg {
+.navbar-main:hover .logo svg {
     transform: rotate(-540deg);
 }
 
@@ -118,11 +118,12 @@
 
 /***** <Small Screens> *****/
 @media only screen and (max-width: 600px) {
-    .navbar {
+    .navbar-main {
         bottom: 0;
         width: 100vw;
         height: 5rem;
         border-top: 1px solid gray;
+        background: var(--bg-secondary);
     }
 
     .logo {
@@ -137,6 +138,12 @@
         justify-content: center;
     }
 
+    .nav-link:hover {
+        filter: grayscale(0%) opacity(1);
+        background: var(--bg-primary);
+        color: var(--text-secondary);
+    }
+
     .logout-logo {
         -webkit-transform: rotate(180deg);
         -moz-transform: rotate(180deg);
@@ -145,7 +152,7 @@
         transform: rotate(180deg);
     }
 
-    .navbar:hover .logout-logo {
+    .navbar-main:hover .logout-logo {
         -webkit-transform: rotate(180deg);
         -moz-transform: rotate(180deg);
         -ms-transform: rotate(180deg);
@@ -158,18 +165,18 @@
 
 /***** <Large Screens> *****/
 @media only screen and (min-width: 600px) {
-    .navbar {
+    .navbar-main {
         top: 0;
         width: 5rem;
         height: 100vh;
         border-right: 1px solid grey;
     }
 
-    .navbar:hover {
+    .navbar-main:hover {
         width: 16rem;
     }
 
-    .navbar:hover .logout-logo {
+    .navbar-main:hover .logout-logo {
         -webkit-transform: rotate(180deg);
         -moz-transform: rotate(180deg);
         -ms-transform: rotate(180deg);
@@ -177,15 +184,15 @@
         transform: rotate(180deg);
     }
 
-    .navbar:hover .link-text {
+    .navbar-main:hover .link-text {
         display: inline;
     }
 
-    .navbar:hover .logo svg {
+    .navbar-main:hover .logo svg {
         margin-left: 13rem;
     }
 
-    .navbar:hover .logo-text {
+    .navbar-main:hover .logo-text {
         left: 0px;
     }
 }

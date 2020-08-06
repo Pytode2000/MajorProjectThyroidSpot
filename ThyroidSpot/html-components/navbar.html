@@ -1,8 +1,6 @@
 <link rel="stylesheet" href="../css/navbar.css" />
-<script src="../js/test.js"></script>
 
-
-<nav class="navbar">
+<nav class="navbar-main">
     <ul class="navbar-nav">
         <li class="logo">
             <a href="#" class="nav-link">
@@ -87,11 +85,31 @@
 
     </ul>
 </nav>
-
 <!-- When loading, this animation will be activated. -->
 <div class="loader-wrapper">
-    <span class="loader"><span class="loader-inner"><b style="font-size:1.5rem; color: var(--text-secondary)">A&#42;</b></span></span>
+    <span class="loader"><span class="loader-inner"></span></span>
 </div>
+
+<script src="../js/firebase-init.js"></script>
+
+<script src="../js/firebase-log-state.js"></script>
+
+<!-- <script src="../js/firebase-api.js"></script> -->
+<script>
+    // LOGOUT FUNCTION
+    const btnLogout = document.getElementById("nav-tab-logout");
+    btnLogout.addEventListener("click", e => {
+        firebase.auth().signOut().then(function () {
+            // Sign-out successful.
+            console.log("Logged Out");
+            window.location.href = 'index.html';
+
+        }).catch(function (error) {
+            console.log("Error occurred when logging out");
+        });
+    });
+</script>
+
 
 <script>
     $(window).on("load", function () {
@@ -100,6 +118,7 @@
 
     function navigation_control() {
         /* Check if user is logged in or not. */
+        user_logged_in = sessionStorage.getItem("user_logged_in");
 
         // If user is *not* logged in, "Logout" button in navbar will not show. 
         // If user is *not* logged in, "Profile" button in navbar will not show. 
