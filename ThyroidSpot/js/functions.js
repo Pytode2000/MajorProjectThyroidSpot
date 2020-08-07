@@ -107,7 +107,7 @@ function postDiseaseInfo() {
         return function (e) {
             var binaryData = e.target.result;
             //composing the json object which is to be sent to the Post endpoint
-            var product = { disease: currentDiseaseID, description: $('#newDiseaseDesc').val(), disease_content: $('#newDiseaseContent').val(), symptom: $('#newDiseaseSymptom').val(), cause: $('#newDiseaseCause').val(), treatment: $('#newDiseaseTreatment').val(), timestamp: date, CoverImage: window.btoa(binaryData) }
+            var product = { disease: $('#newDiseaseName').val(), description: $('#newDiseaseDesc').val(), disease_content: $('#newDiseaseContent').val(), symptom: $('#newDiseaseSymptom').val(), cause: $('#newDiseaseCause').val(), treatment: $('#newDiseaseTreatment').val(), timestamp: date, CoverImage: window.btoa(binaryData) }
             console.log(product);
             $.ajax({
                 type: 'POST',
