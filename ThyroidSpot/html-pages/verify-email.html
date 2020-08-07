@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" />
+
+    <!-- FontAwesome (Icons) -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+    <!-- Jquery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX"
+        crossorigin="anonymous">
+
+    <!-- Local Imports -->
+    <link rel="stylesheet" href="../css/style.css" />
+
+    <title>Thyroid Spot</title>
+</head>
+
+<body>
+
+
+
+
+    <main>
+        <div class="content">
+
+            <div class="container container-small" style="margin-top: 9%; background: black">
+
+
+                <div class="card" style="border: none;">
+
+                    <div class="card-header text-center" style="background: black; color: white;">
+                        <h1><i class="fas fa-exclamation-triangle"></i> Verify Account <i class="fas fa-exclamation-triangle"></i></h1>
+                    </div>
+
+                    <div class="card-body">
+                        Dear user, the email address used to register this account has <b>not been verified</b> yet. To access
+                        <b>Thyroid Spot
+                        </b> beyond this point, please verify your email address, thank you.
+                        <br>
+                        <br>
+                        <div style="text-align: center;">
+                            <div style="display: inline-block; text-align: left;">
+                                <span id="welcome-text"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer text-muted">
+
+                        <button class="btn btn-secondary" style="float: left; width: 40%;" onclick="logout()"><b>Logout</b></button>
+
+
+                        <button class="btn btn-secondary" style="float: right;width: 40%;" onclick="resendVerificationEmail()"><b>Re-send
+                                Email
+                            </b></button>
+
+                        <br>
+                        <br>
+                        <button class="btn btn-secondary btn-block" onclick="refresh()"><b>Refresh
+                            </b></button>
+                    </div>
+                </div>
+                <br>
+            </div>
+
+        </div>
+
+        <div id="footer-html"></div>
+    </main>
+
+
+</body>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script>
+
+<!-- This page will share the same JS file with index.html. -->
+<script src="../js/verify-email.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        // $("#navbar-html").load("../html-components/navbar.html");
+
+        $("#footer-html").load("../html-components/footer.html");
+
+    });
+</script>
+
+
+</body>
+
+
+
+</html>

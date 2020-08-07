@@ -33,7 +33,7 @@
     <main>
         <div class="content">
 
-            <div class="container form-container">
+            <div class="container container-fluid form-container">
                 <br>
                 <div class="btn-group btn-group-toggle" data-toggle="buttons" style="width: 100%">
                     <label class="btn btn-secondary active btn-lg" onclick="toggleLogin()" id="toggleLoginBtn">
@@ -48,17 +48,17 @@
                     <h3>Already have an account? Login now!</h3>
                     <form>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+                            <label for="loginEmail">Email address</label>
+                            <input type="email" class="form-control" id="loginEmail" aria-describedby="emailHelp" placeholder="Enter email">
                             <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="password" placeholder="Password">
+                            <label for="loginPassword">Password</label>
+                            <input type="password" class="form-control" id="loginPassword" placeholder="Password">
                         </div>
 
                     </form>
-                    <button id="btnLogin" class="btn btn-primary">Login</button>
+                    <button id="btnLogin" class="btn btn-primary" onclick="login()">Login</button>
                 </div>
 
                 <div id="registerForm" class="hide">
@@ -66,19 +66,19 @@
 
                     <form>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+                            <label for="registerEmail">Email address</label>
+                            <input type="email" class="form-control" id="registerEmail" aria-describedby="emailHelp" placeholder="Enter email">
                             <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="password" placeholder="Password">
+                            <label for="registerPassword">Password</label>
+                            <input type="password" class="form-control" id="registerPassword" placeholder="Password">
                         </div>
 
                         <h3>Still got other fields. NOT DONE</h3>
 
                     </form>
-                    <button id="btnRegister" class="btn btn-primary">Register</button>
+                    <button id="btnRegister" class="btn btn-primary" onclick="register()">Register</button>
                 </div>
 
 
@@ -98,7 +98,6 @@
 
 <script src="../js/index.js"></script>
 
-<!-- <script src="../js/firebase-api.js"></script> -->
 
 <script type="text/javascript">
     $(document).ready(function () {
