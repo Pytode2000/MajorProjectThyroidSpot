@@ -1,6 +1,6 @@
-//disease info functions
+//disease functions
 var diseaseURI = 'https://localhost:44395/api/Disease';
-var disinfoArray = [];
+var diseaseInfoArray = [];
 var currentDiseaseID; //this variable will contain the disease name that's selected
 
 //This function will consume the disease GET API
