@@ -28,5 +28,6 @@ namespace ThyroidDataAccess
         public virtual DbSet<disease_information> disease_information { get; set; }
         public virtual DbSet<patient_information> patient_information { get; set; }
         public virtual DbSet<patient_report> patient_report { get; set; }
+        public virtual DbSet<user> user { get; set; }
     }
 }

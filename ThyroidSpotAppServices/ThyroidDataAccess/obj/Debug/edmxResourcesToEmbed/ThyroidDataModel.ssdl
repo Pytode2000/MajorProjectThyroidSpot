@@ -5,7 +5,7 @@
       <PropertyRef Name="disease" />
     </Key>
     <Property Name="disease" Type="nvarchar" MaxLength="255" Nullable="false" />
-    <Property Name="thumbnail" Type="nvarchar" MaxLength="255" />
+    <Property Name="thumbnail" Type="text" />
     <Property Name="description" Type="text" />
     <Property Name="disease_content" Type="text" />
     <Property Name="symptom" Type="text" />
@@ -37,9 +37,19 @@
     <Property Name="drug_dose" Type="int" Nullable="false" />
     <Property Name="timestamp" Type="nvarchar" MaxLength="255" Nullable="false" />
   </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="full_name" Type="nvarchar" MaxLength="70" Nullable="false" />
+    <Property Name="account_type" Type="nvarchar" MaxLength="9" Nullable="false" />
+  </EntityType>
   <EntityContainer Name="ThyroidDataModelStoreContainer">
     <EntitySet Name="disease_information" EntityType="Self.disease_information" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="patient_information" EntityType="Self.patient_information" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="patient_report" EntityType="Self.patient_report" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>
