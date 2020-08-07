@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Imports -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="../js/disease-function.js"></script>
+
+
+    <title>Thyroid Spot</title>
+</head>
+
+<body>
+    <div id="navbar-html"></div>
+    <main>
+        <div class="container">
+            <div onclick="document.getElementById('id01').style.display='block'" class = "centerText">
+                <img  src="https://www.mei.edu/sites/default/files/2019-01/Virus.jpg" >
+                <div class="centerTitle"><b>Disease A</b></div>
+            </div>
+            <div class = "centerText">
+                <img src="https://www.mei.edu/sites/default/files/2019-01/Virus.jpg">
+                <div class="centerTitle"><b>Disease B</b></div>
+            </div>
+            <div class = "centerText">
+                <img src="https://www.mei.edu/sites/default/files/2019-01/Virus.jpg">
+                <div class="centerTitle"><b>Disease C</b></div>
+            </div>
+            <div class = "centerText">
+                <img src="https://www.mei.edu/sites/default/files/2019-01/Virus.jpg">
+                <div class="centerTitle"><b>Disease D</b></div>
+            </div>
+        </div>
+        <div id="id01" class="w3-modal">
+            <div class="w3-modal-content">
+              <div class="w3-container">
+                <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                <h1>Disease A</h1>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut fringilla, risus at rhoncus malesuada, 
+                    magna ligula tristique arcu, vel consectetur velit orci non neque. Etiam at ligula dolor. Sed nisi arcu, 
+                    tristique vitae aliquet ac, consectetur ut turpis. Suspendisse faucibus tellus ante, id iaculis elit 
+                    aliquam in. Maecenas lobortis tellus a mollis imperdiet. Sed aliquam lobortis ipsum, at vulputate mi 
+                    tempor euismod. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;
+                    Praesent a purus eget tortor iaculis vulputate. Quisque vel nisi posuere sem dapibus volutpat.
+                    In tincidunt orci nec lorem facilisis, vel hendrerit augue semper. Praesent accumsan felis nec justo 
+                    consequat, eget posuere elit dapibus. Mauris sagittis feugiat ex id efficitur.
+
+                    Sed condimentum vel orci sit amet convallis. Sed a orci quam. Nullam suscipit rutrum odio ut ultrices. 
+                    Etiam congue fringilla auctor. Quisque et imperdiet est. Sed gravida commodo tellus ut maximus. Maecenas 
+                    nec dapibus nisi. Nam id lacus sed sapien pretium elementum. Donec dignissim, elit eget sollicitudin 
+                    auctor, dolor leo fringilla leo, eu maximus elit augue eget sapien. Sed porta, turpis et sagittis auctor, 
+                    ante massa laoreet felis, at blandit risus nisi ac turpis. Maecenas a nisi eget arcu rutrum vulputate eu 
+                    et dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas id sollicitudin diam, eu 
+                    bibendum neque. Vestibulum id suscipit ipsum.
+                </p>
+              </div>
+            </div>
+          </div>
+
+
+    </main>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#navbar-html").load("../html-components/navbar.html");
+
+            $("#footer-html").load("../html-components/footer.html");
+        });
+    </script>
+</body>
+
+</html>
