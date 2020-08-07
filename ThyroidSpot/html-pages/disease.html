@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Imports -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="../js/disease-function.js"></script>
+
+
+    <title>Thyroid Spot</title>
+</head>
+
+<body>
+    <div id="navbar-html"></div>
+    <main>
+        <!--Disease Cards-->
+        <div id="diseaseCard" class="container">
+            <!--<div onclick= "document.getElementById('diseaseModal').style.display='block'" class="centerText">
+                <img src="https://www.mei.edu/sites/default/files/2019-01/Virus.jpg">
+                <div class='centerTitle'><b>Disease A</b></div>
+            </div>
+            <div onclick= "document.getElementById('diseaseModal').style.display='block'" class="centerText">
+                <img src="https://www.mei.edu/sites/default/files/2019-01/Virus.jpg">
+                <div class='centerTitle'><b>Disease A</b></div>
+            </div>!-->
+        </div>
+
+        <!--Modal For Diease Info-->
+        <div id="diseaseModal" class="w3-modal">
+            <div class="w3-modal-content">
+              <div class="w3-container">
+                <span onclick="document.getElementById('diseaseModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                <h1 id="diseaseName" class="centerText">Disease A</h1>
+                <p id = "diseaseShortDescription" class="centerText">
+                    (A disease that affects yout throat) * Short description
+                </p>
+                <p id="diseaseContent">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque placerat congue dui non 
+                    posuere. Curabitur velit metus, congue nec eros eu, porta tempus elit. Aliquam vel quam eu 
+                    neque viverra egestas. Mauris eu blandit dui. Morbi auctor vestibulum ligula commodo elementum. 
+                    Cras nibh libero, venenatis ut vulputate in, bibendum vel sapien. Sed nisl urna, mattis sed orci 
+                    et, lobortis efficitur leo. Maecenas sit amet massa urna. Phasellus accumsan est nisi, in faucibus 
+                    turpis commodo sed. *content
+                </p>
+                <h2 class="centerText">
+                    Symptoms
+                </h2>
+                <p id="diseaseSymptoms">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque placerat congue dui non 
+                    posuere. Curabitur velit metus, congue nec eros eu, porta tempus elit. Aliquam vel quam eu 
+                    neque viverra egestas. Mauris eu blandit dui. Morbi auctor vestibulum ligula commodo elementum. 
+                    Cras nibh libero, venenatis ut vulputate in, bibendum vel sapien. Sed nisl urna, mattis sed orci 
+                    et, lobortis efficitur leo. Maecenas sit amet massa urna. Phasellus accumsan est nisi, in faucibus 
+                    turpis commodo sed.
+                </p>
+                <h2 class="centerText">
+                    Cause
+                </h2>
+                <p id="diseaseCause">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque placerat congue dui non 
+                    posuere. Curabitur velit metus, congue nec eros eu, porta tempus elit. Aliquam vel quam eu 
+                    neque viverra egestas. Mauris eu blandit dui. Morbi auctor vestibulum ligula commodo elementum. 
+                    Cras nibh libero, venenatis ut vulputate in, bibendum vel sapien. Sed nisl urna, mattis sed orci 
+                    et, lobortis efficitur leo. Maecenas sit amet massa urna. Phasellus accumsan est nisi, in faucibus 
+                    turpis commodo sed. 
+                </p>
+                <h2 class="centerText">
+                    Treatment
+                </h2>
+                <p id="diseaseTreatment">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque placerat congue dui non 
+                    posuere. Curabitur velit metus, congue nec eros eu, porta tempus elit. Aliquam vel quam eu 
+                    neque viverra egestas. Mauris eu blandit dui. Morbi auctor vestibulum ligula commodo elementum. 
+                    Cras nibh libero, venenatis ut vulputate in, bibendum vel sapien. Sed nisl urna, mattis sed orci 
+                    et, lobortis efficitur leo. Maecenas sit amet massa urna. Phasellus accumsan est nisi, in faucibus 
+                    turpis commodo sed.
+                </p>
+              </div>
+            </div>
+          </div>
+
+
+    </main>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#navbar-html").load("../html-components/navbar.html");
+
+            $("#footer-html").load("../html-components/footer.html");
+        });
+    </script>
+</body>
+
+</html>
