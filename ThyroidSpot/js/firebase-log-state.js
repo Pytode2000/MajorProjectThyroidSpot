@@ -14,7 +14,8 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         console.log(firebaseUser);
         // user_logged_in = 'y'
         sessionStorage.setItem("user_logged_in", 'y');
-        sessionStorage.setItem("user_email", user.email);
+        sessionStorage.setItem("user_email", firebaseUser.email);
+        console.log(firebaseUser.email)
 
 
         // btnLogout.classList.remove('hide');
