@@ -75,6 +75,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ThyroidDataModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="user.cs">
+      <DependentUpon>ThyroidDataModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="ThyroidDataModel.edmx">

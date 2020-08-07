@@ -20,6 +20,7 @@
 
     <!-- Local Imports -->
     <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/index.css" />
 
 
     <title>Thyroid Spot</title>
@@ -31,21 +32,57 @@
 
     <main>
         <div class="content">
-            <div class="container">
-                <form>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="Password">
-                    </div>
-                </form>
-                <button id="btnRegister" class="btn btn-primary">Register</button>
 
-                <button id="btnLogin" class="btn btn-primary">Login</button>
+
+
+
+            <div class="container form-container">
+                <br>
+                <div class="btn-group btn-group-toggle" data-toggle="buttons" style="width: 100%">
+                    <label class="btn btn-secondary active btn-lg" onclick="toggleLogin()" id="toggleLoginBtn">
+                        <input type="radio" name="options" id="loginTab" autocomplete="off" checked> Login
+                    </label>
+                    <label class="btn btn-secondary btn-lg" onclick="toggleRegister()" id="toggleRegisterBtn">
+                        <input type="radio" name="options" id="registerTab" autocomplete="off"> Register
+                    </label>
+                </div>
+
+                <div id="loginForm">
+                    <h3>Already have an account? Login now!</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+                            <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Password">
+                        </div>
+
+                    </form>
+                    <button id="btnLogin" class="btn btn-primary">Login</button>
+                </div>
+
+                <div id="registerForm" class="hide">
+                    <h3>New here? Sign up now!</h3>
+
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+                            <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Password">
+                        </div>
+
+                        <h3>Still got other fields. NOT DONE</h3>
+
+                    </form>
+                    <button id="btnRegister" class="btn btn-primary">Register</button>
+                </div>
 
             <h1>Heading lorem ipsum</h1>
 
@@ -134,9 +171,7 @@
 <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script>
 
-<script src="../js/firebase-api.js"></script>
-
-
+<script src="../js/index.js"></script>
 
 <!-- <script src="../js/firebase-api.js"></script> -->
 

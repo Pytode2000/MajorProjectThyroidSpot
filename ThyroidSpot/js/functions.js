@@ -48,16 +48,16 @@ function getOneDiseaseInfo(id) {
             $('#tableBody2').html('');
             //Iterate through the bookArray to generate rows to populate the table
             for (i = 0; i < disinfoArray.length; i++) {
-                if (id == disinfoArray[i].disease){
-                localStorage.setItem("diseasename", id);
-                //generate the buttons html with information hidden into its attributes (index)
-                //num attribute is used to store the array index so that in can be used later to retrieve information from the bookArray
-                updateButton = "<button num='" + i + "' class='updateBtn btn-sm btn btn-warning' data-toggle='modal' data-target='#updateBookModal' index='" + disinfoArray[i].disease + "' >Update</button> ";
-                deletebutton = "<button class='deleteBtn btn btn-danger btn-sm delete-btn' data-toggle='modal' data-target='#updateBookModal' num='" + i + "' index='" + disinfoArray[i].disease + "'>Delete</button>"
-                coverImage = "<img style='width:100px' src='data:image/jpeg;base64," + disinfoArray[i].thumbnail + "'/>";
+                if (id == disinfoArray[i].disease) {
+                    localStorage.setItem("diseasename", id);
+                    //generate the buttons html with information hidden into its attributes (index)
+                    //num attribute is used to store the array index so that in can be used later to retrieve information from the bookArray
+                    updateButton = "<button num='" + i + "' class='updateBtn btn-sm btn btn-warning' data-toggle='modal' data-target='#updateBookModal' index='" + disinfoArray[i].disease + "' >Update</button> ";
+                    deletebutton = "<button class='deleteBtn btn btn-danger btn-sm delete-btn' data-toggle='modal' data-target='#updateBookModal' num='" + i + "' index='" + disinfoArray[i].disease + "'>Delete</button>"
+                    coverImage = "<img style='width:100px' src='data:image/jpeg;base64," + disinfoArray[i].thumbnail + "'/>";
 
-                //TO KAILONG: You can change the design here as well if you don't want it to display a table
-                $('#tableBody').append("<tr><td>" + disinfoArray[i].disease + "</td><td>" + disinfoArray[i].description + "</td><td>" + disinfoArray[i].disease_content + "</td><td>" + disinfoArray[i].symptom + "</td><td>" + disinfoArray[i].cause + "</td><td>" + disinfoArray[i].treatment + "</td><td>" + coverImage + "</td><td>" + updateButton + "</td><td>" + deletebutton + "</td><td>" + disinfoArray[i].timestamp + "</td></tr>");
+                    //TO KAILONG: You can change the design here as well if you don't want it to display a table
+                    $('#tableBody').append("<tr><td>" + disinfoArray[i].disease + "</td><td>" + disinfoArray[i].description + "</td><td>" + disinfoArray[i].disease_content + "</td><td>" + disinfoArray[i].symptom + "</td><td>" + disinfoArray[i].cause + "</td><td>" + disinfoArray[i].treatment + "</td><td>" + coverImage + "</td><td>" + updateButton + "</td><td>" + deletebutton + "</td><td>" + disinfoArray[i].timestamp + "</td></tr>");
                 }
             }
         }
@@ -72,10 +72,10 @@ function updateDiseaseInfo() {
     reader.onload = (function (theFile) {
         return function (e) {
             var binaryData = e.target.result;
-            
+
             //creating date
             var today = new Date();
-            var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+            var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
             //prepare for update
             var product = { disease: currentDiseaseID, description: $('#updateDiseaseDesc').val(), disease_content: $('#updateDiseaseContent').val(), symptom: $('#updateDiseaseSymptom').val(), cause: $('#updateDiseaseCause').val(), treatment: $('#updateDiseaseTreatment').val(), timestamp: date, CoverImage: window.btoa(binaryData) }
@@ -164,7 +164,7 @@ $(document).on("click", ".updateBtn", function () {
 
 //all the delete buttons will respond to this
 $(document).on("click", ".deleteBtn", function () {
-    
+
     currentDiseaseID = $(this).attr('index');
     $('#updateDiseaseDesc').val(bookArray[$(this).attr('num')].description);
     $('#updateDiseaseContent').val(bookArray[$(this).attr('num')].disease_content);
