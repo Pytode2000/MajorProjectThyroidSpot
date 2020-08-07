@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ThyroidDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="disease_information">
+    <Key>
+      <PropertyRef Name="disease" />
+    </Key>
+    <Property Name="disease" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="thumbnail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="disease_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="symptom" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="cause" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="treatment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="timestamp" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="patient_information">
+    <Key>
+      <PropertyRef Name="patient_id" />
+    </Key>
+    <Property Name="patient_id" Type="Int32" Nullable="false" />
+    <Property Name="user_id" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="diagnosis" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ic_number" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="date_of_birth" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="gender" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="blood_type" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="timestamp" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="patient_report">
+    <Key>
+      <PropertyRef Name="report_id" />
+    </Key>
+    <Property Name="report_id" Type="Int32" Nullable="false" />
+    <Property Name="patient_id" Type="Int32" Nullable="false" />
+    <Property Name="FT4" Type="Double" Nullable="false" />
+    <Property Name="TSH" Type="Double" Nullable="false" />
+    <Property Name="drug_dose" Type="Int32" Nullable="false" />
+    <Property Name="timestamp" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="ThyroidDataEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="disease_information" EntityType="Self.disease_information" />
+    <EntitySet Name="patient_information" EntityType="Self.patient_information" />
+    <EntitySet Name="patient_report" EntityType="Self.patient_report" />
+  </EntityContainer>
+</Schema>

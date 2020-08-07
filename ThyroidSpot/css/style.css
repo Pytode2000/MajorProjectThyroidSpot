@@ -4,13 +4,8 @@
   font-size: 16px;
   font-family: 'Open Sans';
   --transition-speed: 600ms;
-  /* --text-primary: #b6b6b6; */
-  /* --text-secondary: #ececec; */
-  /* --bg-primary: #23232e; */
-  /* --bg-secondary: #141418; */
   --text-primary: #000000;
   --text-secondary: grey;
-  /* --bg-primary: #ececec; */
   --bg-primary: white;
   --bg-secondary: #ececec;
 }
@@ -32,12 +27,10 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-  /* background: lightgrey; */
   background: var(--text-secondary);
 }
 
 body::-webkit-scrollbar-thumb:hover {
-  /* background: darkgray; */
   background: var(--text-primary);
 }
 
@@ -147,7 +140,7 @@ main {
   vertical-align: top;
   display: inline-block;
   width: 100%;
-  background-color: var(--bg-secondary);
+  background-color: var(--text-primary);
   animation: loader-inner 2s infinite ease-in;
 }
 

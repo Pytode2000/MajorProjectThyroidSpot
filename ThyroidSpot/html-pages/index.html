@@ -5,21 +5,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Imports -->
-    <link rel="stylesheet" href="../css/style.css" />
+    <!-- Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" />
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+    <!-- FontAwesome (Icons) -->
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+    <!-- Jquery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX"
+        crossorigin="anonymous">
+
+    <!-- Local Imports -->
+    <link rel="stylesheet" href="../css/style.css" />
 
 
     <title>Thyroid Spot</title>
 </head>
 
 <body>
+
     <div id="navbar-html"></div>
 
     <main>
         <div class="content">
+            <div class="container">
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Password">
+                    </div>
+                </form>
+                <button id="btnRegister" class="btn btn-primary">Register</button>
+
+                <button id="btnLogin" class="btn btn-primary">Login</button>
 
             <h1>Heading lorem ipsum</h1>
 
@@ -94,19 +120,36 @@
                 meditation raw denim fanny pack. Pop-up retro taiyaki meditation twee gastropub VHS etsy. Semiotics gochujang
                 street art normcore, edison bulb farm-to-table pour-over taxidermy brooklyn.
             </p>
+            </div>
         </div>
 
         <div id="footer-html"></div>
     </main>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#navbar-html").load("../html-components/navbar.html");
 
-            $("#footer-html").load("../html-components/footer.html");
+</body>
 
-        });
-    </script>
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script>
+
+<script src="../js/firebase-api.js"></script>
+
+
+
+<!-- <script src="../js/firebase-api.js"></script> -->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#navbar-html").load("../html-components/navbar.html");
+
+        $("#footer-html").load("../html-components/footer.html");
+
+    });
+</script>
+
+
 </body>
 
 
