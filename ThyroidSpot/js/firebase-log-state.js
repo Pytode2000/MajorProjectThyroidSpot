@@ -5,7 +5,7 @@
 
 // var user_logged_in = "y"
 
-var user_account_type = "patient"
+var user_account_type = "patient" // Placeholder unti l the "user" table is ready.
 // // var user_account_type = "clinician"
 // // var user_account_type = "admin"
 
@@ -14,13 +14,14 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         console.log(firebaseUser);
         // user_logged_in = 'y'
         sessionStorage.setItem("user_logged_in", 'y');
+        sessionStorage.setItem("user_email", user.email);
+
 
         // btnLogout.classList.remove('hide');
         console.log("Logged in: " + sessionStorage.getItem("user_logged_in"));
     }
     else {
         sessionStorage.setItem("user_logged_in", 'n');
-
         console.log("Logged in: " + sessionStorage.getItem("user_logged_in"));
         // btnLogout.classList.add('hide');
 

@@ -1,0 +1,7 @@
+.form-container {
+    background: var(--bg-secondary);
+}
+
+.hide {
+    display: none;
+}

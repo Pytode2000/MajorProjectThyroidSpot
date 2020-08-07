@@ -1,10 +1,26 @@
+/* Toggle between Login and Register Tab */
+const loginForm = document.getElementById("loginForm");
+const registerForm = document.getElementById("registerForm");
+const toggleLoginBtn = document.getElementById("toggleLoginBtn");
+const toggleRegisterBtn = document.getElementById("toggleRegisterBtn");
 
-// sessionStorage.setItem("lastname", "Smith");
-// sessionStorage.removeItem("key");
-// sessionStorage.clear();
-// var lastname = sessionStorage.getItem("key");
+function toggleRegister() {
+    loginForm.classList.add("hide");
+    registerForm.classList.remove("hide");
+
+    toggleRegisterBtn.classList.add("active");
+    toggleLoginBtn.classList.remove("active");
+}
+function toggleLogin() {
+    registerForm.classList.add("hide");
+    loginForm.classList.remove("hide");
+
+    toggleLoginBtn.classList.add("active");
+    toggleRegisterBtn.classList.remove("active");
+}
 
 
+/* Firebase Login and Register function */
 
 // GET DOM
 const txtEmail = document.getElementById("email");
@@ -22,7 +38,7 @@ btnLogin.addEventListener("click", e => {
         console.log(user);
         // TEST
         sessionStorage.setItem("user_logged_in", "y")
-        window.location.href = 'profile.html';
+        window.location.href = "profile.html";
 
     })
     promise.catch(e => console.log(e.message));
