@@ -4,11 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4e12d927e10b45d5a181c2959f88bb48" Name="Diagram1">
+      <Diagram DiagramId="4e12d927e10b45d5a181c2959f88bb48" Name="Diagram1" ZoomLevel="95">
         <EntityTypeShape EntityType="ThyroidDataModel.disease_information" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ThyroidDataModel.patient_information" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ThyroidDataModel.patient_report" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ThyroidDataModel.user" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="ThyroidDataModel.user" Width="1.5" PointX="0.75" PointY="3.625" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

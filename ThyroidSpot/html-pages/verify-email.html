@@ -21,6 +21,15 @@
     <!-- Local Imports -->
     <link rel="stylesheet" href="../css/style.css" />
 
+    <!-- 
+    <style>
+        html,
+        body {
+            background: var(--bg-secondary);
+            ;
+        }
+    </style> -->
+
     <title>Thyroid Spot</title>
 </head>
 
@@ -32,12 +41,12 @@
     <main>
         <div class="content">
 
-            <div class="container container-small" style="margin-top: 9%; background: black">
+            <div class="container container-small bg-secondary" style="margin-top: 9%;">
 
-
+                <!-- background: var(--bg-secondary); -->
                 <div class="card" style="border: none;">
 
-                    <div class="card-header text-center" style="background: black; color: white;">
+                    <div class="card-header text-center bg-secondary" style="color: white;">
                         <h1><i class="fas fa-exclamation-triangle"></i> Verify Account <i class="fas fa-exclamation-triangle"></i></h1>
                     </div>
 
@@ -56,17 +65,18 @@
 
                     <div class="card-footer text-muted">
 
-                        <button class="btn btn-secondary" style="float: left; width: 40%;" onclick="logout()"><b>Logout</b></button>
+                        <button class="btn btn-dark bold" style="float: left; width: 40%;" onclick="logout()"><i class="fas fa-sign-out-alt fa-rotate-180"></i>
+                            Logout</button>
 
 
-                        <button class="btn btn-secondary" style="float: right;width: 40%;" onclick="resendVerificationEmail()"><b>Re-send
-                                Email
-                            </b></button>
+                        <button class="btn btn-dark bold" style="float: right;width: 40%;" onclick="resendVerificationEmail()"><i
+                                class="fas fa-envelope"></i> Re-send
+
+                        </button>
 
                         <br>
                         <br>
-                        <button class="btn btn-secondary btn-block" onclick="refresh()"><b>Refresh
-                            </b></button>
+                        <button class="btn btn-dark btn-block bold" onclick="refresh()"><i class="fas fa-refresh"></i> Refresh</button>
                     </div>
                 </div>
                 <br>

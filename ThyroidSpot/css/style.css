@@ -260,4 +260,17 @@ main {
 /*** </Bootstrap Floating Label> ***/
 
 
+/*** Misc ***/
+.bold {
+  font-weight: bold;
+}
+
+.hide {
+  display: none;
+}
+
+.white-text {
+  color: white;
+}
+
 /********** </Global stylesheet> **********/

@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="shortcut icon" href="../assets/images/thyroidspot-logo.png" />
+
     <!-- Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" />
 
@@ -33,57 +35,156 @@
     <main>
         <div class="content">
 
-            <div class="container container-fluid form-container">
-                <br>
-                <div class="btn-group btn-group-toggle" data-toggle="buttons" style="width: 100%">
-                    <label class="btn btn-secondary active btn-lg" onclick="toggleLogin()" id="toggleLoginBtn">
-                        <input type="radio" name="options" id="loginTab" autocomplete="off" checked> Login
+            <style>
+                .form-container {
+                    background: rgb(84, 91, 98);
+                }
+            </style>
+
+            <!-- TOGGLER -->
+            <div class="container container-small container-fluid form-container" style="padding: 0;">
+
+                <div class="btn-group btn-group-toggle" data-toggle="buttons" style="width: 100%;">
+                    <label class="btn btn-secondary active btn-lg" onclick="toggleLogin()" id="toggleLoginBtn" style=" border: none; border-radius: 0;">
+                        <input type="radio" name="options" id="loginTab" autocomplete="off" checked> <b>Sign In</b>
                     </label>
-                    <label class="btn btn-secondary btn-lg" onclick="toggleRegister()" id="toggleRegisterBtn">
-                        <input type="radio" name="options" id="registerTab" autocomplete="off"> Register
+                    <label class="btn btn-secondary btn-lg" onclick="toggleRegister()" id="toggleRegisterBtn" style=" border: none; border-radius: 0;">
+                        <input type="radio" name="options" id="registerTab" autocomplete="off"> <b>Sign Up</b>
                     </label>
                 </div>
 
-                <div id="loginForm">
-                    <h3>Already have an account? Login now!</h3>
-                    <form>
-                        <div class="form-group">
-                            <input type="email" class="form-control" id="loginEmail" aria-describedby="emailHelp" placeholder="Enter email">
-                            <label for="loginEmail">Email address</label>
+            </div>
 
-                            <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+            <div class="container container-small container-fluid form-container">
+
+                <!-- LOGIN -->
+                <div id="loginForm">
+                    <br>
+                    <div class="text-center white-text">
+                        <h2><b>Already have an account? Login now!</b></h1>
+                    </div>
+                    <br>
+                    <br>
+                    <form>
+
+                        <div class="form-label-group">
+                            <input type="email" id="loginEmail" class="form-control" placeholder="Enter email address..." required="" autofocus="">
+                            <label for="loginEmail">Enter email address...</label>
                         </div>
                         <div class="form-label-group">
-                            <input type="emai" id="inputEmail4" class="form-control" placeholder="Email" required="" autofocus="">
-                            <label for="inputEmail4">Email Address</label>
-                        </div>
-                        <div class="form-group">
-                            <label for="loginPassword">Password</label>
-                            <input type="password" class="form-control" id="loginPassword" placeholder="Password">
+                            <input type="password" class="form-control" id="loginPassword" placeholder="Enter password..." required="" autofocus="">
+                            <label for="loginPassword">Enter password...</label>
                         </div>
 
                     </form>
-                    <button id="btnLogin" class="btn btn-primary" onclick="login()">Login</button>
+                    <br>
+                    <button id="btnLogin" class="btn btn-dark btn-block bold" onclick="login()">Login</button>
+                    <br>
                 </div>
 
+                <!-- REGISTER -->
                 <div id="registerForm" class="hide">
-                    <h3>New here? Sign up now!</h3>
-
-                    <form>
-                        <div class="form-group">
-                            <label for="registerEmail">Email address</label>
-                            <input type="email" class="form-control" id="registerEmail" aria-describedby="emailHelp" placeholder="Enter email">
-                            <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                    <br>
+                    <div class="text-center white-text">
+                        <h2><b>New here? Register an account now!</b></h1>
+                    </div>
+                    <br>
+                    <br> <form>
+                        <div class="form-label-group">
+                            <input type="email" class="form-control" id="registerEmail" placeholder="Enter email address..." required="" autofocus="">
+                            <label for="registerEmail">Enter email address...</label>
                         </div>
-                        <div class="form-group">
-                            <label for="registerPassword">Password</label>
-                            <input type="password" class="form-control" id="registerPassword" placeholder="Password">
+                        <div class="form-label-group">
+                            <input type="password" class="form-control" id="registerPassword" placeholder="Enter password..." required="" autofocus="">
+                            <label for="registerPassword">Enter password...</label>
                         </div>
 
-                        <h3>Still got other fields. NOT DONE</h3>
+                        <div class="form-label-group">
+                            <input type="password" class="form-control" id="registerRetypePassword" placeholder="Re-type password..." required="" autofocus="">
+                            <label for="registerRetypePassword">Re-type password...</label>
+                        </div>
+
+                        <div class="form-label-group">
+                            <input type="text" class="form-control" id="registerId" placeholder="Enter NRIC..." required="" autofocus="">
+                            <label for="registerId">Enter NRIC...</label>
+                        </div>
+
+                        <div class="form-label-group">
+                            <input type="text" class="form-control" id="registerFullName" placeholder="Enter full name..." required="" autofocus="">
+                            <label for="registerFullName">Enter full name...</label>
+                        </div>
+                        <!-- Jquery Datepicker for Birthdate -->
+                        <div class="form-label-group">
+                            <input type="text" class="form-control" id="registerBirthdate" placeholder="Select birthdate..." required="" autofocus="">
+                            <label for="registerBirthdate">Select birthdate...</label>
+                        </div>
+
+                        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+                        <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
+
+                        <script>
+                            $(function () {
+                                $("#registerBirthdate").datepicker({
+                                    dateFormat: "dd-mm-yy",
+                                    changeMonth: true,
+                                    changeYear: true,
+                                    yearRange: "1930:2020",
+
+                                    icons: {
+                                        time: "fa fa-clock-o",
+                                        date: "fa fa-calendar",
+                                        up: "fa fa-arrow-up",
+                                        down: "fa fa-arrow-down"
+                                    }
+                                });
+                            });
+                        </script>
+
+                        <!-- Radio buttons for gender -->
+                        <label class="white-text">Select gender: </label>
+
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="genderMaleRadio" name="genderMaleRadio" class="custom-control-input" checked>
+                            <label class="custom-control-label white-text" for="genderMaleRadio">Male</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline" style="float: right;">
+                            <input type="radio" id="genderFemaleRadio" name="genderMaleRadio" class="custom-control-input">
+                            <label class="custom-control-label white-text" for="genderFemaleRadio">Female</label>
+                        </div>
+                        <br>
+
+                        <!-- SELECT MENU FOR DIAGNOSIS -->
+
+                        <div>
+                            <!-- SELECT MENU FOR Blood type -->
+                            <label for="registerBloodType" class="white-text" style="display:inline;">Select blood type:
+                            </label>
+
+                            <select id="registerBloodType" class="custom-select" style="width:70%; float: right;">
+                                <!-- <option selected>Select diagnosis...</option> -->
+                                <option>One</option>
+                                <option>Two</option>
+                                <option>Three</option>
+                            </select>
+                        </div>
+
+                        <br>
+
+                        <div>
+                            <label for="registerDiagnosis" class="white-text" style="display:inline;">Select diagnosis: </label>
+
+                            <select id="registerDiagnosis" class="custom-select" style="width:70%; float: right;">
+                                <!-- <option selected>Select diagnosis...</option> -->
+                                <option>One</option>
+                                <option>Two</option>
+                                <option>Three</option>
+                            </select>
+                        </div>
 
                     </form>
-                    <button id="btnRegister" class="btn btn-primary" onclick="register()">Register</button>
+                    <br>
+                    <button id="btnRegister" class="btn btn-dark btn-block bold" onclick="register()">Register</button>
+                    <br>
                 </div>
 
 
