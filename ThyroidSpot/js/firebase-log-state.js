@@ -23,7 +23,11 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         }
         // User's email is not verified.
         else {
-            window.location.href = "verify-email.html";
+            // If it loads too fast, subsequent functions in Register can't be called.
+            setTimeout(function () {
+                window.location.href = "verify-email.html";
+            }, 2000);
+
             sessionStorage.setItem("user_logged_in", 'y');
             sessionStorage.setItem("user_email", firebaseUser.email);
         }

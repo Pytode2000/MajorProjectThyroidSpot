@@ -1,3 +1,7 @@
+var userURI = "https://localhost:44395/api/User";
+var patientInfoURI = "https://localhost:44395/api/patientinfo";
+
+
 /* Toggle between Login and Register Tab */
 
 // GET DOM
@@ -34,7 +38,7 @@ function login() {
     const pass = txtPassword.value;
     const auth = firebase.auth();
     const promise = auth.signInWithEmailAndPassword(email, pass);
-    promise.then(user => {
+    promise.then(firebaseUser => {
         sessionStorage.setItem("user_logged_in", "y")
         window.location.href = "profile.html";
     })
@@ -49,7 +53,58 @@ function register() {
     const pass = txtPassword.value;
     const auth = firebase.auth();
     const promise = auth.createUserWithEmailAndPassword(email, pass);
-    promise.then(user => {
+    promise.then(firebaseUser => {
+        const user = firebase.auth().currentUser;
+        const userUid = user.uid;
+        console.log(userUid);
+
+        // Creates an instance (row) in the "user" table.
+        var userInstance = { user_id: userUid, full_name: $('#registerFullName').val(), account_type: "patient" };
+        console.log(userInstance)
+        $.ajax({
+            type: 'POST',
+            url: userURI,
+            data: JSON.stringify(userInstance),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                console.log("User instance created.")
+                // $('#registerFullName').val('')
+            }
+        });
+
+        // Creates an instance (row) in the "patient_information" table.
+        var diagnosis = document.getElementById("registerDiagnosis");
+        var diagnosisChosen = diagnosis.options[diagnosis.selectedIndex].text;
+
+        var genderChosen;
+        if (document.getElementById('genderMaleRadio').checked) {
+            genderChosen = "Male"
+        }
+        else {
+            genderChosen = "Female"
+        }
+
+        var bloodType = document.getElementById("registerBloodType");
+        var bloodTypeChosen = bloodType.options[bloodType.selectedIndex].text;
+
+        var patientInfoInstance = {
+            user_id: userUid, diagnosis: diagnosisChosen, ic_number: $('#registerId').val(),
+            date_of_birth: $('#registerBirthdate').val(), gender: genderChosen, blood_type: bloodTypeChosen, timestamp: "-"
+        };
+
+        console.log(patientInfoInstance);
+        $.ajax({
+            type: 'POST',
+            url: patientInfoURI,
+            data: JSON.stringify(patientInfoInstance),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+            }
+        });
+
+        // Send Email
         user.sendEmailVerification().then(function () {
             alert("A verification email has been sent to: " + user.email);
         }).catch(function (error) {
@@ -65,11 +120,27 @@ function register() {
 
 
 
+function testFunction() {
+    // Creates an instance (row) in the "patient_information" table.
+    var diagnosis = document.getElementById("registerDiagnosis");
+    var diagnosisChosen = diagnosis.options[diagnosis.selectedIndex].text;
 
+    var genderChosen;
+    if (document.getElementById('genderMaleRadio').checked) {
+        genderChosen = "Male"
+    }
+    else {
+        genderChosen = "Female"
+    }
 
+    var bloodType = document.getElementById("registerBloodType");
+    var bloodTypeChosen = bloodType.options[bloodType.selectedIndex].text;
 
+    var patientInfoInstance = {
+        user_id: "userid", diagnosis: diagnosisChosen, ic_number: $('#registerId').val(),
+        date_of_birth: $('#registerBirthdate').val(), gender: genderChosen, blood_type: bloodTypeChosen, timestamp: "-"
+    };
 
-
-
-
+    console.log(patientInfoInstance);
+}
 
