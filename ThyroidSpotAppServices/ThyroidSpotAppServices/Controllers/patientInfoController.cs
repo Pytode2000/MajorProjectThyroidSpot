@@ -19,12 +19,12 @@ namespace ThyroidSpotAppServices.Controllers
             }
         }
 
-        //get one patient info (can be used for patient-only accs)
-        public patient_information Get(int id)
+        //get one patient info via firebase UID (can be used for patient-only accs)
+        public patient_information Get(string id)
         {
             using (ThyroidDataEntities entities = new ThyroidDataEntities())
             {
-                return entities.patient_information.FirstOrDefault(e => e.patient_id == id);
+                return entities.patient_information.FirstOrDefault(e => e.user_id == id);
             }
         }
 
