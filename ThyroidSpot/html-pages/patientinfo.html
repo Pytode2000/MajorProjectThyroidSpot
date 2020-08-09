@@ -30,54 +30,65 @@
         </div>
 
         <!--Modal For Diease Info-->
-        <!-- <div id="diseaseModal" class="w3-modal">
+        <div id="newPatientModal" class="w3-modal">
             <div class="w3-modal-content">
                 <div class="w3-container">
-                    <span onclick="document.getElementById('diseaseModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                    <h1 id="diseaseName" class="centerText">Disease A</h1>
-                    <p id="diseaseShortDescription" class="centerText">
-                        (A disease that affects yout throat) * Short description
+                    <span onclick="document.getElementById('newPatientModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                    <h1 id="diseaseName" class="centerText">Create Patient Info</h1>
+                    <p>
+                    <label>NRIC:</label>
+                    <input id="newIC">
                     </p>
-                    <p id="diseaseContent">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque placerat congue dui non posuere. Curabitur velit metus,
-                        congue nec eros eu, porta tempus elit. Aliquam vel quam eu neque viverra egestas. Mauris eu blandit
-                        dui. Morbi auctor vestibulum ligula commodo elementum. Cras nibh libero, venenatis ut vulputate in,
-                        bibendum vel sapien. Sed nisl urna, mattis sed orci et, lobortis efficitur leo. Maecenas sit amet
-                        massa urna. Phasellus accumsan est nisi, in faucibus turpis commodo sed. *content
+                    
+                    <p>
+                    <label>Date of birth:</label>
+                    <input id="newDOB">
                     </p>
-                    <h2 class="centerText">
-                        Symptoms
-                    </h2>
-                    <p id="diseaseSymptoms">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque placerat congue dui non posuere. Curabitur velit metus,
-                        congue nec eros eu, porta tempus elit. Aliquam vel quam eu neque viverra egestas. Mauris eu blandit
-                        dui. Morbi auctor vestibulum ligula commodo elementum. Cras nibh libero, venenatis ut vulputate in,
-                        bibendum vel sapien. Sed nisl urna, mattis sed orci et, lobortis efficitur leo. Maecenas sit amet
-                        massa urna. Phasellus accumsan est nisi, in faucibus turpis commodo sed.
+
+                    <p>
+                    <label>Gender:</label>
+                    <select name="gender" id="newGenderDDL">
+                        <option value="" selected disabled hidden>--Choose here--</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
                     </p>
-                    <h2 class="centerText">
-                        Cause
-                    </h2>
-                    <p id="diseaseCause">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque placerat congue dui non posuere. Curabitur velit metus,
-                        congue nec eros eu, porta tempus elit. Aliquam vel quam eu neque viverra egestas. Mauris eu blandit
-                        dui. Morbi auctor vestibulum ligula commodo elementum. Cras nibh libero, venenatis ut vulputate in,
-                        bibendum vel sapien. Sed nisl urna, mattis sed orci et, lobortis efficitur leo. Maecenas sit amet
-                        massa urna. Phasellus accumsan est nisi, in faucibus turpis commodo sed.
+                    
+                    <p>
+                    <label>Diagnosis:</label>
+                    <select name="diagnosis" id="newDiagnosisDDL">
+                        <option value="" selected disabled hidden>--Choose here--</option>
+                        <option value="De Quervain's Thyroiditis">De Quervain's Thyroiditis</option>
+                        <option value="Differentiated thyroid carcinoma">Differentiated thyroid carcinoma</option>
+                        <option value="Graves' disease">Graves' disease</option>
+                        <option value="Hashimoto's thyroiditis">Hashimoto's thyroiditis</option>
+                        <option value="Hypothyroidism">Hypothyroidism</option>
+                        <option value="Post-thyroidectomy">Post-thyroidectomy</option>
+                        <option value="Riedel's thyroiditis">Riedel's thyroiditis</option>
+                    </select>
                     </p>
-                    <h2 class="centerText">
-                        Treatment
-                    </h2>
-                    <p id="diseaseTreatment">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque placerat congue dui non posuere. Curabitur velit metus,
-                        congue nec eros eu, porta tempus elit. Aliquam vel quam eu neque viverra egestas. Mauris eu blandit
-                        dui. Morbi auctor vestibulum ligula commodo elementum. Cras nibh libero, venenatis ut vulputate in,
-                        bibendum vel sapien. Sed nisl urna, mattis sed orci et, lobortis efficitur leo. Maecenas sit amet
-                        massa urna. Phasellus accumsan est nisi, in faucibus turpis commodo sed.
+
+                    <p>
+                    <label>Blood Type:</label>
+                    <select name="bloodtype" id="newBloodTypeDDL">
+                        <option value="" selected disabled hidden>--Choose here--</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                    </select>
                     </p>
+
+                    <div style="text-align: center;">
+                        <button id="btnRegister" class="btn btn-dark btn-block bold" onclick="postPatientInfo()">Create Patient Info</button>
+                    </div>
                 </div>
             </div>
-        </div> -->
+        </div>
 
 
     </main>

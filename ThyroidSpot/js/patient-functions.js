@@ -6,8 +6,9 @@ var patientInfoArray = [];
 var currentPatientID; //this variable will contain the patient ID that's selected
 
 //This function will consume the patient info GET API (FOR DOCTORS)
-function getAllPatientInfo() {
-    //TODO: localstorage and if statement to get account, if role == doctor, use this function
+function getOnePatientInfo() {
+    
+    var getuid = sessionStorage.getItem("uniqueid");
     console.log("retrieving all patient info...")
     $.ajax({
         type: 'GET',
@@ -22,10 +23,8 @@ function getAllPatientInfo() {
             $('#patientCardContent').html('');
             //Iterate through the diseaseInfoArray to generate rows to populate the table
             for (i = 0; i < patientInfoArray.length; i++) {
-                //ALERT: need code an if else statement to determine role of user
+                if (getuid == patientInfoArray[i].user_id){
 
-
-                //ALERT: need code a localstorage GET to get username
 
                 viewreportbutton = "<button id='forumdescbtn' class=' btn btn-info btn-sm' index='" + patientInfoArray[i].patient_id + "'>View Report</button>"
                 // $('#diseaseCard').append("<div onclick="+viewmorebutton+"  class = 'centerText'>" +
@@ -34,55 +33,64 @@ function getAllPatientInfo() {
                     "<img src='https://www.mei.edu/sites/default/files/2019-01/Virus.jpg'>"+
                      "<div class='centerTitle'></p><b>" + patientInfoArray[i].ic_number + 
                      "</b></p><div class='centerContent'><p>Diagnosis: "+patientInfoArray[i].diagnosis+"</p></div>" +viewreportbutton+ "</div>");
-            }
-        }
-    });
-}
-
-//only patients can access it based on their assigned unique ID
-function getPatientInfo_PatientsOnly() {
-    console.log("retrieving all patient info...")
-
-    //TODO: need a localstorage to get unique ID
-
-    $.ajax({
-        type: 'GET',
-        url: patientURI,
-        dataType: 'json',
-        contentType: 'application/json',
-        success: function (data) {
-            //put json data into bookArray
-            patientInfoArray = data;
-            console.log(patientInfoArray)
-            //clear the tbody of the table so that it will be refreshed everytime
-            $('#patientCardContent').html('');
-            //Iterate through the diseaseInfoArray to generate rows to populate the table
-            for (i = 0; i < patientInfoArray.length; i++) {
-                //TODO: need code an if else statement to match firebase ID
-
-                viewreportbutton = "<button id='forumdescbtn' class=' btn btn-info btn-sm' index='" + patientInfoArray[i].patient_id + "'>View Report</button>"
-                // $('#diseaseCard').append("<div onclick="+viewmorebutton+"  class = 'centerText'>" +
-                //     coverImage + "<div class='centerTitle'><b>" + diseaseInfoArray[i].disease + "</b></div></div>");
-                $('#patientCardContent').append("<div class = 'centerText'>" +
+                }
+                else if (i == patientInfoArray.length-1){
+                    createinfobutton = "<button id='createnewinfo' class=' btn btn-info btn-sm'>Create New Patient Info</button>"
+                    $('#patientCardContent').append("<div class = 'centerText'>" +
                     "<img src='https://www.mei.edu/sites/default/files/2019-01/Virus.jpg'>"+
-                     "<div class='centerTitle'></p><b>" + patientInfoArray[i].ic_number + 
-                     "</b></p><div class='centerContent'><p>Diagnosis: "+patientInfoArray[i].diagnosis+"</p></div>" +viewreportbutton+ "</div>");
+                     "<div class='centerTitle'></p>No patient info yet"+
+                     "</p><div class='centerContent'><p>Please click on the link to create one</p></div>" +createinfobutton+ "</div>");
+                
+                }
             }
         }
     });
 }
+
+// //only patients can access it based on their assigned unique ID
+// function getPatientInfo_DoctorOnly() {
+//     console.log("retrieving all patient info...")
+//     $.ajax({
+//         type: 'GET',
+//         url: patientURI,
+//         dataType: 'json',
+//         contentType: 'application/json',
+//         success: function (data) {
+//             //put json data into bookArray
+//             patientInfoArray = data;
+//             console.log(patientInfoArray)
+//             //clear the tbody of the table so that it will be refreshed everytime
+//             $('#patientCardContent').html('');
+//             //Iterate through the diseaseInfoArray to generate rows to populate the table
+//             for (i = 0; i < patientInfoArray.length; i++) {
+//                 //TODO: need code an if else statement to match firebase ID
+
+//                 viewreportbutton = "<button id='forumdescbtn' class=' btn btn-info btn-sm' index='" + patientInfoArray[i].patient_id + "'>View Report</button>"
+//                 // $('#diseaseCard').append("<div onclick="+viewmorebutton+"  class = 'centerText'>" +
+//                 //     coverImage + "<div class='centerTitle'><b>" + diseaseInfoArray[i].disease + "</b></div></div>");
+//                 $('#patientCardContent').append("<div class = 'centerText'>" +
+//                     "<img src='https://www.mei.edu/sites/default/files/2019-01/Virus.jpg'>"+
+//                      "<div class='centerTitle'></p><b>" + patientInfoArray[i].ic_number + 
+//                      "</b></p><div class='centerContent'><p>Diagnosis: "+patientInfoArray[i].diagnosis+"</p></div>" +viewreportbutton+ "</div>");
+//             }
+//         }
+//     });
+// }
 
 //create patient info
 function postPatientInfo() {
-    //TODO: firebase UID to be get from localstorage GET and putting in 'user_id'
-
+    //getting firebase UID from sessionstorage GET and putting in 'user_id'
+    var getuser_id = sessionStorage.getItem("uniqueid");
+    
     //creating date
     var today = new Date();
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
-    var patientinfo = { user_id: "temporaryid1", diagnosis: $('#newDiagnosisDDL').val(), ic_number: $('#newIC').val(), date_of_birth: $('#newDOB').val(),
+    var patientinfo = { user_id: getuser_id, diagnosis: $('#newDiagnosisDDL').val(), ic_number: $('#newIC').val(), date_of_birth: $('#newDOB').val(),
      gender: $('#newGenderDDL').val(), blood_type: $('#newBloodTypeDDL').val(), timestamp: date}
+
     console.log(patientinfo);
+
     $.ajax({
         type: 'POST',
         url: patientURI,
@@ -91,8 +99,8 @@ function postPatientInfo() {
         contentType: 'application/json',
         success: function (data) {
             //calling the function again so that the new books are updated
-            getAllPatientInfo();
-            $('#newPatientModal').modal('hide');
+            getOnePatientInfo();
+            document.getElementById('newPatientModal').style.display='none'
         }
     });
 }
@@ -138,4 +146,8 @@ function getPatientReport() {
 }
 
 
-getAllPatientInfo();
+$(document).on("click", "#createnewinfo", function () {
+    document.getElementById('newPatientModal').style.display='block'
+});
+
+getOnePatientInfo();

@@ -18,6 +18,8 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
             // user_logged_in = 'y'
             sessionStorage.setItem("user_logged_in", 'y');
             sessionStorage.setItem("user_email", firebaseUser.email);
+            sessionStorage.setItem("uniqueid", firebaseUser.uid);
+            console.log(firebaseUser.uid)
             console.log(firebaseUser.email)
             console.log("Logged in: " + sessionStorage.getItem("user_logged_in"));
         }
