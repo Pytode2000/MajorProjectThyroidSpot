@@ -44,7 +44,7 @@ namespace ThyroidSpotAppServices.Controllers
         {
             using (ThyroidDataEntities entities = new ThyroidDataEntities())
             {
-                var patientinfo = entities.patient_information.Find(id);
+                var patientinfo = entities.patient_information.FirstOrDefault(e => e.patient_id == id);
                 patientinfo.user_id = pinfo.user_id;
                 patientinfo.diagnosis = pinfo.diagnosis;
                 patientinfo.ic_number = pinfo.ic_number;
@@ -53,7 +53,7 @@ namespace ThyroidSpotAppServices.Controllers
                 patientinfo.blood_type = pinfo.blood_type;
                 patientinfo.timestamp = pinfo.timestamp;
 
-                entities.Entry(pinfo).State = System.Data.Entity.EntityState.Modified;
+                entities.Entry(patientinfo).State = System.Data.Entity.EntityState.Modified;
                 entities.SaveChanges();
             }
         }

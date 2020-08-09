@@ -15,20 +15,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="patient_information">
-      <EntityTypeMapping TypeName="ThyroidDataModel.patient_information">
-        <MappingFragment StoreEntitySet="patient_information">
-          <ScalarProperty Name="patient_id" ColumnName="patient_id" />
-          <ScalarProperty Name="user_id" ColumnName="user_id" />
-          <ScalarProperty Name="diagnosis" ColumnName="diagnosis" />
-          <ScalarProperty Name="ic_number" ColumnName="ic_number" />
-          <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
-          <ScalarProperty Name="gender" ColumnName="gender" />
-          <ScalarProperty Name="blood_type" ColumnName="blood_type" />
-          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="patient_report">
       <EntityTypeMapping TypeName="ThyroidDataModel.patient_report">
         <MappingFragment StoreEntitySet="patient_report">
@@ -48,6 +34,20 @@
           <ScalarProperty Name="full_name" ColumnName="full_name" />
           <ScalarProperty Name="user_id" ColumnName="user_id" />
           <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="patient_information">
+      <EntityTypeMapping TypeName="ThyroidDataModel.patient_information">
+        <MappingFragment StoreEntitySet="patient_information">
+          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+          <ScalarProperty Name="blood_type" ColumnName="blood_type" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+          <ScalarProperty Name="ic_number" ColumnName="ic_number" />
+          <ScalarProperty Name="diagnosis" ColumnName="diagnosis" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="patient_id" ColumnName="patient_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -17,11 +17,11 @@
     <Key>
       <PropertyRef Name="patient_id" />
     </Key>
-    <Property Name="patient_id" Type="int" Nullable="false" />
+    <Property Name="patient_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="user_id" Type="nvarchar" MaxLength="255" Nullable="false" />
     <Property Name="diagnosis" Type="nvarchar" MaxLength="255" Nullable="false" />
     <Property Name="ic_number" Type="nvarchar" MaxLength="9" Nullable="false" />
-    <Property Name="date_of_birth" Type="date" Nullable="false" />
+    <Property Name="date_of_birth" Type="nvarchar" MaxLength="255" Nullable="false" />
     <Property Name="gender" Type="nvarchar" MaxLength="6" Nullable="false" />
     <Property Name="blood_type" Type="nvarchar" MaxLength="5" Nullable="false" />
     <Property Name="timestamp" Type="nvarchar" MaxLength="255" Nullable="false" />
@@ -30,7 +30,7 @@
     <Key>
       <PropertyRef Name="report_id" />
     </Key>
-    <Property Name="report_id" Type="int" Nullable="false" />
+    <Property Name="report_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="patient_id" Type="int" Nullable="false" />
     <Property Name="FT4" Type="float" Nullable="false" />
     <Property Name="TSH" Type="float" Nullable="false" />

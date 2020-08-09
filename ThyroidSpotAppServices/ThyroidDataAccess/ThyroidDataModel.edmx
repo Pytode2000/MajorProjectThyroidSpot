@@ -22,11 +22,11 @@
           <Key>
             <PropertyRef Name="patient_id" />
           </Key>
-          <Property Name="patient_id" Type="int" Nullable="false" />
+          <Property Name="patient_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="user_id" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="diagnosis" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="ic_number" Type="nvarchar" MaxLength="9" Nullable="false" />
-          <Property Name="date_of_birth" Type="date" Nullable="false" />
+          <Property Name="date_of_birth" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="gender" Type="nvarchar" MaxLength="6" Nullable="false" />
           <Property Name="blood_type" Type="nvarchar" MaxLength="5" Nullable="false" />
           <Property Name="timestamp" Type="nvarchar" MaxLength="255" Nullable="false" />
@@ -35,7 +35,7 @@
           <Key>
             <PropertyRef Name="report_id" />
           </Key>
-          <Property Name="report_id" Type="int" Nullable="false" />
+          <Property Name="report_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="patient_id" Type="int" Nullable="false" />
           <Property Name="FT4" Type="float" Nullable="false" />
           <Property Name="TSH" Type="float" Nullable="false" />
@@ -74,19 +74,6 @@
           <Property Name="treatment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="timestamp" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
-        <EntityType Name="patient_information">
-          <Key>
-            <PropertyRef Name="patient_id" />
-          </Key>
-          <Property Name="patient_id" Type="Int32" Nullable="false" />
-          <Property Name="user_id" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="diagnosis" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ic_number" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="date_of_birth" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="gender" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="blood_type" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="timestamp" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
         <EntityType Name="patient_report">
           <Key>
             <PropertyRef Name="report_id" />
@@ -100,9 +87,9 @@
         </EntityType>
         <EntityContainer Name="ThyroidDataEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="disease_information" EntityType="Self.disease_information" />
-          <EntitySet Name="patient_information" EntityType="Self.patient_information" />
           <EntitySet Name="patient_report" EntityType="Self.patient_report" />
           <EntitySet Name="user" EntityType="ThyroidDataModel.user" />
+          <EntitySet Name="patient_information" EntityType="ThyroidDataModel.patient_information" />
         </EntityContainer>
         <EntityType Name="user">
           <Key>
@@ -112,6 +99,19 @@
           <Property Name="user_id" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="full_name" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
           <Property Name="account_type" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="patient_information">
+          <Key>
+            <PropertyRef Name="patient_id" />
+          </Key>
+          <Property Name="patient_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="diagnosis" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ic_number" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="date_of_birth" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="gender" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="blood_type" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="timestamp" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -129,20 +129,6 @@
                 <ScalarProperty Name="symptom" ColumnName="symptom" />
                 <ScalarProperty Name="cause" ColumnName="cause" />
                 <ScalarProperty Name="treatment" ColumnName="treatment" />
-                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="patient_information">
-            <EntityTypeMapping TypeName="ThyroidDataModel.patient_information">
-              <MappingFragment StoreEntitySet="patient_information">
-                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
-                <ScalarProperty Name="user_id" ColumnName="user_id" />
-                <ScalarProperty Name="diagnosis" ColumnName="diagnosis" />
-                <ScalarProperty Name="ic_number" ColumnName="ic_number" />
-                <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
-                <ScalarProperty Name="gender" ColumnName="gender" />
-                <ScalarProperty Name="blood_type" ColumnName="blood_type" />
                 <ScalarProperty Name="timestamp" ColumnName="timestamp" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -166,6 +152,20 @@
                 <ScalarProperty Name="full_name" ColumnName="full_name" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="patient_information">
+            <EntityTypeMapping TypeName="ThyroidDataModel.patient_information">
+              <MappingFragment StoreEntitySet="patient_information">
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+                <ScalarProperty Name="blood_type" ColumnName="blood_type" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+                <ScalarProperty Name="ic_number" ColumnName="ic_number" />
+                <ScalarProperty Name="diagnosis" ColumnName="diagnosis" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

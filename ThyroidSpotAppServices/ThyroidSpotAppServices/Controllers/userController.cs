@@ -47,7 +47,7 @@ namespace ThyroidSpotAppServices.Controllers
                 patientinfo.full_name = uinfo.full_name;
                 patientinfo.account_type = uinfo.account_type;
 
-                entities.Entry(uinfo).State = System.Data.Entity.EntityState.Modified;
+                entities.Entry(patientinfo).State = System.Data.Entity.EntityState.Modified;
                 entities.SaveChanges();
             }
         }
