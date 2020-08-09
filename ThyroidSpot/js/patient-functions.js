@@ -25,14 +25,18 @@ function getOnePatientInfo() {
             for (i = 0; i < patientInfoArray.length; i++) {
                 if (getuid == patientInfoArray[i].user_id){
 
+                    currentPatientID = patientInfoArray[i].patient_id;
 
-                viewreportbutton = "<button id='forumdescbtn' class=' btn btn-info btn-sm' index='" + patientInfoArray[i].patient_id + "'>View Report</button>"
-                // $('#diseaseCard').append("<div onclick="+viewmorebutton+"  class = 'centerText'>" +
-                //     coverImage + "<div class='centerTitle'><b>" + diseaseInfoArray[i].disease + "</b></div></div>");
-                $('#patientCardContent').append("<div class = 'centerText'>" +
-                    "<img src='https://www.mei.edu/sites/default/files/2019-01/Virus.jpg'>"+
-                     "<div class='centerTitle'></p><b>" + patientInfoArray[i].ic_number + 
-                     "</b></p><div class='centerContent'><p>Diagnosis: "+patientInfoArray[i].diagnosis+"</p></div>" +viewreportbutton+ "</div>");
+                    viewreportbutton = "<button id='forumdescbtn' class=' btn btn-info btn-sm' index='" + patientInfoArray[i].patient_id + "'>View Report</button>"
+                    // $('#diseaseCard').append("<div onclick="+viewmorebutton+"  class = 'centerText'>" +
+                    //     coverImage + "<div class='centerTitle'><b>" + diseaseInfoArray[i].disease + "</b></div></div>");
+                    $('#patientCardContent').append("<div class = 'centerText'>" +
+                        "<img src='https://www.mei.edu/sites/default/files/2019-01/Virus.jpg'>"+
+                        "<div class='centerTitle'></p><b>" + patientInfoArray[i].ic_number + 
+                        "</b></p><div class='centerContent'><p>Diagnosis: "+patientInfoArray[i].diagnosis+"</p></div>" +viewreportbutton+ "</div>");
+
+                    getPatientReport();
+
                 }
                 else if (i == patientInfoArray.length-1){
                     createinfobutton = "<button id='createnewinfo' class=' btn btn-info btn-sm'>Create New Patient Info</button>"
@@ -40,7 +44,6 @@ function getOnePatientInfo() {
                     "<img src='https://www.mei.edu/sites/default/files/2019-01/Virus.jpg'>"+
                      "<div class='centerTitle'></p>No patient info yet"+
                      "</p><div class='centerContent'><p>Please click on the link to create one</p></div>" +createinfobutton+ "</div>");
-                
                 }
             }
         }
@@ -86,6 +89,7 @@ function postPatientInfo() {
     var today = new Date();
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
+
     var patientinfo = { user_id: getuser_id, diagnosis: $('#newDiagnosisDDL').val(), ic_number: $('#newIC').val(), date_of_birth: $('#newDOB').val(),
      gender: $('#newGenderDDL').val(), blood_type: $('#newBloodTypeDDL').val(), timestamp: date}
 
@@ -115,9 +119,10 @@ var currentreportID; //this variable will contain the report ID that's selected
 
 //only patients can access it based on their assigned unique ID
 function getPatientReport() {
-    console.log("retrieving all patient info...")
+    console.log("retrieving all patient report...")
 
-    //TODO: need a localstorage to get unique ID
+    console.log(currentPatientID)
+    
     $.ajax({
         type: 'GET',
         url: reportURI,
@@ -126,20 +131,32 @@ function getPatientReport() {
         success: function (data) {
             //put json data into bookArray
             reportArray = data;
-            console.log(reportArray)
             //clear the tbody of the table so that it will be refreshed everytime
-            $('#reportContent').html('');
+            
+            // $('#reportContent').html('');
+
             //Iterate through the diseaseInfoArray to generate rows to populate the table
             for (i = 0; i < reportArray.length; i++) {
                 //TODO: need code an if else statement to match firebase ID
 
                 // $('#diseaseCard').append("<div onclick="+viewmorebutton+"  class = 'centerText'>" +
                 //     coverImage + "<div class='centerTitle'><b>" + diseaseInfoArray[i].disease + "</b></div></div>");
-                $('#reportContent').append("<div class = 'centerText'>" +
-                    "<img src='https://www.mei.edu/sites/default/files/2019-01/Virus.jpg'>"+
-                     "<div class='centerTitle'></p><b>" + reportArray[i].report_id + //TODO: get username from the user table 
-                     "</b></p><div class='centerContent'><p>FT4: "+reportArray[i].FT4 +"</p><p>TSH: "+reportArray[i].TSH +
-                     "</p><p>Drug Dose: "+reportArray[i].drug_dose +"</p><p>Last updated: "+reportArray[i].timestamp +"</p></div></div>");
+                // $('#reportContent').append("<div class = 'centerText'>" +
+                //     "<img src='https://www.mei.edu/sites/default/files/2019-01/Virus.jpg'>"+
+                //      "<div class='centerTitle'></p><b>" + reportArray[i].report_id + //TODO: get username from the user table 
+                //      "</b></p><div class='centerContent'><p>FT4: "+reportArray[i].FT4 +"</p><p>TSH: "+reportArray[i].TSH +
+                //      "</p><p>Drug Dose: "+reportArray[i].drug_dose +"</p><p>Last updated: "+reportArray[i].timestamp +"</p></div></div>");
+
+                if (currentPatientID == reportArray[i].patient_id){
+                    
+                    //TODO: show reports of the patient
+                    var report = {report_id: reportArray[i].report_id, patient_id: reportArray[i].patient_id, FT4: reportArray[i].FT4, TSH: reportArray[i].TSH, drug_dose: reportArray[i].drug_dose, timestamp: reportArray[i].timestamp}
+                    return console.log(report)
+                }
+                else if (i == reportArray.length-1){
+                    //TODO: add 'ADD REPORT' button here
+                    return console.log("sot liao u")
+                }
             }
         }
     });
