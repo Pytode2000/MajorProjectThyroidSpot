@@ -30,6 +30,7 @@ function toggleLogin() {
 
 
 /* Firebase Login and Register function */
+// NOTE: FORM CONTROL NOT IMPLEMENTED YET.
 function login() {
     const txtEmail = document.getElementById("loginEmail");
     const txtPassword = document.getElementById("loginPassword");
@@ -38,8 +39,14 @@ function login() {
     const pass = txtPassword.value;
     const auth = firebase.auth();
     const promise = auth.signInWithEmailAndPassword(email, pass);
+
+    // On login, GET "user" table's "account_type" via "user_id" (firebase unique id, or uid).
+
+
+
     promise.then(firebaseUser => {
         sessionStorage.setItem("user_logged_in", "y")
+        // Beneath here change to a condition based on user_account_type
         window.location.href = "profile.html";
     })
     promise.catch(e => console.log(e.message));
@@ -59,7 +66,7 @@ function register() {
         console.log(userUid);
 
         // Creates an instance (row) in the "user" table.
-        var userInstance = { user_id: userUid, full_name: $('#registerFullName').val(), account_type: "patient" };
+        var userInstance = { user_id: userUid, full_name: $('#registerFullName').val(), account_type: "patient" }; // Register function only creates "patient" accounts.
         console.log(userInstance)
         $.ajax({
             type: 'POST',
@@ -114,33 +121,3 @@ function register() {
     });
     promise.catch(e => console.log(e.message));
 }
-
-
-
-
-
-
-function testFunction() {
-    // Creates an instance (row) in the "patient_information" table.
-    var diagnosis = document.getElementById("registerDiagnosis");
-    var diagnosisChosen = diagnosis.options[diagnosis.selectedIndex].text;
-
-    var genderChosen;
-    if (document.getElementById('genderMaleRadio').checked) {
-        genderChosen = "Male"
-    }
-    else {
-        genderChosen = "Female"
-    }
-
-    var bloodType = document.getElementById("registerBloodType");
-    var bloodTypeChosen = bloodType.options[bloodType.selectedIndex].text;
-
-    var patientInfoInstance = {
-        user_id: "userid", diagnosis: diagnosisChosen, ic_number: $('#registerId').val(),
-        date_of_birth: $('#registerBirthdate').val(), gender: genderChosen, blood_type: bloodTypeChosen, timestamp: "-"
-    };
-
-    console.log(patientInfoInstance);
-}
-

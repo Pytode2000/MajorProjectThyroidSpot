@@ -140,10 +140,10 @@
                             });
                         </script>
 
+
                         <!-- Radio buttons for gender -->
                         <label class="white-text">Select gender: </label>
-
-                        <div class="custom-control custom-radio custom-control-inline">
+                        <div class="custom-control custom-radio custom-control-inline" style="left:15%;">
                             <input type="radio" id="genderMaleRadio" name="genderMaleRadio" class="custom-control-input" checked>
                             <label class="custom-control-label white-text" for="genderMaleRadio">Male</label>
                         </div>
@@ -151,33 +151,44 @@
                             <input type="radio" id="genderFemaleRadio" name="genderMaleRadio" class="custom-control-input">
                             <label class="custom-control-label white-text" for="genderFemaleRadio">Female</label>
                         </div>
+                        <br> <br>
+
+                        <div>
+                            <label for="registerDiagnosis" class="white-text" style="display:inline;">Select diagnosis: </label>
+                            <select id="registerDiagnosis" class="custom-select" style="width:70%; float: right;">
+                                <option>De Quervain's thyroiditis</option>
+                                <option>Differentiatied thyroid carcinoma</option>
+                                <option>Graves' disease</option>
+                                <option>Hashimoto's thyroiditis</option>
+                                <option>Hyperthyroidism</option>
+                                <option>Hypothyroidsm</option>
+                                <option>Post-radioiodine ablation</option>
+                                <option>Post-thyroidectomy</option>
+                                <option>Riedel's thyroiditis</option>
+                                <option>Thyrotoxicosis</option>
+                                <option>Toxic adenoma</option>
+                                <option>Toxic multinodular goitre</option>
+                                <option>Others</option>
+                            </select>
+                        </div>
                         <br>
-
-                        <!-- SELECT MENU FOR DIAGNOSIS -->
-
                         <div>
                             <!-- SELECT MENU FOR Blood type -->
                             <label for="registerBloodType" class="white-text" style="display:inline;">Select blood type:
                             </label>
 
                             <select id="registerBloodType" class="custom-select" style="width:70%; float: right;">
-                                <!-- <option selected>Select diagnosis...</option> -->
-                                <option>One</option>
-                                <option>Two</option>
-                                <option>Three</option>
-                            </select>
-                        </div>
+                                <option>A-</option>
+                                <option>A+</option>
 
-                        <br>
+                                <option>B-</option>
+                                <option>B+</option>
 
-                        <div>
-                            <label for="registerDiagnosis" class="white-text" style="display:inline;">Select diagnosis: </label>
+                                <option>AB-</option>
+                                <option>AB+</option>
 
-                            <select id="registerDiagnosis" class="custom-select" style="width:70%; float: right;">
-                                <!-- <option selected>Select diagnosis...</option> -->
-                                <option>One</option>
-                                <option>Two</option>
-                                <option>Three</option>
+                                <option>O-</option>
+                                <option>O+</option>
                             </select>
                         </div>
 
