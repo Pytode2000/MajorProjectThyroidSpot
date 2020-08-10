@@ -52,7 +52,8 @@ namespace ThyroidSpotAppServices.Controllers
             }
         }
 
-        //delete user (based on firebase unique id)
+        //delete user (based on user id)
+        [HttpDelete]
         public string Delete(int id)
         {
             using (ThyroidDataEntities entities = new ThyroidDataEntities())
