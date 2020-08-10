@@ -5,26 +5,30 @@
     b) "user_account_type", a string retrieved from the "user" table. The 3 types are admin, clinician, and patient.
 */
 
+var userURI = "https://localhost:44395/api/User/";
 
-
-var user_account_type = "patient" // Placeholder unti l the "user" table is ready.
-// // var user_account_type = "clinician"
-// // var user_account_type = "admin"
+// User's account type is set in login function.
 
 firebase.auth().onAuthStateChanged(firebaseUser => {
     // User is logged in.
     if (firebaseUser) {
-        // Set a bunch of sessions for logged in state.
-        sessionStorage.setItem("user_logged_in", 'y');
-        sessionStorage.setItem("user_email", firebaseUser.email);
-        sessionStorage.setItem("unique_id", firebaseUser.uid);
-        console.log(firebaseUser.uid);
-        console.log(firebaseUser.email);
-
+        sessionStorage.setItem("user_logged_in", "y");
         // User's email is verified.
         if (firebaseUser.emailVerified === true) {
-            // Don't have to do anything because onclick login already redirects user to a page.
-            console.log("Logged in: " + sessionStorage.getItem("user_logged_in"));
+            // If email is verified, on login/registration, GET "user" table's "account_type" via "user_id" (firebase unique id, or uid).
+            currentUserArray = []
+            $.ajax({
+                type: 'GET',
+                url: userURI + firebaseUser.uid,
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (data) {
+                    currentUserArray = data;
+                    console.log(currentUserArray.account_type);
+                    sessionStorage.setItem("user_account_type", currentUserArray.account_type);
+
+                }
+            });
         }
         // User's email is not verified.
         else {
@@ -34,14 +38,14 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 window.location.href = "verify-email.html";
             }, 2000);
         }
-
     }
     // User not logged in.
     else {
         sessionStorage.setItem("user_logged_in", 'n');
-        sessionStorage.setItem("user_email", null);
-        sessionStorage.setItem("unique_id", null);
-
+        sessionStorage.setItem("user_account_type", null)
         console.log("Logged in: " + sessionStorage.getItem("user_logged_in"));
+        console.log("Account type: " + sessionStorage.getItem("user_account_type"));
+
     }
 });
+

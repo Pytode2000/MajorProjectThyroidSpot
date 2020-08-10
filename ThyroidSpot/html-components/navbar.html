@@ -121,6 +121,9 @@
         /* Check if user is logged in or not. */
         user_logged_in = sessionStorage.getItem("user_logged_in");
 
+        /* Check user's account type. */
+        user_account_type = sessionStorage.getItem("user_account_type");
+
         // If user is *not* logged in, "Logout" button in navbar will not show. 
         // If user is *not* logged in, "Profile" button in navbar will not show. 
         if (user_logged_in == "n") {
@@ -150,6 +153,16 @@
         // If user is *not* logged in OR account type is not admin, "Manage" button (used by account_type="admin") in navbar will not show.
         if (user_logged_in == "n" || user_account_type != "admin") {
             document.getElementById('nav-tab-manage').style.display = "none";
+        }
+
+
+        // More specific navigation control.
+        const currentLoc = window.location.href;
+        if (currentLoc == "http://127.0.0.1:5500/html-pages/index.html" && user_logged_in == 'y') {
+            window.location.href = profile.html;
+        }
+        if (currentLoc == "http://127.0.0.1:5500/html-pages/profile.html" && user_logged_in == 'n') {
+            window.location.href = index.html;
         }
     }
 

@@ -40,14 +40,15 @@ function login() {
     const auth = firebase.auth();
     const promise = auth.signInWithEmailAndPassword(email, pass);
 
-    // On login, GET "user" table's "account_type" via "user_id" (firebase unique id, or uid).
-
-
-
     promise.then(firebaseUser => {
-        sessionStorage.setItem("user_logged_in", "y")
-        // Beneath here change to a condition based on user_account_type
         window.location.href = "profile.html";
+
+        setTimeout(function () {
+            // Redirect user to "verify-email.html"
+            window.location.reload();
+
+        }, 1000);
+
     })
     promise.catch(e => console.log(e.message));
 }
