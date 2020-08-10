@@ -24,11 +24,14 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 contentType: 'application/json',
                 success: function (data) {
                     currentUserArray = data;
-                    console.log(currentUserArray.account_type);
+                    // console.log(currentUserArray.account_type);
                     sessionStorage.setItem("user_account_type", currentUserArray.account_type);
-
                 }
             });
+
+            console.log(sessionStorage.getItem("user_logged_in"));
+            console.log("TEST" + sessionStorage.getItem("user_account_type"));
+
         }
         // User's email is not verified.
         else {
@@ -36,13 +39,13 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
             setTimeout(function () {
                 // Redirect user to "verify-email.html"
                 window.location.href = "verify-email.html";
-            }, 2000);
+            }, 1000);
         }
     }
     // User not logged in.
     else {
         sessionStorage.setItem("user_logged_in", 'n');
-        sessionStorage.setItem("user_account_type", null)
+        sessionStorage.setItem("user_account_type", "none")
         console.log("Logged in: " + sessionStorage.getItem("user_logged_in"));
         console.log("Account type: " + sessionStorage.getItem("user_account_type"));
 
