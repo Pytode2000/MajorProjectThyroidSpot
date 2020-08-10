@@ -1,0 +1,74 @@
+.container {
+    column-gap: 30px;
+    margin-left: 50px;
+    margin-right: 50px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    background-image: rgb(117, 117, 117);
+  }
+
+  .shiftedrow{
+      padding-left: 40px;
+  }
+  
+  .centerTable {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 14px;
+    position: relative;
+    border: 1px;
+  }
+  
+  #reportcontainer {
+    width: 80%;
+    margin-top: 10%;
+    margin: auto;
+    height: 450px;
+    padding: 10px;
+  }
+  
+  #historycontainer {
+    width: 50%;
+    height: 420px;
+    background: red;
+    float: left;
+    padding-right: 5%;
+  }
+  
+  #graphcontainer {
+    
+    height: 420px;
+    background: black;
+  }
+  
+  .container > div > img {
+    opacity: 0.5;
+    border-radius: 25px;
+    width: 100%;  
+    height: 100%;  
+    object-fit: cover;  
+    margin-bottom: 15px;
+    margin-top: 15px;
+    max-width: 500px;
+  }
+  
+  .centerTitle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+  }
+
+/* TODO: reportcontainer, historycontainer, graphcontainer for mobile */
+@media only screen and (max-width: 600px) {
+·/* Adding margin-bottom so that content does not get blocked by the navigation bar*/
+  .container {
+    display: grid;
+    column-gap: 30px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 5rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+  
