@@ -37,7 +37,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         else {
             // If it loads too fast, subsequent functions in Register can't be called.
             setTimeout(function () {
-                // Redirect user to "verify-email.html"
                 window.location.href = "verify-email.html";
             }, 1000);
         }

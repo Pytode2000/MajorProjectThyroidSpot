@@ -41,7 +41,7 @@ function login() {
     const promise = auth.signInWithEmailAndPassword(email, pass);
 
     promise.then(firebaseUser => {
-        window.location.href = "redirect.html";
+        window.location.href = "profile.html";
 
     })
     promise.catch(e => console.log(e.message));
