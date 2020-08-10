@@ -28,10 +28,8 @@ function getOnePatientInfo() {
                     currentPatientID = patientInfoArray[i].patient_id;
 
                     viewreportbutton = "<button id='forumdescbtn' class=' btn btn-info btn-sm' index='" + patientInfoArray[i].patient_id + "'>View Report</button>"
-                    // $('#diseaseCard').append("<div onclick="+viewmorebutton+"  class = 'centerText'>" +
-                    //     coverImage + "<div class='centerTitle'><b>" + diseaseInfoArray[i].disease + "</b></div></div>");
-
-                    //TODO: get user
+                   
+                    //TODO: get user's name from login
                     $('#patientCardContent').append("<h2 style='text-align: center'>Test Name</h2><table class='centerTable'><tr>"+
                         "<td></p><b>IC number: " + patientInfoArray[i].ic_number + 
                         "</b></p></td><td class='shiftedrow'><p>Diagnosis: "+patientInfoArray[i].diagnosis+"</p></td>"+
@@ -114,7 +112,7 @@ function postPatientInfo() {
 
 
 
-//GET PATIENT REPORT:
+//GET + CREATE PATIENT REPORT:
 var reportURI = 'https://localhost:44395/api/report';
 var reportArray = [];
 var currentreportID; //this variable will contain the report ID that's selected
@@ -167,8 +165,38 @@ function getPatientReport() {
 }
 
 
-//TODO: create function for postPatientReport
+//create function for postPatientReport
+function postPatientReport() {
+    //getting firebase UID from sessionstorage GET and putting in 'user_id'
+    var getuser_id = currentPatientID
+    console.log(currentPatientID)
 
+    //creating date
+    var today = new Date();
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    console.log(date);
+
+    //TODO: create modal for posting patient report and modify accordingly
+    var patientinfo = { user_id: getuser_id, diagnosis: $('#newDiagnosisDDL').val(), ic_number: $('#newIC').val(), date_of_birth: $('#newDOB').val(),
+     gender: $('#newGenderDDL').val(), blood_type: $('#newBloodTypeDDL').val(), timestamp: date}
+
+    console.log(patientinfo);
+
+
+    //TODO: post function for patient report
+    // $.ajax({
+    //     type: 'POST',
+    //     url: reportURI,
+    //     data: JSON.stringify(patientinfo),
+    //     dataType: 'json',
+    //     contentType: 'application/json',
+    //     success: function (data) {
+    //         //calling the function again so that the new books are updated
+    //         getOnePatientInfo();
+    //         document.getElementById('newPatientModal').style.display='none'
+    //     }
+    // });
+}
 
 
 
@@ -177,5 +205,6 @@ $(document).on("click", "#createnewinfo", function () {
 });
 
 //TODO: create a doc model for postPatientReport
+
 
 getOnePatientInfo();
