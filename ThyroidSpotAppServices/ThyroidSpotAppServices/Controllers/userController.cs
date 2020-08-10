@@ -53,12 +53,12 @@ namespace ThyroidSpotAppServices.Controllers
         }
 
         //delete user (based on firebase unique id)
-        public string Delete(string uniqueid)
+        public string Delete(int id)
         {
             using (ThyroidDataEntities entities = new ThyroidDataEntities())
             {
                 //user userid = entities.user.Find(id);
-                user userid = (user)entities.user.Where(m => m.user_id.Equals(uniqueid));
+                user userid = entities.user.Find(id);
                 entities.user.Remove(userid);
                 entities.SaveChanges();
                 return "user deleted";
