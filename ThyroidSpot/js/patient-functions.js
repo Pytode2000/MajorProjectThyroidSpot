@@ -30,10 +30,13 @@ function getOnePatientInfo() {
                     viewreportbutton = "<button id='forumdescbtn' class=' btn btn-info btn-sm' index='" + patientInfoArray[i].patient_id + "'>View Report</button>"
                     // $('#diseaseCard').append("<div onclick="+viewmorebutton+"  class = 'centerText'>" +
                     //     coverImage + "<div class='centerTitle'><b>" + diseaseInfoArray[i].disease + "</b></div></div>");
-                    $('#patientCardContent').append("<div class = 'centerText'>" +
-                        "<img src='https://www.mei.edu/sites/default/files/2019-01/Virus.jpg'>"+
-                        "<div class='centerTitle'></p><b>" + patientInfoArray[i].ic_number + 
-                        "</b></p><div class='centerContent'><p>Diagnosis: "+patientInfoArray[i].diagnosis+"</p></div>" +viewreportbutton+ "</div>");
+
+                    //TODO: get user
+                    $('#patientCardContent').append("<h2 style='text-align: center'>Test Name</h2><table class='centerTable'><tr>"+
+                        "<td></p><b>IC number: " + patientInfoArray[i].ic_number + 
+                        "</b></p></td><td class='shiftedrow'><p>Diagnosis: "+patientInfoArray[i].diagnosis+"</p></td>"+
+                        "<td class='shiftedrow'>D.O.B: "+patientInfoArray[i].date_of_birth+"</td><td class='shiftedrow'>Gender: "+patientInfoArray[i].gender+
+                        "</td><td class='shiftedrow'>Blood Type: "+patientInfoArray[i].blood_type+"</td></tr></table>");
 
                     getPatientReport();
 
@@ -137,7 +140,6 @@ function getPatientReport() {
 
             //Iterate through the diseaseInfoArray to generate rows to populate the table
             for (i = 0; i < reportArray.length; i++) {
-                //TODO: need code an if else statement to match firebase ID
 
                 // $('#diseaseCard').append("<div onclick="+viewmorebutton+"  class = 'centerText'>" +
                 //     coverImage + "<div class='centerTitle'><b>" + diseaseInfoArray[i].disease + "</b></div></div>");
@@ -154,7 +156,9 @@ function getPatientReport() {
                     return console.log(report)
                 }
                 else if (i == reportArray.length-1){
-                    //TODO: add 'ADD REPORT' button here
+                    $('#reportcontainer').html('');
+                    createreportbtn = "<button id='createrpt' class=' btn btn-info btn-sm'>Create Report</button>"
+                    $('#reportcontainer').append("<div style='text-align: center; margin-top: 10%'><h3>No patient report found</h3><div>"+createreportbtn+"<div></div>");
                     return console.log("sot liao u")
                 }
             }
@@ -163,8 +167,15 @@ function getPatientReport() {
 }
 
 
+//TODO: create function for postPatientReport
+
+
+
+
 $(document).on("click", "#createnewinfo", function () {
     document.getElementById('newPatientModal').style.display='block'
 });
+
+//TODO: create a doc model for postPatientReport
 
 getOnePatientInfo();
