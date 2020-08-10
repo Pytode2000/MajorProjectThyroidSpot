@@ -20,11 +20,11 @@ namespace ThyroidSpotAppServices.Controllers
         }
 
         //get one user info from firebase unique ID (to be done on javascript)
-        public user Get(string uniqueid)
+        public user Get(string id)
         {
             using (ThyroidDataEntities entities = new ThyroidDataEntities())
             {
-                return entities.user.FirstOrDefault(e => e.user_id == uniqueid);
+                return entities.user.FirstOrDefault(e => e.user_id == id);
             }
         }
 
