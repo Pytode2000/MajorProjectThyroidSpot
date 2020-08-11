@@ -41,6 +41,10 @@ function login() {
     const promise = auth.signInWithEmailAndPassword(email, pass);
 
     promise.then(firebaseUser => {
+        
+        //DO NOT REMOVE: need to use it to create patient report in case not created on sign in
+        // var s = sessionStorage.setItem("firebaseUID", )
+        
         window.location.href = "profile.html";
 
         setTimeout(function () {

@@ -27,6 +27,10 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                     console.log(currentUserArray.account_type);
                     sessionStorage.setItem("user_account_type", currentUserArray.account_type);
 
+                    //DO NOT REMOVE: need it for creating patient reports (should user smhow havent yet)
+                    //this will be removed in the actual one, for now using it for dev purposes
+                    sessionStorage.setItem("uniqueid", firebaseUser.uid);
+
                 }
             });
         }

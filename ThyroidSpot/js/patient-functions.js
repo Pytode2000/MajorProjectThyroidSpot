@@ -21,6 +21,9 @@ function getOnePatientInfo() {
             console.log(patientInfoArray)
             //clear the tbody of the table so that it will be refreshed everytime
             $('#patientCardContent').html('');
+
+            // $('#reportcontainer').html('');
+
             //Iterate through the diseaseInfoArray to generate rows to populate the table
             for (i = 0; i < patientInfoArray.length; i++) {
                 if (getuid == patientInfoArray[i].user_id){
@@ -36,15 +39,19 @@ function getOnePatientInfo() {
                         "<td class='shiftedrow'>D.O.B: "+patientInfoArray[i].date_of_birth+"</td><td class='shiftedrow'>Gender: "+patientInfoArray[i].gender+
                         "</td><td class='shiftedrow'>Blood Type: "+patientInfoArray[i].blood_type+"</td></tr></table>");
 
-                    getPatientReport();
+                    return  getPatientReport();
+
 
                 }
-                else if (i == patientInfoArray.length-1){
+                else if (getuid != patientInfoArray[i].user_id && i == patientInfoArray.length-1){
+                    $('#reportcontainer').html('');
                     createinfobutton = "<button id='createnewinfo' class=' btn btn-info btn-sm'>Create New Patient Info</button>"
                     $('#patientCardContent').append("<div class = 'centerText'>" +
-                    "<img src='https://www.mei.edu/sites/default/files/2019-01/Virus.jpg'>"+
+                    
                      "<div class='centerTitle'></p>No patient info yet"+
                      "</p><div class='centerContent'><p>Please click on the link to create one</p></div>" +createinfobutton+ "</div>");
+
+                    return console.log("that's enough")
                 }
             }
         }
@@ -153,11 +160,11 @@ function getPatientReport() {
                     var report = {report_id: reportArray[i].report_id, patient_id: reportArray[i].patient_id, FT4: reportArray[i].FT4, TSH: reportArray[i].TSH, drug_dose: reportArray[i].drug_dose, timestamp: reportArray[i].timestamp}
                     return console.log(report)
                 }
-                else if (i == reportArray.length-1){
+                else if (currentPatientID != reportArray[i].patient_id && i == reportArray.length-1){
                     $('#reportcontainer').html('');
                     createreportbtn = "<button id='createrpt' class=' btn btn-info btn-sm'>Create Report</button>"
                     $('#reportcontainer').append("<div style='text-align: center; margin-top: 10%'><h3>No patient report found</h3><div>"+createreportbtn+"<div></div>");
-                    return console.log("sot liao u")
+                    return console.log("no report history")
                 }
             }
         }
@@ -167,7 +174,7 @@ function getPatientReport() {
 
 //create function for postPatientReport
 function postPatientReport() {
-    //getting firebase UID from sessionstorage GET and putting in 'user_id'
+    //getting patient id and putting it into a variable
     var getuser_id = currentPatientID
     console.log(currentPatientID)
 
@@ -176,26 +183,26 @@ function postPatientReport() {
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
     console.log(date);
 
-    //TODO: create modal for posting patient report and modify accordingly
-    var patientinfo = { user_id: getuser_id, diagnosis: $('#newDiagnosisDDL').val(), ic_number: $('#newIC').val(), date_of_birth: $('#newDOB').val(),
-     gender: $('#newGenderDDL').val(), blood_type: $('#newBloodTypeDDL').val(), timestamp: date}
+    
+    var patientinfo = { patient_id: getuser_id, FT4: $('#newFT4').val(), TSH: $('#newTSH').val(), 
+    drug_dose: $('#newDrugDose').val(), timestamp: date}
 
     console.log(patientinfo);
 
 
     //TODO: post function for patient report
-    // $.ajax({
-    //     type: 'POST',
-    //     url: reportURI,
-    //     data: JSON.stringify(patientinfo),
-    //     dataType: 'json',
-    //     contentType: 'application/json',
-    //     success: function (data) {
-    //         //calling the function again so that the new books are updated
-    //         getOnePatientInfo();
-    //         document.getElementById('newPatientModal').style.display='none'
-    //     }
-    // });
+    $.ajax({
+        type: 'POST',
+        url: reportURI,
+        data: JSON.stringify(patientinfo),
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            //calling the function again so that the new books are updated
+            getOnePatientInfo();
+            document.getElementById('newReportModal').style.display='none'
+        }
+    });
 }
 
 
@@ -205,6 +212,8 @@ $(document).on("click", "#createnewinfo", function () {
 });
 
 //TODO: create a doc model for postPatientReport
-
+$(document).on("click", "#createrpt", function () {
+    document.getElementById('newReportModal').style.display='block'
+});
 
 getOnePatientInfo();

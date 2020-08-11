@@ -34,33 +34,50 @@
             <div id="graphcontainer">
             </div>
         </div>
-        <!--Modal For Diease Info-->
+        <!--Modal For Patient Info-->
         <div id="newPatientModal" class="w3-modal">
             <div class="w3-modal-content">
                 <div class="w3-container">
                     <span onclick="document.getElementById('newPatientModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                    <h1 id="diseaseName" class="centerText">Create Patient Info</h1>
-                    <p>
+                    <h1 id="diseaseName">Create Patient Info</h1>
+                    <hr>
+                    <table id="createnfotable">
+                    <tr>
+                    <td class="firsttd">
                     <label>NRIC:</label>
+                    </td>
+                    <td class="labeltd">
                     <input id="newIC">
-                    </p>
+                    </td>
+                    </tr>
                     
-                    <p>
+                    <tr>
+                    <td class="firsttd">
                     <label>Date of birth:</label>
+                    </td>
+                    <td class="labeltd">
                     <input id="newDOB">
-                    </p>
+                    </td>
+                    </tr>
 
-                    <p>
+                    <tr>
+                    <td class="firsttd">
                     <label>Gender:</label>
+                    </td>
+                    <td class="labeltd">
                     <select name="gender" id="newGenderDDL">
                         <option value="" selected disabled hidden>--Choose here--</option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                     </select>
-                    </p>
+                    </td>
+                    </tr>
                     
-                    <p>
+                    <tr>
+                    <td class="firsttd">
                     <label>Diagnosis:</label>
+                    </td>
+                    <td class="labeltd">
                     <select name="diagnosis" id="newDiagnosisDDL">
                         <option value="" selected disabled hidden>--Choose here--</option>
                         <option value="De Quervain's Thyroiditis">De Quervain's Thyroiditis</option>
@@ -71,10 +88,14 @@
                         <option value="Post-thyroidectomy">Post-thyroidectomy</option>
                         <option value="Riedel's thyroiditis">Riedel's thyroiditis</option>
                     </select>
-                    </p>
+                    </td>
+                    </tr>
                     
-                    <p>
+                    <tr>
+                    <td class="firsttd">
                     <label>Blood Type:</label>
+                    </td>
+                    <td class="labeltd">
                     <select name="bloodtype" id="newBloodTypeDDL">
                         <option value="" selected disabled hidden>--Choose here--</option>
                         <option value="A+">A+</option>
@@ -86,10 +107,55 @@
                         <option value="O+">O+</option>
                         <option value="O-">O-</option>
                     </select>
-                    </p>
-
-                    <div style="text-align: center;">
+                    </td>
+                    </tr>
+                    </table>
+                    <div style="text-align: center; margin-bottom: 2em;">
                         <button id="btnRegister" class="btn btn-dark btn-block bold" onclick="postPatientInfo()">Create Patient Info</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--Modal For Create Patient Report-->
+        <div id="newReportModal" class="w3-modal">
+            <div class="w3-modal-content">
+                <div class="w3-container">
+                    <span onclick="document.getElementById('newReportModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                    <h1 id="diseaseName">Create Health Report</h1>
+                    <hr>
+                    <table id="createnfotable">
+                    <tr>
+                    <td class="firsttd">
+                    <label>FT4:</label>
+                    </td>
+                    <td class="labeltd">
+                    <input id="newFT4">
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td class="firsttd">
+                    <label>TSH:</label>
+                    </td>
+                    <td class="labeltd">
+                    <input id="newTSH">
+                    </td>
+                    </tr>
+
+                    <tr>
+                    <td class="firsttd">
+                    <label>Drug dose:</label>
+                    </td>
+                    </td>
+                    <td class="labeltd">
+                    <input id="newDrugDose">
+                    </td>
+                    </tr>
+                    </table>
+                    <div style="text-align: center; margin-bottom: 2em;">
+                        <button id="btnRegister" class="btn btn-dark btn-block bold" onclick="postPatientReport()">Save Report</button>
                     </div>
                 </div>
             </div>
