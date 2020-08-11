@@ -1,9 +1,34 @@
 // all patient functions go here
 
+//QUERY FOR USERNAME
+var userURI = 'https://localhost:44395/api/user';
+var userInfoArray = [];
+var username;
+function getUserName(){
+    var getuid = sessionStorage.getItem("uniqueid");
+    $.ajax({
+        type: 'GET',
+        url: userURI,
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            
+            userInfoArray = data;
+
+            for (i = 0; i < userInfoArray.length; i++) {
+                if (getuid == userInfoArray[i].user_id){
+                    return username = userInfoArray[i].full_name;
+                }
+            }
+        }
+    });
+}
+
 //disease functions
 var patientURI = 'https://localhost:44395/api/patientInfo';
 var patientInfoArray = [];
 var currentPatientID; //this variable will contain the patient ID that's selected
+
 
 //This function will consume the patient info GET API (FOR DOCTORS)
 function getOnePatientInfo() {
@@ -32,8 +57,8 @@ function getOnePatientInfo() {
 
                     viewreportbutton = "<button id='forumdescbtn' class=' btn btn-info btn-sm' index='" + patientInfoArray[i].patient_id + "'>View Report</button>"
                    
-                    //TODO: get user's name from login
-                    $('#patientCardContent').append("<h2 style='text-align: center'>Test Name</h2><table class='centerTable'><tr>"+
+                    
+                    $('#patientCardContent').append("<h2 style='text-align: center'>"+username+"</h2><table class='centerTable'><tr>"+
                         "<td></p><b>IC number: " + patientInfoArray[i].ic_number + 
                         "</b></p></td><td class='shiftedrow'><p>Diagnosis: "+patientInfoArray[i].diagnosis+"</p></td>"+
                         "<td class='shiftedrow'>D.O.B: "+patientInfoArray[i].date_of_birth+"</td><td class='shiftedrow'>Gender: "+patientInfoArray[i].gender+
@@ -140,35 +165,23 @@ function getPatientReport() {
             //put json data into bookArray
             reportArray = data;
             //clear the tbody of the table so that it will be refreshed everytime
-            
+            console.log(reportArray)
             // $('#reportContent').html('');
-
+            $('#dosagehist').html('');
             //Iterate through the diseaseInfoArray to generate rows to populate the table
             for (i = 0; i < reportArray.length; i++) {
-
-                // $('#diseaseCard').append("<div onclick="+viewmorebutton+"  class = 'centerText'>" +
-                //     coverImage + "<div class='centerTitle'><b>" + diseaseInfoArray[i].disease + "</b></div></div>");
-                // $('#reportContent').append("<div class = 'centerText'>" +
-                //     "<img src='https://www.mei.edu/sites/default/files/2019-01/Virus.jpg'>"+
-                //      "<div class='centerTitle'></p><b>" + reportArray[i].report_id + //TODO: get username from the user table 
-                //      "</b></p><div class='centerContent'><p>FT4: "+reportArray[i].FT4 +"</p><p>TSH: "+reportArray[i].TSH +
-                //      "</p><p>Drug Dose: "+reportArray[i].drug_dose +"</p><p>Last updated: "+reportArray[i].timestamp +"</p></div></div>");
-
+              
                 if (currentPatientID == reportArray[i].patient_id){
                     
                     var report = {report_id: reportArray[i].report_id, patient_id: reportArray[i].patient_id, FT4: reportArray[i].FT4, TSH: reportArray[i].TSH, drug_dose: reportArray[i].drug_dose, timestamp: reportArray[i].timestamp}
 
 
                     createreportbtn = "<button id='createrpt' class=' btn btn-info btn-sm'>Create Report</button>"
-                    $('#dosagehist').html('');
 
 
-                    //TODO: display patient report in the history container
-                    $('#dosagehist').append("<div><table class='centerTable'>"+
-                    "<tr><td>"+report.timestamp+"</td><td style='padding-left:3em;'>"+report.FT4+"</td><td style='padding-left:3em;'>"+report.TSH+"</td><td style='padding-left:3em;'>"+report.drug_dose+"</td></tr></table></div>");
-                    return console.log(report)
-
-
+                    $('#dosagehist').append("<div style='margin-bottom: 1em;'><table class='dosageTable'>"+
+                    "<tr><td>"+report.timestamp+"</td><td style='padding-left:2em; padding-right:2em;'>"+report.FT4+"</td><td style='padding-left:2em;padding-right:2em;'>"+report.TSH+"</td><td style='padding-left:2em;padding-right:2em;'>"+report.drug_dose+"</td></tr></table></div>");
+                    
 
                 }
                 else if (currentPatientID != reportArray[i].patient_id && i == reportArray.length-1){
@@ -226,4 +239,5 @@ $(document).on("click", "#createrpt", function () {
     document.getElementById('newReportModal').style.display='block'
 });
 
+getUserName();
 getOnePatientInfo();

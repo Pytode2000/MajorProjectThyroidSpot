@@ -47,6 +47,14 @@
     position: relative;
     border: 1px;
   }
+
+  .dosageTable {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 14px;
+    position: relative;
+    /* border: 1px solid black; */
+  }
   
   #reportcontainer {
     width: 80%;
