@@ -179,15 +179,18 @@
         // If user is either not logged in or account type is not clinician, don't let them go patientinfo.html.
         if (user_logged_in == 'n' || user_account_type != "clinician") {
             // Blocked URLs.
-            if (currentLoc == "http://127.0.0.1:5500/html-pages/patientinfo.html") {
-                window.location.href = "index.html";
-            }
+            //if () {
+            //    window.location.href = "index.html";
+            //
         }
 
         // If user is either not logged in or account type is not patient, don't let them go disease.html.
         if (user_logged_in == 'n' || user_account_type != "patient") {
             // Blocked URLs.
             if (currentLoc == "http://127.0.0.1:5500/html-pages/disease.html") {
+                window.location.href = "index.html";
+            }
+            else if (currentLoc == "http://127.0.0.1:5500/html-pages/patientinfo.html") {
                 window.location.href = "index.html";
             }
         }
@@ -208,8 +211,5 @@
         navigation_control();
         nav.classList.remove("hide");
     }
-
-
-
 
 </script>

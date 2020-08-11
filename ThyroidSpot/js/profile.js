@@ -43,8 +43,8 @@ function toggleInformation() {
 
 function getUser() {
     currentUserArray = []
-    const user_id = sessionStorage.getItem("user_unique_id")
-    var user = firebase.auth().currentUser;
+    const user_id = sessionStorage.getItem("user_unique_id");
+    const user_email = sessionStorage.getItem("user_email");
     $.ajax({
         type: 'GET',
         url: userURI + user_id,
@@ -57,9 +57,9 @@ function getUser() {
             document.getElementById("profName").innerHTML = currentUserArray.full_name;
             document.getElementById("profType").innerHTML = currentUserArray.account_type;
             document.getElementById("profUid").innerHTML = currentUserArray.user_id;
-            document.getElementById("profEmail").innerHTML = user.email;
+            document.getElementById("profEmail").innerHTML = user_email;
 
-           
+
 
 
 
