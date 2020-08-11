@@ -40,7 +40,7 @@ function refresh() {
     return false;
 }
 
-
+// (THIS PAGE NEEDS THIS BECAUSE navbar.html WILL NOT BE IMPORTED HERE).
 // Check state
 firebase.auth().onAuthStateChanged(firebaseUser => {
     const text = document.getElementById("welcome-text");

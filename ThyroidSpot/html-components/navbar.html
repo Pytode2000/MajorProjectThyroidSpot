@@ -63,7 +63,7 @@
 
         <!-- Only for Admins -->
         <li class="nav-item" id="nav-tab-manage">
-            <a href="#" class="nav-link">
+            <a href="manage.html" class="nav-link">
                 <i class="svg-inline--fa fas fa-edit fa-primary fa-w-16 fa-2x"></i>
                 <span class="link-text">Manage</span>
             </a>
@@ -86,9 +86,9 @@
     </ul>
 </nav>
 <!-- When loading, this animation will be activated. -->
-<!-- <div class="loader-wrapper">
+<div class="loader-wrapper">
     <span class="loader"><span class="loader-inner"></span></span>
-</div> -->
+</div>
 
 <!-- Only need to initialize it once at navbar since navbar will be in all other pages. -->
 <script src="../js/firebase-init.js"></script>
@@ -198,7 +198,6 @@
     if (sessionStorage.getItem("user_account_type") === "none" && sessionStorage.getItem("user_logged_in") === 'y') {
         setTimeout(function () {
             navigation_control();
-
         }, 1000);
     }
     else {

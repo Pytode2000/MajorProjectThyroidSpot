@@ -13,6 +13,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     // User is logged in.
     if (firebaseUser) {
         sessionStorage.setItem("user_logged_in", "y");
+        sessionStorage.setItem("user_fb_uid", firebaseUser.uid)
         // User's email is verified.
         if (firebaseUser.emailVerified === true) {
             // If email is verified, on login/registration, GET "user" table's "account_type" via "user_id" (firebase unique id, or uid).
@@ -29,9 +30,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 }
             });
 
-            console.log(sessionStorage.getItem("user_logged_in"));
-            console.log("TEST" + sessionStorage.getItem("user_account_type"));
-
         }
         // User's email is not verified.
         else {
@@ -45,9 +43,13 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     else {
         sessionStorage.setItem("user_logged_in", 'n');
         sessionStorage.setItem("user_account_type", "none")
-        console.log("Logged in: " + sessionStorage.getItem("user_logged_in"));
-        console.log("Account type: " + sessionStorage.getItem("user_account_type"));
+        sessionStorage.setItem("user_fb_uid", "none")
 
     }
+
+    console.log("Logged in: " + sessionStorage.getItem("user_logged_in"));
+    console.log("Account type: " + sessionStorage.getItem("user_account_type"));
+    console.log("User's UID: " + sessionStorage.getItem("user_fb_uid"));
+
 });
 
