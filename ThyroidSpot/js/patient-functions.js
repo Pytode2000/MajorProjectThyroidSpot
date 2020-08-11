@@ -88,7 +88,7 @@ function getOnePatientInfo() {
 //     });
 // }
 
-//create patient info
+//create patient info (FOR DEBUGGING PURPOSES)
 function postPatientInfo() {
     //getting firebase UID from sessionstorage GET and putting in 'user_id'
     var getuser_id = sessionStorage.getItem("uniqueid");
@@ -156,9 +156,20 @@ function getPatientReport() {
 
                 if (currentPatientID == reportArray[i].patient_id){
                     
-                    //TODO: show reports of the patient
                     var report = {report_id: reportArray[i].report_id, patient_id: reportArray[i].patient_id, FT4: reportArray[i].FT4, TSH: reportArray[i].TSH, drug_dose: reportArray[i].drug_dose, timestamp: reportArray[i].timestamp}
+
+
+                    createreportbtn = "<button id='createrpt' class=' btn btn-info btn-sm'>Create Report</button>"
+                    $('#dosagehist').html('');
+
+
+                    //TODO: display patient report in the history container
+                    $('#dosagehist').append("<div><table class='centerTable'>"+
+                    "<tr><td>"+report.timestamp+"</td><td style='padding-left:3em;'>"+report.FT4+"</td><td style='padding-left:3em;'>"+report.TSH+"</td><td style='padding-left:3em;'>"+report.drug_dose+"</td></tr></table></div>");
                     return console.log(report)
+
+
+
                 }
                 else if (currentPatientID != reportArray[i].patient_id && i == reportArray.length-1){
                     $('#reportcontainer').html('');
@@ -190,7 +201,6 @@ function postPatientReport() {
     console.log(patientinfo);
 
 
-    //TODO: post function for patient report
     $.ajax({
         type: 'POST',
         url: reportURI,
@@ -206,12 +216,12 @@ function postPatientReport() {
 }
 
 
-
+//(FOR DEBUG) doc model for postPatientInfo
 $(document).on("click", "#createnewinfo", function () {
     document.getElementById('newPatientModal').style.display='block'
 });
 
-//TODO: create a doc model for postPatientReport
+//doc model for postPatientReport
 $(document).on("click", "#createrpt", function () {
     document.getElementById('newReportModal').style.display='block'
 });

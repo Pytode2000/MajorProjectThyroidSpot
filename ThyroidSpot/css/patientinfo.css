@@ -59,7 +59,7 @@
   #historycontainer {
     width: 50%;
     height: 420px;
-    background: red;
+    background: rgb(255, 255, 255);
     float: left;
     padding-right: 5%;
   }
@@ -67,7 +67,7 @@
   #graphcontainer {
     
     height: 420px;
-    background: black;
+    background: rgb(151, 151, 151);
   }
   
   .container > div > img {
