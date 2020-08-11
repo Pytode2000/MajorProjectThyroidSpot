@@ -20,6 +20,7 @@
 
     <!-- Local Imports -->
     <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/profile.css" />
 
 
     <title>Thyroid Spot</title>
@@ -31,9 +32,70 @@
 
     <main>
         <div class="content">
-            <h1> PROFILE PAGE </h1>
-        </div>
+            <!-- <h1> PROFILE PAGE </h1> -->
 
+            <style>
+                .form-container {
+                    background: rgb(84, 91, 98);
+                }
+            </style>
+
+            <!-- TOGGLER -->
+            <div class="container container-small container-fluid form-container" style="padding: 0; margin-top: 3%;">
+
+                <div class="btn-group btn-group-toggle" data-toggle="buttons" style="width: 100%;">
+                    <label class="btn btn-secondary active btn-lg" onclick="toggleProfile()" id="toggleProfileBtn" style=" border: none; border-radius: 0;">
+                        <input type="radio" name="options" id="profileTab" autocomplete="off" checked> <b>User Profile</b>
+                    </label>
+                    <label class="btn btn-secondary btn-lg" onclick="toggleInformation()" id="togglePatientBtn" style=" border: none; border-radius: 0;">
+                        <input type="radio" name="options" id="patientTab" autocomplete="off"> <b>Information</b>
+                    </label>
+                </div>
+            </div>
+
+
+            <div class="container container-small container-fluid form-container white-text">
+
+                <div id="profileSection">
+
+                    <ul>
+                        <li>Full Name: <span id="profName"></span></li>
+                        <li>Email Address: <span id="profEmail"></span></li>
+                        <li>Account Type: <span id="profType"></span></li>
+                        <li>UID: <span id="profUid"></span></li>
+                    </ul>
+
+                </div>
+
+
+
+                <div id="patientSection" class="hide">
+                    <ul>
+                        <li>Gender: <span id="profGender"></span></li>
+                        <li>Diagnosis: <span id="profDiagnosis"></span></li>
+                        <li>Blood Type: <span id="profBloodType"></span></li>
+                        <li>Date of Birth: <span id="profDOB"></span></li>
+
+                        <li>NRIC Number: <span id="profNRIC"></span></li>
+                    </ul>
+
+
+                </div>
+
+            </div>
+
+            <h3># Only backend (retrieving) done. Design to be done soon. </h3>
+
+
+
+
+
+
+
+
+
+
+        </div>
         <div id="footer-html"></div>
     </main>
 
@@ -44,6 +106,9 @@
 <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script>
+
+<script src="../js/profile.js"></script>
+
 
 
 <script type="text/javascript">
