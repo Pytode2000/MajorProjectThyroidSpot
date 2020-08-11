@@ -52,6 +52,8 @@ namespace ThyroidSpotAppServices.Controllers
             }
         }
 
+        //delete user 
+
         //delete user (based on user id)
         [HttpDelete]
         public string Delete(int id)

@@ -47,12 +47,6 @@ function login() {
         
         window.location.href = "profile.html";
 
-        setTimeout(function () {
-            // Redirect user to "verify-email.html"
-            window.location.reload();
-
-        }, 1000);
-
     })
     promise.catch(e => console.log(e.message));
 }
@@ -125,4 +119,27 @@ function register() {
         console.log(user)
     });
     promise.catch(e => console.log(e.message));
+}
+
+
+
+// var auth = firebase.auth();
+// var emailAddress = "user@example.com";
+
+
+
+// #forgetPasswordTxt
+function forgotPassword() {
+    // forgotPasswordEmail
+    var auth = firebase.auth();
+    const fpEmail = document.getElementById("forgotPasswordEmail");
+    const email = fpEmail.value;
+
+    auth.sendPasswordResetEmail(email).then(function () {
+        console.log("Email to change password sent to: " + email);
+        $('#forgotPasswordModal').modal('hide');
+    }).catch(function (error) {
+        // An error happened.
+        console.log("An error occurred.")
+    });
 }

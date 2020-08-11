@@ -15,6 +15,12 @@
 
     <!-- Jquery -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX"
@@ -22,7 +28,6 @@
 
     <!-- Local Imports -->
     <link rel="stylesheet" href="../css/style.css" />
-    <link rel="stylesheet" href="../css/index.css" />
 
 
     <title>Thyroid Spot</title>
@@ -42,7 +47,7 @@
             </style>
 
             <!-- TOGGLER -->
-            <div class="container container-small container-fluid form-container" style="padding: 0;">
+            <div class="container container-small container-fluid form-container" style="padding: 0; margin-top: 3%;">
 
                 <div class="btn-group btn-group-toggle" data-toggle="buttons" style="width: 100%;">
                     <label class="btn btn-secondary active btn-lg" onclick="toggleLogin()" id="toggleLoginBtn" style=" border: none; border-radius: 0;">
@@ -79,7 +84,22 @@
                     </form>
                     <br>
                     <button id="btnLogin" class="btn btn-dark btn-block bold" onclick="login()">Login</button>
-                    <br>
+
+
+                    <div class="text-right white-text" style="margin: 1%">
+                        <a id="forgetPasswordTxt" type="button" data-toggle="modal" data-target="#forgotPasswordModal">
+                            Forgot your password?
+                        </a>
+                    </div>
+
+                    <style>
+                        #forgetPasswordTxt:hover {
+                            color: white;
+                            text-decoration: underline;
+                            font-weight: bold;
+                        }
+                    </style>
+
                 </div>
 
                 <!-- REGISTER -->
@@ -118,9 +138,6 @@
                             <input type="text" class="form-control" id="registerBirthdate" placeholder="Select birthdate..." required="" autofocus="">
                             <label for="registerBirthdate">Select birthdate...</label>
                         </div>
-
-                        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-                        <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
 
                         <script>
                             $(function () {
@@ -200,10 +217,38 @@
 
 
             </div>
+
         </div>
 
         <div id="footer-html"></div>
     </main>
+
+    <!-- Forgot Password Modal -->
+    <div class="modal fade" id="forgotPasswordModal" tabindex="-1" role="dialog" aria-labelledby="forgotPasswordModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="forgotPasswordModalLabel">Forgot Password</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+
+                        <div class="form-label-group">
+                            <input type="email" id="forgotPasswordEmail" class="form-control" placeholder="Enter email address..." required="" autofocus="">
+                            <label for="forgotPasswordEmail">Enter email address...</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="forgotPassword()">Send Email</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 </body>

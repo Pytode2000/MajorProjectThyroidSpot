@@ -40,7 +40,7 @@ function refresh() {
     return false;
 }
 
-
+// (THIS PAGE NEEDS THIS BECAUSE navbar.html WILL NOT BE IMPORTED HERE).
 // Check state
 firebase.auth().onAuthStateChanged(firebaseUser => {
     const text = document.getElementById("welcome-text");
@@ -49,20 +49,17 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     if (firebaseUser) {
         // User's email is verified.
         if (firebaseUser.emailVerified === true) {
-            sessionStorage.setItem("user_logged_in", 'y');
-            sessionStorage.setItem("user_email", firebaseUser.email);
+            // sessionStorage.setItem("user_logged_in", 'y');
             window.location.href = 'profile.html';
         }
         // User's email is not verified.
         else {
-            sessionStorage.setItem("user_logged_in", 'y');
-            sessionStorage.setItem("user_email", firebaseUser.email);
+            // sessionStorage.setItem("user_logged_in", 'y');
         }
     }
     // User not logged in.
     else {
-        sessionStorage.setItem("user_logged_in", 'n');
-        sessionStorage.setItem("user_email");
+        // sessionStorage.setItem("user_logged_in", 'n');
     }
 });
 
