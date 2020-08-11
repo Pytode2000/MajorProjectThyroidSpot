@@ -40,7 +40,7 @@
 
         <!-- Only for Patients -->
         <li class="nav-item" id="nav-tab-health">
-            <a href="" class="nav-link">
+            <a href="patientinfo.html" class="nav-link">
                 <i class="svg-inline--fa fas fa-notes-medical fa-primary fa-w-16 fa-2x"></i>
                 <span class="link-text">Health</span>
             </a>
@@ -127,7 +127,7 @@
 
         // If user is *not* logged in, "Logout" button in navbar will not show. 
         // If user is *not* logged in, "Profile" button in navbar will not show. 
-        if (user_logged_in == "n") {
+        if (user_logged_in != "y") {
             document.getElementById('nav-tab-logout').style.display = "none";
             document.getElementById('nav-tab-profile').style.display = "none";
         }
@@ -163,7 +163,7 @@
         if (currentLoc == "http://127.0.0.1:5500/html-pages/index.html" && user_logged_in == 'y') {
             window.location.href = "profile.html";
         }
-        if (currentLoc == "http://127.0.0.1:5500/html-pages/profile.html" && user_logged_in == 'n') {
+        if (currentLoc == "http://127.0.0.1:5500/html-pages/profile.html" && user_logged_in != 'y') {
             window.location.href = "index.html";
         }
         // User not logged in.

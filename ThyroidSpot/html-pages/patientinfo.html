@@ -33,7 +33,12 @@
 
                 <button id='createrpt' class=' btn btn-info btn-sm'>Create Report</button>
                 <table class='centerTable' style="margin-top: 2em;">
-                    <tr><th>Date</th><th style="padding-left:2em;">FT4</th><th style="padding-left:2em;">TSH</th><th style="padding-left:2em;">Drug Dose</th></tr>
+                    <tr>
+                        <th>Date</th>
+                        <th style="padding-left:2em;">FT4</th>
+                        <th style="padding-left:2em;">TSH</th>
+                        <th style="padding-left:2em;">Drug Dose</th>
+                    </tr>
                 </table>
                 <hr>
                 <div id="dosagehist">
@@ -50,76 +55,77 @@
                     <h1 id="diseaseName">Create Patient Info</h1>
                     <hr>
                     <table id="createnfotable">
-                    <tr>
-                    <td class="firsttd">
-                    <label>NRIC:</label>
-                    </td>
-                    <td class="labeltd">
-                    <input id="newIC">
-                    </td>
-                    </tr>
-                    
-                    <tr>
-                    <td class="firsttd">
-                    <label>Date of birth:</label>
-                    </td>
-                    <td class="labeltd">
-                    <input id="newDOB">
-                    </td>
-                    </tr>
+                        <tr>
+                            <td class="firsttd">
+                                <label>NRIC:</label>
+                            </td>
+                            <td class="labeltd">
+                                <input id="newIC">
+                            </td>
+                        </tr>
 
-                    <tr>
-                    <td class="firsttd">
-                    <label>Gender:</label>
-                    </td>
-                    <td class="labeltd">
-                    <select name="gender" id="newGenderDDL">
-                        <option value="" selected disabled hidden>--Choose here--</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                    </select>
-                    </td>
-                    </tr>
-                    
-                    <tr>
-                    <td class="firsttd">
-                    <label>Diagnosis:</label>
-                    </td>
-                    <td class="labeltd">
-                    <select name="diagnosis" id="newDiagnosisDDL">
-                        <option value="" selected disabled hidden>--Choose here--</option>
-                        <option value="De Quervain's Thyroiditis">De Quervain's Thyroiditis</option>
-                        <option value="Differentiated thyroid carcinoma">Differentiated thyroid carcinoma</option>
-                        <option value="Graves' disease">Graves' disease</option>
-                        <option value="Hashimoto's thyroiditis">Hashimoto's thyroiditis</option>
-                        <option value="Hypothyroidism">Hypothyroidism</option>
-                        <option value="Post-thyroidectomy">Post-thyroidectomy</option>
-                        <option value="Riedel's thyroiditis">Riedel's thyroiditis</option>
-                    </select>
-                    </td>
-                    </tr>
-                    
-                    <tr>
-                    <td class="firsttd">
-                    <label>Blood Type:</label>
-                    </td>
-                    <td class="labeltd">
-                    <select name="bloodtype" id="newBloodTypeDDL">
-                        <option value="" selected disabled hidden>--Choose here--</option>
-                        <option value="A+">A+</option>
-                        <option value="A-">A-</option>
-                        <option value="B+">B+</option>
-                        <option value="B-">B-</option>
-                        <option value="AB+">AB+</option>
-                        <option value="AB-">AB-</option>
-                        <option value="O+">O+</option>
-                        <option value="O-">O-</option>
-                    </select>
-                    </td>
-                    </tr>
+                        <tr>
+                            <td class="firsttd">
+                                <label>Date of birth:</label>
+                            </td>
+                            <td class="labeltd">
+                                <input id="newDOB">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="firsttd">
+                                <label>Gender:</label>
+                            </td>
+                            <td class="labeltd">
+                                <select name="gender" id="newGenderDDL">
+                                    <option value="" selected disabled hidden>--Choose here--</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="firsttd">
+                                <label>Diagnosis:</label>
+                            </td>
+                            <td class="labeltd">
+                                <select name="diagnosis" id="newDiagnosisDDL">
+                                    <option value="" selected disabled hidden>--Choose here--</option>
+                                    <option value="De Quervain's Thyroiditis">De Quervain's Thyroiditis</option>
+                                    <option value="Differentiated thyroid carcinoma">Differentiated thyroid carcinoma</option>
+                                    <option value="Graves' disease">Graves' disease</option>
+                                    <option value="Hashimoto's thyroiditis">Hashimoto's thyroiditis</option>
+                                    <option value="Hypothyroidism">Hypothyroidism</option>
+                                    <option value="Post-thyroidectomy">Post-thyroidectomy</option>
+                                    <option value="Riedel's thyroiditis">Riedel's thyroiditis</option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="firsttd">
+                                <label>Blood Type:</label>
+                            </td>
+                            <td class="labeltd">
+                                <select name="bloodtype" id="newBloodTypeDDL">
+                                    <option value="" selected disabled hidden>--Choose here--</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                </select>
+                            </td>
+                        </tr>
                     </table>
                     <div style="text-align: center; margin-bottom: 2em;">
-                        <button id="btnRegister" class="btn btn-dark btn-block bold" onclick="postPatientInfo()">Create Patient Info</button>
+                        <button id="btnRegister" class="btn btn-dark btn-block bold" onclick="postPatientInfo()">Create Patient
+                            Info</button>
                     </div>
                 </div>
             </div>
@@ -134,33 +140,33 @@
                     <h1 id="diseaseName">Create Health Report</h1>
                     <hr>
                     <table id="createnfotable">
-                    <tr>
-                    <td class="firsttd">
-                    <label>FT4:</label>
-                    </td>
-                    <td class="labeltd">
-                    <input id="newFT4">
-                    </td>
-                    </tr>
-                    
-                    <tr>
-                    <td class="firsttd">
-                    <label>TSH:</label>
-                    </td>
-                    <td class="labeltd">
-                    <input id="newTSH">
-                    </td>
-                    </tr>
+                        <tr>
+                            <td class="firsttd">
+                                <label>FT4:</label>
+                            </td>
+                            <td class="labeltd">
+                                <input id="newFT4">
+                            </td>
+                        </tr>
 
-                    <tr>
-                    <td class="firsttd">
-                    <label>Drug dose:</label>
-                    </td>
-                    </td>
-                    <td class="labeltd">
-                    <input id="newDrugDose">
-                    </td>
-                    </tr>
+                        <tr>
+                            <td class="firsttd">
+                                <label>TSH:</label>
+                            </td>
+                            <td class="labeltd">
+                                <input id="newTSH">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="firsttd">
+                                <label>Drug dose:</label>
+                            </td>
+                            </td>
+                            <td class="labeltd">
+                                <input id="newDrugDose">
+                            </td>
+                        </tr>
                     </table>
                     <div style="text-align: center; margin-bottom: 2em;">
                         <button id="btnRegister" class="btn btn-dark btn-block bold" onclick="postPatientReport()">Save Report</button>

@@ -8,7 +8,7 @@ var currentPatientID; //this variable will contain the patient ID that's selecte
 //This function will consume the patient info GET API (FOR DOCTORS)
 function getOnePatientInfo() {
     
-    var getuid = sessionStorage.getItem("uniqueid");
+    var getuid = sessionStorage.getItem("user_unique_id");
     console.log("retrieving all patient info...")
     $.ajax({
         type: 'GET',
@@ -91,7 +91,7 @@ function getOnePatientInfo() {
 //create patient info (FOR DEBUGGING PURPOSES)
 function postPatientInfo() {
     //getting firebase UID from sessionstorage GET and putting in 'user_id'
-    var getuser_id = sessionStorage.getItem("uniqueid");
+    var getuser_id = sessionStorage.getItem("user_unique_id");
     
     //creating date
     var today = new Date();

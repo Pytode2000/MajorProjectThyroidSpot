@@ -24,12 +24,11 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 contentType: 'application/json',
                 success: function (data) {
                     currentUserArray = data;
-                    console.log(currentUserArray.account_type);
                     sessionStorage.setItem("user_account_type", currentUserArray.account_type);
 
                     //DO NOT REMOVE: need it for creating patient reports (should user smhow havent yet)
                     //this will be removed in the actual one, for now using it for dev purposes
-                    sessionStorage.setItem("uniqueid", firebaseUser.uid);
+                    sessionStorage.setItem("user_unique_id", firebaseUser.uid);
 
                 }
             });
@@ -46,10 +45,12 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     // User not logged in.
     else {
         sessionStorage.setItem("user_logged_in", 'n');
-        sessionStorage.setItem("user_account_type", null)
-        console.log("Logged in: " + sessionStorage.getItem("user_logged_in"));
-        console.log("Account type: " + sessionStorage.getItem("user_account_type"));
-
+        sessionStorage.setItem("user_account_type", "none")
+        sessionStorage.setItem("user_unique_id", "none")
     }
+
+    console.log("Logged in: " + sessionStorage.getItem("user_logged_in"));
+    console.log("Account type: " + sessionStorage.getItem("user_account_type"));
+    console.log("User UID: " + sessionStorage.getItem("user_unique_id"));
 });
 
