@@ -40,14 +40,15 @@ function login() {
     const auth = firebase.auth();
     const promise = auth.signInWithEmailAndPassword(email, pass);
 
-    // On login, GET "user" table's "account_type" via "user_id" (firebase unique id, or uid).
-
-
-
     promise.then(firebaseUser => {
-        sessionStorage.setItem("user_logged_in", "y")
-        // Beneath here change to a condition based on user_account_type
-        window.location.href = "profile.html";
+
+        //DO NOT REMOVE: need to use it to create patient report in case not created on sign in
+        // var s = sessionStorage.setItem("firebaseUID", )
+        setTimeout(function () {
+            window.location.href = "profile.html";
+        }, 2000);
+
+
     })
     promise.catch(e => console.log(e.message));
 }
@@ -120,4 +121,27 @@ function register() {
         console.log(user)
     });
     promise.catch(e => console.log(e.message));
+}
+
+
+
+// var auth = firebase.auth();
+// var emailAddress = "user@example.com";
+
+
+
+// #forgetPasswordTxt
+function forgotPassword() {
+    // forgotPasswordEmail
+    var auth = firebase.auth();
+    const fpEmail = document.getElementById("forgotPasswordEmail");
+    const email = fpEmail.value;
+
+    auth.sendPasswordResetEmail(email).then(function () {
+        console.log("Email to change password sent to: " + email);
+        $('#forgotPasswordModal').modal('hide');
+    }).catch(function (error) {
+        // An error happened.
+        console.log("An error occurred.")
+    });
 }
