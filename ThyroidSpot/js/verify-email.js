@@ -50,7 +50,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         // User's email is verified.
         if (firebaseUser.emailVerified === true) {
             // sessionStorage.setItem("user_logged_in", 'y');
-            window.location.href = 'profile.html';
+            window.location.href = 'index.html'; // PURPOSELY (TO TEST)
         }
         // User's email is not verified.
         else {

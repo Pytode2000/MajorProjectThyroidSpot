@@ -5,7 +5,7 @@ var userURI = 'https://localhost:44395/api/user';
 var userInfoArray = [];
 var username;
 function getUserName(){
-    var getuid = sessionStorage.getItem("uniqueid");
+    var getuid = sessionStorage.getItem("user_unique_id");
     $.ajax({
         type: 'GET',
         url: userURI,
