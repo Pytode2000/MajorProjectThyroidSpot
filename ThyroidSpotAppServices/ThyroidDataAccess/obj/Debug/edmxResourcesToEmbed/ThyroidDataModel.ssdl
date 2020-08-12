@@ -34,6 +34,7 @@
     <Property Name="patient_id" Type="int" Nullable="false" />
     <Property Name="FT4" Type="float" Nullable="false" />
     <Property Name="TSH" Type="float" Nullable="false" />
+    <Property Name="drug_name" Type="nvarchar" MaxLength="255" Nullable="false" />
     <Property Name="drug_dose" Type="int" Nullable="false" />
     <Property Name="timestamp" Type="nvarchar" MaxLength="255" Nullable="false" />
   </EntityType>

@@ -5,7 +5,7 @@ var userURI = 'https://localhost:44395/api/user';
 var userInfoArray = [];
 var username;
 function getUserName(){
-    var getuid = sessionStorage.getItem("uniqueid");
+    var getuid = sessionStorage.getItem("user_unique_id");
     $.ajax({
         type: 'GET',
         url: userURI,
@@ -23,6 +23,7 @@ function getUserName(){
         }
     });
 }
+
 
 //disease functions
 var patientURI = 'https://localhost:44395/api/patientInfo';
@@ -178,7 +179,7 @@ function getPatientReport() {
 
                     createreportbtn = "<button id='createrpt' class=' btn btn-info btn-sm'>Create Report</button>"
 
-
+                    //TODO: edit the append to include the drug name attribute
                     $('#dosagehist').append("<div style='margin-bottom: 1em;'><table class='dosageTable'>"+
                     "<tr><td>"+report.timestamp+"</td><td style='padding-left:2em; padding-right:2em;'>"+report.FT4+"</td><td style='padding-left:2em;padding-right:2em;'>"+report.TSH+"</td><td style='padding-left:2em;padding-right:2em;'>"+report.drug_dose+"</td></tr></table></div>");
                     
@@ -207,8 +208,8 @@ function postPatientReport() {
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
     console.log(date);
 
-    
-    var patientinfo = { patient_id: getuser_id, FT4: $('#newFT4').val(), TSH: $('#newTSH').val(), 
+    //TODO: edit the model to include the drug name attribute
+    var patientinfo = {patient_id: getuser_id, FT4: $('#newFT4').val(), TSH: $('#newTSH').val(), 
     drug_dose: $('#newDrugDose').val(), timestamp: date}
 
     console.log(patientinfo);

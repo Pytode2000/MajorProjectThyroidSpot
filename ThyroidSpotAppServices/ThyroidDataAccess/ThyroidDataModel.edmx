@@ -39,6 +39,7 @@
           <Property Name="patient_id" Type="int" Nullable="false" />
           <Property Name="FT4" Type="float" Nullable="false" />
           <Property Name="TSH" Type="float" Nullable="false" />
+          <Property Name="drug_name" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="drug_dose" Type="int" Nullable="false" />
           <Property Name="timestamp" Type="nvarchar" MaxLength="255" Nullable="false" />
         </EntityType>
@@ -84,6 +85,7 @@
           <Property Name="TSH" Type="Double" Nullable="false" />
           <Property Name="drug_dose" Type="Int32" Nullable="false" />
           <Property Name="timestamp" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="drug_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="ThyroidDataEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="disease_information" EntityType="Self.disease_information" />
@@ -136,6 +138,7 @@
           <EntitySetMapping Name="patient_report">
             <EntityTypeMapping TypeName="ThyroidDataModel.patient_report">
               <MappingFragment StoreEntitySet="patient_report">
+                <ScalarProperty Name="drug_name" ColumnName="drug_name" />
                 <ScalarProperty Name="report_id" ColumnName="report_id" />
                 <ScalarProperty Name="patient_id" ColumnName="patient_id" />
                 <ScalarProperty Name="FT4" ColumnName="FT4" />

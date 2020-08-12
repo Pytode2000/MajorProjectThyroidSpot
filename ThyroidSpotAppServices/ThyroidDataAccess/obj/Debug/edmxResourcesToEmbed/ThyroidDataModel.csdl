@@ -23,6 +23,7 @@
     <Property Name="TSH" Type="Double" Nullable="false" />
     <Property Name="drug_dose" Type="Int32" Nullable="false" />
     <Property Name="timestamp" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="drug_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityContainer Name="ThyroidDataEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="disease_information" EntityType="Self.disease_information" />

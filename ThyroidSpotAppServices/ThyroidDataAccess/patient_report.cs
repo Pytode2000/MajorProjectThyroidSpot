@@ -20,5 +20,6 @@ namespace ThyroidDataAccess
         public double TSH { get; set; }
         public int drug_dose { get; set; }
         public string timestamp { get; set; }
+        public string drug_name { get; set; }
     }
 }

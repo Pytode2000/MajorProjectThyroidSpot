@@ -18,6 +18,7 @@
     <EntitySetMapping Name="patient_report">
       <EntityTypeMapping TypeName="ThyroidDataModel.patient_report">
         <MappingFragment StoreEntitySet="patient_report">
+          <ScalarProperty Name="drug_name" ColumnName="drug_name" />
           <ScalarProperty Name="report_id" ColumnName="report_id" />
           <ScalarProperty Name="patient_id" ColumnName="patient_id" />
           <ScalarProperty Name="FT4" ColumnName="FT4" />
