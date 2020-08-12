@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="shortcut icon" href="../assets/images/thyroidspot-logo.png" />
+
     <!-- Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" />
 
@@ -13,6 +15,12 @@
 
     <!-- Jquery -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX"
@@ -29,6 +37,17 @@
 <body>
 
     <div id="navbar-html"></div>
+
+    <!-- Floating action button -->
+    <button id="FAB" class="floating-btn setting-fab" data-toggle="modal" data-target="#profileSettingModal">
+        <i class="fas fa-user-cog"></i>
+    </button>
+
+
+    <button id="FAB" class="floating-btn edit-fab" data-toggle="modal" data-target="#modall">
+        <i class="fas fa-user-edit"></i>
+    </button>
+
 
     <main>
         <div class="content">
@@ -100,6 +119,128 @@
     </main>
 
 
+
+    <!-- Settings Modal -->
+    <div class="modal fade" id="profileSettingModal" tabindex="-1" role="dialog" aria-labelledby="profileSettingModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="profileSettingModalLabel">Settings</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <!-- Logout -->
+                    <button class="btn btn-block btn-secondary" onclick="logout();">Logout</button>
+
+                    <!-- Change Email -->
+                    <button class="btn btn-block btn-success" data-toggle="modal" data-target="#changeEmailModal">Change
+                        Email
+                    </button>
+
+                    <!-- Change Password -->
+                    <button class="btn btn-block btn-primary" data-toggle="modal" data-target="#changePasswordModal">Change
+                        Password
+                    </button>
+
+                    <!-- Delete -->
+                    <button class="btn btn-block btn-danger" data-toggle="modal" data-target="#deleteAccountModal">Delete
+                        Account
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Change Email Modal -->
+    <div class="modal fade" id="changeEmailModal" tabindex="-1" role="dialog" aria-labelledby="changeEmailModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="changeEmailModalLabel">Change Email</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>The new email must be verified afterwards!</p>
+                    <form>
+
+                        <div class="form-label-group">
+                            <input type="email" id="changeEmail" class="form-control" placeholder="Enter new email address..." required="" autofocus="">
+                            <label for="changeEmail">Enter new email address...</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="changeEmail()">Update Email</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+
+                        <div class="form-label-group">
+                            <input type="password" id="changePassword" class="form-control" placeholder="Enter new password..." required="" autofocus="">
+                            <label for="changePassword">Enter new password...</label>
+                        </div>
+
+                        <div class="form-label-group">
+                            <input type="password" id="retypeChangePassword" class="form-control" placeholder="Re-type new password..." required="" autofocus="">
+                            <label for="retypeChangePassword">Re-type new password...</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="changePassword()">Update Password</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Delete Account Modal -->
+    <div class="modal fade" id="deleteAccountModal" tabindex="-1" role="dialog" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteAccountModalLabel">Delete Account</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <p>Are you sure you want to delete your account? This action is permanent!</p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="deleteAccount()">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </body>
 
 <!-- Firebase -->
@@ -110,7 +251,6 @@
 <script src="../js/profile.js"></script>
 
 
-
 <script type="text/javascript">
     $(document).ready(function () {
         $("#navbar-html").load("../html-components/navbar.html");
@@ -119,10 +259,5 @@
 
     });
 </script>
-
-
-</body>
-
-
 
 </html>
