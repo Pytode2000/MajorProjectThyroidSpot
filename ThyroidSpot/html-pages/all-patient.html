@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Imports -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/all-patient.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="../js/disease-function.js"></script>
+
+
+    <title>Thyroid Spot</title>
+</head> 
+
+<body>
+    <div id="navbar-html"></div>
+    <button onclick="document.getElementById('diseaseModal').style.display='block'" style="margin-left: 1000px;margin-top: 50px;">Add Patient</button>
+    <main class="grid">
+        <article>
+            <div class="text">
+              <h3>Yu KaiLong</h3>
+              <p>12 August 2020</p>
+              <p>FT4: 20.1</p>
+              <p>TSH: 11.1</p>
+              <button>More Details</button>
+            </div>
+        </article>
+
+    <!--Modal For Adding Patient-->
+    <div id="diseaseModal" class="w3-modal">
+        <div class="w3-modal-content">
+            <div class="w3-container">
+                <span onclick="document.getElementById('diseaseModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                <h1 id="diseaseName" class="centerText">Enter Patient Information</h1>
+                <form action="#">
+                    <label for="fname">Patient Name</label>
+                    <input type="text" id="fname" name="fname"><br><br>
+                    <label for="lname">Patient ID</label>
+                    <input type="text" id="lname" name="lname"><br><br>
+                    <input style="margin-bottom: 50px;" type="submit" value="Submit"><br>
+                  </form>
+            </div>
+        </div>
+    </div>
+    </main>
+    
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#navbar-html").load("../html-components/navbar.html");
+
+            $("#footer-html").load("../html-components/footer.html");
+        });
+    </script>
+</body>
