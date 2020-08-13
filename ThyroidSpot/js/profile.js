@@ -142,7 +142,9 @@ function changeEmail() {
 
     }).catch(function (error) {
         // An error happened.
-        console.log("An error occurred when changing email.")
+        console.log("An error occurred when changing email.");
+        $('#changeEmailModal').modal('hide');
+        $('#errorModal').modal('toggle');
 
     });
 }
@@ -158,12 +160,15 @@ function changePassword() {
 
     user.updatePassword(password).then(function () {
         // Update successful.
-        console.log("Password has been update!")
+        console.log("Password has been update!");
         $('#changePasswordModal').modal('hide');
 
     }).catch(function (error) {
         // An error happened.
-        console.log("An error occurred when changing password.")
+        console.log("An error occurred when changing password.");
+        $('#changePasswordModal').modal('hide');
+        $('#errorModal').modal('toggle');
+
 
     });
 }
@@ -219,7 +224,11 @@ function deleteAccount() {
 
     }).catch(function (error) {
         // An error happened.
-        console.log("An error occurred when deleting account.")
+        console.log("An error occurred when deleting account.");
+        $('#deleteAccountModal').modal('hide');
+
+        $('#errorModal').modal('toggle');
+
     });
 }
 
@@ -265,40 +274,3 @@ function updateProfile() {
 
 }
 
-/*
-function updateThread() {
-    var currentdate = new Date();
-    var datetime = currentdate.getDate() + "/"
-        + (currentdate.getMonth() + 1) + "/"
-        + currentdate.getFullYear() + " "
-        + currentdate.getHours() + ":"
-        + currentdate.getMinutes() + ":"
-        + currentdate.getSeconds();
-
-    var thread = { Thread_Id: currentThreadID, Username: currentUser, Title: $('#updateThreadTitle').val(), Description: $('#updateThreadDescription').val(), Created: datetime } //, Created: datetime 
-    console.log(thread);
-    $.ajax({
-        type: 'PUT',
-        url: threadsURI + "/" + currentThreadID,
-        data: JSON.stringify(thread),
-        dataType: 'json',
-        contentType: 'application/json',
-        success: function (data) {
-            //calling the function again so that the new books are updated
-            getAllThreads();
-            $('#updateThreadModal').modal('hide');
-        }
-    });
-}
-
-            document.getElementById("editId").defaultValue = currentPatientArray.ic_number;
-            document.getElementById("editBirthdate").defaultValue = currentPatientArray.date_of_birth;
-            $("#editDiagnosis").val(currentPatientArray.diagnosis);
-            $("#editBloodType").val(currentPatientArray.blood_type);
-            $('input:radio[name="genderMaleRadio"]').filter('[value=currentPatientArray.gender]').attr('checked', true); // TO BE CHECKED
-
-
-
-
-
-*/
