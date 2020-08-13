@@ -1,4 +1,4 @@
-/*FLOATING ACTION BUTTON*/
+/*** <FLOATING ACTION BUTTON> ***/
 .floating-btn {
     width: 80px;
     height: 80px;
@@ -25,44 +25,33 @@
     cursor: pointer;
 }
 
+.floating-btn:focus {
+    outline: 0;
+}
+
 .setting-fab {
+    background: white;
+    color: black;
     right: 20px;
 }
 
-.setting-fab {
-    /* background: rgba(228, 102, 83, 0.6); */
-    background: white;
-    color: black;
-}
-
-/* .setting-fab:active {
-    background: rgba(228, 102, 83, 1);
-    ;
-} */
-
 .setting-fab:hover {
-    /* background: rgba(228, 102, 83, 1); */
     background: black;
     color: white;
 }
 
-
 .edit-fab {
+    background: white;
+    color: black;
     right: 120px;
 }
 
-.edit-fab {
-    /* background: rgba(228, 102, 83, 0.6); */
-    background: white;
-    color: black;
-}
-
 .edit-fab:hover {
-    /* background: rgba(228, 102, 83, 1); */
     background: black;
     color: white;
 }
 
+/*** </FLOATING ACTION BUTTON> ***/
 
 /***** <Small Screens> *****/
 @media only screen and (max-width: 600px) {

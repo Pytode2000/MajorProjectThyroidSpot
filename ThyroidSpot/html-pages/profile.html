@@ -39,15 +39,15 @@
     <div id="navbar-html"></div>
 
     <!-- Floating action button -->
-    <button id="FAB" class="floating-btn setting-fab" data-toggle="modal" data-target="#profileSettingModal">
+    <button class="floating-btn setting-fab" data-toggle="modal" data-target="#profileSettingModal">
         <i class="fas fa-user-cog"></i>
     </button>
 
-
-    <button id="FAB" class="floating-btn edit-fab" data-toggle="modal" data-target="#modall">
-        <i class="fas fa-user-edit"></i>
-    </button>
-
+    <div id="FAB-edit" class="hide">
+        <button class="floating-btn edit-fab" data-toggle="modal" data-target="#editPatientModal">
+            <i class="fas fa-user-edit"></i>
+        </button>
+    </div>
 
     <main>
         <div class="content">
@@ -62,7 +62,7 @@
             <!-- TOGGLER -->
             <div class="container container-small container-fluid form-container" style="padding: 0; margin-top: 3%;">
 
-                <div class="btn-group btn-group-toggle" data-toggle="buttons" style="width: 100%;">
+                <div class="btn-group btn-group-toggle" style="width: 100%;">
                     <label class="btn btn-secondary active btn-lg" onclick="toggleProfile()" id="toggleProfileBtn" style=" border: none; border-radius: 0;">
                         <input type="radio" name="options" id="profileTab" autocomplete="off" checked> <b>User Profile</b>
                     </label>
@@ -104,13 +104,6 @@
             </div>
 
             <h3># Only backend (retrieving) done. Design to be done soon. </h3>
-
-
-
-
-
-
-
 
 
 
@@ -229,7 +222,7 @@
                 </div>
                 <div class="modal-body">
 
-                    <p>Are you sure you want to delete your account? This action is permanent!</p>
+                    <p>Are you sure you want to delete your account?<br>This action is permanent!</p>
 
                 </div>
                 <div class="modal-footer">
@@ -239,6 +232,120 @@
             </div>
         </div>
     </div>
+
+
+
+    <!-- Edit -->
+    <div class="modal fade" id="editPatientModal" tabindex="-1" role="dialog" aria-labelledby="editPatientModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editPatientModalLabel">Edit Patient Information</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <form>
+
+                        <div class="form-label-group">
+                            <input type="text" class="form-control" id="editId" placeholder="Enter NRIC..." required="" autofocus="">
+                            <label for="editId">Enter NRIC number...</label>
+                        </div>
+
+                        <!-- <div class="form-label-group">
+                            <input type="text" class="form-control" id="editFullName" placeholder="Enter full name..." required="" autofocus="">
+                            <label for="editFullName">Enter full name...</label>
+                        </div> -->
+                        <!-- Jquery Datepicker for Birthdate -->
+                        <div class="form-label-group">
+                            <input type="text" class="form-control" id="editBirthdate" placeholder="Select birthdate..." required="" autofocus="">
+                            <label for="editBirthdate">Select birthdate...</label>
+                        </div>
+
+                        <script>
+                            $(function () {
+                                $("#editBirthdate").datepicker({
+                                    dateFormat: "dd-mm-yy",
+                                    changeMonth: true,
+                                    changeYear: true,
+                                    yearRange: "1930:2020",
+
+                                    icons: {
+                                        time: "fa fa-clock-o",
+                                        date: "fa fa-calendar",
+                                        up: "fa fa-arrow-up",
+                                        down: "fa fa-arrow-down"
+                                    }
+                                });
+                            });
+                        </script>
+
+
+                        <!-- Radio buttons for gender -->
+                        <label>Select gender: </label>
+                        <div class="custom-control custom-radio custom-control-inline" style="left:15%;">
+                            <input type="radio" id="genderMaleRadio" name="genderMaleRadio" value="Male" class="custom-control-input" checked>
+                            <label class="custom-control-label" for="genderMaleRadio">Male</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline" style="float: right;">
+                            <input type="radio" id="genderFemaleRadio" name="genderMaleRadio" value="Female" class="custom-control-input">
+                            <label class="custom-control-label" for="genderFemaleRadio">Female</label>
+                        </div>
+                        <br> <br>
+
+                        <div>
+                            <label for="editDiagnosis" style="display:inline;">Select diagnosis: </label>
+                            <select id="editDiagnosis" class="custom-select" style="width:70%; float: right;">
+                                <option>De Quervain's thyroiditis</option>
+                                <option>Differentiatied thyroid carcinoma</option>
+                                <option>Graves' disease</option>
+                                <option>Hashimoto's thyroiditis</option>
+                                <option>Hyperthyroidism</option>
+                                <option>Hypothyroidsm</option>
+                                <option>Post-radioiodine ablation</option>
+                                <option>Post-thyroidectomy</option>
+                                <option>Riedel's thyroiditis</option>
+                                <option>Thyrotoxicosis</option>
+                                <option>Toxic adenoma</option>
+                                <option>Toxic multinodular goitre</option>
+                                <option>Others</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div>
+                            <!-- SELECT MENU FOR Blood type -->
+                            <label for="editBloodType" style="display:inline;">Select blood type:
+                            </label>
+
+                            <select id="editBloodType" class="custom-select" style="width:70%; float: right;">
+                                <option>A-</option>
+                                <option>A+</option>
+
+                                <option>B-</option>
+                                <option>B+</option>
+
+                                <option>AB-</option>
+                                <option>AB+</option>
+
+                                <option>O-</option>
+                                <option>O+</option>
+                            </select>
+                        </div>
+
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="updateProfile()">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
 
 </body>

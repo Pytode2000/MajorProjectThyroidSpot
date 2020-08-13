@@ -91,6 +91,20 @@ function getPatientInfo() {
             document.getElementById("profDOB").innerHTML = currentPatientArray.date_of_birth;
             document.getElementById("profNRIC").innerHTML = currentPatientArray.ic_number;
             patient_table_patient_id = currentPatientArray.patient_id;
+
+
+            // This is for the update (pre-set values).
+            document.getElementById("editId").defaultValue = currentPatientArray.ic_number;
+            document.getElementById("editBirthdate").defaultValue = currentPatientArray.date_of_birth;
+            $("#editDiagnosis").val(currentPatientArray.diagnosis);
+            $("#editBloodType").val(currentPatientArray.blood_type);
+            if (currentPatientArray.gender == "Male") {
+                $('input:radio[name="genderMaleRadio"]').filter('[value="Male"]').attr('checked', true);
+            }
+            else {
+                $('input:radio[name="genderMaleRadio"]').filter('[value="Female"]').attr('checked', true);
+            }
+
         }
     });
 }
@@ -100,7 +114,10 @@ function getPatientInfo() {
 // Calling the function.
 getUser()
 if (sessionStorage.getItem("user_account_type") == "patient") {
+    // If user is patient, get patient info + show edit patient info's FAB.
     getPatientInfo()
+    const editPatientInfoFAB = document.getElementById("FAB-edit");
+    editPatientInfoFAB.classList.remove("hide")
 }
 
 
@@ -205,3 +222,83 @@ function deleteAccount() {
         console.log("An error occurred when deleting account.")
     });
 }
+
+
+/* Update Profile */
+
+function updateProfile() {
+    const user_id = sessionStorage.getItem("user_unique_id");
+
+    var diagnosis = document.getElementById("editDiagnosis");
+    var diagnosisChosen = diagnosis.options[diagnosis.selectedIndex].text;
+
+    var genderChosen;
+    if (document.getElementById('genderMaleRadio').checked) {
+        genderChosen = "Male"
+    }
+    else {
+        genderChosen = "Female"
+    }
+
+    var bloodType = document.getElementById("editBloodType");
+    var bloodTypeChosen = bloodType.options[bloodType.selectedIndex].text;
+
+    var patientInfoInstance = {
+        user_id: user_id, diagnosis: diagnosisChosen, ic_number: $('#editId').val(),
+        date_of_birth: $('#editBirthdate').val(), gender: genderChosen, blood_type: bloodTypeChosen, timestamp: "-"
+    };
+
+
+    $.ajax({
+        type: 'PUT',
+        url: patientInfoURI + patient_table_patient_id,
+        data: JSON.stringify(patientInfoInstance),
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            $('#editPatientModal').modal('hide');
+            console.log("Successfully updated patient's information.")
+            window.location.reload();
+        }
+    });
+
+
+}
+
+/*
+function updateThread() {
+    var currentdate = new Date();
+    var datetime = currentdate.getDate() + "/"
+        + (currentdate.getMonth() + 1) + "/"
+        + currentdate.getFullYear() + " "
+        + currentdate.getHours() + ":"
+        + currentdate.getMinutes() + ":"
+        + currentdate.getSeconds();
+
+    var thread = { Thread_Id: currentThreadID, Username: currentUser, Title: $('#updateThreadTitle').val(), Description: $('#updateThreadDescription').val(), Created: datetime } //, Created: datetime 
+    console.log(thread);
+    $.ajax({
+        type: 'PUT',
+        url: threadsURI + "/" + currentThreadID,
+        data: JSON.stringify(thread),
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            //calling the function again so that the new books are updated
+            getAllThreads();
+            $('#updateThreadModal').modal('hide');
+        }
+    });
+}
+
+            document.getElementById("editId").defaultValue = currentPatientArray.ic_number;
+            document.getElementById("editBirthdate").defaultValue = currentPatientArray.date_of_birth;
+            $("#editDiagnosis").val(currentPatientArray.diagnosis);
+            $("#editBloodType").val(currentPatientArray.blood_type);
+            $('input:radio[name="genderMaleRadio"]').filter('[value=currentPatientArray.gender]').attr('checked', true); // TO BE CHECKED
+
+
+
+
+
+*/
