@@ -174,14 +174,15 @@ function getPatientReport() {
               
                 if (currentPatientID == reportArray[i].patient_id){
                     
-                    var report = {report_id: reportArray[i].report_id, patient_id: reportArray[i].patient_id, FT4: reportArray[i].FT4, TSH: reportArray[i].TSH, drug_dose: reportArray[i].drug_dose, timestamp: reportArray[i].timestamp}
+                    var report = {report_id: reportArray[i].report_id, patient_id: reportArray[i].patient_id, drug_name: reportArray[i].drug_name, FT4: reportArray[i].FT4, TSH: reportArray[i].TSH, drug_dose: reportArray[i].drug_dose, timestamp: reportArray[i].timestamp}
 
 
                     createreportbtn = "<button id='createrpt' class=' btn btn-info btn-sm'>Create Report</button>"
 
                     //TODO: edit the append to include the drug name attribute
                     $('#dosagehist').append("<div style='margin-bottom: 1em;'><table class='dosageTable'>"+
-                    "<tr><td>"+report.timestamp+"</td><td style='padding-left:2em; padding-right:2em;'>"+report.FT4+"</td><td style='padding-left:2em;padding-right:2em;'>"+report.TSH+"</td><td style='padding-left:2em;padding-right:2em;'>"+report.drug_dose+"</td></tr></table></div>");
+                    "<tr><td>"+report.timestamp+"</td><td style='padding-left:4em;'>"+report.FT4+"</td><td style='padding-left:4em;'>"+
+                    ""+report.TSH+"</td><td style='padding-left:3em;padding-right:1em;'>"+report.drug_name+"</td><td style='padding-left:1em;padding-right:3em;'>"+report.drug_dose+"</td></tr></table></div>");
                     
 
                 }
@@ -209,7 +210,7 @@ function postPatientReport() {
     console.log(date);
 
     //TODO: edit the model to include the drug name attribute
-    var patientinfo = {patient_id: getuser_id, FT4: $('#newFT4').val(), TSH: $('#newTSH').val(), 
+    var patientinfo = {patient_id: getuser_id, FT4: $('#newFT4').val(), TSH: $('#newTSH').val(), drug_name: $('#newDrugName').val(),
     drug_dose: $('#newDrugDose').val(), timestamp: date}
 
     console.log(patientinfo);
