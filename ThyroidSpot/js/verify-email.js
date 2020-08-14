@@ -18,7 +18,8 @@ function resendVerificationEmail() {
     const user = firebase.auth().currentUser;
 
     user.sendEmailVerification().then(function () {
-        alert("A verification email has been sent to: " + user.email);
+        $('#alertEmailModal').modal('toggle');
+        console.log("Sent email.");
     }).catch(function (error) {
     });
 }

@@ -132,13 +132,19 @@ function changeEmail() {
     user.updateEmail(email).then(function () {
         // Update successful.
         user.sendEmailVerification().then(function () {
-            alert("A verification email has been sent to: " + user.email);
+            console.log("Email has been update!")
+            $('#changeEmailModal').modal('hide');
+            $('#profileSettingModal').modal('hide');
+            $('#alertEmailModal').modal('toggle');
+            setTimeout(function () {
+                // Redirect user to "verify-email.html"
+                window.location.href = "verify-email.html";
+            }, 3000);
+
         }).catch(function (error) {
         });
 
-        console.log("Email has been update!")
-        $('#changeEmailModal').modal('hide');
-        window.location.href = "verify-email.html"
+
 
     }).catch(function (error) {
         // An error happened.

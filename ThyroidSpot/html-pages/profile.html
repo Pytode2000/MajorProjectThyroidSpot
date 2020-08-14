@@ -53,12 +53,6 @@
         <div class="content">
             <!-- <h1> PROFILE PAGE </h1> -->
 
-            <style>
-                .form-container {
-                    background: rgb(84, 91, 98);
-                }
-            </style>
-
             <!-- TOGGLER -->
             <div class="container container-small container-fluid form-container" style="padding: 0; margin-top: 3%;">
 
@@ -73,39 +67,141 @@
             </div>
 
 
-            <div class="container container-small container-fluid form-container white-text">
+            <div class="container container-small container-fluid form-container white-text" id="main-cont">
 
                 <div id="profileSection">
 
-                    <ul>
-                        <li>Full Name: <span id="profName"></span></li>
-                        <li>Email Address: <span id="profEmail"></span></li>
-                        <li>Account Type: <span id="profType"></span></li>
-                        <li>UID: <span id="profUid"></span></li>
-                    </ul>
+                    <br>
 
+                    <div class="alert alert-dark" role="alert">
+                        <p class="mb-0">Full Name
+
+                            <i class="fas fa-user close"></i>
+                            <div class="text-center">
+                                <h4 class="alert-heading"> <span id="profName"></span>
+                                </h4>
+                            </div>
+                        </p>
+                        <hr>
+
+                    </div>
+
+                    <div class="alert alert-dark" role="alert">
+                        <p class="mb-0">Email Address
+                            <i class="fas fa-envelope close"></i>
+                            <div class="text-center">
+                                <h4 class="alert-heading"><span id="profEmail"></span></h4>
+                            </div>
+                        </p>
+                        <hr>
+
+                    </div>
+
+                    <div class="alert alert-dark" role="alert">
+                        <p class="mb-0">Account Type
+                            <i class="fas fa-lock close"></i>
+                            <div class="text-center">
+                                <h4 class="alert-heading"><span id="profType"></span></h4>
+                            </div>
+                        </p>
+                        <hr>
+
+                    </div>
+
+
+                    <div class="alert alert-dark" role="alert">
+                        <p class="mb-0">UID
+                            <i class="fas fa-fingerprint close"></i>
+                            <div class="text-center">
+                                <h6 class="alert-heading"><span id="profUid"></span></h6>
+                            </div>
+                        </p>
+                        <hr>
+
+                    </div>
+
+
+                    <br>
                 </div>
 
 
 
                 <div id="patientSection" class="hide">
-                    <ul>
-                        <li>Gender: <span id="profGender"></span></li>
-                        <li>Diagnosis: <span id="profDiagnosis"></span></li>
-                        <li>Blood Type: <span id="profBloodType"></span></li>
-                        <li>Date of Birth: <span id="profDOB"></span></li>
-
-                        <li>NRIC Number: <span id="profNRIC"></span></li>
-                    </ul>
+                    <br>
 
 
+                    <div class="alert alert-dark" role="alert">
+                        <p class="mb-0">NRIC Number
+
+                            <i class="fas fa-id-card close"></i>
+                            <div class="text-center">
+                                <h4 class="alert-heading"> <span id="profNRIC"></span>
+                                </h4>
+                            </div>
+                        </p>
+                        <hr>
+
+                    </div>
+
+
+                    <div class="alert alert-dark" role="alert">
+                        <p class="mb-0">Birthdate
+
+                            <i class="fas fa-calendar close"></i>
+                            <div class="text-center">
+                                <h4 class="alert-heading"> <span id="profDOB"></span>
+                                </h4>
+                            </div>
+                        </p>
+                        <hr>
+
+                    </div>
+
+
+                    <div class="alert alert-dark" role="alert">
+                        <p class="mb-0">Gender
+
+                            <i class="fas fa-venus-mars close"></i> <div class="text-center">
+                                <h4 class="alert-heading"> <span id="profGender"></span>
+                                </h4>
+                            </div>
+                        </p>
+                        <hr>
+
+                    </div>
+
+                    <div class="alert alert-dark" role="alert">
+                        <p class="mb-0">Diagnosis
+
+                            <i class="fas fa-stethoscope close"></i> <div class="text-center">
+                                <h4 class="alert-heading"> <span id="profDiagnosis"></span>
+                                </h4>
+                            </div>
+                        </p>
+                        <hr>
+
+                    </div>
+
+
+
+                    <div class="alert alert-dark" role="alert">
+                        <p class="mb-0">Blood Type
+
+                            <i class="fas fa-tint close"></i>
+                            <div class="text-center">
+                                <h4 class="alert-heading"> <span id="profBloodType"></span>
+                                </h4>
+                            </div>
+                        </p>
+                        <hr>
+
+                    </div>
+
+
+                    <br>
                 </div>
 
             </div>
-
-            <h3># Only backend (retrieving) done. Design to be done soon. </h3>
-
-
 
         </div>
         <div id="footer-html"></div>
@@ -165,13 +261,13 @@
 
                         <div class="form-label-group">
                             <input type="email" id="changeEmail" class="form-control" placeholder="Enter new email address..." required="" autofocus="">
-                            <label for="changeEmail">Enter new email address...</label>
+                            <label for="changeEmail">Enter new email address...<i class="fas fa-envelope close"></i></label>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="changeEmail()">Update Email</button>
+                    <button type="button" class="btn btn-success" onclick="changeEmail()">Update Email</button>
                 </div>
             </div>
         </div>
@@ -192,12 +288,12 @@
 
                         <div class="form-label-group">
                             <input type="password" id="changePassword" class="form-control" placeholder="Enter new password..." required="" autofocus="">
-                            <label for="changePassword">Enter new password...</label>
+                            <label for="changePassword">Enter new password...<i class="fas fa-key close"></i></label>
                         </div>
 
                         <div class="form-label-group">
                             <input type="password" id="retypeChangePassword" class="form-control" placeholder="Re-type new password..." required="" autofocus="">
-                            <label for="retypeChangePassword">Re-type new password...</label>
+                            <label for="retypeChangePassword">Re-type new password...<i class="fas fa-key close"></i></label>
                         </div>
                     </form>
                 </div>
@@ -208,7 +304,6 @@
             </div>
         </div>
     </div>
-
 
     <!-- Delete Account Modal -->
     <div class="modal fade" id="deleteAccountModal" tabindex="-1" role="dialog" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
@@ -227,7 +322,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="deleteAccount()">Delete</button>
+                    <button type="button" class="btn btn-danger" onclick="deleteAccount()">Delete</button>
                 </div>
             </div>
         </div>
@@ -367,6 +462,23 @@
         </div>
     </div>
 
+
+    <!-- Alert Email Modal -->
+    <div class="modal fade" id="alertEmailModal" tabindex="-1" role="dialog" aria-labelledby="alertEmailModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="alertEmailModalLabel">Alert</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    A verification email has been sent to the email address. 
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
