@@ -8,6 +8,14 @@
     height: 100%;  
   }
 
+  #searchRPTcontain{
+    margin-bottom: 2em; 
+    margin-top: 2em; 
+    width: 80%; 
+    margin-left: auto; 
+    margin-right: auto;
+  }
+
   /*for dev and debugging purposes only*/
   #newPatientModal{
     text-align: center;
@@ -40,42 +48,82 @@
     position: relative;
   }
 
+  /*DOSAGE REPORT TABLE CSS*/
   .centerTable {
     margin-left: auto;
     margin-right: auto;
     font-size: 14px;
     position: relative;
-    border: 1px;
+    width: 100%;
+    text-align: center;
   }
 
-  .dosageTable {
+  /*PATIENT INFO TABLE CSS*/
+  .infoTable{
     margin-left: auto;
     margin-right: auto;
     font-size: 14px;
     position: relative;
+    width: 80%;
+    text-align: center;
+  }
+
+  /* DEBUG: show table borders for designing purposes */
+  table, th , td{
+    border: 1px black solid;
+  }
+
+
+  /*DOSAGE TABLE CSS*/
+  .dosageTable {
+    
+    font-size: 14px;
+    /* position: relative; */
     /* border: 1px solid black; */
+    text-align: center;
+    width: 100%;
   }
   
+  .reportTD{
+    width: 8em;
+    text-align: left;
+  }
+  .reportFT{
+    width: 3em;
+    text-align: left;
+  }
+  .reportTSH{
+    text-align: center;
+  }
+  .reportDRNA{
+    width: 9em;
+    text-align: left;
+  }
+
+
+  /*PATIENT REPORT + GRAPH CSS*/
   #reportcontainer {
     width: 80%;
     margin-top: 10%;
     margin: auto;
     height: 450px;
-    padding: 10px;
+    
+    display: flex;
   }
   
   #historycontainer {
-    width: 50%;
+    /* width: 50%; */
     height: 420px;
     background: rgb(255, 255, 255);
-    float: left;
     padding-right: 5%;
+    flex: 0 0 50%;
   }
   
   #graphcontainer {
     
     height: 420px;
     background: rgb(151, 151, 151);
+    flex: 1;
   }
   
   .container > div > img {
@@ -97,16 +145,98 @@
     font-size: 16px;
   }
 
+
+
+
 /* TODO: reportcontainer, historycontainer, graphcontainer for mobile */
 @media only screen and (max-width: 600px) {
-·/* Adding margin-bottom so that content does not get blocked by the navigation bar*/
+/* Adding margin-bottom so that content does not get blocked by the navigation bar*/
   .container {
     display: grid;
-    column-gap: 30px;
-    margin-left: 50px;
-    margin-right: 50px;
-    margin-bottom: 5rem;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* column-gap: 30px; */
+    /* margin-left: 50px; */
+    /* margin-right: 50px; */
+    /* margin-bottom: 5rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
   }
+  th, td{
+    display: block;
+    padding-left: 0%;
+    padding-right: 0%;
+  }
+
+#patientCardContent{
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  text-align: center;
+}
+
+.shiftedrow{
+  padding-left: 5px;
+}
+
+#searchRPTcontain{
+    margin-bottom: 2em; margin-top: 2em; width: auto;
+}
+
+/*PATIENT REPORT + GRAPH CSS*/
+#reportcontainer {
+  width: 90%;
+  margin-left: 2em;
+  display: flex;
+  flex-direction: column-reverse;
+  position: absolute;
+  margin-bottom: 10em;
+}
+
+#historycontainer {
+  /* width: 50%; */
+  height: 420px;
+  background: rgb(255, 255, 255);
+  display: block;
+  position: relative;
+  z-index: 2;
+}
+
+#graphcontainer {
+  margin-right: 5%;
+  
+  width: auto;
+  background: rgb(151, 151, 151);
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+    
+.centerTable{
+  visibility: collapse;
+}
+
+    /*DOSAGE TABLE CSS*/
+    .dosageTable {
+    
+      font-size: 14px;
+      /* position: relative; */
+      /* border: 1px solid black; */
+      text-align: left;
+      width: 100%;
+    }
+    
+    .reportTD{
+      
+      text-align: left;
+    }
+    .reportFT{
+      
+      text-align: left;
+    }
+    .reportTSH{
+      text-align: left;
+    }
+    .reportDRNA{
+      text-align: left;
+    }
+  
 }
   

@@ -59,7 +59,7 @@ function getOnePatientInfo() {
                     viewreportbutton = "<button id='forumdescbtn' class=' btn btn-info btn-sm' index='" + patientInfoArray[i].patient_id + "'>View Report</button>"
                    
                     
-                    $('#patientCardContent').append("<h2 style='text-align: center'>"+username+"</h2><table class='centerTable'><tr>"+
+                    $('#patientCardContent').append("<h2 style='text-align: center'>"+username+"</h2><table class='infoTable'><tr>"+
                         "<td></p><b>IC number: " + patientInfoArray[i].ic_number + 
                         "</b></p></td><td class='shiftedrow'><p>Diagnosis: "+patientInfoArray[i].diagnosis+"</p></td>"+
                         "<td class='shiftedrow'>D.O.B: "+patientInfoArray[i].date_of_birth+"</td><td class='shiftedrow'>Gender: "+patientInfoArray[i].gender+
@@ -179,10 +179,10 @@ function getPatientReport() {
 
                     createreportbtn = "<button id='createrpt' class=' btn btn-info btn-sm'>Create Report</button>"
 
-                    //TODO: edit the append to include the drug name attribute
-                    $('#dosagehist').append("<div style='margin-bottom: 1em;'><table class='dosageTable'>"+
-                    "<tr><td>"+report.timestamp+"</td><td style='padding-left:4em;'>"+report.FT4+"</td><td style='padding-left:4em;'>"+
-                    ""+report.TSH+"</td><td style='padding-left:3em;padding-right:1em;'>"+report.drug_name+"</td><td style='padding-left:1em;padding-right:3em;'>"+report.drug_dose+"</td></tr></table></div>");
+                    
+                    $('#dosagehist').append("<div style='margin-bottom: 0.5em;'><table class='dosageTable'>"+
+                    "<tr><td class='reportTD'>"+report.timestamp+"</td><td class='reportFT'>"+report.FT4+"</td><td class='reportTSH'>"+
+                    ""+report.TSH+"</td><td class='reportDRNA'>"+report.drug_name+"</td><td>"+report.drug_dose+"</td></tr></table></div>");
                     
 
                 }
@@ -209,7 +209,7 @@ function postPatientReport() {
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
     console.log(date);
 
-    //TODO: edit the model to include the drug name attribute
+    
     var patientinfo = {patient_id: getuser_id, FT4: $('#newFT4').val(), TSH: $('#newTSH').val(), drug_name: $('#newDrugName').val(),
     drug_dose: $('#newDrugDose').val(), timestamp: date}
 
