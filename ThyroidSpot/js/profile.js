@@ -91,6 +91,20 @@ function getPatientInfo() {
             document.getElementById("profDOB").innerHTML = currentPatientArray.date_of_birth;
             document.getElementById("profNRIC").innerHTML = currentPatientArray.ic_number;
             patient_table_patient_id = currentPatientArray.patient_id;
+
+
+            // This is for the update (pre-set values).
+            document.getElementById("editId").defaultValue = currentPatientArray.ic_number;
+            document.getElementById("editBirthdate").defaultValue = currentPatientArray.date_of_birth;
+            $("#editDiagnosis").val(currentPatientArray.diagnosis);
+            $("#editBloodType").val(currentPatientArray.blood_type);
+            if (currentPatientArray.gender == "Male") {
+                $('input:radio[name="genderMaleRadio"]').filter('[value="Male"]').attr('checked', true);
+            }
+            else {
+                $('input:radio[name="genderMaleRadio"]').filter('[value="Female"]').attr('checked', true);
+            }
+
         }
     });
 }
@@ -100,7 +114,10 @@ function getPatientInfo() {
 // Calling the function.
 getUser()
 if (sessionStorage.getItem("user_account_type") == "patient") {
+    // If user is patient, get patient info + show edit patient info's FAB.
     getPatientInfo()
+    const editPatientInfoFAB = document.getElementById("FAB-edit");
+    editPatientInfoFAB.classList.remove("hide")
 }
 
 
@@ -125,7 +142,9 @@ function changeEmail() {
 
     }).catch(function (error) {
         // An error happened.
-        console.log("An error occurred when changing email.")
+        console.log("An error occurred when changing email.");
+        $('#changeEmailModal').modal('hide');
+        $('#errorModal').modal('toggle');
 
     });
 }
@@ -141,12 +160,15 @@ function changePassword() {
 
     user.updatePassword(password).then(function () {
         // Update successful.
-        console.log("Password has been update!")
+        console.log("Password has been update!");
         $('#changePasswordModal').modal('hide');
 
     }).catch(function (error) {
         // An error happened.
-        console.log("An error occurred when changing password.")
+        console.log("An error occurred when changing password.");
+        $('#changePasswordModal').modal('hide');
+        $('#errorModal').modal('toggle');
+
 
     });
 }
@@ -202,6 +224,53 @@ function deleteAccount() {
 
     }).catch(function (error) {
         // An error happened.
-        console.log("An error occurred when deleting account.")
+        console.log("An error occurred when deleting account.");
+        $('#deleteAccountModal').modal('hide');
+
+        $('#errorModal').modal('toggle');
+
     });
 }
+
+
+/* Update Profile */
+
+function updateProfile() {
+    const user_id = sessionStorage.getItem("user_unique_id");
+
+    var diagnosis = document.getElementById("editDiagnosis");
+    var diagnosisChosen = diagnosis.options[diagnosis.selectedIndex].text;
+
+    var genderChosen;
+    if (document.getElementById('genderMaleRadio').checked) {
+        genderChosen = "Male"
+    }
+    else {
+        genderChosen = "Female"
+    }
+
+    var bloodType = document.getElementById("editBloodType");
+    var bloodTypeChosen = bloodType.options[bloodType.selectedIndex].text;
+
+    var patientInfoInstance = {
+        user_id: user_id, diagnosis: diagnosisChosen, ic_number: $('#editId').val(),
+        date_of_birth: $('#editBirthdate').val(), gender: genderChosen, blood_type: bloodTypeChosen, timestamp: "-"
+    };
+
+
+    $.ajax({
+        type: 'PUT',
+        url: patientInfoURI + patient_table_patient_id,
+        data: JSON.stringify(patientInfoInstance),
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            $('#editPatientModal').modal('hide');
+            console.log("Successfully updated patient's information.")
+            window.location.reload();
+        }
+    });
+
+
+}
+
