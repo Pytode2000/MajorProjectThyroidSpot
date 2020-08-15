@@ -115,7 +115,7 @@ function register() {
 
         // Send Email
         user.sendEmailVerification().then(function () {
-            alert("A verification email has been sent to: " + user.email);
+            $('#alertEmailModal').modal('toggle');
         }).catch(function (error) {
         });
 
