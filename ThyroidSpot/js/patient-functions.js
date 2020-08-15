@@ -17,7 +17,8 @@ function getUserName(){
 
             for (i = 0; i < userInfoArray.length; i++) {
                 if (getuid == userInfoArray[i].user_id){
-                    return username = userInfoArray[i].full_name;
+                    username = userInfoArray[i].full_name;
+                    return getOnePatientInfo();
                 }
             }
         }
@@ -145,6 +146,7 @@ function postPatientInfo() {
 
 
 
+
 //GET + CREATE PATIENT REPORT:
 var reportURI = 'https://localhost:44395/api/report';
 var reportArray = [];
@@ -242,4 +244,3 @@ $(document).on("click", "#createrpt", function () {
 });
 
 getUserName();
-getOnePatientInfo();
