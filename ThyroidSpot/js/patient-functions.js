@@ -179,9 +179,7 @@ function getPatientReport() {
                     var report = {report_id: reportArray[i].report_id, patient_id: reportArray[i].patient_id, drug_name: reportArray[i].drug_name, FT4: reportArray[i].FT4, TSH: reportArray[i].TSH, drug_dose: reportArray[i].drug_dose, timestamp: reportArray[i].timestamp}
 
 
-                    createreportbtn = "<button id='createrpt' class=' btn btn-info btn-sm'>Create Report</button>"
-
-                    
+                    //TODO: onclick on button to view report in a modal (then can add on a button to export it as PDF)
                     $('#dosagehist').append("<div style='margin-bottom: 0.5em;'><table class='dosageTable'>"+
                     "<tr><td class='reportTD'>"+report.timestamp+"</td><td class='reportFT'>"+report.FT4+"</td><td class='reportTSH'>"+
                     ""+report.TSH+"</td><td class='reportDRNA'>"+report.drug_name+"</td><td>"+report.drug_dose+"</td></tr></table></div>");
@@ -231,6 +229,13 @@ function postPatientReport() {
         }
     });
 }
+
+
+//TODO: function to export patient info with dosage report as PDF (screw the graph first bc that one is really hard)
+function exportData(){
+     
+}
+
 
 
 //(FOR DEBUG) doc model for postPatientInfo
