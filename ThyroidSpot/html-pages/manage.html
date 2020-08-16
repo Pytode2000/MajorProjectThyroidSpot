@@ -15,6 +15,12 @@
 
     <!-- Jquery -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX"
@@ -22,7 +28,7 @@
 
     <!-- Local Imports -->
     <link rel="stylesheet" href="../css/style.css" />
-    <!-- <link rel="stylesheet" href="../css/index.css" /> -->
+    <link rel="stylesheet" href="../css/manage.css" />
 
 
     <title>Thyroid Spot</title>
@@ -34,11 +40,54 @@
 
     <main>
         <div class="content">
+            <div class="containter container-sm">
+                <h2 class="text-center">Manage</h2>
 
-            <h3> To be done in Phase 3 (Week 8 ~ Week 9 [31/08/20 ~ 11/09/20]) by Jia Chun (Admin).</h3>
+
+
+                <div style="width:100%; display:inline-block;">
+                    <div class="form-label-group" style="width:30%; float:left;">
+                        <input type="text" id="searchInput" name="searchInput" class="form-control" placeholder="Search..." required="" autofocus="">
+                        <label for="searchInput">Search...</label>
+                    </div>
+                    <button class="btn btn-link searchButton"><i class="fas fa-search close" onclick="searchFunction()"></i></button>
+
+
+                    <select id="filterSearch" class="custom-select" style="width:20%; float: right;" onclick="filterByAccountType()">
+                        <option value="">All</option>
+                        <option value="admin">Admin</option>
+                        <option value="clinician">Clinician</option>
+                        <option value="patient">Patient</option>
+                        <!-- <option><b>Clear X</b></option> -->
+                    </select>
+
+                </div>
 
 
 
+
+                <table class="table table-dark table-striped" style="margin-bottom: 0; font-size: 1.25em;">
+                    <tr>
+                        <th>
+                            Full Name
+                        </th>
+                        <th style="float: right;">
+                            Account Type
+                        </th>
+                    </tr>
+                </table>
+
+                <!-- Add a sort function -->
+
+                <ul id="usersUL">
+                    <!-- <li><a href="#">Adele | patient</a></li> -->
+                    <!-- Filled using JS in manage.js -->
+                </ul>
+
+
+
+
+            </div>
         </div>
 
         <div id="footer-html"></div>
@@ -51,6 +100,9 @@
 <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script>
+
+<script src="../js/manage.js"></script>
+
 
 <!-- <script src="../js/index.js"></script> -->
 

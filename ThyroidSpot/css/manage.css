@@ -1,0 +1,49 @@
+* {
+  box-sizing: border-box;
+}
+
+#searchInput {
+  /* background-image: url('/css/searchicon.png'); */
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+#usersUL {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#usersUL li a {
+  border: 1px solid #ddd;
+  margin-top: -1px;
+  /* Prevent double borders */
+  background-color: #f6f6f6;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  display: block
+}
+
+#usersUL li a:hover:not(.header) {
+  background-color: #eee;
+}
+
+
+#filterSearch {
+  height: 45px;
+}
+
+.fa-search {
+  font-size: 36px;
+}
+
+.searchButton:focus {
+  outline: none;
+  box-shadow: none;
+}
