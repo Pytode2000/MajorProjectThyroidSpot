@@ -174,20 +174,24 @@
                     <label>Drug Name:</label>
                     </td>
                     <td class="labeltd">
-                    <input id="newDrugName">
+                    <input class="newDrugName">
                     </td>
-                    </tr>
-
-                    <tr>
                     <td class="firsttd">
-                    <label>Drug dose:</label>
-                    </td>
-                    </td>
-                    <td class="labeltd">
-                    <input id="newDrugDose">
-                    </td>
+                        <label>Drug dose:</label>
+                        </td>
+                        </td>
+                        <td class="labeltd">
+                        <input class="newDrugDose">
+                        </td>
                     </tr>
                     </table>
+                    
+                    <table id="addon">
+                    </table>
+                    
+                    <div style="text-align: center; margin-top: 1em; margin-bottom: 4em;">
+                        <button id="addMoreRows">Add another drug dose</button>
+                    </div>
                     <div style="text-align: center; margin-bottom: 2em;">
                         <button id="btnRegister" class="btn btn-dark btn-block bold" onclick="postPatientReport()">Save Report</button>
                     </div>

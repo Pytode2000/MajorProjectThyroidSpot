@@ -183,11 +183,12 @@ function getPatientReport() {
                     
                     var report = {report_id: reportArray[i].report_id, patient_id: reportArray[i].patient_id, drug_name: reportArray[i].drug_name, FT4: reportArray[i].FT4, TSH: reportArray[i].TSH, drug_dose: reportArray[i].drug_dose, timestamp: reportArray[i].timestamp}
 
+                    viewdosagebtn = "<button id='viewdosage' class=' btn btn-info btn-sm'>View Prescription</button>";
 
                     //TODO: onclick on button to view report in a modal (then can add on a button to export it as PDF)
                     $('#dosagehist').append("<div style='margin-bottom: 0.5em;'><table class='dosageTable'>"+
                     "<tr><td class='reportTD'>"+report.timestamp+"</td><td class='reportFT'>"+report.FT4+"</td><td class='reportTSH'>"+
-                    ""+report.TSH+"</td><td class='reportDRNA'>"+report.drug_name+"</td><td>"+report.drug_dose+"</td></tr></table></div>");
+                    ""+report.TSH+"</td><td class='reportDRNA'>"+viewdosagebtn+"</td></tr></table></div>");
                     
 
                 }
@@ -202,6 +203,9 @@ function getPatientReport() {
         }
     });
 }
+
+
+//TODO: create a prescription modal and function to view prescription
 
 
 
@@ -221,8 +225,6 @@ function postPatientReport() {
     
     var patientinfo = {patient_id: getuser_id, FT4: $('#newFT4').val(), TSH: $('#newTSH').val(), timestamp: date}
     console.log(patientinfo);
-
-    
 
     $.ajax({
         type: 'POST',
@@ -264,13 +266,25 @@ function getReportID(){
 function postDosage(){
     
     console.log("calling post dosage")
+    
+    send = $('.newDrugName')
+    send2 = $('.newDrugDose')
 
-    var druginfo = {report_id: captureportid, drug_dose: $('#newDrugDose').val(), drug_name: $('#newDrugName').val()}
-    console.log(druginfo)
+    array_to_add = []
+    for (i = 0 ; i < send.length; i++){
+        //druginfo = {report_id: captureportid, drug_dose: send[i].value, drug_name: send2[i].value}
+        druginfo = {report_id: 2, drug_dose: send[i].value, drug_name: send2[i].value}
+        array_to_add.push(druginfo)
+    }
+    //var druginfo = {report_id: 2, drug_dose: $('#newDrugDose').val(), drug_name: $('#newDrugName').val()}
+    console.log(array_to_add)
+
+    //var druginfo = {report_id: captureportid, drug_dose: $('#newDrugDose').val(), drug_name: $('#newDrugName').val()}
+    //console.log(druginfo)
     $.ajax({
         type: 'POST',
         url: dosageURI,
-        data: JSON.stringify(druginfo),
+        data: JSON.stringify(array_to_add),
         dataType: 'json',
         contentType: 'application/json',
         success: function (data) {
@@ -288,7 +302,11 @@ function exportData(){
      
 }
 
-
+$(document).on('click', '#addMoreRows', function(){
+    var html = "<tr><td class='firsttd'><label>Drug Name:</label></td><td class='labeltd'><input class='newDrugName'></td><td class='firsttd'>"+
+    "<label>Drug dose:</label></td></td><td class='labeltd'><input class='newDrugDose'></td></tr>";
+    $("#addon").append(html);
+});
 
 //(FOR DEBUG) doc model for postPatientInfo
 $(document).on("click", "#createnewinfo", function () {
@@ -299,5 +317,7 @@ $(document).on("click", "#createnewinfo", function () {
 $(document).on("click", "#createrpt", function () {
     document.getElementById('newReportModal').style.display='block'
 });
+
+//TODO: add onclick function to launch prescription model
 
 getUserName();
