@@ -25,6 +25,84 @@ function getAllUsers() {
     });
 }
 
+function createUser() {
+    emailTxt = $('#newUserEmail').val();
+    passwordTxt = $('#newUserPassword').val();
+    // one more for re-type password.
+    fullNameTxt = $('#newUserFullName').val()
+
+    var acc_type;
+    if (document.getElementById('typeAdminRadio').checked) {
+        acc_type = "admin"
+    }
+    else {
+        acc_type = "clinician"
+    }
+
+    var config = {
+        apiKey: "AIzaSyAJOmgi_23UV7szjryl9Bv6Bd9uK13C0KU",
+        authDomain: "thyroidspot.firebaseapp.com",
+        databaseURL: "https://thyroidspot.firebaseio.com",
+        projectId: "thyroidspot",
+        storageBucket: "thyroidspot.appspot.com",
+        messagingSenderId: "652518093634",
+        appId: "1:652518093634:web:5cc7a86bd8119cfcfe0edb",
+        measurementId: "G-VLNKVKH5GT"
+    };
+    var secondaryApp = firebase.initializeApp(config, "Secondary");
+    // var fbUid;
+
+    secondaryApp.auth().createUserWithEmailAndPassword(emailTxt, passwordTxt).then(function (firebaseUser) {
+        // fbUid = firebaseUser.uid;
+        var uid = firebaseUser.user.uid;
+
+        console.log("User " + firebaseUser.uid + " created successfully!");
+        console.log(uid)
+
+        // var newUserFbId = firebaseUser.uid
+        // console.log(newUserFbId);
+
+        var userInstance = { user_id: uid, full_name: fullNameTxt, account_type: acc_type }; // NOT DONE UID HAVENT ADD
+        console.log(userInstance)
+        $.ajax({
+            type: 'POST',
+            url: userURI,
+            data: JSON.stringify(userInstance),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                console.log("User instance created.");
+                $('#newUserModal').modal('hide');
+                // Send verification email
+
+            }
+        });
+
+        //I don't know if the next statement is necessary 
+        secondaryApp.auth().signOut();
+    });
+    // Creates an instance (row) in the "user" table.
+
+
+    //     admin.auth().createUser({
+    //         email: emailTxt,
+    //         emailVerified: false,
+    //         // phoneNumber: '+11234567890',
+    //         password: passwordTxt,
+    //         // displayName: 'John Doe',
+    //         // photoURL: 'http://www.example.com/12345678/photo.png',
+    //         disabled: false
+    //     })
+    //         .then(function (userRecord) {
+    //             // See the UserRecord reference doc for the contents of userRecord.
+    //             console.log('Successfully created new user:', userRecord.uid);
+    //         })
+    //         .catch(function (error) {
+    //             console.log('Error creating new user:', error);
+    //         });
+}
+
+
 
 function searchFunction() {
     // Declare variables
@@ -33,6 +111,10 @@ function searchFunction() {
     filter = input.value.toUpperCase();
     ul = document.getElementById("usersUL");
     li = ul.getElementsByTagName('li');
+
+    if (input.value.length == 0) {
+        $("#filterSearch").val("");
+    }
 
     // Loop through all list items, and hide those who don't match the search query
     for (i = 0; i < li.length; i++) {
@@ -44,20 +126,26 @@ function searchFunction() {
             li[i].style.display = "none";
         }
     }
+
 }
 
 function filterByAccountType() {
     var filter = document.getElementById("filterSearch");
     var filterSelected = filter.options[filterSearch.selectedIndex].value;
-    // var input = document.getElementById('searchInput');
+
     $('input[type=text]#searchInput').val(filterSelected);
 
     // Call the search function.
     searchFunction();
+
     // Empty textbox.
     $('input[type=text]#searchInput').val("");
+}
 
-
+function resetFilterOnSearch() {
+    $("#filterSearch").val("");
+    $('input[type=text]#searchInput').val("");
+    searchFunction();
 }
 
 
