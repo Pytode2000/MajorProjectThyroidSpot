@@ -38,6 +38,11 @@
 
     <div id="navbar-html"></div>
 
+    <!-- Floating action button -->
+    <button class="floating-btn newUser-fab" data-toggle="modal" data-target="#newUserModal">
+        <i class="fas fa-user-plus"></i>
+    </button>
+
     <main>
         <div class="content">
             <div class="containter container-sm">
@@ -48,12 +53,12 @@
                 <div style="width:100%; display:inline-block;">
                     <div class="form-label-group" style="width:30%; float:left;">
                         <input type="text" id="searchInput" name="searchInput" class="form-control" placeholder="Search..." required="" autofocus="">
-                        <label for="searchInput">Search...</label>
+                        <label for="searchInput">Search...<i class="fas fa-times close" onclick="resetFilterOnSearch()"></i></label>
                     </div>
-                    <button class="btn btn-link searchButton"><i class="fas fa-search close" onclick="searchFunction()"></i></button>
+                    <button class="btn btn-link" id="searchButton"><i class="fas fa-search close" onclick="searchFunction()"></i></button>
 
 
-                    <select id="filterSearch" class="custom-select" style="width:20%; float: right;" onclick="filterByAccountType()">
+                    <select id="filterSearch" class="custom-select" style="width:20%; float: right;" onchange="filterByAccountType()">
                         <option value="">All</option>
                         <option value="admin">Admin</option>
                         <option value="clinician">Clinician</option>
@@ -93,6 +98,59 @@
         <div id="footer-html"></div>
     </main>
 
+
+    <!-- New User Modal -->
+    <div class="modal fade" id="newUserModal" tabindex="-1" role="dialog" aria-labelledby="newUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newUserModalLabel">Generate New User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- <p>The new email must be verified afterwards!</p> -->
+                    <form>
+
+                        <div class="form-label-group">
+                            <input type="email" id="newUserEmail" class="form-control" placeholder="Enter email address..." required="" autofocus="">
+                            <label for="newUserEmail">Enter new email address...<i class="fas fa-envelope close"></i></label>
+                        </div>
+                        <div class="form-label-group">
+                            <input type="password" class="form-control" id="newUserPassword" placeholder="Enter password..." required="" autofocus="">
+                            <label for="newUserPassword">Enter password...<i class="fas fa-key close"></i></label>
+                        </div>
+                        <div class="form-label-group">
+                            <input type="password" class="form-control" id="newUserRePassword" placeholder="Re-type password..." required="" autofocus="">
+                            <label for="newUserRePassword">Re-type password...<i class="fas fa-key close"></i></label>
+                        </div>
+                        <div class="form-label-group">
+                            <input type="text" class="form-control" id="newUserFullName" placeholder="Enter full name..." required="" autofocus="">
+                            <label for="newUserFullName">Enter full name...<i class="fas fa-user close"></i></label>
+                        </div>
+
+                        <!-- Radio buttons for account type. -->
+                        <!-- typeAdminRadio, typeClinicianRadio -->
+                        <label>Select account type: </label>
+                        <div class="custom-control custom-radio custom-control-inline" style="left:15%;">
+                            <input type="radio" id="typeAdminRadio" name="typeAdminRadio" class="custom-control-input" checked>
+                            <label class="custom-control-label" for="typeAdminRadio">Admin</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline" style="float: right;">
+                            <input type="radio" id="typeClinicianRadio" name="typeAdminRadio" class="custom-control-input">
+                            <label class="custom-control-label" for="typeClinicianRadio">Clinician</label>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="createUser()">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 

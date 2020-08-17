@@ -47,8 +47,7 @@ function login() {
 
         setTimeout(function () {
             window.location.href = "profile.html";
-        }, 3500);
-
+        }, 3000);
 
     })
     promise.catch(e => console.log(e.message));

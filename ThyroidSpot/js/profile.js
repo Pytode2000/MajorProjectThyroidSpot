@@ -9,9 +9,6 @@ if (sessionStorage.getItem("user_account_type") != "patient") // Only user_accou
 }
 
 
-
-
-
 /* Toggle between Profile and Information Tab */
 // GET DOM
 // const profileSection = document.getElementById("profileSection");
