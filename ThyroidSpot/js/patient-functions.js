@@ -146,12 +146,12 @@ function postPatientInfo() {
 
 
 
-
 //GET + CREATE PATIENT REPORT:
 var reportURI = 'https://localhost:44395/api/report';
+var dosageURI = 'https://localhost:44395/api/dosage';
 var reportArray = [];
 var currentreportID; //this variable will contain the report ID that's selected
-
+var reportIDArray = [];
 
 //only patients can access it based on their assigned unique ID
 function getPatientReport() {
@@ -172,8 +172,13 @@ function getPatientReport() {
             // $('#reportContent').html('');
             $('#dosagehist').html('');
             //Iterate through the diseaseInfoArray to generate rows to populate the table
+            if (reportArray == ""){
+                $('#reportcontainer').html('');
+                createreportbtn = "<button id='createrpt' class=' btn btn-info btn-sm'>Create Report</button>"
+                $('#reportcontainer').append("<div style='text-align: center; margin-top: 10%; margin-left: auto; margin-right: auto;'><h3>No patient report found</h3><div>"+createreportbtn+"<div></div>");
+            }
+            else{
             for (i = 0; i < reportArray.length; i++) {
-              
                 if (currentPatientID == reportArray[i].patient_id){
                     
                     var report = {report_id: reportArray[i].report_id, patient_id: reportArray[i].patient_id, drug_name: reportArray[i].drug_name, FT4: reportArray[i].FT4, TSH: reportArray[i].TSH, drug_dose: reportArray[i].drug_dose, timestamp: reportArray[i].timestamp}
@@ -194,11 +199,15 @@ function getPatientReport() {
                 }
             }
         }
+        }
     });
 }
 
 
+
 //create function for postPatientReport
+var captureportid //global variable to get report id after adding
+
 function postPatientReport() {
     //getting patient id and putting it into a variable
     var getuser_id = currentPatientID
@@ -210,11 +219,10 @@ function postPatientReport() {
     console.log(date);
 
     
-    var patientinfo = {patient_id: getuser_id, FT4: $('#newFT4').val(), TSH: $('#newTSH').val(), drug_name: $('#newDrugName').val(),
-    drug_dose: $('#newDrugDose').val(), timestamp: date}
-
+    var patientinfo = {patient_id: getuser_id, FT4: $('#newFT4').val(), TSH: $('#newTSH').val(), timestamp: date}
     console.log(patientinfo);
 
+    
 
     $.ajax({
         type: 'POST',
@@ -224,8 +232,52 @@ function postPatientReport() {
         contentType: 'application/json',
         success: function (data) {
             //calling the function again so that the new books are updated
+            console.log(data)
+            getReportID();
+        }
+    });
+}
+
+
+//get report id after posting
+function getReportID(){
+    console.log("calling get rpt id")
+    
+    $.ajax({
+        type: 'GET',
+        url: reportURI,
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            //calling the function again so that the new books are updated
+            reportIDArray = data
+            console.log(reportIDArray)
+
+            console.log(reportIDArray[reportIDArray.length-1].report_id); //get recent added id
+            captureportid = reportIDArray[reportIDArray.length-1].report_id
+            postDosage();
+        }
+    });
+}
+
+//Post drug name and drug dosage to dosage table
+function postDosage(){
+    
+    console.log("calling post dosage")
+
+    var druginfo = {report_id: captureportid, drug_dose: $('#newDrugDose').val(), drug_name: $('#newDrugName').val()}
+    console.log(druginfo)
+    $.ajax({
+        type: 'POST',
+        url: dosageURI,
+        data: JSON.stringify(druginfo),
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            //calling the function again so that the new books are updated
             getOnePatientInfo();
-            document.getElementById('newReportModal').style.display='none'
+            document.getElementById('newPatientModal').style.display='none'
+            window.location.reload();
         }
     });
 }

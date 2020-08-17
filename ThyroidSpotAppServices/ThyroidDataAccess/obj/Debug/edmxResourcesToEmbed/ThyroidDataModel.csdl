@@ -17,12 +17,8 @@
     <EntitySet Name="disease_information" EntityType="Self.disease_information" />
     <EntitySet Name="user" EntityType="ThyroidDataModel.user" />
     <EntitySet Name="patient_information" EntityType="ThyroidDataModel.patient_information" />
-    <EntitySet Name="drug_dosage" EntityType="ThyroidDataModel.drug_dosage" />
     <EntitySet Name="patient_report" EntityType="ThyroidDataModel.patient_report" />
-    <AssociationSet Name="FK_drug_report" Association="ThyroidDataModel.FK_drug_report">
-      <End Role="patient_report" EntitySet="patient_report" />
-      <End Role="drug_dosage" EntitySet="drug_dosage" />
-    </AssociationSet>
+    <EntitySet Name="drug_dosage" EntityType="ThyroidDataModel.drug_dosage" />
   </EntityContainer>
   <EntityType Name="user">
     <Key>
@@ -46,16 +42,6 @@
     <Property Name="blood_type" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
     <Property Name="timestamp" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
   </EntityType>
-  <EntityType Name="drug_dosage">
-    <Key>
-      <PropertyRef Name="idDosage" />
-    </Key>
-    <Property Name="idDosage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="drug_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="drug_dose" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="report_id" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="patient_report" Relationship="ThyroidDataModel.FK_drug_report" FromRole="drug_dosage" ToRole="patient_report" />
-  </EntityType>
   <EntityType Name="patient_report">
     <Key>
       <PropertyRef Name="report_id" />
@@ -65,18 +51,14 @@
     <Property Name="FT4" Type="Double" Nullable="false" />
     <Property Name="TSH" Type="Double" Nullable="false" />
     <Property Name="timestamp" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="drug_dosage" Relationship="ThyroidDataModel.FK_drug_report" FromRole="patient_report" ToRole="drug_dosage" />
   </EntityType>
-  <Association Name="FK_drug_report">
-    <End Type="ThyroidDataModel.patient_report" Role="patient_report" Multiplicity="1" />
-    <End Type="ThyroidDataModel.drug_dosage" Role="drug_dosage" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="patient_report">
-        <PropertyRef Name="report_id" />
-      </Principal>
-      <Dependent Role="drug_dosage">
-        <PropertyRef Name="report_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
+  <EntityType Name="drug_dosage">
+    <Key>
+      <PropertyRef Name="idDosage" />
+    </Key>
+    <Property Name="idDosage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="drug_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="drug_dose" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="report_id" Type="Int32" Nullable="false" />
+  </EntityType>
 </Schema>

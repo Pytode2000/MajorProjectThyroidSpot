@@ -18,7 +18,5 @@ namespace ThyroidDataAccess
         public string drug_name { get; set; }
         public string drug_dose { get; set; }
         public int report_id { get; set; }
-    
-        public virtual patient_report patient_report { get; set; }
     }
 }

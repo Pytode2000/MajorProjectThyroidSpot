@@ -54,29 +54,11 @@
     <Property Name="full_name" Type="nvarchar" MaxLength="70" Nullable="false" />
     <Property Name="account_type" Type="nvarchar" MaxLength="9" Nullable="false" />
   </EntityType>
-  <Association Name="FK_drug_report">
-    <End Role="patient_report" Type="Self.patient_report" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="drug_dosage" Type="Self.drug_dosage" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="patient_report">
-        <PropertyRef Name="report_id" />
-      </Principal>
-      <Dependent Role="drug_dosage">
-        <PropertyRef Name="report_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="ThyroidDataModelStoreContainer">
     <EntitySet Name="disease_information" EntityType="Self.disease_information" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="drug_dosage" EntityType="Self.drug_dosage" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="patient_information" EntityType="Self.patient_information" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="patient_report" EntityType="Self.patient_report" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_drug_report" Association="Self.FK_drug_report">
-      <End Role="patient_report" EntitySet="patient_report" />
-      <End Role="drug_dosage" EntitySet="drug_dosage" />
-    </AssociationSet>
   </EntityContainer>
 </Schema>

@@ -8,9 +8,8 @@
         <EntityTypeShape EntityType="ThyroidDataModel.disease_information" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ThyroidDataModel.user" Width="1.5" PointX="0.75" PointY="3.625" />
         <EntityTypeShape EntityType="ThyroidDataModel.patient_information" Width="1.5" PointX="2.875" PointY="0.75" />
-        <EntityTypeShape EntityType="ThyroidDataModel.drug_dosage" Width="1.5" PointX="7" PointY="1" />
         <EntityTypeShape EntityType="ThyroidDataModel.patient_report" Width="1.5" PointX="4.75" PointY="0.875" />
-        <AssociationConnector Association="ThyroidDataModel.FK_drug_report" />
+        <EntityTypeShape EntityType="ThyroidDataModel.drug_dosage" Width="1.5" PointX="6.625" PointY="1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
