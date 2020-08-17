@@ -14,12 +14,19 @@ namespace ThyroidDataAccess
     
     public partial class patient_report
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public patient_report()
+        {
+            this.drug_dosage = new HashSet<drug_dosage>();
+        }
+    
         public int report_id { get; set; }
         public int patient_id { get; set; }
         public double FT4 { get; set; }
         public double TSH { get; set; }
-        public int drug_dose { get; set; }
         public string timestamp { get; set; }
-        public string drug_name { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<drug_dosage> drug_dosage { get; set; }
     }
 }
