@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Imports -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/patientinfo.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="../js/patient-functions.js"></script>
+
+
+    <title>Thyroid Spot</title>
+</head>
+
+<body>
+    <div id="navbar-html"></div>
+    <main>
+        <!--Patient Cards-->
+        <div id="patientCardContent" class="container">
+            <h2 style='text-align: center'>Yu KaiLong</h2><table class='centerTable'><tr>
+                <td></p><b>IC number: G0392993R
+                </b></p></td><td class='shiftedrow'><p>Diagnosis: ABC</p></td>
+                <td class='shiftedrow'>D.O.B: 14 November 2001</td><td class='shiftedrow'>Gender: Male
+                </td><td class='shiftedrow'>Blood Type: B+ </td></tr></table>
+        </div>
+        <div id="reportcontainer">
+            <div style="margin-bottom: 2em; margin-top: 2em;">
+                <input id="searchInput" style="margin-left: 2em;" placeholder="Search Date...">
+                <button id='createrpt' style="float: right; margin-right: 2em;" class=' btn btn-info btn-sm'>Create Report</button>
+            </div>
+            <div id="historycontainer">
+                <table class='centerTable' style="margin-top: 1em;">
+                    <tr><th style="padding-left:2em;">Date</th><th style="padding-left:3.5em; padding-right:0.5em;">FT4</th><th style="padding-left:3.5em; padding-right:0.5em;">TSH</th><th style="padding-left:1em;">Drug Dose</th></tr>
+                </table>
+                <hr>
+                <div id="dosagehist">
+                    <div style='margin-bottom: 1em;'>
+                        <table class='dosageTable'>
+                            <tr>
+                                <td>12 August 2020</td>
+                                <td style='padding-left:2em; padding-right:2em;'>20.1</td>
+                                <td style='padding-left:2em;padding-right:2em;'>11.1</td>
+                                <td style='padding-left:2em;padding-right:2em;'>ABC</td>
+                            </tr>
+                        </table>
+                        </div>
+                </div>
+            </div>
+            <div id="graphcontainer">
+            </div>
+        </div>
+        <!--Modal For Patient Info-->
+        <div id="newPatientModal" class="w3-modal">
+            <div class="w3-modal-content">
+                <div class="w3-container">
+                    <span onclick="document.getElementById('newPatientModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                    <h1 id="diseaseName">Create Patient Info</h1>
+                    <hr>
+                    <table id="createnfotable">
+                    <tr>
+                    <td class="firsttd">
+                    <label>NRIC:</label>
+                    </td>
+                    <td class="labeltd">
+                    <input id="newIC">
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td class="firsttd">
+                    <label>Date of birth:</label>
+                    </td>
+                    <td class="labeltd">
+                    <input id="newDOB">
+                    </td>
+                    </tr>
+
+                    <tr>
+                    <td class="firsttd">
+                    <label>Gender:</label>
+                    </td>
+                    <td class="labeltd">
+                    <select name="gender" id="newGenderDDL">
+                        <option value="" selected disabled hidden>--Choose here--</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td class="firsttd">
+                    <label>Diagnosis:</label>
+                    </td>
+                    <td class="labeltd">
+                    <select name="diagnosis" id="newDiagnosisDDL">
+                        <option value="" selected disabled hidden>--Choose here--</option>
+                        <option value="De Quervain's Thyroiditis">De Quervain's Thyroiditis</option>
+                        <option value="Differentiated thyroid carcinoma">Differentiated thyroid carcinoma</option>
+                        <option value="Graves' disease">Graves' disease</option>
+                        <option value="Hashimoto's thyroiditis">Hashimoto's thyroiditis</option>
+                        <option value="Hypothyroidism">Hypothyroidism</option>
+                        <option value="Post-thyroidectomy">Post-thyroidectomy</option>
+                        <option value="Riedel's thyroiditis">Riedel's thyroiditis</option>
+                    </select>
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td class="firsttd">
+                    <label>Blood Type:</label>
+                    </td>
+                    <td class="labeltd">
+                    <select name="bloodtype" id="newBloodTypeDDL">
+                        <option value="" selected disabled hidden>--Choose here--</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                    </select>
+                    </td>
+                    </tr>
+                    </table>
+                    <div style="text-align: center; margin-bottom: 2em;">
+                        <button id="btnRegister" class="btn btn-dark btn-block bold" onclick="postPatientInfo()">Create Patient Info</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--Modal For Create Patient Report-->
+        <div id="newReportModal" class="w3-modal">
+            <div class="w3-modal-content">
+                <div class="w3-container">
+                    <span onclick="document.getElementById('newReportModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                    <h1 id="diseaseName">Create Health Report</h1>
+                    <hr>
+                    <table id="createnfotable">
+                    <tr>
+                    <td class="firsttd">
+                    <label>FT4:</label>
+                    </td>
+                    <td class="labeltd">
+                    <input id="newFT4">
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td class="firsttd">
+                    <label>TSH:</label>
+                    </td>
+                    <td class="labeltd">
+                    <input id="newTSH">
+                    </td>
+                    </tr>
+
+                    <tr>
+                    <td class="firsttd">
+                    <label>Drug dose:</label>
+                    </td>
+                    </td>
+                    <td class="labeltd">
+                    <input id="newDrugDose">
+                    </td>
+                    </tr>
+                    </table>
+                    <div style="text-align: center; margin-bottom: 2em;">
+                        <button id="btnRegister" class="btn btn-dark btn-block bold" onclick="postPatientReport()">Save Report</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#navbar-html").load("../html-components/navbar.html");
+
+            $("#footer-html").load("../html-components/footer.html");
+        });
+    </script>
+</body>
+
+</html>

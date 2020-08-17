@@ -34,3 +34,14 @@ C:\Users\Potato\Documents\MajorProjectThyroidSpot\ThyroidSpotAppServices\Thyroid
 C:\Users\Potato\Documents\MajorProjectThyroidSpot\ThyroidSpotAppServices\ThyroidDataAccess\obj\Debug\ThyroidDataAccess.csproj.CopyComplete
 C:\Users\Potato\Documents\MajorProjectThyroidSpot\ThyroidSpotAppServices\ThyroidDataAccess\obj\Debug\ThyroidDataAccess.dll
 C:\Users\Potato\Documents\MajorProjectThyroidSpot\ThyroidSpotAppServices\ThyroidDataAccess\obj\Debug\ThyroidDataAccess.pdb
+C:\MajorProjectThyroidSpot\ThyroidSpotAppServices\ThyroidDataAccess\bin\Debug\ThyroidDataAccess.dll.config
+C:\MajorProjectThyroidSpot\ThyroidSpotAppServices\ThyroidDataAccess\bin\Debug\ThyroidDataAccess.dll
+C:\MajorProjectThyroidSpot\ThyroidSpotAppServices\ThyroidDataAccess\bin\Debug\ThyroidDataAccess.pdb
+C:\MajorProjectThyroidSpot\ThyroidSpotAppServices\ThyroidDataAccess\bin\Debug\EntityFramework.dll
+C:\MajorProjectThyroidSpot\ThyroidSpotAppServices\ThyroidDataAccess\bin\Debug\EntityFramework.SqlServer.dll
+C:\MajorProjectThyroidSpot\ThyroidSpotAppServices\ThyroidDataAccess\bin\Debug\EntityFramework.xml
+C:\MajorProjectThyroidSpot\ThyroidSpotAppServices\ThyroidDataAccess\bin\Debug\EntityFramework.SqlServer.xml
+C:\MajorProjectThyroidSpot\ThyroidSpotAppServices\ThyroidDataAccess\obj\Debug\ThyroidDataAccess.csprojAssemblyReference.cache
+C:\MajorProjectThyroidSpot\ThyroidSpotAppServices\ThyroidDataAccess\obj\Debug\ThyroidDataAccess.csproj.CopyComplete
+C:\MajorProjectThyroidSpot\ThyroidSpotAppServices\ThyroidDataAccess\obj\Debug\ThyroidDataAccess.dll
+C:\MajorProjectThyroidSpot\ThyroidSpotAppServices\ThyroidDataAccess\obj\Debug\ThyroidDataAccess.pdb
