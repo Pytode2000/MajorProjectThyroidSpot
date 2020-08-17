@@ -13,22 +13,12 @@
     <Property Name="treatment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="timestamp" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
   </EntityType>
-  <EntityType Name="patient_report">
-    <Key>
-      <PropertyRef Name="report_id" />
-    </Key>
-    <Property Name="report_id" Type="Int32" Nullable="false" />
-    <Property Name="patient_id" Type="Int32" Nullable="false" />
-    <Property Name="FT4" Type="Double" Nullable="false" />
-    <Property Name="TSH" Type="Double" Nullable="false" />
-    <Property Name="drug_dose" Type="Int32" Nullable="false" />
-    <Property Name="timestamp" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-  </EntityType>
   <EntityContainer Name="ThyroidDataEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="disease_information" EntityType="Self.disease_information" />
-    <EntitySet Name="patient_report" EntityType="Self.patient_report" />
     <EntitySet Name="user" EntityType="ThyroidDataModel.user" />
     <EntitySet Name="patient_information" EntityType="ThyroidDataModel.patient_information" />
+    <EntitySet Name="patient_report" EntityType="ThyroidDataModel.patient_report" />
+    <EntitySet Name="drug_dosage" EntityType="ThyroidDataModel.drug_dosage" />
   </EntityContainer>
   <EntityType Name="user">
     <Key>
@@ -51,5 +41,24 @@
     <Property Name="gender" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
     <Property Name="blood_type" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
     <Property Name="timestamp" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="patient_report">
+    <Key>
+      <PropertyRef Name="report_id" />
+    </Key>
+    <Property Name="report_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="patient_id" Type="Int32" Nullable="false" />
+    <Property Name="FT4" Type="Double" Nullable="false" />
+    <Property Name="TSH" Type="Double" Nullable="false" />
+    <Property Name="timestamp" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="drug_dosage">
+    <Key>
+      <PropertyRef Name="idDosage" />
+    </Key>
+    <Property Name="idDosage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="drug_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="drug_dose" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="report_id" Type="Int32" Nullable="false" />
   </EntityType>
 </Schema>

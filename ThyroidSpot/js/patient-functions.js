@@ -5,7 +5,7 @@ var userURI = 'https://localhost:44395/api/user';
 var userInfoArray = [];
 var username;
 function getUserName(){
-    var getuid = sessionStorage.getItem("uniqueid");
+    var getuid = sessionStorage.getItem("user_unique_id");
     $.ajax({
         type: 'GET',
         url: userURI,
@@ -17,12 +17,14 @@ function getUserName(){
 
             for (i = 0; i < userInfoArray.length; i++) {
                 if (getuid == userInfoArray[i].user_id){
-                    return username = userInfoArray[i].full_name;
+                    username = userInfoArray[i].full_name;
+                    return getOnePatientInfo();
                 }
             }
         }
     });
 }
+
 
 //disease functions
 var patientURI = 'https://localhost:44395/api/patientInfo';
@@ -58,9 +60,9 @@ function getOnePatientInfo() {
                     viewreportbutton = "<button id='forumdescbtn' class=' btn btn-info btn-sm' index='" + patientInfoArray[i].patient_id + "'>View Report</button>"
                    
                     
-                    $('#patientCardContent').append("<h2 style='text-align: center'>"+username+"</h2><table class='centerTable'><tr>"+
-                        "<td></p><b>IC number: " + patientInfoArray[i].ic_number + 
-                        "</b></p></td><td class='shiftedrow'><p>Diagnosis: "+patientInfoArray[i].diagnosis+"</p></td>"+
+                    $('#patientCardContent').append("<h2 style='text-align: center'>"+username+"</h2><table class='infoTable'><tr>"+
+                        "<td class='shiftedrow' style='padding-left: -5px'><b>IC number: " + patientInfoArray[i].ic_number + 
+                        "</b></td><td class='shiftedrow'>Diagnosis: "+patientInfoArray[i].diagnosis+"</td>"+
                         "<td class='shiftedrow'>D.O.B: "+patientInfoArray[i].date_of_birth+"</td><td class='shiftedrow'>Gender: "+patientInfoArray[i].gender+
                         "</td><td class='shiftedrow'>Blood Type: "+patientInfoArray[i].blood_type+"</td></tr></table>");
 
@@ -146,9 +148,10 @@ function postPatientInfo() {
 
 //GET + CREATE PATIENT REPORT:
 var reportURI = 'https://localhost:44395/api/report';
+var dosageURI = 'https://localhost:44395/api/dosage';
 var reportArray = [];
 var currentreportID; //this variable will contain the report ID that's selected
-
+var reportIDArray = [];
 
 //only patients can access it based on their assigned unique ID
 function getPatientReport() {
@@ -169,18 +172,22 @@ function getPatientReport() {
             // $('#reportContent').html('');
             $('#dosagehist').html('');
             //Iterate through the diseaseInfoArray to generate rows to populate the table
+            if (reportArray == ""){
+                $('#reportcontainer').html('');
+                createreportbtn = "<button id='createrpt' class=' btn btn-info btn-sm'>Create Report</button>"
+                $('#reportcontainer').append("<div style='text-align: center; margin-top: 10%; margin-left: auto; margin-right: auto;'><h3>No patient report found</h3><div>"+createreportbtn+"<div></div>");
+            }
+            else{
             for (i = 0; i < reportArray.length; i++) {
-              
                 if (currentPatientID == reportArray[i].patient_id){
                     
-                    var report = {report_id: reportArray[i].report_id, patient_id: reportArray[i].patient_id, FT4: reportArray[i].FT4, TSH: reportArray[i].TSH, drug_dose: reportArray[i].drug_dose, timestamp: reportArray[i].timestamp}
+                    var report = {report_id: reportArray[i].report_id, patient_id: reportArray[i].patient_id, drug_name: reportArray[i].drug_name, FT4: reportArray[i].FT4, TSH: reportArray[i].TSH, drug_dose: reportArray[i].drug_dose, timestamp: reportArray[i].timestamp}
 
 
-                    createreportbtn = "<button id='createrpt' class=' btn btn-info btn-sm'>Create Report</button>"
-
-
-                    $('#dosagehist').append("<div style='margin-bottom: 1em;'><table class='dosageTable'>"+
-                    "<tr><td>"+report.timestamp+"</td><td style='padding-left:2em; padding-right:2em;'>"+report.FT4+"</td><td style='padding-left:2em;padding-right:2em;'>"+report.TSH+"</td><td style='padding-left:2em;padding-right:2em;'>"+report.drug_dose+"</td></tr></table></div>");
+                    //TODO: onclick on button to view report in a modal (then can add on a button to export it as PDF)
+                    $('#dosagehist').append("<div style='margin-bottom: 0.5em;'><table class='dosageTable'>"+
+                    "<tr><td class='reportTD'>"+report.timestamp+"</td><td class='reportFT'>"+report.FT4+"</td><td class='reportTSH'>"+
+                    ""+report.TSH+"</td><td class='reportDRNA'>"+report.drug_name+"</td><td>"+report.drug_dose+"</td></tr></table></div>");
                     
 
                 }
@@ -192,11 +199,15 @@ function getPatientReport() {
                 }
             }
         }
+        }
     });
 }
 
 
+
 //create function for postPatientReport
+var captureportid //global variable to get report id after adding
+
 function postPatientReport() {
     //getting patient id and putting it into a variable
     var getuser_id = currentPatientID
@@ -208,11 +219,10 @@ function postPatientReport() {
     console.log(date);
 
     
-    var patientinfo = { patient_id: getuser_id, FT4: $('#newFT4').val(), TSH: $('#newTSH').val(), 
-    drug_dose: $('#newDrugDose').val(), timestamp: date}
-
+    var patientinfo = {patient_id: getuser_id, FT4: $('#newFT4').val(), TSH: $('#newTSH').val(), timestamp: date}
     console.log(patientinfo);
 
+    
 
     $.ajax({
         type: 'POST',
@@ -222,11 +232,62 @@ function postPatientReport() {
         contentType: 'application/json',
         success: function (data) {
             //calling the function again so that the new books are updated
-            getOnePatientInfo();
-            document.getElementById('newReportModal').style.display='none'
+            console.log(data)
+            getReportID();
         }
     });
 }
+
+
+//get report id after posting
+function getReportID(){
+    console.log("calling get rpt id")
+    
+    $.ajax({
+        type: 'GET',
+        url: reportURI,
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            //calling the function again so that the new books are updated
+            reportIDArray = data
+            console.log(reportIDArray)
+
+            console.log(reportIDArray[reportIDArray.length-1].report_id); //get recent added id
+            captureportid = reportIDArray[reportIDArray.length-1].report_id
+            postDosage();
+        }
+    });
+}
+
+//Post drug name and drug dosage to dosage table
+function postDosage(){
+    
+    console.log("calling post dosage")
+
+    var druginfo = {report_id: captureportid, drug_dose: $('#newDrugDose').val(), drug_name: $('#newDrugName').val()}
+    console.log(druginfo)
+    $.ajax({
+        type: 'POST',
+        url: dosageURI,
+        data: JSON.stringify(druginfo),
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            //calling the function again so that the new books are updated
+            getOnePatientInfo();
+            document.getElementById('newPatientModal').style.display='none'
+            window.location.reload();
+        }
+    });
+}
+
+
+//TODO: function to export patient info with dosage report as PDF (screw the graph first bc that one is really hard)
+function exportData(){
+     
+}
+
 
 
 //(FOR DEBUG) doc model for postPatientInfo
@@ -240,4 +301,3 @@ $(document).on("click", "#createrpt", function () {
 });
 
 getUserName();
-getOnePatientInfo();

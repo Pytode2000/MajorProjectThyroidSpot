@@ -1,7 +1,9 @@
 //disease functions
 var diseaseURI = 'https://localhost:44395/api/Disease';
 var diseaseInfoArray = [];
+var secondInfoArray = [];
 var currentDiseaseID; //this variable will contain the disease name that's selected
+var storage = []; //this array will define the search
 
 //This function will consume the disease GET API
 function getAllDiseaseInfo() {
@@ -14,13 +16,15 @@ function getAllDiseaseInfo() {
         success: function (data) {
             //put json data into bookArray
             diseaseInfoArray = data;
+            secondInfoArray = data;
             console.log(diseaseInfoArray)
             //clear the tbody of the table so that it will be refreshed everytime
             $('#diseaseCard').html('');
             //Iterate through the diseaseInfoArray to generate rows to populate the table
             for (i = 0; i < diseaseInfoArray.length; i++) {
                 coverImage = "<img style='width:100px' src='data:image/jpeg;base64," + diseaseInfoArray[i].thumbnail + "'/>";
-
+                def = {id: i, disease: diseaseInfoArray[i].disease}
+                storage.push(def)
                 //use sample image for now:
                 coverImage= "<img src='https://www.mei.edu/sites/default/files/2019-01/Virus.jpg'>"
                 // viewmorebutton = "document.getElementById('diseaseModal').style.display='block'"
@@ -36,7 +40,6 @@ function getAllDiseaseInfo() {
 
 //This function will get one disease info
 function getOneDiseaseInfo(id) {
-    id
     console.log(id);
     $.ajax({
         type: 'GET',
@@ -66,6 +69,64 @@ function getOneDiseaseInfo(id) {
     });
 }
 
+var stonks
+//disease search function
+function diseaseSearch() {
+    const searchTerm = document.getElementById("diseaseSearch").value;
+
+    if (searchTerm.length == 0)
+    { 
+        storage = []
+        secondInfoArray = []
+       getAllDiseaseInfo();	
+       stonks = ""
+       return false; 
+    }  	
+    
+    if (!searchTerm) {
+        return;
+    }
+    
+    secondInfoArray = storage.filter(currentGoal => {
+        if (currentGoal.disease && searchTerm) {
+            if (currentGoal.disease.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
+                    stonks =  currentGoal.disease
+                    console.log(currentGoal.disease)
+                    return true; 
+            }
+            return false;
+          }
+    });
+
+    console.log(secondInfoArray)
+    $('#diseaseCard').html('');
+    for (i = 0; i < secondInfoArray.length; i++){
+        $('#diseaseCard').append("<div id='viewmore' num="+secondInfoArray[i].id+"  class = 'centerText'>" +
+        coverImage + "<div class='centerTitle'><b>" + secondInfoArray[i].disease + "</b></div></div>");
+    }
+
+}
+
+function call(){
+    //console.log(stonksid)
+
+    $('#diseaseCard').html('');
+    // //Iterate through the diseaseInfoArray to generate rows to populate the table
+    // for (i = 0; i < diseaseInfoArray.length; i++) {
+    //     coverImage = "<img style='width:100px' src='data:image/jpeg;base64," + diseaseInfoArray[i].thumbnail + "'/>";
+
+    //     //use sample image for now:
+    //     coverImage= "<img src='https://www.mei.edu/sites/default/files/2019-01/Virus.jpg'>"
+    //     // viewmorebutton = "document.getElementById('diseaseModal').style.display='block'"
+        // $('#diseaseCard').append("<div onclick="+viewmorebutton+"  class = 'centerText'>" +
+        //     coverImage + "<div class='centerTitle'><b>" + diseaseInfoArray[i].disease + "</b></div></div>");
+    //     $('#diseaseCard').append("<div id='viewmore' num="+stonksid+"  class = 'centerText'>" +
+    //         coverImage + "<div class='centerTitle'><b>" + stonks + "</b></div></div>");
+    //  }
+
+}
+
+
 $(document).on("click", "#viewmore", function () {
     currentDiseaseID = $(this).attr('num');
     console.log(currentDiseaseID);
@@ -74,3 +135,4 @@ $(document).on("click", "#viewmore", function () {
 });
 
 getAllDiseaseInfo();
+call();

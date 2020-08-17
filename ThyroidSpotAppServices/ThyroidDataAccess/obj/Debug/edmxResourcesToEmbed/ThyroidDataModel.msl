@@ -15,18 +15,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="patient_report">
-      <EntityTypeMapping TypeName="ThyroidDataModel.patient_report">
-        <MappingFragment StoreEntitySet="patient_report">
-          <ScalarProperty Name="report_id" ColumnName="report_id" />
-          <ScalarProperty Name="patient_id" ColumnName="patient_id" />
-          <ScalarProperty Name="FT4" ColumnName="FT4" />
-          <ScalarProperty Name="TSH" ColumnName="TSH" />
-          <ScalarProperty Name="drug_dose" ColumnName="drug_dose" />
-          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="user">
       <EntityTypeMapping TypeName="ThyroidDataModel.user">
         <MappingFragment StoreEntitySet="user">
@@ -48,6 +36,27 @@
           <ScalarProperty Name="diagnosis" ColumnName="diagnosis" />
           <ScalarProperty Name="user_id" ColumnName="user_id" />
           <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="patient_report">
+      <EntityTypeMapping TypeName="ThyroidDataModel.patient_report">
+        <MappingFragment StoreEntitySet="patient_report">
+          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+          <ScalarProperty Name="TSH" ColumnName="TSH" />
+          <ScalarProperty Name="FT4" ColumnName="FT4" />
+          <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+          <ScalarProperty Name="report_id" ColumnName="report_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="drug_dosage">
+      <EntityTypeMapping TypeName="ThyroidDataModel.drug_dosage">
+        <MappingFragment StoreEntitySet="drug_dosage">
+          <ScalarProperty Name="report_id" ColumnName="report_id" />
+          <ScalarProperty Name="drug_dose" ColumnName="drug_dose" />
+          <ScalarProperty Name="drug_name" ColumnName="drug_name" />
+          <ScalarProperty Name="idDosage" ColumnName="idDosage" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

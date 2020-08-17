@@ -49,7 +49,7 @@
             <!-- TOGGLER -->
             <div class="container container-small container-fluid form-container" style="padding: 0; margin-top: 3%;">
 
-                <div class="btn-group btn-group-toggle" data-toggle="buttons" style="width: 100%;">
+                <div class="btn-group btn-group-toggle" style="width: 100%;">
                     <label class="btn btn-secondary active btn-lg" onclick="toggleLogin()" id="toggleLoginBtn" style=" border: none; border-radius: 0;">
                         <input type="radio" name="options" id="loginTab" autocomplete="off" checked> <b>Sign In</b>
                     </label>
@@ -60,7 +60,7 @@
 
             </div>
 
-            <div class="container container-small container-fluid form-container">
+            <div class="container container-small container-fluid form-container" style="border-bottom-left-radius: 16px; border-bottom-right-radius: 16px;">
 
                 <!-- LOGIN -->
                 <div id="loginForm">
@@ -74,11 +74,11 @@
 
                         <div class="form-label-group">
                             <input type="email" id="loginEmail" class="form-control" placeholder="Enter email address..." required="" autofocus="">
-                            <label for="loginEmail">Enter email address...</label>
+                            <label for="loginEmail">Enter email address...<i class="fas fa-envelope close"></i></label>
                         </div>
                         <div class="form-label-group">
                             <input type="password" class="form-control" id="loginPassword" placeholder="Enter password..." required="" autofocus="">
-                            <label for="loginPassword">Enter password...</label>
+                            <label for="loginPassword">Enter password...<i class="fas fa-key close"></i></label>
                         </div>
 
                     </form>
@@ -86,7 +86,7 @@
                     <button id="btnLogin" class="btn btn-dark btn-block bold" onclick="login()">Login</button>
 
 
-                    <div class="text-right white-text" style="margin: 1%">
+                    <div class="text-right white-text" style="margin: 1%;">
                         <a id="forgetPasswordTxt" type="button" data-toggle="modal" data-target="#forgotPasswordModal">
                             Forgot your password?
                         </a>
@@ -112,31 +112,31 @@
                     <br> <form>
                         <div class="form-label-group">
                             <input type="email" class="form-control" id="registerEmail" placeholder="Enter email address..." required="" autofocus="">
-                            <label for="registerEmail">Enter email address...</label>
+                            <label for="registerEmail">Enter email address...<i class="fas fa-envelope close"></i></label>
                         </div>
                         <div class="form-label-group">
                             <input type="password" class="form-control" id="registerPassword" placeholder="Enter password..." required="" autofocus="">
-                            <label for="registerPassword">Enter password...</label>
+                            <label for="registerPassword">Enter password...<i class="fas fa-key close"></i></label>
                         </div>
 
                         <div class="form-label-group">
                             <input type="password" class="form-control" id="registerRetypePassword" placeholder="Re-type password..." required="" autofocus="">
-                            <label for="registerRetypePassword">Re-type password...</label>
+                            <label for="registerRetypePassword">Re-type password...<i class="fas fa-key close"></i></label>
                         </div>
 
                         <div class="form-label-group">
                             <input type="text" class="form-control" id="registerId" placeholder="Enter NRIC..." required="" autofocus="">
-                            <label for="registerId">Enter NRIC number...</label>
+                            <label for="registerId">Enter NRIC number...<i class="fas fa-id-card close"></i></label>
                         </div>
 
                         <div class="form-label-group">
                             <input type="text" class="form-control" id="registerFullName" placeholder="Enter full name..." required="" autofocus="">
-                            <label for="registerFullName">Enter full name...</label>
+                            <label for="registerFullName">Enter full name...<i class="fas fa-user close"></i></label>
                         </div>
                         <!-- Jquery Datepicker for Birthdate -->
                         <div class="form-label-group">
                             <input type="text" class="form-control" id="registerBirthdate" placeholder="Select birthdate..." required="" autofocus="">
-                            <label for="registerBirthdate">Select birthdate...</label>
+                            <label for="registerBirthdate">Select birthdate...<i class="fas fa-calendar close"></i></label>
                         </div>
 
                         <script>
@@ -211,11 +211,12 @@
 
                     </form>
                     <br>
+                    <br>
                     <button id="btnRegister" class="btn btn-dark btn-block bold" onclick="register()">Register</button>
                     <br>
                 </div>
 
-
+                <!-- <br> -->
             </div>
 
         </div>
@@ -238,7 +239,7 @@
 
                         <div class="form-label-group">
                             <input type="email" id="forgotPasswordEmail" class="form-control" placeholder="Enter email address..." required="" autofocus="">
-                            <label for="forgotPasswordEmail">Enter email address...</label>
+                            <label for="forgotPasswordEmail">Enter email address...<i class="fas fa-envelope close"></i></label>
                         </div>
                     </form>
                 </div>
@@ -249,6 +250,24 @@
             </div>
         </div>
     </div>
+
+    <!-- Alert Email Modal -->
+    <div class="modal fade" id="alertEmailModal" tabindex="-1" role="dialog" aria-labelledby="alertEmailModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="alertEmailModalLabel">Alert</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    A verification email has been sent to the email address.
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
 </body>
@@ -270,7 +289,6 @@
 </script>
 
 
-</body>
 
 
 

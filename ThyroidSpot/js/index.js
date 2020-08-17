@@ -43,11 +43,11 @@ function login() {
     promise.then(firebaseUser => {
 
         //DO NOT REMOVE: need to use it to create patient report in case not created on sign in
-        // var s = sessionStorage.setItem("firebaseUID", )
+        // var s = sessionStorage.setItem("firebaseUID", firebaseUser.uid)
+
         setTimeout(function () {
             window.location.href = "profile.html";
-        }, 2000);
-
+        }, 3000);
 
     })
     promise.catch(e => console.log(e.message));
@@ -114,7 +114,7 @@ function register() {
 
         // Send Email
         user.sendEmailVerification().then(function () {
-            alert("A verification email has been sent to: " + user.email);
+            $('#alertEmailModal').modal('toggle');
         }).catch(function (error) {
         });
 

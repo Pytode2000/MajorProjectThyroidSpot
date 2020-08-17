@@ -46,7 +46,6 @@ namespace ThyroidSpotAppServices.Controllers
                 var report1 = entities.patient_report.Find(id);
                 report1.FT4 = report.FT4;
                 report1.TSH = report.TSH;
-                report1.drug_dose = report.drug_dose;
                 report1.timestamp = report.timestamp;
 
                 entities.Entry(report1).State = System.Data.Entity.EntityState.Modified;

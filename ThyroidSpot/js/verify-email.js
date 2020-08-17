@@ -18,7 +18,8 @@ function resendVerificationEmail() {
     const user = firebase.auth().currentUser;
 
     user.sendEmailVerification().then(function () {
-        alert("A verification email has been sent to: " + user.email);
+        $('#alertEmailModal').modal('toggle');
+        console.log("Sent email.");
     }).catch(function (error) {
     });
 }
@@ -50,7 +51,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         // User's email is verified.
         if (firebaseUser.emailVerified === true) {
             // sessionStorage.setItem("user_logged_in", 'y');
-            window.location.href = 'profile.html';
+            window.location.href = 'index.html'; // PURPOSELY (TO TEST)
         }
         // User's email is not verified.
         else {

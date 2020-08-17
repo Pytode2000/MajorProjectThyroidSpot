@@ -6,12 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Imports -->
+
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/patientinfo.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" />
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+    <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://printjs-4de6.kxcdn.com/print.min.css">
+    
     <script src="../js/patient-functions.js"></script>
 
 
@@ -28,20 +33,30 @@
                 <div class='centerTitle'><b>Disease A</b></div>
             </div> -->
         </div>
-        <div id="reportcontainer">
-            <div style="margin-bottom: 2em; margin-top: 2em;">
-                <input id="searchInput" style="margin-left: 2em;" placeholder="Search Date...">
-                <button id='createrpt' style="float: right; margin-right: 2em;" class=' btn btn-info btn-sm'>Create Report</button>
+        <div id="searchRPTcontain">
+            <div id="searchInput">
+            <input id="searchInputBox" placeholder="Search Date...">
             </div>
+            <div id="createrpt">
+            <button id='createrptbtn' class=' btn btn-info btn-sm'>Create Report</button>
+            </div>
+        </div>
+        <div id="reportcontainer">
+            
             <div id="historycontainer">
                 <table class='centerTable' style="margin-top: 1em;">
-                    <tr><th style="padding-left:2em;">Date</th><th style="padding-left:3.5em; padding-right:0.5em;">FT4</th><th style="padding-left:3.5em; padding-right:0.5em;">TSH</th><th style="padding-left:1em;">Drug Dose</th></tr>
+                    <tr><th id="labelDate" >Date</th>
+                        <th id="labelFT4" >FT4</th>
+                        <th id="labelTSH">TSH</th>
+                        <th id="labelDrug">Drug</th>
+                        <th id="labelDose">Dose</th></tr>
                 </table>
                 <hr>
                 <div id="dosagehist">
                 </div>
             </div>
             <div id="graphcontainer">
+                <h2 style="text-align: center;">Graph over here</h2>
             </div>
         </div>
         <!--Modal For Patient Info-->
@@ -151,6 +166,15 @@
                     </td>
                     <td class="labeltd">
                     <input id="newTSH">
+                    </td>
+                    </tr>
+
+                    <tr>
+                    <td class="firsttd">
+                    <label>Drug Name:</label>
+                    </td>
+                    <td class="labeltd">
+                    <input id="newDrugName">
                     </td>
                     </tr>
 
