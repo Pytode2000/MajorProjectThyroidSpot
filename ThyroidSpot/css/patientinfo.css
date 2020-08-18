@@ -30,6 +30,10 @@
     flex: 1;
   }
 
+  #rpt{
+    text-align: center;
+  }
+
   /*for dev and debugging purposes only*/
   #newPatientModal{
     text-align: center;
@@ -43,8 +47,13 @@
   #createnfotable{
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 2em;
   }
+
+  #addon{
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .firsttd{
     text-align: right;
   }
@@ -114,6 +123,11 @@
     text-align: left;
   }
 
+  #prescriptionTable{
+    margin-left: auto;
+    margin-right: auto;
+  }
+
 
   /*PATIENT REPORT + GRAPH CSS*/
   #reportcontainer {
@@ -176,7 +190,7 @@
 
 
 
-/* TODO: reportcontainer, historycontainer, graphcontainer for mobile */
+/* TODO: prescriptionModal, newReportModal for mobile */
 @media only screen and (max-width: 600px) {
 /* Adding margin-bottom so that content does not get blocked by the navigation bar*/
   .container {
