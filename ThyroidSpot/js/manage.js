@@ -1,9 +1,14 @@
+var currentAdminUid = sessionStorage.getItem("user_unique_id");
+
 var userURI = "https://localhost:44395/api/User";
+var patientInfoURI = "https://localhost:44395/api/patientinfo";
 
 var usersArray = [];
 
-//// This variable will contain the Affair_Id for the affair that the user had selected
-// var currentAffairId;
+var currentSelectedUserUid; // For GET.
+var currentSelectedUserArray;
+var currentSelectedUserId; // For delete.
+var currentSelectedUserAccountType;
 
 
 function getAllUsers() {
@@ -16,14 +21,86 @@ function getAllUsers() {
             usersArray = data;
             $("#usersUL").html("");
             for (iteration = 0; iteration < usersArray.length; iteration++) {
-                // <!-- <li><a href="#">Adele | patient</a></li>
-                userListItem = "<li><a>" + usersArray[iteration].full_name + "<b style='float: right; margin-right: 2em;'>" + usersArray[iteration].account_type + "</b></a></li>"
-                $('#usersUL').append(userListItem)
+                // Don't show the admin's own account.
+                if (usersArray[iteration].user_id != currentAdminUid) {
+                    userListItem = "<li><a id='userAnchorList' index='" + usersArray[iteration].user_id + "'>" + usersArray[iteration].full_name + "<b style='float: right; margin-right: 2em;'>" + usersArray[iteration].account_type + "</b></a></li>"
+                    $('#usersUL').append(userListItem);
+                }
             }
+        }
+    });
+}
+
+$(document).on("click", "#userAnchorList", function () {
+    currentSelectedUserUid = $(this).attr("index");
+    // console.log(currentSelectedUserUid);
+    getSelectedUser();
+    $('#userModal').modal('toggle');
+});
+
+
+function getSelectedUser() {
+    $.ajax({
+        type: 'GET',
+        url: userURI + '/' + currentSelectedUserUid,
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            currentSelectedUserArray = data;
+            document.getElementById("modalId").innerHTML = currentSelectedUserArray.id;
+            document.getElementById("modalUid").innerHTML = currentSelectedUserArray.user_id;
+            document.getElementById("userModalLabel").innerHTML = currentSelectedUserArray.full_name;
+            document.getElementById("modalAccountType").innerHTML = currentSelectedUserArray.account_type;
+
+            deleteBtn = document.getElementById("deleteButton");
+            if (currentSelectedUserArray.account_type == "admin") {
+                deleteBtn.classList.add("hide");
+            }
+            else {
+                deleteBtn.classList.remove("hide");
+
+            }
+            // For delete.
+            currentSelectedUserId = currentSelectedUserArray.id;;
+            currentSelectedUserAccountType = currentSelectedUserArray.account_type;
 
         }
     });
 }
+
+function deleteUser() {
+    // Delete from "user" table.
+    $.ajax({
+        type: 'DELETE',
+        url: userURI + '/' + currentSelectedUserId,
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            console.log("User instance deleted.")
+        }
+    });
+
+    if (currentSelectedUserAccountType == "patient") {
+        // If user is a patient, delete from the "patient_information" table.
+        $.ajax({
+            type: 'DELETE',
+            url: patientInfoURI + '/' + currentSelectedUserId,
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                console.log("Patient instance deleted.")
+            }
+        });
+    }
+    $('#deleteUserModal').modal('hide');
+    $('#userModal').modal('hide');
+
+    setTimeout(function () {
+        window.location.reload();
+    }, 2000);
+}
+
+
 
 function createUser() {
     emailTxt = $('#newUserEmail').val();
@@ -57,7 +134,7 @@ function createUser() {
         var uid = firebaseUser.user.uid;
 
         console.log("User " + firebaseUser.uid + " created successfully!");
-        console.log(uid)
+        // console.log(uid)
 
         // var newUserFbId = firebaseUser.uid
         // console.log(newUserFbId);
@@ -73,34 +150,18 @@ function createUser() {
             success: function (data) {
                 console.log("User instance created.");
                 $('#newUserModal').modal('hide');
-                // Send verification email
+                // Send verification email? maybe
+                window.location.reload();
+
 
             }
         });
 
-        //I don't know if the next statement is necessary 
         secondaryApp.auth().signOut();
     });
-    // Creates an instance (row) in the "user" table.
 
-
-    //     admin.auth().createUser({
-    //         email: emailTxt,
-    //         emailVerified: false,
-    //         // phoneNumber: '+11234567890',
-    //         password: passwordTxt,
-    //         // displayName: 'John Doe',
-    //         // photoURL: 'http://www.example.com/12345678/photo.png',
-    //         disabled: false
-    //     })
-    //         .then(function (userRecord) {
-    //             // See the UserRecord reference doc for the contents of userRecord.
-    //             console.log('Successfully created new user:', userRecord.uid);
-    //         })
-    //         .catch(function (error) {
-    //             console.log('Error creating new user:', error);
-    //         });
 }
+
 
 
 
@@ -146,6 +207,10 @@ function resetFilterOnSearch() {
     $("#filterSearch").val("");
     $('input[type=text]#searchInput').val("");
     searchFunction();
+}
+
+function clearFilter() {
+    $("#filterSearch").val("");
 }
 
 
