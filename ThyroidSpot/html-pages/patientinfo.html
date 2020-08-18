@@ -35,7 +35,7 @@
         </div>
         <div id="searchRPTcontain">
             <div id="searchInput">
-            <input id="searchInputBox" placeholder="Search Date...">
+            <input id="searchInputBox" onkeyup="searchPatientReport();" placeholder="Search Date...">
             </div>
             <div id="createrpt">
             <button id='createrptbtn' class=' btn btn-info btn-sm'>Create Report</button>
@@ -48,8 +48,7 @@
                     <tr><th id="labelDate" >Date</th>
                         <th id="labelFT4" >FT4</th>
                         <th id="labelTSH">TSH</th>
-                        <th id="labelDrug">Drug</th>
-                        <th id="labelDose">Dose</th></tr>
+                        <th id="labelDrug">Drug Dose</th>
                 </table>
                 <hr>
                 <div id="dosagehist">
@@ -147,7 +146,7 @@
         <div id="newReportModal" class="w3-modal">
             <div class="w3-modal-content">
                 <div class="w3-container">
-                    <span onclick="document.getElementById('newReportModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                    <span id="closereportmodal" onclick="document.getElementById('newReportModal').style.display='none' " class="w3-button w3-display-topright">&times;</span>
                     <h1 id="diseaseName">Create Health Report</h1>
                     <hr>
                     <table id="createnfotable">
@@ -185,7 +184,7 @@
                         </td>
                     </tr>
                     </table>
-                    
+
                     <table id="addon">
                     </table>
                     
@@ -198,6 +197,50 @@
                 </div>
             </div>
         </div>
+
+
+         <!--Modal For Prescriptions-->
+         <div id="prescriptionModal" class="w3-modal">
+            <div class="w3-modal-content">
+                <div class="w3-container">
+                    <span onclick="document.getElementById('prescriptionModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                    <h2 style="text-align: center;">Prescription</h2>
+                    
+                    <table id="tableReadings" style="margin-right: auto; margin-left: auto; margin-bottom: 2em;">
+                        <tr>
+                            <td style=" text-align:center;">Diagnosis:</td>
+                            <td id="tdDiagnosis"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center;">Checkup date:</td>
+                            <td id="tdCheckup"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center;">FT4:</td>
+                            <td id="tdFt4"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center;">TSH:</td>
+                            <td id="tdTsh"></td>
+                        </tr>
+                    </table>
+                    
+                    <table style="margin-right: auto; margin-left: auto; margin-bottom: 0.5em;">
+                        <tr>
+                            <th>Drug name</th>
+                            <th style="width: 42%;"></th>
+                            <th>Dosage</th>
+                        </tr>
+                    </table>
+
+
+                    <table id="prescriptionTable">
+                    </table>
+
+                </div>
+            </div>
+        </div>
+                    
     </main>
 
     <!-- Firebase -->
