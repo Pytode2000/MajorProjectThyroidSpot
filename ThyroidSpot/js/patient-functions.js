@@ -127,7 +127,6 @@ function postPatientInfo() {
     //creating date
     var today = new Date();
 
-    //TODO: change date format to DD/MM/YYYY instead
     var date =  today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
 
 
@@ -183,9 +182,10 @@ function getPatientReport() {
             $('#dosagehist').html('');
             //Iterate through the diseaseInfoArray to generate rows to populate the table
             if (reportArray == ""){
+                $('#searchRPTcontain').html('');
                 $('#reportcontainer').html('');
-                createreportbtn = "<button id='createrpt' class=' btn btn-info btn-sm'>Create Report</button>"
-                $('#reportcontainer').append("<div style='text-align: center; margin-top: 10%; margin-left: auto; margin-right: auto;'><h3>No patient report found</h3><div>"+createreportbtn+"<div></div>");
+                createreportbtn = "<button id='rpt' class=' btn btn-info btn-sm'>Create Report</button>"
+                $('#reportcontainer').append("<div style='text-align: center; margin-top: 10%; margin-left: auto; margin-right: auto;'><h3 >No patient report found</h3><div>"+createreportbtn+"<div></div>");
             }
             else{
             for (i = 0; i < reportArray.length; i++) {
@@ -203,9 +203,10 @@ function getPatientReport() {
 
                 }
                 else if (currentPatientID != reportArray[i].patient_id && i == reportArray.length-1){
+                    $('#searchRPTcontain').html('');
                     $('#reportcontainer').html('');
-                    createreportbtn = "<button id='createrpt' class=' btn btn-info btn-sm'>Create Report</button>"
-                    $('#reportcontainer').append("<div style='text-align: center; margin-top: 10%'><h3>No patient report found</h3><div>"+createreportbtn+"<div></div>");
+                    createreportbtn = "<button id='rpt' class=' btn btn-info btn-sm'>Create Report</button>"
+                    $('#reportcontainer').append("<div style='text-align: center; margin-top: 10%; margin-left: auto; margin-right: auto;'><h3>No patient report found</h3><div>"+createreportbtn+"<div></div>");
                     return console.log("no report history")
                 }
             }
@@ -321,38 +322,44 @@ function getPrescription(){
 
 
 //create function for postPatientReport
-var captureportid //global variable to get report id after adding
-
 function postPatientReport() {
     //getting patient id and putting it into a variable
     var getuser_id = currentPatientID
     console.log(currentPatientID)
 
-    //creating date
-    var today = new Date();
-    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    //TODO: change date format to DD-MM-YYYY instead
+    var date =  moment(new Date()).format("DD-MM-YYYY")
     console.log(date);
 
+    //regex to check decimals for FT4 and TSH
+    var decimalregex = new RegExp('[+-]?([0-9]*[.])?[0-9]+');
+   
     
     var patientinfo = {patient_id: getuser_id, FT4: $('#newFT4').val(), TSH: $('#newTSH').val(), timestamp: date}
     console.log(patientinfo);
 
-    $.ajax({
-        type: 'POST',
-        url: reportURI,
-        data: JSON.stringify(patientinfo),
-        dataType: 'json',
-        contentType: 'application/json',
-        success: function (data) {
-            //calling the function again so that the new books are updated
-            console.log(data)
-            getReportID();
-        }
-    });
+    //check if FT4 and TSH matches with defined regex
+    if (patientinfo.FT4.match(decimalregex) && patientinfo.TSH.match(decimalregex)){
+            $.ajax({
+                type: 'POST',
+                url: reportURI,
+                data: JSON.stringify(patientinfo),
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (data) {
+                    console.log(data)
+                    getReportID();
+                }
+            });
+    }
+    //if FT4 and TSH DOES NOT match with defined regex
+    else{
+        alert("Please input a decimal for FT4 and TSH")
+    }
 }
 
-
 //get report id after posting
+var captureportid;
 function getReportID(){
     console.log("calling get rpt id")
     
@@ -384,7 +391,7 @@ function postDosage(){
     array_to_add = []
     for (i = 0 ; i < send.length; i++){
         
-        druginfo = {report_id: captureportid, drug_dose: send[i].value, drug_name: send2[i].value}
+        druginfo = {report_id: captureportid, drug_name: send[i].value, drug_dose: send2[i].value}
         array_to_add.push(druginfo)
     }
     
@@ -417,8 +424,8 @@ function exportData(){
 
 
 $(document).on('click', '#addMoreRows', function(){
-    var html = "<tr class='appended'><td class='firsttd'><label>Drug Name:</label></td><td class='labeltd'><input class='newDrugName'></td><td class='firsttd'>"+
-    "<label>Drug dose:</label></td></td><td class='labeltd'><input class='newDrugDose'></td></tr>";
+    var html = "<tr class='appended'><td class='firsttd'><label>Drug Name:</label></td><td class='labeltd'><input class='newDrugName' placeholder='Enter drug name...'  maxlength='255' required></td><td class='firsttd'>"+
+    "<label>Drug dose:</label></td></td><td class='labeltd'><input class='newDrugDose' placeholder='Enter dose...' maxlength='5' required></td></tr>";
     $("#addon").append(html);
 });
 
@@ -437,6 +444,11 @@ $(document).on("click", "#createrpt", function () {
     document.getElementById('newReportModal').style.display='block'
 });
 
+//doc model for postPatientReport (using middle report button)
+$(document).on("click", "#rpt", function () {
+    document.getElementById('newReportModal').style.display='block'
+});
+
 // doc prescription model for getOneReportInfo and getPrescription
 $(document).on("click", "#viewdosage", function () {
     currentReportID = $(this).attr('num');
@@ -444,5 +456,6 @@ $(document).on("click", "#viewdosage", function () {
     getOneReportInfo(currentReportID);
     document.getElementById('prescriptionModal').style.display='block'
 });
+
 
 getUserName();

@@ -17,6 +17,8 @@
     <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://printjs-4de6.kxcdn.com/print.min.css">
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+
     <script src="../js/patient-functions.js"></script>
 
 
@@ -149,13 +151,15 @@
                     <span id="closereportmodal" onclick="document.getElementById('newReportModal').style.display='none' " class="w3-button w3-display-topright">&times;</span>
                     <h1 id="diseaseName">Create Health Report</h1>
                     <hr>
+                    
+                    <form id="test" onsubmit="postPatientReport(); return false;">
                     <table id="createnfotable">
                     <tr>
                     <td class="firsttd">
                     <label>FT4:</label>
                     </td>
                     <td class="labeltd">
-                    <input id="newFT4">
+                    <input id="newFT4" placeholder="Enter FT4" required>
                     </td>
                     </tr>
                     
@@ -164,7 +168,7 @@
                     <label>TSH:</label>
                     </td>
                     <td class="labeltd">
-                    <input id="newTSH">
+                    <input id="newTSH" placeholder="Enter TSH" required>
                     </td>
                     </tr>
 
@@ -173,14 +177,14 @@
                     <label>Drug Name:</label>
                     </td>
                     <td class="labeltd">
-                    <input class="newDrugName">
+                    <input class="newDrugName" maxlength="255" placeholder="Enter drug name..." required>
                     </td>
                     <td class="firsttd">
                         <label>Drug dose:</label>
                         </td>
                         </td>
                         <td class="labeltd">
-                        <input class="newDrugDose">
+                        <input class="newDrugDose" maxlength="5" placeholder="Enter dose..." required>
                         </td>
                     </tr>
                     </table>
@@ -192,8 +196,9 @@
                         <button id="addMoreRows">Add another drug dose</button>
                     </div>
                     <div style="text-align: center; margin-bottom: 2em;">
-                        <button id="btnRegister" class="btn btn-dark btn-block bold" onclick="postPatientReport()">Save Report</button>
+                        <button id="btnRegister" type="submit" class="btn btn-dark btn-block bold">Save Report</button>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>

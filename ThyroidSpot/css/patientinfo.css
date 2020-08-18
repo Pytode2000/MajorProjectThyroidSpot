@@ -30,6 +30,10 @@
     flex: 1;
   }
 
+  #rpt{
+    text-align: center;
+  }
+
   /*for dev and debugging purposes only*/
   #newPatientModal{
     text-align: center;
