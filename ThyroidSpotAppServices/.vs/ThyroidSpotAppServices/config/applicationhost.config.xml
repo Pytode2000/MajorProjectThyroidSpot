@@ -1,26 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-
     IIS configuration sections.
-
     For schema documentation, see
     %IIS_BIN%\config\schema\IIS_schema.xml.
     
     Please make a backup of this file before making any changes to it.
-
     NOTE: The following environment variables are available to be used
           within this file and are understood by the IIS Express.
-
           %IIS_USER_HOME% - The IIS Express home directory for the user
           %IIS_SITES_HOME% - The default home directory for sites
           %IIS_BIN% - The location of the IIS Express binaries
           %SYSTEMDRIVE% - The drive letter of %IIS_BIN%
-
 -->
 <configuration>
 
     <!--
-
         The <configSections> section controls the registration of sections.
         Section is the basic unit of deployment, locking, searching and
         containment for configuration settings.
@@ -44,7 +38,6 @@
                 <asp />
             </system.webServer>
         </location>
-
     -->
     <configSections>
         <sectionGroup name="system.applicationHost">
@@ -142,10 +135,8 @@
         </applicationPools>
 
         <!--
-
           The <listenerAdapters> section defines the protocols with which the
           Windows Process Activation Service (WAS) binds.
-
         -->
         <listenerAdapters>
             <add name="http" />
@@ -162,11 +153,11 @@
             </site>
             <site name="ThyroidSpotAppServices" id="2">
                 <application path="/" applicationPool="Clr4IntegratedAppPool">
-                    <virtualDirectory path="/" physicalPath="C:\MajorProjectThyroidSpot\ThyroidSpotAppServices\ThyroidSpotAppServices" />
+                    <virtualDirectory path="/" physicalPath="C:\Users\Potato\Documents\MajorProjectThyroidSpot\ThyroidSpotAppServices\ThyroidSpotAppServices" />
                 </application>
                 <bindings>
-                    <binding protocol="https" bindingInformation="*:44395:localhost" />
                     <binding protocol="http" bindingInformation="*:55966:localhost" />
+                    <binding protocol="https" bindingInformation="*:44395:localhost" />
                 </bindings>
             </site>
             <siteDefaults>
@@ -212,10 +203,8 @@
         <fastCgi />
 
         <!--
-
           The <globalModules> section defines all native-code modules.
           To enable a module, specify it in the <modules> section.
-
         -->
         <globalModules>
             <add name="HttpLoggingModule" image="%IIS_BIN%\loghttp.dll" />
@@ -260,9 +249,7 @@
             <add name="AspNetCoreModuleV2" image="%IIS_BIN%\Asp.Net Core Module\V2\aspnetcorev2.dll" />
         </globalModules>
 
-        <httpCompression />
-<!--
-        <httpCompression directory="%TEMP%\iisexpress\IIS Temporary Compressed Files">
+        <httpCompression directory="%TEMP%">
             <scheme name="gzip" dll="%IIS_BIN%\gzip.dll" />
             <dynamicTypes>
                 <add mimeType="text/*" enabled="true" />
@@ -281,7 +268,7 @@
                 <add mimeType="*/*" enabled="false" />
             </staticTypes>
         </httpCompression>
--->
+
         <httpErrors lockAttributes="allowAbsolutePathsWhenDelegated,defaultPath">
             <error statusCode="401" prefixLanguageFilePath="%IIS_BIN%\custerr" path="401.htm" />
             <error statusCode="403" prefixLanguageFilePath="%IIS_BIN%\custerr" path="403.htm" />

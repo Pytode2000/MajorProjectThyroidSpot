@@ -4,14 +4,13 @@ var reportURI = 'https://localhost:44395/api/report';
 var reportArray = [];
 var patientInfoArray = [];
 var userInfoArray = [];
-var currentPatientID;
 var patientName;
 var valueFT4;
 var valueTSH;
 var latestUpdate;
 
 
-function getPatientName(userId) {
+function getPatientName() {
     console.log("retrieving patient name...")
     $.ajax({
         aSync: false,
@@ -21,11 +20,7 @@ function getPatientName(userId) {
         contentType: 'application/json',
         success: function (data) {
             userInfoArray = data;
-            for(i = 0; i < userInfoArray.length; i++) {
-                if (userId == userInfoArray[i].user_id) {
-                    patientName = userInfoArray[i].full_name;
-                }
-            }
+            return userInfoArray;
         }
     });
 }
@@ -42,21 +37,34 @@ function getAllPatientInfo() {
             console.log(patientInfoArray)
             $('#patientCard').html('');
             for (i = 0; i < patientInfoArray.length; i++) {
-                getPatientName(patientInfoArray[i].user_id)
-                getPatientReport(patientInfoArray[i].patient_id)           
-                $('#patientCard').append("<article> <div class='text'><h3>"+patientName+"</h3><p>x</p>"+
-                  "<p><b>Latest Update</b></p><p>FT4:x</p><p>TSH: x</p>"+
-                  "<a class='button' href='patient-info-doctor.html' >More Details</a>"+
-                  "<a class='button' href='#'>Graph</a></div></article>");
+                console.log(patientInfoArray[i].user_id)
+                //getPatientName(patientInfoArray[i].user_id)
+                //getPatientReport(patientInfoArray[i].patient_id)           
+                $('#patientCard').append("<article class='patient-card'> <div class='text'><h3>Name</h3><p>"+patientInfoArray[i].ic_number+"</p>"+
+                  "<p><b>Details</b></p><p>Gender:"+patientInfoArray[i].gender+"</p><p>Blood Type: "+patientInfoArray[i].blood_type+"</p>"+
+                  "<a id='patientDetailsBtn' num='"+ patientInfoArray[i].patient_id + "' index='"+ patientInfoArray[i].user_id + "' class='button patient-details-btn' >More Details</a>"+
+                  "<a class='patient-details-btn button' href='#'>Graph</a></div></article>");
+                console.log("btn val:"+$('#patientDetailsBtn').attr('index'))
             }
         }
     });
 }
 
 
+// Place details into Project Modal
+$(document).on("click", "#patientDetailsBtn", function () {
+    var currentPatientUserId = $(this).attr('index');
+    var currentPatientId = $(this).attr('num')
+    localStorage.setItem("currentPatientUserId",currentPatientUserId)
+    localStorage.setItem("currentPatientId",currentPatientId)
+    window.location.href = "patient-info-doctor.html"
+
+});
+
+
 
 //This function will get the full name of the patient
-function getPatientReport(patientId) {
+function getPatientReport() {
     console.log("Retrieving Patient Report...")
     $.ajax({
         aSync: false,
@@ -66,18 +74,15 @@ function getPatientReport(patientId) {
         contentType: 'application/json',
         success: function (data) {
             reportArray = data;
-             for(i = 0; i < reportArray.length; i++) {
-                if (patientId == reportArray[i].patient_id) {
-                        valueFT4 = reportArray[i].FT4,
-                        valueTSH = reportArray[i].TSH,
-                        latestUpdate = reportArray[i].timestamp
-                    
-                }
-            }
+            return reportArray;
         }
     });
 }
 
-$(window).on('load', function() {
-    getAllPatientInfo();
-   });
+
+
+
+
+getAllPatientInfo();
+
+

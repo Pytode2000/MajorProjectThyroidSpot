@@ -6,13 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Imports -->
+
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/patientinfo.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" />
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <script src="../js/patient-functions.js"></script>
+
+    <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://printjs-4de6.kxcdn.com/print.min.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+
+    <script src="../js/patient-information-function.js"></script>
 
 
     <title>Thyroid Spot</title>
@@ -23,36 +30,41 @@
     <main>
         <!--Patient Cards-->
         <div id="patientCardContent" class="container">
-            <h2 style='text-align: center'>Yu KaiLong</h2><table class='centerTable'><tr>
-                <td></p><b>IC number: G0392993R
-                </b></p></td><td class='shiftedrow'><p>Diagnosis: ABC</p></td>
-                <td class='shiftedrow'>D.O.B: 14 November 2001</td><td class='shiftedrow'>Gender: Male
-                </td><td class='shiftedrow'>Blood Type: B+ </td></tr></table>
+            <h2 id="patient-name" style='text-align: center'>username</h2>
+            <table class='infoTable'>
+                <tr>
+                <td id="patient-ic-number" class='shiftedrow' style='padding-left: -5px'>IC number: </td>
+                <td id="patient-diagnosis" class='shiftedrow'>Diagnosis: </td>
+                <td id="patient-date-of-birth" class='shiftedrow'>D.O.B: </td>
+                <td id="patient-gender" class='shiftedrow'>Gender: </td>
+                <td id="patient-blood-type" class='shiftedrow'>Blood Type: </td>
+            </tr>
+        </table>
+        </div>
+
+        <div id="searchRPTcontain">
+            <div id="searchInput">
+            <input id="searchInputBox" onkeyup="searchPatientReport();" placeholder="Search Date...">
+            </div>
+            <div id="createrpt">
+            <button id='createrptbtn' class=' btn btn-info btn-sm'>Create Report</button>
+            </div>
         </div>
         <div id="reportcontainer">
-            <div style="margin-bottom: 2em; margin-top: 2em;">
-                <input id="searchInput" style="margin-left: 2em;" placeholder="Search Date...">
-                <button id='createrpt' style="float: right; margin-right: 2em;" class=' btn btn-info btn-sm'>Create Report</button>
-            </div>
+            
             <div id="historycontainer">
                 <table class='centerTable' style="margin-top: 1em;">
-                    <tr><th style="padding-left:2em;">Date</th><th style="padding-left:3.5em; padding-right:0.5em;">FT4</th><th style="padding-left:3.5em; padding-right:0.5em;">TSH</th><th style="padding-left:1em;">Drug Dose</th></tr>
+                    <tr><th id="labelDate" >Date</th>
+                        <th id="labelFT4" >FT4</th>
+                        <th id="labelTSH">TSH</th>
+                        <th id="labelDrug">Drug Dose</th>
                 </table>
                 <hr>
                 <div id="dosagehist">
-                    <div style='margin-bottom: 1em;'>
-                        <table class='dosageTable'>
-                            <tr>
-                                <td>12 August 2020</td>
-                                <td style='padding-left:2em; padding-right:2em;'>20.1</td>
-                                <td style='padding-left:2em;padding-right:2em;'>11.1</td>
-                                <td style='padding-left:2em;padding-right:2em;'>ABC</td>
-                            </tr>
-                        </table>
-                        </div>
                 </div>
             </div>
             <div id="graphcontainer">
+                <h2 style="text-align: center;">Graph over here</h2>
             </div>
         </div>
         <!--Modal For Patient Info-->
@@ -143,16 +155,18 @@
         <div id="newReportModal" class="w3-modal">
             <div class="w3-modal-content">
                 <div class="w3-container">
-                    <span onclick="document.getElementById('newReportModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                    <span id="closereportmodal" onclick="document.getElementById('newReportModal').style.display='none' " class="w3-button w3-display-topright">&times;</span>
                     <h1 id="diseaseName">Create Health Report</h1>
                     <hr>
+                    
+                    <form id="test" onsubmit="postPatientReport(); return false;">
                     <table id="createnfotable">
                     <tr>
                     <td class="firsttd">
                     <label>FT4:</label>
                     </td>
                     <td class="labeltd">
-                    <input id="newFT4">
+                    <input id="newFT4" placeholder="Enter FT4" required>
                     </td>
                     </tr>
                     
@@ -161,26 +175,84 @@
                     <label>TSH:</label>
                     </td>
                     <td class="labeltd">
-                    <input id="newTSH">
+                    <input id="newTSH" placeholder="Enter TSH" required>
                     </td>
                     </tr>
 
                     <tr>
                     <td class="firsttd">
-                    <label>Drug dose:</label>
-                    </td>
+                    <label>Drug Name:</label>
                     </td>
                     <td class="labeltd">
-                    <input id="newDrugDose">
+                    <input class="newDrugName" maxlength="255" placeholder="Enter drug name..." required>
                     </td>
+                    <td class="firsttd">
+                        <label>Drug dose:</label>
+                        </td>
+                        </td>
+                        <td class="labeltd">
+                        <input class="newDrugDose" maxlength="5" placeholder="Enter dose..." required>
+                        </td>
                     </tr>
                     </table>
-                    <div style="text-align: center; margin-bottom: 2em;">
-                        <button id="btnRegister" class="btn btn-dark btn-block bold" onclick="postPatientReport()">Save Report</button>
+
+                    <table id="addon">
+                    </table>
+                    
+                    <div style="text-align: center; margin-top: 1em; margin-bottom: 4em;">
+                        <button id="addMoreRows">Add another drug dose</button>
                     </div>
+                    <div style="text-align: center; margin-bottom: 2em;">
+                        <button id="btnRegister" type="submit" class="btn btn-dark btn-block bold">Save Report</button>
+                    </div>
+                    </form>
                 </div>
             </div>
         </div>
+
+
+         <!--Modal For Prescriptions-->
+         <div id="prescriptionModal" class="w3-modal">
+            <div class="w3-modal-content">
+                <div class="w3-container">
+                    <span onclick="document.getElementById('prescriptionModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                    <h2 style="text-align: center;">Prescription</h2>
+                    
+                    <table id="tableReadings" style="margin-right: auto; margin-left: auto; margin-bottom: 2em;">
+                        <tr>
+                            <td style=" text-align:center;">Diagnosis:</td>
+                            <td id="tdDiagnosis"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center;">Checkup date:</td>
+                            <td id="tdCheckup"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center;">FT4:</td>
+                            <td id="tdFt4"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center;">TSH:</td>
+                            <td id="tdTsh"></td>
+                        </tr>
+                    </table>
+                    
+                    <table style="margin-right: auto; margin-left: auto; margin-bottom: 0.5em;">
+                        <tr>
+                            <th>Drug name</th>
+                            <th style="width: 42%;"></th>
+                            <th>Dosage</th>
+                        </tr>
+                    </table>
+
+
+                    <table id="prescriptionTable">
+                    </table>
+
+                </div>
+            </div>
+        </div>
+                    
     </main>
 
     <!-- Firebase -->
