@@ -34,6 +34,7 @@
     <Property Name="gender" Type="nvarchar" MaxLength="6" Nullable="false" />
     <Property Name="blood_type" Type="nvarchar" MaxLength="5" Nullable="false" />
     <Property Name="timestamp" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="doctor_id" Type="int" />
   </EntityType>
   <EntityType Name="patient_report">
     <Key>

@@ -41,6 +41,7 @@
     <Property Name="gender" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
     <Property Name="blood_type" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
     <Property Name="timestamp" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="doctor_id" Type="Int32" />
   </EntityType>
   <EntityType Name="patient_report">
     <Key>

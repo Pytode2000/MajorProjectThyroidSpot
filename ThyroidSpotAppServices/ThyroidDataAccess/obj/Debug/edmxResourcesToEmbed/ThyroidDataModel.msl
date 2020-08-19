@@ -28,6 +28,7 @@
     <EntitySetMapping Name="patient_information">
       <EntityTypeMapping TypeName="ThyroidDataModel.patient_information">
         <MappingFragment StoreEntitySet="patient_information">
+          <ScalarProperty Name="doctor_id" ColumnName="doctor_id" />
           <ScalarProperty Name="timestamp" ColumnName="timestamp" />
           <ScalarProperty Name="blood_type" ColumnName="blood_type" />
           <ScalarProperty Name="gender" ColumnName="gender" />

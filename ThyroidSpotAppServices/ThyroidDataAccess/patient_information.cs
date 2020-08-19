@@ -22,5 +22,6 @@ namespace ThyroidDataAccess
         public string gender { get; set; }
         public string blood_type { get; set; }
         public string timestamp { get; set; }
+        public Nullable<int> doctor_id { get; set; }
     }
 }
