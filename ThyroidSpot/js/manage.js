@@ -69,6 +69,7 @@ function getSelectedUser() {
 }
 
 function deleteUser() {
+
     // Delete from "user" table.
     $.ajax({
         type: 'DELETE',
@@ -98,6 +99,7 @@ function deleteUser() {
     setTimeout(function () {
         window.location.reload();
     }, 2000);
+
 }
 
 

@@ -61,11 +61,30 @@ function getUser() {
         contentType: 'application/json',
         success: function (data) {
             currentUserArray = data;
-            document.getElementById("profName").innerHTML = currentUserArray.full_name;
-            document.getElementById("profType").innerHTML = currentUserArray.account_type;
-            document.getElementById("profUid").innerHTML = currentUserArray.user_id;
-            document.getElementById("profEmail").innerHTML = user_email;
-            user_table_id = currentUserArray.id;
+            try {
+                document.getElementById("profName").innerHTML = currentUserArray.full_name;
+                document.getElementById("profType").innerHTML = currentUserArray.account_type;
+                document.getElementById("profUid").innerHTML = currentUserArray.user_id;
+                document.getElementById("profEmail").innerHTML = user_email;
+                user_table_id = currentUserArray.id;
+            } catch (e) {
+                // I CAN PROBABLY DELETE USER HERE. BUT FOR NOW, I WILL JUST LOG USER OUT
+                // alert("Your account has already been deleted!")
+                // $('#profileSettingModal').modal('toggle');
+                // Firebase configuration
+                // Firebase configuration
+
+                // $('#profLogoutBtn').trigger('click');
+                // logout();
+                // $("nav-tab-logout").click(function () {
+                // });
+                // var removedUser = firebase.auth().currentUser;
+                // console.log(removedUser)
+                // removedUser.delete().then(function () {
+                //     // Instace deleted from FB.
+                //     console.log("Firebase instance deleted.");
+                // })
+            }
         }
     });
 }

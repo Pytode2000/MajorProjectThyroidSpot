@@ -114,7 +114,7 @@
                     <form>
 
                         <div class="form-label-group">
-                            <input type="email" id="newUserEmail" class="form-control" placeholder="Enter email address..." required="" autofocus="">
+                            <input type="email" id="newUserEmail" class="form-control" placeholder="Enter email address..." required minlength="10" autofocus="">
                             <label for="newUserEmail">Enter new email address...<i class="fas fa-envelope close"></i></label>
                         </div>
                         <div class="form-label-group">
@@ -164,17 +164,19 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <ul>
-                        <li>ID: <span id="modalId"></span></li>
-                        <li>Unique ID: <span id="modalUid"></span></li>
-                        <!-- <li>Full Name: <span id="modalFullName"></span></li> -->
-                        <li>Account Type: <span id="modalAccountType"></span></li>
+                    <ul class="list-group">
+                        <li class="list-group-item"><b>ID:</b> <span id="modalId"></span></li>
+                        <li class="list-group-item"><b>Account Type:</b> <span id="modalAccountType"></span></li>
+                        <li class="list-group-item"><b>Unique ID:</b> <span id="modalUid"></span></li>
+
                     </ul>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" id="deleteButton" class="btn btn-danger" data-toggle="modal" data-target="#deleteUserModal" onclick="$('#userModal').modal('hide');">Delete
-                        User</button>
+                        User
+                    </button>
                 </div>
             </div>
         </div>
