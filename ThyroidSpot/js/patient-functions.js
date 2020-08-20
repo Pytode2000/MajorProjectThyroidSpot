@@ -354,7 +354,7 @@ function postPatientReport() {
     }
     //if FT4 and TSH DOES NOT match with defined regex
     else{
-        alert("Please input a decimal for FT4 and TSH")
+        alert("Please input a proper reading for FT4 and TSH")
     }
 }
 
