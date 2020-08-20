@@ -107,61 +107,76 @@ function deleteUser() {
 function createUser() {
     emailTxt = $('#newUserEmail').val();
     passwordTxt = $('#newUserPassword').val();
-    // one more for re-type password.
+    rePasswordTxt = $('#newUserRePassword').val()
     fullNameTxt = $('#newUserFullName').val()
 
-    var acc_type;
-    if (document.getElementById('typeAdminRadio').checked) {
-        acc_type = "admin"
+    if (passwordTxt === rePasswordTxt) {
+
+        var acc_type;
+        if (document.getElementById('typeAdminRadio').checked) {
+            acc_type = "admin"
+        }
+        else {
+            acc_type = "clinician"
+        }
+
+        var config = {
+            apiKey: "AIzaSyAJOmgi_23UV7szjryl9Bv6Bd9uK13C0KU",
+            authDomain: "thyroidspot.firebaseapp.com",
+            databaseURL: "https://thyroidspot.firebaseio.com",
+            projectId: "thyroidspot",
+            storageBucket: "thyroidspot.appspot.com",
+            messagingSenderId: "652518093634",
+            appId: "1:652518093634:web:5cc7a86bd8119cfcfe0edb",
+            measurementId: "G-VLNKVKH5GT"
+        };
+        var secondaryApp = firebase.initializeApp(config, "Secondary");
+        // var fbUid;
+
+        secondaryApp.auth().createUserWithEmailAndPassword(emailTxt, passwordTxt).then(function (firebaseUser) {
+            // fbUid = firebaseUser.uid;
+            var uid = firebaseUser.user.uid;
+
+            console.log("User " + firebaseUser.uid + " created successfully!");
+            // console.log(uid)
+
+            // var newUserFbId = firebaseUser.uid
+            // console.log(newUserFbId);
+
+            var userInstance = { user_id: uid, full_name: fullNameTxt, account_type: acc_type }; // NOT DONE UID HAVENT ADD
+            console.log(userInstance)
+            $.ajax({
+                type: 'POST',
+                url: userURI,
+                data: JSON.stringify(userInstance),
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (data) {
+                    console.log("User instance created.");
+                    $('#newUserModal').modal('hide');
+                    // Send verification email? maybe
+                    window.location.reload();
+
+
+                }
+            });
+
+            secondaryApp.auth().signOut();
+        }).catch(function (error) {
+            const adminCreateUserAlert = document.getElementById("adminCreateUserAlert");
+
+            adminCreateUserAlert.classList.remove("hide");
+            adminCreateUserAlert.innerHTML = error.message;
+            secondaryApp.auth().signOut();
+        });
     }
     else {
-        acc_type = "clinician"
+        // password and retype passwrong different.
+        const adminCreateUserAlert = document.getElementById("adminCreateUserAlert");
+
+        adminCreateUserAlert.classList.remove("hide");
+        adminCreateUserAlert.innerHTML = "Password and re-type password different! Please try again.";
     }
-
-    var config = {
-        apiKey: "AIzaSyAJOmgi_23UV7szjryl9Bv6Bd9uK13C0KU",
-        authDomain: "thyroidspot.firebaseapp.com",
-        databaseURL: "https://thyroidspot.firebaseio.com",
-        projectId: "thyroidspot",
-        storageBucket: "thyroidspot.appspot.com",
-        messagingSenderId: "652518093634",
-        appId: "1:652518093634:web:5cc7a86bd8119cfcfe0edb",
-        measurementId: "G-VLNKVKH5GT"
-    };
-    var secondaryApp = firebase.initializeApp(config, "Secondary");
-    // var fbUid;
-
-    secondaryApp.auth().createUserWithEmailAndPassword(emailTxt, passwordTxt).then(function (firebaseUser) {
-        // fbUid = firebaseUser.uid;
-        var uid = firebaseUser.user.uid;
-
-        console.log("User " + firebaseUser.uid + " created successfully!");
-        // console.log(uid)
-
-        // var newUserFbId = firebaseUser.uid
-        // console.log(newUserFbId);
-
-        var userInstance = { user_id: uid, full_name: fullNameTxt, account_type: acc_type }; // NOT DONE UID HAVENT ADD
-        console.log(userInstance)
-        $.ajax({
-            type: 'POST',
-            url: userURI,
-            data: JSON.stringify(userInstance),
-            dataType: 'json',
-            contentType: 'application/json',
-            success: function (data) {
-                console.log("User instance created.");
-                $('#newUserModal').modal('hide');
-                // Send verification email? maybe
-                window.location.reload();
-
-
-            }
-        });
-
-        secondaryApp.auth().signOut();
-    });
-
 }
 
 

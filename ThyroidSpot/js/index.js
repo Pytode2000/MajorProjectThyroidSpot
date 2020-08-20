@@ -50,77 +50,103 @@ function login() {
         }, 3000);
 
     })
-    promise.catch(e => console.log(e.message));
+    promise.catch(e => {
+        console.log(e.message);
+        // document.getElementById("modalId").innerHTML = currentSelectedUserArray.id;
+        const loginAlert = document.getElementById("loginAlert");
+
+        loginAlert.classList.remove("hide");
+        loginAlert.innerHTML = e.message;
+    });
 }
 
 function register() {
     const txtEmail = document.getElementById("registerEmail");
     const txtPassword = document.getElementById("registerPassword");
+    const txtRePassword = document.getElementById("registerRetypePassword");
 
-    const email = txtEmail.value;
-    const pass = txtPassword.value;
-    const auth = firebase.auth();
-    const promise = auth.createUserWithEmailAndPassword(email, pass);
-    promise.then(firebaseUser => {
-        const user = firebase.auth().currentUser;
-        const userUid = user.uid;
-        console.log(userUid);
+    if (txtPassword.value === txtRePassword.value) {
 
-        // Creates an instance (row) in the "user" table.
-        var userInstance = { user_id: userUid, full_name: $('#registerFullName').val(), account_type: "patient" }; // Register function only creates "patient" accounts.
-        console.log(userInstance)
-        $.ajax({
-            type: 'POST',
-            url: userURI,
-            data: JSON.stringify(userInstance),
-            dataType: 'json',
-            contentType: 'application/json',
-            success: function (data) {
-                console.log("User instance created.")
-                // $('#registerFullName').val('')
+
+        const email = txtEmail.value;
+        const pass = txtPassword.value;
+        const auth = firebase.auth();
+        const promise = auth.createUserWithEmailAndPassword(email, pass);
+        promise.then(firebaseUser => {
+            const user = firebase.auth().currentUser;
+            const userUid = user.uid;
+            console.log(userUid);
+
+            // Creates an instance (row) in the "user" table.
+            var userInstance = { user_id: userUid, full_name: $('#registerFullName').val(), account_type: "patient" }; // Register function only creates "patient" accounts.
+            console.log(userInstance)
+            $.ajax({
+                type: 'POST',
+                url: userURI,
+                data: JSON.stringify(userInstance),
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (data) {
+                    console.log("User instance created.")
+                    // $('#registerFullName').val('')
+                }
+            });
+
+            // Creates an instance (row) in the "patient_information" table.
+            var diagnosis = document.getElementById("registerDiagnosis");
+            var diagnosisChosen = diagnosis.options[diagnosis.selectedIndex].text;
+
+            var genderChosen;
+            if (document.getElementById('genderMaleRadio').checked) {
+                genderChosen = "Male"
             }
-        });
-
-        // Creates an instance (row) in the "patient_information" table.
-        var diagnosis = document.getElementById("registerDiagnosis");
-        var diagnosisChosen = diagnosis.options[diagnosis.selectedIndex].text;
-
-        var genderChosen;
-        if (document.getElementById('genderMaleRadio').checked) {
-            genderChosen = "Male"
-        }
-        else {
-            genderChosen = "Female"
-        }
-
-        var bloodType = document.getElementById("registerBloodType");
-        var bloodTypeChosen = bloodType.options[bloodType.selectedIndex].text;
-
-        var patientInfoInstance = {
-            user_id: userUid, diagnosis: diagnosisChosen, ic_number: $('#registerId').val(),
-            date_of_birth: $('#registerBirthdate').val(), gender: genderChosen, blood_type: bloodTypeChosen, timestamp: "-"
-        };
-
-        console.log(patientInfoInstance);
-        $.ajax({
-            type: 'POST',
-            url: patientInfoURI,
-            data: JSON.stringify(patientInfoInstance),
-            dataType: 'json',
-            contentType: 'application/json',
-            success: function (data) {
+            else {
+                genderChosen = "Female"
             }
+
+            var bloodType = document.getElementById("registerBloodType");
+            var bloodTypeChosen = bloodType.options[bloodType.selectedIndex].text;
+
+            var patientInfoInstance = {
+                user_id: userUid, diagnosis: diagnosisChosen, ic_number: $('#registerId').val(),
+                date_of_birth: $('#registerBirthdate').val(), gender: genderChosen, blood_type: bloodTypeChosen, timestamp: "-"
+            };
+
+            console.log(patientInfoInstance);
+            $.ajax({
+                type: 'POST',
+                url: patientInfoURI,
+                data: JSON.stringify(patientInfoInstance),
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (data) {
+                }
+            });
+
+            // Send Email
+            user.sendEmailVerification().then(function () {
+                $('#alertEmailModal').modal('toggle');
+            }).catch(function (error) {
+            });
+
+            console.log(user)
+        });
+        promise.catch(e => {
+            console.log(e.message);
+            const registerAlert = document.getElementById("registerAlert");
+
+            registerAlert.classList.remove("hide");
+            registerAlert.innerHTML = e.message;
         });
 
-        // Send Email
-        user.sendEmailVerification().then(function () {
-            $('#alertEmailModal').modal('toggle');
-        }).catch(function (error) {
-        });
+    }
+    else {
+        // Password and retype different.
+        const registerAlert = document.getElementById("registerAlert");
 
-        console.log(user)
-    });
-    promise.catch(e => console.log(e.message));
+        registerAlert.classList.remove("hide");
+        registerAlert.innerHTML = "Password and re-type password different! Please try again.";
+    }
 }
 
 
@@ -142,6 +168,10 @@ function forgotPassword() {
         $('#forgotPasswordModal').modal('hide');
     }).catch(function (error) {
         // An error happened.
-        console.log("An error occurred.")
+        console.log("An error occurred.");
+        const forgotPwAlert = document.getElementById("forgotPwAlert");
+
+        forgotPwAlert.classList.remove("hide");
+        forgotPwAlert.innerHTML = error.message;
     });
 }

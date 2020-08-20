@@ -85,7 +85,6 @@
                         <button type="submit" id="btnLogin" class="btn btn-dark btn-block bold">Login</button>
                     </form>
 
-
                     <div class="text-right white-text" style="margin: 1%;">
                         <a id="forgetPasswordTxt" type="button" data-toggle="modal" data-target="#forgotPasswordModal">
                             Forgot your password?
@@ -100,6 +99,10 @@
                         }
                     </style>
 
+                    <div id="loginAlert" class="alert alert-danger hide" role="alert">
+                        <!-- Error message. -->
+                    </div>
+                    <br>
                 </div>
 
                 <!-- REGISTER -->
@@ -222,6 +225,10 @@
                     </form>
 
                     <br>
+                    <div id="registerAlert" class="alert alert-danger hide" role="alert">
+                        <!-- Error message. -->
+                    </div>
+                    <br>
                 </div>
 
                 <!-- <br> -->
@@ -257,6 +264,10 @@
                         <button type="submit" class="btn btn-primary">Send Email</button>
                     </div>
                 </form>
+                <div id="forgotPwAlert" class="alert alert-danger hide" role="alert">
+                    <!-- Error message. -->
+                </div>
+                <!-- <br> -->
 
             </div>
         </div>
