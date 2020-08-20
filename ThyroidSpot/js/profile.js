@@ -68,22 +68,7 @@ function getUser() {
                 document.getElementById("profEmail").innerHTML = user_email;
                 user_table_id = currentUserArray.id;
             } catch (e) {
-                // I CAN PROBABLY DELETE USER HERE. BUT FOR NOW, I WILL JUST LOG USER OUT
-                // alert("Your account has already been deleted!")
-                // $('#profileSettingModal').modal('toggle');
-                // Firebase configuration
-                // Firebase configuration
-
-                // $('#profLogoutBtn').trigger('click');
-                // logout();
-                // $("nav-tab-logout").click(function () {
-                // });
-                // var removedUser = firebase.auth().currentUser;
-                // console.log(removedUser)
-                // removedUser.delete().then(function () {
-                //     // Instace deleted from FB.
-                //     console.log("Firebase instance deleted.");
-                // })
+                console.log(e)
             }
         }
     });

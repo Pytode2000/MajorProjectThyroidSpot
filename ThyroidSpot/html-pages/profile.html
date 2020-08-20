@@ -222,7 +222,7 @@
                 <div class="modal-body">
 
                     <!-- Logout -->
-                    <button class="btn btn-block btn-secondary" id="profLogoutBtn" onclick="logout();">Logout</button>
+                    <button class="btn btn-block btn-secondary" onclick="logout();">Logout</button>
 
                     <!-- Change Email -->
                     <button class="btn btn-block btn-success" data-toggle="modal" data-target="#changeEmailModal">Change
@@ -255,20 +255,22 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <p>The new email must be verified afterwards!</p>
-                    <form>
+                <form onsubmit="changeEmail(); return false;">
+
+                    <div class="modal-body">
+                        <p>The new email must be verified afterwards!</p>
 
                         <div class="form-label-group">
                             <input type="email" id="changeEmail" class="form-control" placeholder="Enter new email address..." required="" autofocus="">
                             <label for="changeEmail">Enter new email address...<i class="fas fa-envelope close"></i></label>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success" onclick="changeEmail()">Update Email</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Update Email</button>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>
@@ -283,24 +285,28 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form>
+                <form onsubmit="changePassword(); return false;">
+
+                    <div class="modal-body">
 
                         <div class="form-label-group">
-                            <input type="password" id="changePassword" class="form-control" placeholder="Enter new password..." required="" autofocus="">
+                            <input type="password" id="changePassword" class="form-control" placeholder="Enter new password..." required="" autofocus=""
+                                minlength="8">
                             <label for="changePassword">Enter new password...<i class="fas fa-key close"></i></label>
                         </div>
 
                         <div class="form-label-group">
-                            <input type="password" id="retypeChangePassword" class="form-control" placeholder="Re-type new password..." required="" autofocus="">
+                            <input type="password" id="retypeChangePassword" class="form-control" placeholder="Re-type new password..." required="" autofocus=""
+                                minlength="8">
                             <label for="retypeChangePassword">Re-type new password...<i class="fas fa-key close"></i></label>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="changePassword()">Update Password</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Update Password</button>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>
@@ -340,12 +346,11 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-
-                    <form>
+                <form onsubmit="updateProfile(); return false;">
+                    <div class="modal-body">
 
                         <div class="form-label-group">
-                            <input type="text" class="form-control" id="editId" placeholder="Enter NRIC..." required="" autofocus="">
+                            <input type="text" class="form-control" id="editId" placeholder="Enter NRIC..." required="" autofocus="" minlength="9" maxlength="9">
                             <label for="editId">Enter NRIC number...</label>
                         </div>
 
@@ -429,13 +434,14 @@
                             </select>
                         </div>
 
-                    </form>
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="updateProfile()">Update</button>
-                </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -474,7 +480,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    A verification email has been sent to the email address. 
+                    A verification email has been sent to the email address.
                 </div>
             </div>
         </div>
