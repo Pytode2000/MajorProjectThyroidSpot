@@ -6,28 +6,25 @@ var dosageURI = 'https://localhost:44395/api/dosage';
 var reportArray = [];
 var currentreportID; //this variable will contain the report ID that's selected
 var reportIDArray = [];
-var userArray = [];
+var currentUser = [];
 
 var secondReportArray = [] // for search function
 var storeReports = [] //second array for search function
 
-var patientInfoArray = []
+var patientInfo = []
 currentPatientUserId = localStorage.getItem("currentPatientUserId")
 currentPatientId = localStorage.getItem("currentPatientId")
 
 function getPatientName(){
     $.ajax({
         type: 'GET',
-        url: userURI,
+        url: userURI +"/"+currentPatientUserId,
         dataType: 'json',
         contentType: 'application/json',
         success: function(data){
-            userArray = data;
-            for(i=0;i<userArray.length;i++){
-                if(userArray[i].user_id == currentPatientUserId){
-                    $('#patient-name').text(userArray[i].full_name)
-                }
-            }
+            currentUser = data;
+            $('#patient-name').text(currentUser.full_name)
+
         }
     })
 }
@@ -35,44 +32,22 @@ function getPatientName(){
 function getSpecificPatientInfo(){
     $.ajax({
         type: 'GET',
-        url: patientURI,
+        url: patientURI +"/"+currentPatientUserId,
         dataType: 'json',
         contentType: 'application/json',
         success: function (data) {
-            patientInfoArray = data
-            for(i=0; i<patientInfoArray.length;i++){
-                if (patientInfoArray[i].user_id == currentPatientUserId){
-                    $('#patient-ic-number').text("IC Number: "+ patientInfoArray[i].ic_number)
-                    $('#patient-diagnosis').text("Diagnosis: "+ patientInfoArray[i].diagnosis)
-                    $('#patient-date-of-birth').text("Date of Birth: "+ patientInfoArray[i].date_of_birth)
-                    $('#patient-gender').text("Gender: "+ patientInfoArray[i].gender)
-                    $('#patient-blood-type').text("Blood Type: "+ patientInfoArray[i].blood_type)
-                }
-            }
+            patientInfo = data
+            $('#patient-ic-number').text("IC Number: "+ patientInfo.ic_number)
+            $('#patient-diagnosis').text("Diagnosis: "+ patientInfo.diagnosis)
+            $('#patient-date-of-birth').text("Date of Birth: "+ patientInfo.date_of_birth)
+            $('#patient-gender').text("Gender: "+ patientInfo.gender)
+            $('#patient-blood-type').text("Blood Type: "+ patientInfo.blood_type)
+
         }
 });
 }
 
-function getSpecificPatientInfo(){
-    $.ajax({
-        type: 'GET',
-        url: patientURI,
-        dataType: 'json',
-        contentType: 'application/json',
-        success: function (data) {
-            patientInfoArray = data
-            for(i=0; i<patientInfoArray.length;i++){
-                if (patientInfoArray[i].user_id == currentPatientUserId){
-                    $('#patient-ic-number').text("IC Number: "+ patientInfoArray[i].ic_number)
-                    $('#patient-diagnosis').text("Diagnosis: "+ patientInfoArray[i].diagnosis)
-                    $('#patient-date-of-birth').text("Date of Birth: "+ patientInfoArray[i].date_of_birth)
-                    $('#patient-gender').text("Gender: "+ patientInfoArray[i].gender)
-                    $('#patient-blood-type').text("Blood Type: "+ patientInfoArray[i].blood_type)
-                }
-            }
-        }
-});
-}
+
 
 function getPatientReport() {
     console.log("retrieving all patient report...")

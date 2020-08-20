@@ -24,7 +24,7 @@ namespace ThyroidSpotAppServices.Controllers
         {
             using (ThyroidDataEntities entities = new ThyroidDataEntities())
             {
-                return entities.user.FirstOrDefault(e => e.user_id == id);
+               return entities.user.FirstOrDefault(e => e.user_id == id);
             }
         }
 
