@@ -207,137 +207,137 @@
     padding-right: 0%;
   } */
 
-#patientCardContent{
-  margin-left: auto;
-  margin-right: auto;
-  width: fit-content;
-  text-align: center;
-}
-
-.shiftedrow{
-  display: block;
-  padding-left: 5px;
-  margin-top: 0.5em;
-}
-
-#searchRPTcontain{
-    margin-bottom: 3em; 
-    margin-top: 2em; 
-    margin-right: auto;
+  #patientCardContent{
     margin-left: auto;
-    width: 90%;
-    position: relative;
+    margin-right: auto;
+    width: fit-content;
+    text-align: center;
+  }
+
+  .shiftedrow{
     display: block;
-}
-#searchInput{
-  position: relative;
-  float: left;
-  width: 95%;
-  z-index: 2;
-  margin-bottom: 1em;
-  flex: 0 0 100%;
-}
-#searchInputBox{
-  width: 85%;
-  
-}
+    padding-left: 5px;
+    margin-top: 0.5em;
+  }
 
-#createrpt{
-  /* float: right;  */
-  position: relative;
-  text-align: center;
-  width: 95%;
-  z-index: 1;
-  flex: 1;
-}
-#createrptbtn{
-  margin-left: 5px;
-  width: 85%;
-}
-
-/*PATIENT REPORT + GRAPH CSS*/
-#reportcontainer {
-  width: 90%;
-  margin-left: 2em;
-  display: flex;
-  flex-direction: column-reverse;
-  position: absolute;
-  margin-bottom: 6em;
-}
-
-#historycontainer {
-  /* width: 50%; */
-  height: 420px;
-  background: rgb(255, 255, 255);
-  display: block;
-  position: relative;
-  z-index: 2;
-}
-
-#graphcontainer {
-  margin-right: 5%;
-  
-  width: auto;
-  background: rgb(151, 151, 151);
-  display: block;
-  position: relative;
-  z-index: 1;
-}
-    
-.centerTable{
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-}
-#labelDate{
-  padding-left:1em;
-}
-#labelFT4{
-  padding-left:5em;
-  padding-right: 0em;
-}
-#labelTSH{
-  padding-left: 1em;
-}
-#labelDrug{
-  padding-left:1em;
-}
-#labelDose{
-  padding-left:3em;
-}
-
-
-    /*DOSAGE TABLE CSS*/
-    .dosageTable {
-    
-      font-size: 14px;
-      /* position: relative; */
-      /* border: 1px solid black; */
-      margin-left: auto;
+  #searchRPTcontain{
+      margin-bottom: 3em; 
+      margin-top: 2em; 
       margin-right: auto;
-      text-align: left;
-      width: 100%;
-    }
+      margin-left: auto;
+      width: 90%;
+      position: relative;
+      display: block;
+  }
+  #searchInput{
+    position: relative;
+    float: left;
+    width: 95%;
+    z-index: 2;
+    margin-bottom: 1em;
+    flex: 0 0 100%;
+  }
+  #searchInputBox{
+    width: 85%;
     
-    .reportTD{
+  }
+
+  #createrpt{
+    /* float: right;  */
+    position: relative;
+    text-align: center;
+    width: 95%;
+    z-index: 1;
+    flex: 1;
+  }
+  #createrptbtn{
+    margin-left: 5px;
+    width: 85%;
+  }
+
+  /*PATIENT REPORT + GRAPH CSS*/
+  #reportcontainer {
+    width: 90%;
+    margin-left: 2em;
+    display: flex;
+    flex-direction: column-reverse;
+    position: absolute;
+    margin-bottom: 6em;
+  }
+
+  #historycontainer {
+    /* width: 50%; */
+    height: 420px;
+    background: rgb(255, 255, 255);
+    display: block;
+    position: relative;
+    z-index: 2;
+  }
+
+  #graphcontainer {
+    margin-right: 5%;
+    
+    width: auto;
+    background: rgb(151, 151, 151);
+    display: block;
+    position: relative;
+    z-index: 1;
+  }
       
-      text-align: left;
-    }
-    .reportFT{
-      padding-left: 1em;
-      text-align: left;
-    }
-    .reportTSH{
-      padding-left: 2em;
-      text-align: left;
-    }
-    .reportDRNA{
-      text-align: left;
-    }
+  .centerTable{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #labelDate{
+    padding-left:1em;
+  }
+  #labelFT4{
+    padding-left:5em;
+    padding-right: 0em;
+  }
+  #labelTSH{
+    padding-left: 1em;
+  }
+  #labelDrug{
+    padding-left:1em;
+  }
+  #labelDose{
+    padding-left:3em;
+  }
+
+
+  /*DOSAGE TABLE CSS*/
+  .dosageTable {
   
-    #diseaseName{
-      font-size: 28px;
-    }
+    font-size: 14px;
+    /* position: relative; */
+    /* border: 1px solid black; */
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    width: 100%;
+  }
+  
+  .reportTD{
+    
+    text-align: left;
+  }
+  .reportFT{
+    padding-left: 1em;
+    text-align: left;
+  }
+  .reportTSH{
+    padding-left: 2em;
+    text-align: left;
+  }
+  .reportDRNA{
+    text-align: left;
+  }
+
+  #diseaseName{
+    font-size: 28px;
+  }
 
 }
   

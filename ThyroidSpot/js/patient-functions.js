@@ -200,14 +200,14 @@ function getPatientReport() {
                     "<tr><td class='reportTD'>"+report.timestamp+"</td><td class='reportFT'>"+report.FT4+"</td><td class='reportTSH'>"+
                     ""+report.TSH+"</td><td class='reportDRNA'>"+viewdosagebtn+"</td></tr></table></div>");
                     
-
-                }
-                else if (currentPatientID != reportArray[i].patient_id && i == reportArray.length-1){
-                    $('#searchRPTcontain').html('');
-                    $('#reportcontainer').html('');
-                    createreportbtn = "<button id='rpt' class=' btn btn-info btn-sm'>Create Report</button>"
-                    $('#reportcontainer').append("<div style='text-align: center; margin-top: 10%; margin-left: auto; margin-right: auto;'><h3>No patient report found</h3><div>"+createreportbtn+"<div></div>");
-                    return console.log("no report history")
+                
+                    if (currentPatientID != reportArray[i].patient_id && i == reportArray.length-1){
+                        $('#searchRPTcontain').html('');
+                        $('#reportcontainer').html('');
+                        createreportbtn = "<button id='rpt' class=' btn btn-info btn-sm'>Create Report</button>"
+                        $('#reportcontainer').append("<div style='text-align: center; margin-top: 10%; margin-left: auto; margin-right: auto;'><h3>No patient report found</h3><div>"+createreportbtn+"<div></div>");
+                        return console.log("no report history")
+                    }
                 }
             }
         }
@@ -222,7 +222,7 @@ function searchPatientReport(){
     const searchTerm = document.getElementById("searchInputBox").value;
 
     if (searchTerm.length == 0)
-    { 
+    {  
         storeReports = []
         secondReportArray = []
        getPatientReport();	
