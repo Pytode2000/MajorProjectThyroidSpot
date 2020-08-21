@@ -29,7 +29,7 @@ namespace ThyroidSpotAppServices.Controllers
         }
 
         //get patient info via doctor id(can be used for doctor-only accs)
-        public patient_information Get(int doctorid)
+        public patient_information GetOne(string doctorid)
         {
             using (ThyroidDataEntities entities = new ThyroidDataEntities())
             {
