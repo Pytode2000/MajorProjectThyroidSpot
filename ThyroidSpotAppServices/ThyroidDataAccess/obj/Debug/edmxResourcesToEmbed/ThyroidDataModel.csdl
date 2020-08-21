@@ -16,9 +16,9 @@
   <EntityContainer Name="ThyroidDataEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="disease_information" EntityType="Self.disease_information" />
     <EntitySet Name="user" EntityType="ThyroidDataModel.user" />
-    <EntitySet Name="patient_information" EntityType="ThyroidDataModel.patient_information" />
     <EntitySet Name="patient_report" EntityType="ThyroidDataModel.patient_report" />
     <EntitySet Name="drug_dosage" EntityType="ThyroidDataModel.drug_dosage" />
+    <EntitySet Name="patient_information" EntityType="ThyroidDataModel.patient_information" />
   </EntityContainer>
   <EntityType Name="user">
     <Key>
@@ -28,20 +28,6 @@
     <Property Name="user_id" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="full_name" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
     <Property Name="account_type" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="patient_information">
-    <Key>
-      <PropertyRef Name="patient_id" />
-    </Key>
-    <Property Name="patient_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="user_id" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="diagnosis" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="ic_number" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="true" />
-    <Property Name="date_of_birth" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="gender" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
-    <Property Name="blood_type" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
-    <Property Name="timestamp" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="doctor_id" Type="Int32" />
   </EntityType>
   <EntityType Name="patient_report">
     <Key>
@@ -61,5 +47,19 @@
     <Property Name="drug_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="drug_dose" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="report_id" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="patient_information">
+    <Key>
+      <PropertyRef Name="patient_id" />
+    </Key>
+    <Property Name="patient_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="diagnosis" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ic_number" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="true" />
+    <Property Name="date_of_birth" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="gender" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+    <Property Name="blood_type" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="timestamp" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="doctor_id" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

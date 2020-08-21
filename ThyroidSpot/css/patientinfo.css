@@ -49,12 +49,27 @@
     margin-right: auto;
   }
 
+  .newDrugName{
+    width: 20%;
+  }
+  .newDrugDose{
+    width: 15%;
+  }
+
+  .divider{
+    display: none;
+  }
+
   #addon{
     margin-left: auto;
     margin-right: auto;
   }
 
   .firsttd{
+    text-align: right;
+  }
+
+  .finaltd{
     text-align: right;
   }
   .labeltd{
@@ -339,5 +354,17 @@
     font-size: 28px;
   }
 
+  /* create patient info drug name + drug dose */
+  
+  .divider{
+    display: block;
+  }
+
+  .newDrugName{
+    width: 60%;
+  }
+  .newDrugDose{
+    width: 60%;
+  }
 }
   
