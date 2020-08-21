@@ -60,12 +60,15 @@ function navigation_control() {
 
 
     // More specific navigation control.
-    const currentLoc = window.location.href;
-    console.log(currentLoc)
-    if (currentLoc == "http://127.0.0.1:5500/html-pages/index.html" && user_logged_in == 'y') {
+    // const currentLoc = window.location.href;
+    // console.log(currentLoc)
+    // if (currentLoc == "http://127.0.0.1:5500/html-pages/index.html" && user_logged_in == 'y') {
+    if (matchPath("index.html") == true && user_logged_in == 'y') {
         window.location.href = "profile.html";
     }
-    if (currentLoc == "http://127.0.0.1:5500/html-pages/profile.html" && user_logged_in != 'y') {
+    // if (currentLoc == "http://127.0.0.1:5500/html-pages/profile.html" && user_logged_in != 'y') {
+    if (matchPath("profile.html") == true && user_logged_in != 'y') {
+
         window.location.href = "index.html";
     }
     // User not logged in.
@@ -73,7 +76,9 @@ function navigation_control() {
     // If user is either not logged in or account type is not admin, don't let them go manage.html.
     if (user_logged_in == 'n' || user_account_type != "admin") {
         // Blocked URLs.
-        if (currentLoc == "http://127.0.0.1:5500/html-pages/manage.html") {
+        // if (currentLoc == "http://127.0.0.1:5500/html-pages/manage.html") {
+        if (matchPath("manage.html") == true) {
+
             window.location.href = "index.html";
         }
     }
@@ -89,14 +94,29 @@ function navigation_control() {
     // If user is either not logged in or account type is not patient, don't let them go disease.html.
     if (user_logged_in == 'n' || user_account_type != "patient") {
         // Blocked URLs.
-        if (currentLoc == "http://127.0.0.1:5500/html-pages/disease.html") {
+        // if (currentLoc == "http://127.0.0.1:5500/html-pages/disease.html") {
+        if (matchPath("disease.html") == true) {
+
             window.location.href = "index.html";
         }
-        else if (currentLoc == "http://127.0.0.1:5500/html-pages/patientinfo.html") {
+        // else if (currentLoc == "http://127.0.0.1:5500/html-pages/patientinfo.html") {
+        if (matchPath("patientinfo.html") == true) {
+
             window.location.href = "index.html";
         }
     }
 
+}
+
+function matchPath(desiredPathHtml) {
+    // Makes the navigation more robust. E.g., If user types index.html#, it'll still work.
+    const currentLoc = window.location.href;
+    if (currentLoc.match(desiredPathHtml)) {
+        return true
+    }
+    else {
+        return false
+    }
 }
 
 // IF USER IS LOGGED IN BUT NO ROLES, WAIT AWHILE.
