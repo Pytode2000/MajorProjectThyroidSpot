@@ -150,43 +150,46 @@ function changeEmail() {
     }).catch(function (error) {
         // An error happened.
         console.log("An error occurred when changing email.");
-        $('#changeEmailModal').modal('hide');
-        $('#errorModal').modal('toggle');
+        // $('#changeEmailModal').modal('hide');
+        // $('#errorModal').modal('toggle');
+        const changeEmailAlert = document.getElementById("changeEmailAlert");
+        changeEmailAlert.classList.remove("hide");
+        changeEmailAlert.innerHTML = error.message;
 
     });
 }
 
-function changePassword() {
+function changeUserPassword() {
     var user = firebase.auth().currentUser;
 
-    const txtPassword = document.getElementById("changePassword");
-    const txtRePassword = document.getElementById("retypeChangePassword");
+    // const txtPassword = document.getElementById("changePassword");
+    // const txtRePassword = document.getElementById("retypeChangePassword");
 
-    const password = txtPassword.value;
-    const rePassword = txtRePassword.value;
+    const passwordTxt = $('#changePassword').val();
+    const rePasswordTxt = $('#retypeChangePassword').val()
 
-    if (password === rePassword) {
+    // const password = txtPassword.value;
+    // const rePassword = txtRePassword.value;
 
-        user.updatePassword(password).then(function () {
+    if (passwordTxt === rePasswordTxt) {
+
+        user.updatePassword(passwordTxt).then(function () {
             // Update successful.
             console.log("Password has been update!");
             $('#changePasswordModal').modal('hide');
-            $('#errorModal').modal('toggle');
+            // $('#errorModal').modal('toggle');
 
 
         }).catch(function (error) {
             // An error happened.
-            console.log("An error occurred when changing password.");
-            $('#changePasswordModal').modal('hide');
-            $('#errorModal').modal('toggle');
-
-
+            const changePwAlert = document.getElementById("changePwAlert");
+            changePwAlert.classList.remove("hide");
+            changePwAlert.innerHTML = error.message;
         });
     }
     else {
         // Password and retype different.
         const changePwAlert = document.getElementById("changePwAlert");
-
         changePwAlert.classList.remove("hide");
         changePwAlert.innerHTML = "Password and re-type password different! Please try again.";
     }
@@ -244,9 +247,13 @@ function deleteAccount() {
     }).catch(function (error) {
         // An error happened.
         console.log("An error occurred when deleting account.");
-        $('#deleteAccountModal').modal('hide');
+        // $('#deleteAccountModal').modal('hide');
 
-        $('#errorModal').modal('toggle');
+        // $('#errorModal').modal('toggle');
+        const deleteAccAlert = document.getElementById("deleteAccAlert");
+
+        deleteAccAlert.classList.remove("hide");
+        deleteAccAlert.innerHTML = error.message;
 
     });
 }
