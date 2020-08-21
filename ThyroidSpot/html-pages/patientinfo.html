@@ -152,50 +152,46 @@
                     <h1 id="diseaseName">Create Health Report</h1>
                     <hr>
                     
+                    
                     <form id="test" onsubmit="postPatientReport(); return false;">
-                    <table id="createnfotable">
-                    <tr>
-                    <td class="firsttd">
-                    <label>FT4:</label>
-                    </td>
-                    <td class="labeltd">
-                    <input id="newFT4" placeholder="Enter FT4" required>
-                    </td>
-                    </tr>
+                    <div id="createnfotable" class="col-md-2">
+                    <div>
+                        <p>
+                        <label>FT4:</label>
+                         <input id="newFT4" placeholder="Enter FT4" required>
+                         </p>
+                    </div>
                     
-                    <tr>
-                    <td class="firsttd">
-                    <label>TSH:</label>
-                    </td>
-                    <td class="labeltd">
-                    <input id="newTSH" placeholder="Enter TSH" required>
-                    </td>
-                    </tr>
+                    <div>
+                        <p>
+                        <label>TSH:</label>
+                        <input id="newTSH" placeholder="Enter TSH" required>
+                        </p>
+                    </div>
 
-                    <tr>
-                    <td class="firsttd">
-                    <label>Drug Name:</label>
-                    </td>
-                    <td class="labeltd">
-                    <input class="newDrugName" maxlength="255" placeholder="Enter drug name..." required>
-                    </td>
-                    <td class="firsttd">
-                        <label>Drug dose:</label>
-                        </td>
-                        </td>
-                        <td class="labeltd">
-                        <input class="newDrugDose" maxlength="5" placeholder="Enter dose..." required>
-                        </td>
-                    </tr>
-                    </table>
+                    <div>
+                        <p>
+                            <label>Drug Name:</label>
+                        
+                            <input class="newDrugName" maxlength="255" placeholder="Enter drug name..." required>
+                            
+                            <br class="divider">
+                            <br class='divider'>
+                            <label>Drug dose:</label>
+                        
+                            <input class="newDrugDose" maxlength="5" placeholder="Enter dose..." required>
+                        </p>
+                    </div>
 
-                    <table id="addon">
-                    </table>
-                    
+                    </div>
+
+                    <div id="addon" class="col-md-2">
+                    </div>
+                    </div>
                     <div style="text-align: center; margin-top: 1em; margin-bottom: 4em;">
                         <button id="addMoreRows">Add another drug dose</button>
                     </div>
-                    <div style="text-align: center; margin-bottom: 2em;">
+                    <div style="text-align: center; padding-bottom: 2em;">
                         <button id="btnRegister" type="submit" class="btn btn-dark btn-block bold">Save Report</button>
                     </div>
                     </form>
@@ -259,6 +255,8 @@
 
             $("#footer-html").load("../html-components/footer.html");
         });
+
+
     </script>
 </body>
 

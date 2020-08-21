@@ -12,11 +12,13 @@ var userURI = "https://localhost:44395/api/User/";
 firebase.auth().onAuthStateChanged(firebaseUser => {
     // User is logged in.
     if (firebaseUser) {
+
         sessionStorage.setItem("user_logged_in", "y");
         // User's email is verified.
         if (firebaseUser.emailVerified === true) {
             // If email is verified, on login/registration, GET "user" table's "account_type" via "user_id" (firebase unique id, or uid).
             currentUserArray = []
+            
             $.ajax({
                 type: 'GET',
                 url: userURI + firebaseUser.uid,
@@ -24,16 +26,38 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 contentType: 'application/json',
                 success: function (data) {
                     currentUserArray = data;
-                    sessionStorage.setItem("user_account_type", currentUserArray.account_type);
 
-                    //DO NOT REMOVE: need it for creating patient reports (should user smhow havent yet)
-                    //this will be removed in the actual one, for now using it for dev purposes
-                    sessionStorage.setItem("user_unique_id", firebaseUser.uid);
-                    sessionStorage.setItem("user_email", firebaseUser.email);
+                    try {
+
+                        //DO NOT REMOVE: need it for creating patient reports (should user smhow havent yet)
+                        //this will be removed in the actual one, for now using it for dev purposes
+                        sessionStorage.setItem("user_unique_id", firebaseUser.uid);
+                        sessionStorage.setItem("user_email", firebaseUser.email);
+                        sessionStorage.setItem("user_account_type", currentUserArray.account_type);
+
+                    } catch (err) {
+                        console.log("Account is deleted already.")
+                        console.log(sessionStorage.getItem("user_email"));
+                        alert("This account has already been deleted!")
+                        if (firebaseUser != null) {
+
+                            firebaseUser.delete().then(function () {
+                                // User deleted from FB.
+                                console.log("Firebase instance deleted.");
+                            }).catch(function (error) {
+                                console.log("FB user null")
+
+                            });
+                        }
+                        else {
+                            console.log("FB user null 2")
+                        }
 
 
+                    }
                 }
             });
+
         }
         // User's email is not verified.
         else {

@@ -59,5 +59,9 @@
     margin-right: auto; 
     width: 70%;
   }
+
+  main{
+    margin-bottom: 5em;
+  }
 }
   

@@ -200,14 +200,14 @@ function getPatientReport() {
                     "<tr><td class='reportTD'>"+report.timestamp+"</td><td class='reportFT'>"+report.FT4+"</td><td class='reportTSH'>"+
                     ""+report.TSH+"</td><td class='reportDRNA'>"+viewdosagebtn+"</td></tr></table></div>");
                     
-
-                }
-                else if (currentPatientID != reportArray[i].patient_id && i == reportArray.length-1){
-                    $('#searchRPTcontain').html('');
-                    $('#reportcontainer').html('');
-                    createreportbtn = "<button id='rpt' class=' btn btn-info btn-sm'>Create Report</button>"
-                    $('#reportcontainer').append("<div style='text-align: center; margin-top: 10%; margin-left: auto; margin-right: auto;'><h3>No patient report found</h3><div>"+createreportbtn+"<div></div>");
-                    return console.log("no report history")
+                
+                    if (currentPatientID != reportArray[i].patient_id && i == reportArray.length-1){
+                        $('#searchRPTcontain').html('');
+                        $('#reportcontainer').html('');
+                        createreportbtn = "<button id='rpt' class=' btn btn-info btn-sm'>Create Report</button>"
+                        $('#reportcontainer').append("<div style='text-align: center; margin-top: 10%; margin-left: auto; margin-right: auto;'><h3>No patient report found</h3><div>"+createreportbtn+"<div></div>");
+                        return console.log("no report history")
+                    }
                 }
             }
         }
@@ -222,7 +222,7 @@ function searchPatientReport(){
     const searchTerm = document.getElementById("searchInputBox").value;
 
     if (searchTerm.length == 0)
-    { 
+    {  
         storeReports = []
         secondReportArray = []
        getPatientReport();	
@@ -354,7 +354,7 @@ function postPatientReport() {
     }
     //if FT4 and TSH DOES NOT match with defined regex
     else{
-        alert("Please input a decimal for FT4 and TSH")
+        alert("Please input a proper reading for FT4 and TSH")
     }
 }
 
@@ -424,8 +424,8 @@ function exportData(){
 
 
 $(document).on('click', '#addMoreRows', function(){
-    var html = "<tr class='appended'><td class='firsttd'><label>Drug Name:</label></td><td class='labeltd'><input class='newDrugName' placeholder='Enter drug name...'  maxlength='255' required></td><td class='firsttd'>"+
-    "<label>Drug dose:</label></td></td><td class='labeltd'><input class='newDrugDose' placeholder='Enter dose...' maxlength='5' required></td></tr>";
+    var html = "<div class='appended'><p><label>Drug Name: </label><input class='newDrugName' maxlength='255' placeholder='Enter drug name...' required>"+
+    "<br class='divider'><br class='divider'><label> Drug dose: </label><input class='newDrugDose' maxlength='5' placeholder='Enter dose...' required></p></div>";
     $("#addon").append(html);
 });
 

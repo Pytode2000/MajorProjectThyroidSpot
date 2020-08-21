@@ -70,21 +70,20 @@
                     </div>
                     <br>
                     <br>
-                    <form>
+                    <form onsubmit="login(); return false;">
 
                         <div class="form-label-group">
                             <input type="email" id="loginEmail" class="form-control" placeholder="Enter email address..." required="" autofocus="">
                             <label for="loginEmail">Enter email address...<i class="fas fa-envelope close"></i></label>
                         </div>
                         <div class="form-label-group">
-                            <input type="password" class="form-control" id="loginPassword" placeholder="Enter password..." required="" autofocus="">
+                            <input type="password" class="form-control" id="loginPassword" placeholder="Enter password..." required="" autofocus="" minlength="8">
                             <label for="loginPassword">Enter password...<i class="fas fa-key close"></i></label>
                         </div>
 
+                        <br>
+                        <button type="submit" id="btnLogin" class="btn btn-dark btn-block bold">Login</button>
                     </form>
-                    <br>
-                    <button id="btnLogin" class="btn btn-dark btn-block bold" onclick="login()">Login</button>
-
 
                     <div class="text-right white-text" style="margin: 1%;">
                         <a id="forgetPasswordTxt" type="button" data-toggle="modal" data-target="#forgotPasswordModal">
@@ -100,6 +99,10 @@
                         }
                     </style>
 
+                    <div id="loginAlert" class="alert alert-danger hide" role="alert">
+                        <!-- Error message. -->
+                    </div>
+                    <br>
                 </div>
 
                 <!-- REGISTER -->
@@ -109,28 +112,33 @@
                         <h2><b>New here? Register an account now!</b></h1>
                     </div>
                     <br>
-                    <br> <form>
+                    <br>
+                    <form onsubmit="register(); return false;">
                         <div class="form-label-group">
                             <input type="email" class="form-control" id="registerEmail" placeholder="Enter email address..." required="" autofocus="">
                             <label for="registerEmail">Enter email address...<i class="fas fa-envelope close"></i></label>
                         </div>
                         <div class="form-label-group">
-                            <input type="password" class="form-control" id="registerPassword" placeholder="Enter password..." required="" autofocus="">
+                            <input type="password" class="form-control" id="registerPassword" placeholder="Enter password..." required="" autofocus=""
+                                minlength="8">
                             <label for="registerPassword">Enter password...<i class="fas fa-key close"></i></label>
                         </div>
 
                         <div class="form-label-group">
-                            <input type="password" class="form-control" id="registerRetypePassword" placeholder="Re-type password..." required="" autofocus="">
+                            <input type="password" class="form-control" id="registerRetypePassword" placeholder="Re-type password..." required="" autofocus=""
+                                minlength="8">
                             <label for="registerRetypePassword">Re-type password...<i class="fas fa-key close"></i></label>
                         </div>
 
                         <div class="form-label-group">
-                            <input type="text" class="form-control" id="registerId" placeholder="Enter NRIC..." required="" autofocus="">
+                            <input type="text" class="form-control" id="registerId" placeholder="Enter NRIC..." required="" autofocus="" minlength="9"
+                                maxlength="9">
                             <label for="registerId">Enter NRIC number...<i class="fas fa-id-card close"></i></label>
                         </div>
 
                         <div class="form-label-group">
-                            <input type="text" class="form-control" id="registerFullName" placeholder="Enter full name..." required="" autofocus="">
+                            <input type="text" class="form-control" id="registerFullName" placeholder="Enter full name..." required="" autofocus="" minlength="5"
+                                maxlength="70">
                             <label for="registerFullName">Enter full name...<i class="fas fa-user close"></i></label>
                         </div>
                         <!-- Jquery Datepicker for Birthdate -->
@@ -209,10 +217,17 @@
                             </select>
                         </div>
 
+                        <br>
+                        <br>
+                        <!-- <button id="btnRegister" class="btn btn-dark btn-block bold" onclick="register()">Register</button> -->
+                        <button type="submit" id="btnRegister" class="btn btn-dark btn-block bold">Register</button>
+
                     </form>
+
                     <br>
-                    <br>
-                    <button id="btnRegister" class="btn btn-dark btn-block bold" onclick="register()">Register</button>
+                    <div id="registerAlert" class="alert alert-danger hide" role="alert">
+                        <!-- Error message. -->
+                    </div>
                     <br>
                 </div>
 
@@ -234,19 +249,26 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form>
+                <form onsubmit="forgotPassword(); return false;">
+
+                    <div class="modal-body">
 
                         <div class="form-label-group">
-                            <input type="email" id="forgotPasswordEmail" class="form-control" placeholder="Enter email address..." required="" autofocus="">
+                            <input type="email" id="forgotPasswordEmail" class="form-control" placeholder="Enter email address..." required="" minlength=""
+                                autofocus="">
                             <label for="forgotPasswordEmail">Enter email address...<i class="fas fa-envelope close"></i></label>
                         </div>
-                    </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Send Email</button>
+                    </div>
+                </form>
+                <div id="forgotPwAlert" class="alert alert-danger hide" role="alert">
+                    <!-- Error message. -->
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="forgotPassword()">Send Email</button>
-                </div>
+                <!-- <br> -->
+
             </div>
         </div>
     </div>

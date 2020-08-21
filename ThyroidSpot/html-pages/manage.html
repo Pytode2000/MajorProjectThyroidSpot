@@ -109,24 +109,28 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <!-- <p>The new email must be verified afterwards!</p> -->
-                    <form>
+                <form onsubmit="createUser(); return false;">
+
+                    <div class="modal-body">
+                        <!-- <p>The new email must be verified afterwards!</p> -->
 
                         <div class="form-label-group">
-                            <input type="email" id="newUserEmail" class="form-control" placeholder="Enter email address..." required="" autofocus="">
+                            <input type="email" id="newUserEmail" class="form-control" placeholder="Enter email address..." required autofocus="">
                             <label for="newUserEmail">Enter new email address...<i class="fas fa-envelope close"></i></label>
                         </div>
                         <div class="form-label-group">
-                            <input type="password" class="form-control" id="newUserPassword" placeholder="Enter password..." required="" autofocus="">
+                            <input type="password" class="form-control" id="newUserPassword" placeholder="Enter password..." required="" autofocus=""
+                                minlength="8">
                             <label for="newUserPassword">Enter password...<i class="fas fa-key close"></i></label>
                         </div>
                         <div class="form-label-group">
-                            <input type="password" class="form-control" id="newUserRePassword" placeholder="Re-type password..." required="" autofocus="">
+                            <input type="password" class="form-control" id="newUserRePassword" placeholder="Re-type password..." required="" autofocus=""
+                                minlength="8">
                             <label for="newUserRePassword">Re-type password...<i class="fas fa-key close"></i></label>
                         </div>
                         <div class="form-label-group">
-                            <input type="text" class="form-control" id="newUserFullName" placeholder="Enter full name..." required="" autofocus="">
+                            <input type="text" class="form-control" id="newUserFullName" placeholder="Enter full name..." required="" autofocus="" minlength="5"
+                                maxlength="70">
                             <label for="newUserFullName">Enter full name...<i class="fas fa-user close"></i></label>
                         </div>
 
@@ -142,12 +146,15 @@
                             <label class="custom-control-label" for="typeClinicianRadio">Clinician</label>
                         </div>
 
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="createUser()">Create</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                </form>
+                <div id="adminCreateUserAlert" class="alert alert-danger hide" role="alert">
+                        <!-- Error message. -->
+                    </div>
             </div>
         </div>
     </div>
@@ -164,17 +171,19 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <ul>
-                        <li>ID: <span id="modalId"></span></li>
-                        <li>Unique ID: <span id="modalUid"></span></li>
-                        <!-- <li>Full Name: <span id="modalFullName"></span></li> -->
-                        <li>Account Type: <span id="modalAccountType"></span></li>
+                    <ul class="list-group">
+                        <li class="list-group-item"><b>ID:</b> <span id="modalId"></span></li>
+                        <li class="list-group-item"><b>Account Type:</b> <span id="modalAccountType"></span></li>
+                        <li class="list-group-item"><b>Unique ID:</b> <span id="modalUid"></span></li>
+
                     </ul>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" id="deleteButton" class="btn btn-danger" data-toggle="modal" data-target="#deleteUserModal" onclick="$('#userModal').modal('hide');">Delete
-                        User</button>
+                        User
+                    </button>
                 </div>
             </div>
         </div>

@@ -61,11 +61,15 @@ function getUser() {
         contentType: 'application/json',
         success: function (data) {
             currentUserArray = data;
-            document.getElementById("profName").innerHTML = currentUserArray.full_name;
-            document.getElementById("profType").innerHTML = currentUserArray.account_type;
-            document.getElementById("profUid").innerHTML = currentUserArray.user_id;
-            document.getElementById("profEmail").innerHTML = user_email;
-            user_table_id = currentUserArray.id;
+            try {
+                document.getElementById("profName").innerHTML = currentUserArray.full_name;
+                document.getElementById("profType").innerHTML = currentUserArray.account_type;
+                document.getElementById("profUid").innerHTML = currentUserArray.user_id;
+                document.getElementById("profEmail").innerHTML = user_email;
+                user_table_id = currentUserArray.id;
+            } catch (e) {
+                console.log(e)
+            }
         }
     });
 }
@@ -161,19 +165,31 @@ function changePassword() {
     const password = txtPassword.value;
     const rePassword = txtRePassword.value;
 
-    user.updatePassword(password).then(function () {
-        // Update successful.
-        console.log("Password has been update!");
-        $('#changePasswordModal').modal('hide');
+    if (password === rePassword) {
 
-    }).catch(function (error) {
-        // An error happened.
-        console.log("An error occurred when changing password.");
-        $('#changePasswordModal').modal('hide');
-        $('#errorModal').modal('toggle');
+        user.updatePassword(password).then(function () {
+            // Update successful.
+            console.log("Password has been update!");
+            $('#changePasswordModal').modal('hide');
+            $('#errorModal').modal('toggle');
 
 
-    });
+        }).catch(function (error) {
+            // An error happened.
+            console.log("An error occurred when changing password.");
+            $('#changePasswordModal').modal('hide');
+            $('#errorModal').modal('toggle');
+
+
+        });
+    }
+    else {
+        // Password and retype different.
+        const changePwAlert = document.getElementById("changePwAlert");
+
+        changePwAlert.classList.remove("hide");
+        changePwAlert.innerHTML = "Password and re-type password different! Please try again.";
+    }
 }
 
 function logout() {
