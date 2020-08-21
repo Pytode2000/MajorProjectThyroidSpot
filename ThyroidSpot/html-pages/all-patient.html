@@ -43,11 +43,9 @@
             <div class="w3-container">
                 <span onclick="document.getElementById('diseaseModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
                 <h1 id="diseaseName" class="centerText">Enter Patient Information</h1>
-                <form id="adoptPatientForm" onsubmit="adoptPatient()">
-                    <label for="lname">Patient IC</label>
-                    <input type="text" id="patientICInput" ><br><br>
-                    <input style="margin-bottom: 50px;" type="submit" value="submit"><br>
-                  </form>
+                <label for="lname">Patient IC</label>
+                <input type="text" id="patientICInput" ><br><br>
+                <button style="margin-bottom: 50px;" type="button" onclick="adoptPatient()">Submit</button>><br>
             </div>
         </div>
     </div>

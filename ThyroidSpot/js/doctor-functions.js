@@ -8,7 +8,7 @@ var patientName;
 var valueFT4;
 var valueTSH;
 var latestUpdate;
-
+var doctorID = sessionStorage.getItem("user_unique_id");
 
 
 function getPatientName() {
@@ -51,18 +51,17 @@ function getAllPatientInfo() {
     });
 }
 
-//Update Amount of volunteers for event
+
 function adoptPatient(){
-    var doctorID = sessionStorage.getItem("user_unique_id");
-    for(i=0; i <patientInfoArray;i++){
+    for(i=0; i < patientInfoArray.length;i++){
         if ($('#patientICInput').val() == patientInfoArray[i].ic_number){
-            var patientInformation = { patient_id: patientInfoArray[i].patient_id,user_id: patientInfoArray[i].user_id,
+            var patientInformation = { user_id: patientInfoArray[i].user_id,
                 diagnosis: patientInfoArray[i].diagnosis, ic_number: patientInfoArray[i].ic_number, date_of_birth: patientInfoArray[i].date_of_birth,
                 gender: patientInfoArray[i].gender, blood_type: patientInfoArray[i].blood_type, timestamp: patientInfoArray[i].timestamp,
-                doctor_id: doctorID}
+                doctor_id: doctorID};
             $.ajax({
                 type: 'PUT',
-                url: patientURI + "/" + patientInfoArray[i].user_id,
+                url: patientURI +'/'+ patientInfoArray[i].user_id,
                 data: JSON.stringify(patientInformation),
                 dataType: 'json',
                 contentType: 'application/json',
