@@ -313,7 +313,8 @@ function getPrescription(){
                     
                     console.log(prescription)
                     
-                    $('#prescriptionTable').append("<tr><td>"+prescription.drug_name+"</td><th style='width: 50%;'></th><td>"+prescription.drug_dose+"</td></tr>");
+                    $('#prescriptionTable').append("<tr><td>"+prescription.drug_name+"</td>"+
+                    "<td>"+prescription.drug_dose+"</td></tr>");
 
                 }
             }
@@ -425,11 +426,15 @@ function exportData(){
 
 
 $(document).on('click', '#addMoreRows', function(){
-    var html = "<br><div class='row'><div class='move'><label>Drug Name: </label><input class='newDrugName' maxlength='255' placeholder='Enter drug...' required>"+
-        "<br class='divider'><br class='divider'><label> Drug dose: </label><input class='newDrugDose' maxlength='5' placeholder='Enter dose...' required>"+
-        "</div></div>";
+    document.getElementById('addon').style.display='block'
+    var html = "<div class='appended'><div class='form-row col-xs-4  col-md-12'><div class='col-md-6'><label>Drug:</label><div>"+
+    "<input type='email' class='newDrugName' placeholder='Enter Drug...' required></div></div>"+
+    "<br class='divider'><div class='col-md-6'><label>Dose:</label><div>"+
+   "<input type='email' class='newDrugDose' placeholder='Enter Dose...' required></div></div> </div></div>";
     $("#addon").append(html);
 });
+
+
 
 
 $(document).on('click', '#closereportmodal', function(){
@@ -459,5 +464,8 @@ $(document).on("click", "#viewdosage", function () {
     document.getElementById('prescriptionModal').style.display='block'
 });
 
+window.onload = function () {
+document.getElementById('addon').style.display = "none";
+}
 
 getUserName();

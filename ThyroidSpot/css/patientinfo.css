@@ -37,29 +37,38 @@
   /*for dev and debugging purposes only*/
   #newPatientModal{
     text-align: center;
-    
   }
 
-  #newReportModal{
-    text-align: center;
-  }
   .w3-modal-content{
     width: 450px;
   }
 
   #createnfotable{
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 2em;
   }
 
   .newDrugName{
-    width: 25%;
+    width: 100%;
   }
   .newDrugDose{
-    width: 25%;
+    width: 75%;
   }
   .move{
-    margin-left: 2.5em;
+    width: fit-content;
+  }
+
+  #addMoreRows{
+    margin-top: 1em;
+  }
+
+  #drugInput{
+    float: left;
+    width: 30%;
+  }
+  #doseInput{
+    float: right;
+    width: 40%;
+    margin-right: 25%;
   }
 
   .divider{
@@ -148,7 +157,9 @@
     margin-left: auto;
     margin-right: auto;
   }
-
+  .table-info td, th{
+    background-color: none;
+  }
 
   /*PATIENT REPORT + GRAPH CSS*/
   #reportcontainer {
@@ -365,20 +376,45 @@
   }
 
   /* create patient info drug name + drug dose */
-  
+  #createnfotable{
+    margin-left: 1em;
+  }
+
   .divider{
     display: block;
   }
 
   .newDrugName{
-    width: 59%;
+    width: 100%;
   }
   .newDrugDose{
-    width: 59%;
+    width: 100%;
   }
 
   .move{
     margin-left: 0em;
+  }
+
+  #newFT4{
+    width: 100%;
+  }
+
+  #newTSH{
+    width: 100%;
+  }
+
+  #addMoreRows{
+    margin-top: 1em;
+  }
+
+  #drugInput{
+    float: none;
+    width: 80%;
+
+  }
+  #doseInput{
+    float: none;
+    width: 80%;
   }
 }
   
