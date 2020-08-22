@@ -138,7 +138,7 @@
                     </tr>
                     </table>
                     <div style="text-align: center; margin-bottom: 2em;">
-                        <button id="btnRegister" class="btn btn-dark btn-block bold" onclick="postPatientInfo()">Create Patient Info</button>
+                        <button id="btnRegister" class="btn btn-dark custom-class bold" onclick="postPatientInfo()">Create Patient Info</button>
                     </div>
                 </div>
             </div>
@@ -150,7 +150,7 @@
             <div class="w3-modal-content">
                 <div class="w3-container">
                     <span id="closereportmodal" onclick="document.getElementById('newReportModal').style.display='none' " class="w3-button w3-display-topright">&times;</span>
-                    <h1 id="diseaseName" style="text-align: center;">Create Health Report</h1>
+                    <h2 id="diseaseName" style="text-align: center;">Create Health Report</h2>
                     <hr>
                     
                     <div class="modal-body">
@@ -159,7 +159,7 @@
                             <div class="col" style="text-align: left;">
                                 <label>FT4:</label>
                                 <div>
-                                <input type="email" class="form-control" id="newFT4" placeholder="Enter FT4..." required>
+                                <input type="text" class="form-control" id="newFT4" placeholder="Enter FT4..." required>
                                 </div>
                             </div>
                         </div>
@@ -169,7 +169,7 @@
                             <div class="col" style="text-align: left;">
                                 <label>TSH:</label>
                                 <div>
-                                <input type="email" class="form-control" id="newTSH" placeholder="Enter TSH..." required>
+                                <input type="text" class="form-control" id="newTSH" placeholder="Enter TSH..." required>
                                 </div>
                             </div>
                         </div>
@@ -180,7 +180,7 @@
                                 <div class="col-md-6">
                                     <label>Drug:</label>
                                     <div>
-                                    <input type="email" class="newDrugName" placeholder="Enter Drug..." required>
+                                    <input type="text" class="newDrugName" placeholder="Enter Drug..." required>
                                     </div>
                                 </div>
 
@@ -189,7 +189,7 @@
                                 <div class="col-md-6">
                                     <label>Dose:</label>
                                     <div>
-                                    <input type="email" class="newDrugDose" placeholder="Enter Dose..." required>
+                                    <input type="text" class="newDrugDose" placeholder="Enter Dose..." required>
                                     </div>
                                 </div> 
                             </div>
@@ -199,11 +199,11 @@
                         </div>
 
                         </div>
-                            <div style="text-align: center; margin-bottom: 4em;">
-                                <button id="addMoreRows">Add another drug dose</button>
+                            <div style="text-align: center; margin-bottom: 1em;">
+                                <button id="addMoreRows" class="btn btn-secondary custom-class">Add another drug dose</button>
                             </div>
-                            <div style="text-align: center; padding-bottom: 2em;">
-                                <button id="btnRegister" type="submit" class="btn btn-dark btn-block bold">Save Report</button>
+                            <div style="text-align: center; padding-bottom: 1em;">
+                                <button type="submit" class="btn btn-dark btn-SaveReport custom-class bold">Save Report</button>
                             </div>
                     </form>
                 </div>
@@ -220,7 +220,7 @@
                     
                     <table class="table table-sm" style="width: 95%; margin-left: auto; margin-right: auto;">
                         <tr>
-                            <td style=" text-align:left;">Diagnosis:</td>
+                            <td style=" text-align:left; width: 60%;">Diagnosis:</td>
                             <td id="tdDiagnosis"></td>
                         </tr>
                         <tr>
@@ -243,9 +243,9 @@
                         <!--Table head-->
                         <thead>
                           <tr>
-                            <th class="th-lg">Drug Name</th>
+                            <th style="width: 59%;">Drug Name</th>
                             
-                            <th class="th-lg">Dosage</th>
+                            <th class="th-md">Dosage</th>
                             
                           </tr>
                         </thead>

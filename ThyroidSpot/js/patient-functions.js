@@ -428,9 +428,9 @@ function exportData(){
 $(document).on('click', '#addMoreRows', function(){
     document.getElementById('addon').style.display='block'
     var html = "<div class='appended'><div class='form-row col-xs-4  col-md-12'><div class='col-md-6'><label>Drug:</label><div>"+
-    "<input type='email' class='newDrugName' placeholder='Enter Drug...' required></div></div>"+
+    "<input type='text' class='newDrugName' placeholder='Enter Drug...' required></div></div>"+
     "<br class='divider'><div class='col-md-6'><label>Dose:</label><div>"+
-   "<input type='email' class='newDrugDose' placeholder='Enter Dose...' required></div></div> </div></div>";
+   "<input type='text' class='newDrugDose' placeholder='Enter Dose...' required></div></div> </div></div>";
     $("#addon").append(html);
 });
 

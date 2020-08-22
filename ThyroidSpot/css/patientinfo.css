@@ -61,6 +61,10 @@
     margin-top: 1em;
   }
 
+  .btn-SaveReport{
+    width: 45%;
+  }
+
   #drugInput{
     float: left;
     width: 30%;
@@ -233,11 +237,7 @@
     /* margin-bottom: 5rem;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
   }
-  /* th, td{
-    display: block;
-    padding-left: 0%;
-    padding-right: 0%;
-  } */
+  
 
   #missingInfo{
     margin-top: 60%;
@@ -407,14 +407,9 @@
     margin-top: 1em;
   }
 
-  #drugInput{
-    float: none;
-    width: 80%;
+  .custom-class{
+      width: 100%; display:block; 
+  }
 
-  }
-  #doseInput{
-    float: none;
-    width: 80%;
-  }
 }
   
