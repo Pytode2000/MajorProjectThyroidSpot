@@ -2,13 +2,14 @@ var patientURI = 'https://localhost:44395/api/patientInfo';
 var userURI = 'https://localhost:44395/api/user';
 var reportURI = 'https://localhost:44395/api/report';
 var reportArray = [];
-var patientInfoArray = [];
+var patientInformationArray = [];
 var userInfoArray = [];
 var patientName;
 var valueFT4;
 var valueTSH;
 var latestUpdate;
 var doctorID = sessionStorage.getItem("user_unique_id");
+var patientUnderClinician = [];
 
 
 function getPatientName() {
@@ -21,31 +22,29 @@ function getPatientName() {
         contentType: 'application/json',
         success: function (data) {
             userInfoArray = data;
-            return userInfoArray;
         }
     });
 }
 
-function getAllPatientInfo() {
-    console.log("retrieving all patient infomation...")
+
+
+function getAllPatientUnderClinician() {
     $.ajax({
         type: 'GET',
         url: patientURI,
         dataType: 'json',
         contentType: 'application/json',
         success: function (data) {
-            patientInfoArray = data;
-            console.log(patientInfoArray)
+            patientInformationArray = data;
             $('#patientCard').html('');
-            for (i = 0; i < patientInfoArray.length; i++) {
-                console.log(patientInfoArray[i].user_id)
-                //getPatientName(patientInfoArray[i].user_id)
-                //getPatientReport(patientInfoArray[i].patient_id)           
-                $('#patientCard').append("<article class='patient-card'> <div class='text'><h3>Name</h3><p>"+patientInfoArray[i].ic_number+"</p>"+
-                  "<p><b>Details</b></p><p>Gender:"+patientInfoArray[i].gender+"</p><p>Blood Type: "+patientInfoArray[i].blood_type+"</p>"+
-                  "<a id='patientDetailsBtn' num='"+ patientInfoArray[i].patient_id + "' index='"+ patientInfoArray[i].user_id + "' class='button patient-details-btn' >More Details</a>"+
-                  "<a class='patient-details-btn button' href='#'>Graph</a></div></article>");
-                console.log("btn val:"+$('#patientDetailsBtn').attr('index'))
+            for (i = 0; i < patientInformationArray.length; i++) { 
+                if(patientInformationArray[i].doctor_id == doctorID){
+                    $('#patientCard').append("<article class='patient-card'> <div class='text'><h3>Name</h3><p>"+patientInformationArray[i].ic_number+"</p>"+
+                    "<p><b>Details</b></p><p>Gender:"+patientInformationArray[i].gender+"</p><p>Blood Type: "+patientInformationArray[i].blood_type+"</p>"+
+                    "<button id='patientDetailsBtn' num='"+ patientInformationArray[i].patient_id + "' index='"+ patientInformationArray[i].user_id + "' class=' patient-details-btn' >More Details</button><br>"+
+                    "<button class='patient-details-btn' href='#'>Graph</button></div></article>");
+                }   
+                        
             }
         }
     });
@@ -53,15 +52,16 @@ function getAllPatientInfo() {
 
 
 function adoptPatient(){
-    for(i=0; i < patientInfoArray.length;i++){
-        if ($('#patientICInput').val() == patientInfoArray[i].ic_number){
-            var patientInformation = { user_id: patientInfoArray[i].user_id,
-                diagnosis: patientInfoArray[i].diagnosis, ic_number: patientInfoArray[i].ic_number, date_of_birth: patientInfoArray[i].date_of_birth,
-                gender: patientInfoArray[i].gender, blood_type: patientInfoArray[i].blood_type, timestamp: patientInfoArray[i].timestamp,
+    console.log(patientInformationArray)
+    for(i=0; i < patientInformationArray.length;i++){
+        if ($('#patientICInput').val() == patientInformationArray[i].ic_number){
+            var patientInformation = { patient_id: patientInformationArray[i].patient_id, user_id: patientInformationArray[i].user_id,
+                diagnosis: patientInformationArray[i].diagnosis, ic_number: patientInformationArray[i].ic_number, date_of_birth: patientInformationArray[i].date_of_birth,
+                gender: patientInformationArray[i].gender, blood_type: patientInformationArray[i].blood_type, timestamp: patientInformationArray[i].timestamp,
                 doctor_id: doctorID};
             $.ajax({
                 type: 'PUT',
-                url: patientURI +'/'+ patientInfoArray[i].user_id,
+                url: patientURI +'?userid='+ patientInformationArray[i].user_id,
                 data: JSON.stringify(patientInformation),
                 dataType: 'json',
                 contentType: 'application/json',
@@ -81,7 +81,6 @@ $("#adoptPatientForm").submit(function(e) {
 });
 
 
-// Place details into Project Modal
 $(document).on("click", "#patientDetailsBtn", function () {
     var currentPatientUserId = $(this).attr('index');
     var currentPatientId = $(this).attr('num')
@@ -113,6 +112,6 @@ function getPatientReport() {
 
 
 
-getAllPatientInfo();
+getAllPatientUnderClinician();
 
 
