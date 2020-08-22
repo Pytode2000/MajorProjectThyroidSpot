@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using ThyroidSpotAppServices.Controllers;
 
 namespace ThyroidSpotAppServices
 {
@@ -23,6 +24,7 @@ namespace ThyroidSpotAppServices
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
         }
     }
 }
