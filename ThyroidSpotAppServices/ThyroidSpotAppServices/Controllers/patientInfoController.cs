@@ -49,11 +49,11 @@ namespace ThyroidSpotAppServices.Controllers
 
 
         //update report
-        public void PUT(int id, patient_information pinfo)
+        public void PUT(string userid, patient_information pinfo)
         {
             using (ThyroidDataEntities entities = new ThyroidDataEntities())
             {
-                var patientinfo = entities.patient_information.FirstOrDefault(e => e.patient_id == id);
+                var patientinfo = entities.patient_information.FirstOrDefault(e => e.user_id == userid);
                 patientinfo.user_id = pinfo.user_id;
                 patientinfo.diagnosis = pinfo.diagnosis;
                 patientinfo.ic_number = pinfo.ic_number;
@@ -61,6 +61,8 @@ namespace ThyroidSpotAppServices.Controllers
                 patientinfo.gender = pinfo.gender;
                 patientinfo.blood_type = pinfo.blood_type;
                 patientinfo.timestamp = pinfo.timestamp;
+                patientinfo.doctor_id = pinfo.doctor_id;
+
 
                 entities.Entry(patientinfo).State = System.Data.Entity.EntityState.Modified;
                 entities.SaveChanges();
