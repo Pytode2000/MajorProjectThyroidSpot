@@ -76,11 +76,12 @@ function getOnePatientInfo() {
                 }
                 else if (getuid != patientInfoArray[i].user_id && i == patientInfoArray.length-1){
                     $('#reportcontainer').html('');
+                    $('#searchRPTcontain').html('');
                     createinfobutton = "<button id='createnewinfo' class=' btn btn-info btn-sm'>Create New Patient Info</button>"
-                    $('#patientCardContent').append("<div class = 'centerText'>" +
+                    $('#patientCardContent').append("<div id='missingInfo'><div class = 'centerText'>" +
                     
                      "<div class='centerTitle'></p>No patient info yet"+
-                     "</p><div class='centerContent'><p>Please click on the link to create one</p></div>" +createinfobutton+ "</div>");
+                     "</p><div class='centerContent'><p>Please click on the link to create one</p></div>" +createinfobutton+ "</div></div>");
 
                     return console.log("that's enough")
                 }
@@ -424,8 +425,9 @@ function exportData(){
 
 
 $(document).on('click', '#addMoreRows', function(){
-    var html = "<div class='appended'><p><label>Drug Name: </label><input class='newDrugName' maxlength='255' placeholder='Enter drug name...' required>"+
-    "<br class='divider'><br class='divider'><label> Drug dose: </label><input class='newDrugDose' maxlength='5' placeholder='Enter dose...' required></p></div>";
+    var html = "<br><div class='row'><div class='move'><label>Drug Name: </label><input class='newDrugName' maxlength='255' placeholder='Enter drug...' required>"+
+        "<br class='divider'><br class='divider'><label> Drug dose: </label><input class='newDrugDose' maxlength='5' placeholder='Enter dose...' required>"+
+        "</div></div>";
     $("#addon").append(html);
 });
 

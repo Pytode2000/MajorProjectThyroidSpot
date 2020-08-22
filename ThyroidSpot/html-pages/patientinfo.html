@@ -152,42 +152,43 @@
                     <h1 id="diseaseName">Create Health Report</h1>
                     <hr>
                     
-                    
-                    <form id="test" onsubmit="postPatientReport(); return false;">
-                    <div id="createnfotable" class="col-md-2">
-                    <div>
-                        <p>
-                        <label>FT4:</label>
-                         <input id="newFT4" placeholder="Enter FT4" required>
-                         </p>
-                    </div>
-                    
-                    <div>
-                        <p>
-                        <label>TSH:</label>
-                        <input id="newTSH" placeholder="Enter TSH" required>
-                        </p>
-                    </div>
+                    <div class="modal-body">
+                    <form id="createnfotable" onsubmit="postPatientReport(); return false;">
+                        <div class="form-row col-xs-4  col-md-12">
+                            <div class="col" style="text-align: left;">
+                                <label>FT4:</label>
+                                <div>
+                                <input type="email" class="form-control" id="newFT4" placeholder="Enter FT4...">
+                                </div>
+                            </div>
+                        </div>
 
-                    <div>
-                        <p>
-                            <label>Drug Name:</label>
-                        
-                            <input class="newDrugName" maxlength="255" placeholder="Enter drug name..." required>
+
+
+                        <br>
+                        <div class="form-group">
+                            <label for="newTSH">TSH:</label>
+                            <input type="email" class="form-control" id="newTSH" placeholder="Enter TSH...">
+                        </div>
+                        <br>
+                    
+                            <div class="move">
+                                <label>Drug:</label>
                             
-                            <br class="divider">
-                            <br class='divider'>
-                            <label>Drug dose:</label>
-                        
-                            <input class="newDrugDose" maxlength="5" placeholder="Enter dose..." required>
-                        </p>
-                    </div>
+                                <input class="newDrugName" maxlength="255" placeholder="Enter drug..." required>
+                                
+                                <br class="divider">
+                                <br class='divider'>
+                                
+                                <label>Dose:</label>
+                            
+                                <input class="newDrugDose" maxlength="5" placeholder="Enter dose..." required>
+                            </div>
 
-                    </div>
 
                     <div id="addon" class="col-md-2">
                     </div>
-                    </div>
+                </div>
                     <div style="text-align: center; margin-top: 1em; margin-bottom: 4em;">
                         <button id="addMoreRows">Add another drug dose</button>
                     </div>

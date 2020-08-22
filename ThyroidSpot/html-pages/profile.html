@@ -35,9 +35,6 @@
 </head>
 
 <body>
-
-    <div id="navbar-html"></div>
-
     <!-- Floating action button -->
     <button class="floating-btn setting-fab" data-toggle="modal" data-target="#profileSettingModal">
         <i class="fas fa-user-cog"></i>
@@ -49,7 +46,10 @@
         </button>
     </div>
 
+    <div id="navbar-html"></div>
+
     <main>
+
         <div class="content">
             <!-- <h1> PROFILE PAGE </h1> -->
 
@@ -270,6 +270,9 @@
                         <button type="submit" class="btn btn-success">Update Email</button>
                     </div>
                 </form>
+                <div id="changeEmailAlert" class="alert alert-danger hide" role="alert">
+                    <!-- Error message. -->
+                </div>
 
             </div>
         </div>
@@ -285,7 +288,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form onsubmit="changePassword(); return false;">
+                <form onsubmit="changeUserPassword(); return false;">
 
                     <div class="modal-body">
 
@@ -332,6 +335,9 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-danger" onclick="deleteAccount()">Delete</button>
+                </div>
+                <div id="deleteAccAlert" class="alert alert-danger hide" role="alert">
+                    <!-- Error message. -->
                 </div>
             </div>
         </div>
@@ -453,7 +459,7 @@
     <!-- Error modal (for user timeout) -->
 
     <!-- Error Modal -->
-    <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -469,7 +475,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
     <!-- Alert Email Modal -->
