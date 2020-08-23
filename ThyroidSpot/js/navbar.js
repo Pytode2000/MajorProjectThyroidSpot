@@ -85,6 +85,13 @@ function navigation_control() {
 
     // If user is either not logged in or account type is not clinician, don't let them go patientinfo.html.
     if (user_logged_in == 'n' || user_account_type != "clinician") {
+        if (matchPath("patient-info-doctor.html") == true) {
+            window.location.href = "account.html";
+        }
+        if (matchPath("all-patient.html") == true) {
+
+            window.location.href = "account.html";
+        }
         // Blocked URLs.
         //if () {
         //    window.location.href = "account.html";
