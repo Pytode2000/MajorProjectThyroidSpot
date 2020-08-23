@@ -70,8 +70,15 @@
         </li>
 
         <li class="nav-item" style="margin-top: auto;">
-            <a href="about.html" class="nav-link">
+            <a href="" data-toggle="modal" data-target="#helpModal" class="nav-link">
                 <i class="svg-inline--fa fas fa-question-circle fa-primary fa-w-16 fa-2x"></i>
+                <span class="link-text">Help</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="about.html" class="nav-link">
+                <i class="svg-inline--fa fas fa-info-circle fa-primary fa-w-16 fa-2x"></i>
                 <span class="link-text">About</span>
             </a>
         </li>
@@ -85,6 +92,26 @@
 
     </ul>
 </nav>
+
+<!-- Help modal -->
+<div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="helpModalLabel">Help</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Clarify if content will be provided.
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
 
 
 <!-- When loading, this animation will be activated. -->
