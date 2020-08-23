@@ -39,258 +39,53 @@
 
     <main>
         <div class="content">
+            <h1 class="text-center"> <i class="svg-inline--fa fas fa-home fa-primary fa-w-16"></i> Home</h1>
 
-            <style>
-                .form-container {
-                    background: rgb(84, 91, 98);
-                }
-            </style>
+            <!-- <h3>New index.html (home page) (introduction page)</h3>
 
-            <!-- TOGGLER -->
-            <div class="container container-small container-fluid form-container" style="padding: 0; margin-top: 3%;">
+            <a href="" data-toggle="modal" data-target="#helpModal" class="nav-link">
+                <i class="svg-inline--fa fas fa-question-circle fa-primary fa-w-16 fa-2x"></i>
+                <span class="link-text">Help</span>
+            </a> 
 
-                <div class="btn-group btn-group-toggle" style="width: 100%;">
-                    <label class="btn btn-secondary active btn-lg" onclick="toggleLogin()" id="toggleLoginBtn" style=" border: none; border-radius: 0;">
-                        <input type="radio" name="options" id="loginTab" autocomplete="off" checked> <b>Sign In</b>
-                    </label>
-                    <label class="btn btn-secondary btn-lg" onclick="toggleRegister()" id="toggleRegisterBtn" style=" border: none; border-radius: 0;">
-                        <input type="radio" name="options" id="registerTab" autocomplete="off"> <b>Sign Up</b>
-                    </label>
-                </div>
+            <p>just throwing ideas here, ignore.<br> middle-left 65~75% will be a carousel. right side will be the instructions
+                on how to use TS. Use bootstrap's grid </p> -->
 
+            <div class="row">
+                <div class="col-sm-8" style="background: green;">.col-sm-8 ( ADDING A CAROUSEL )<br><img src="../assets/images/thyroidspot-logo.png" width="100%"></div>
+                <div class="col-sm-4"style="background: red;">.col-sm-4<br>TTest ( ADDING INSTRUCTIONS/HELPLINE )<br><br></div>
             </div>
-
-            <div class="container container-small container-fluid form-container" style="border-bottom-left-radius: 16px; border-bottom-right-radius: 16px;">
-
-                <!-- LOGIN -->
-                <div id="loginForm">
-                    <br>
-                    <div class="text-center white-text">
-                        <h2><b>Already have an account? Login now!</b></h1>
-                    </div>
-                    <br>
-                    <br>
-                    <form onsubmit="login(); return false;">
-
-                        <div class="form-label-group">
-                            <input type="email" id="loginEmail" class="form-control" placeholder="Enter email address..." required="" autofocus="">
-                            <label for="loginEmail">Enter email address...<i class="fas fa-envelope close"></i></label>
-                        </div>
-                        <div class="form-label-group">
-                            <input type="password" class="form-control" id="loginPassword" placeholder="Enter password..." required="" autofocus="" minlength="8">
-                            <label for="loginPassword">Enter password...<i class="fas fa-key close"></i></label>
-                        </div>
-
-                        <br>
-                        <button type="submit" id="btnLogin" class="btn btn-dark btn-block bold">Login</button>
-                    </form>
-
-                    <div class="text-right white-text" style="margin: 1%;">
-                        <a id="forgetPasswordTxt" type="button" data-toggle="modal" data-target="#forgotPasswordModal">
-                            Forgot your password?
-                        </a>
-                    </div>
-
-                    <style>
-                        #forgetPasswordTxt:hover {
-                            color: white;
-                            text-decoration: underline;
-                            font-weight: bold;
-                        }
-                    </style>
-
-                    <div id="loginAlert" class="alert alert-danger hide" role="alert">
-                        <!-- Error message. -->
-                    </div>
-                    <br>
+            <div class="row">
+                    <div class="col-sm-8" style="background: red;">.col-sm-8 ( CAPTIONS OR SOMETHING )<br></div>
+                    <div class="col-sm-4"style="background: green;">.col-sm-4<br>TTest<br><br></div>
                 </div>
-
-                <!-- REGISTER -->
-                <div id="registerForm" class="hide">
-                    <br>
-                    <div class="text-center white-text">
-                        <h2><b>New here? Register an account now!</b></h1>
-                    </div>
-                    <br>
-                    <br>
-                    <form onsubmit="register(); return false;">
-                        <div class="form-label-group">
-                            <input type="email" class="form-control" id="registerEmail" placeholder="Enter email address..." required="" autofocus="">
-                            <label for="registerEmail">Enter email address...<i class="fas fa-envelope close"></i></label>
-                        </div>
-                        <div class="form-label-group">
-                            <input type="password" class="form-control" id="registerPassword" placeholder="Enter password..." required="" autofocus=""
-                                minlength="8">
-                            <label for="registerPassword">Enter password...<i class="fas fa-key close"></i></label>
-                        </div>
-
-                        <div class="form-label-group">
-                            <input type="password" class="form-control" id="registerRetypePassword" placeholder="Re-type password..." required="" autofocus=""
-                                minlength="8">
-                            <label for="registerRetypePassword">Re-type password...<i class="fas fa-key close"></i></label>
-                        </div>
-
-                        <div class="form-label-group">
-                            <input type="text" class="form-control" id="registerId" placeholder="Enter NRIC..." required="" autofocus="" minlength="9"
-                                maxlength="9">
-                            <label for="registerId">Enter NRIC number...<i class="fas fa-id-card close"></i></label>
-                        </div>
-
-                        <div class="form-label-group">
-                            <input type="text" class="form-control" id="registerFullName" placeholder="Enter full name..." required="" autofocus="" minlength="5"
-                                maxlength="70">
-                            <label for="registerFullName">Enter full name...<i class="fas fa-user close"></i></label>
-                        </div>
-                        <!-- Jquery Datepicker for Birthdate -->
-                        <div class="form-label-group">
-                            <input type="text" class="form-control" id="registerBirthdate" placeholder="Select birthdate..." required="" autofocus="">
-                            <label for="registerBirthdate">Select birthdate...<i class="fas fa-calendar close"></i></label>
-                        </div>
-
-                        <script>
-                            $(function () {
-                                $("#registerBirthdate").datepicker({
-                                    dateFormat: "dd-mm-yy",
-                                    changeMonth: true,
-                                    changeYear: true,
-                                    yearRange: "1930:2020",
-
-                                    icons: {
-                                        time: "fa fa-clock-o",
-                                        date: "fa fa-calendar",
-                                        up: "fa fa-arrow-up",
-                                        down: "fa fa-arrow-down"
-                                    }
-                                });
-                            });
-                        </script>
-
-
-                        <!-- Radio buttons for gender -->
-                        <label class="white-text">Select gender: </label>
-                        <div class="custom-control custom-radio custom-control-inline" style="left:15%;">
-                            <input type="radio" id="genderMaleRadio" name="genderMaleRadio" class="custom-control-input" checked>
-                            <label class="custom-control-label white-text" for="genderMaleRadio">Male</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline" style="float: right;">
-                            <input type="radio" id="genderFemaleRadio" name="genderMaleRadio" class="custom-control-input">
-                            <label class="custom-control-label white-text" for="genderFemaleRadio">Female</label>
-                        </div>
-                        <br> <br>
-
-                        <div>
-                            <label for="registerDiagnosis" class="white-text" style="display:inline;">Select diagnosis: </label>
-                            <select id="registerDiagnosis" class="custom-select" style="width:70%; float: right;">
-                                <option>De Quervain's thyroiditis</option>
-                                <option>Differentiatied thyroid carcinoma</option>
-                                <option>Graves' disease</option>
-                                <option>Hashimoto's thyroiditis</option>
-                                <option>Hyperthyroidism</option>
-                                <option>Hypothyroidsm</option>
-                                <option>Post-radioiodine ablation</option>
-                                <option>Post-thyroidectomy</option>
-                                <option>Riedel's thyroiditis</option>
-                                <option>Thyrotoxicosis</option>
-                                <option>Toxic adenoma</option>
-                                <option>Toxic multinodular goitre</option>
-                                <option>Others</option>
-                            </select>
-                        </div>
-                        <br>
-                        <div>
-                            <!-- SELECT MENU FOR Blood type -->
-                            <label for="registerBloodType" class="white-text" style="display:inline;">Select blood type:
-                            </label>
-
-                            <select id="registerBloodType" class="custom-select" style="width:70%; float: right;">
-                                <option>A-</option>
-                                <option>A+</option>
-
-                                <option>B-</option>
-                                <option>B+</option>
-
-                                <option>AB-</option>
-                                <option>AB+</option>
-
-                                <option>O-</option>
-                                <option>O+</option>
-                            </select>
-                        </div>
-
-                        <br>
-                        <br>
-                        <!-- <button id="btnRegister" class="btn btn-dark btn-block bold" onclick="register()">Register</button> -->
-                        <button type="submit" id="btnRegister" class="btn btn-dark btn-block bold">Register</button>
-
-                    </form>
-
-                    <br>
-                    <div id="registerAlert" class="alert alert-danger hide" role="alert">
-                        <!-- Error message. -->
-                    </div>
-                    <br>
-                </div>
-
-                <!-- <br> -->
-            </div>
 
         </div>
 
+        
         <div id="footer-html"></div>
+
     </main>
 
-    <!-- Forgot Password Modal -->
-    <div class="modal fade" id="forgotPasswordModal" tabindex="-1" role="dialog" aria-labelledby="forgotPasswordModalLabel" aria-hidden="true">
+    <!-- Help modal -->
+    <!-- <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="forgotPasswordModalLabel">Forgot Password</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form onsubmit="forgotPassword(); return false;">
-
-                    <div class="modal-body">
-
-                        <div class="form-label-group">
-                            <input type="email" id="forgotPasswordEmail" class="form-control" placeholder="Enter email address..." required="" minlength=""
-                                autofocus="">
-                            <label for="forgotPasswordEmail">Enter email address...<i class="fas fa-envelope close"></i></label>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Send Email</button>
-                    </div>
-                </form>
-                <div id="forgotPwAlert" class="alert alert-danger hide" role="alert">
-                    <!-- Error message. -->
-                </div>
-                <!-- <br> -->
-
-            </div>
-        </div>
-    </div>
-
-    <!-- Alert Email Modal -->
-    <div class="modal fade" id="alertEmailModal" tabindex="-1" role="dialog" aria-labelledby="alertEmailModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="alertEmailModalLabel">Alert</h5>
+                    <h5 class="modal-title" id="helpModalLabel">Help</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    A verification email has been sent to the email address.
+                    Clarify if content will be provided.
                 </div>
+
+
+
             </div>
         </div>
-    </div>
-
-
+    </div> -->
 
 </body>
 
@@ -299,7 +94,6 @@
 <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script>
 
-<script src="../js/index.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function () {

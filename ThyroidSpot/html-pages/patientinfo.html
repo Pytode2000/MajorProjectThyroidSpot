@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" />
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://printjs-4de6.kxcdn.com/print.min.css">
@@ -137,7 +138,7 @@
                     </tr>
                     </table>
                     <div style="text-align: center; margin-bottom: 2em;">
-                        <button id="btnRegister" class="btn btn-dark btn-block bold" onclick="postPatientInfo()">Create Patient Info</button>
+                        <button id="btnRegister" class="btn btn-dark custom-class bold" onclick="postPatientInfo()">Create Patient Info</button>
                     </div>
                 </div>
             </div>
@@ -149,7 +150,7 @@
             <div class="w3-modal-content">
                 <div class="w3-container">
                     <span id="closereportmodal" onclick="document.getElementById('newReportModal').style.display='none' " class="w3-button w3-display-topright">&times;</span>
-                    <h1 id="diseaseName">Create Health Report</h1>
+                    <h2 id="diseaseName" style="text-align: center;">Create Health Report</h2>
                     <hr>
                     
                     <div class="modal-body">
@@ -158,43 +159,52 @@
                             <div class="col" style="text-align: left;">
                                 <label>FT4:</label>
                                 <div>
-                                <input type="email" class="form-control" id="newFT4" placeholder="Enter FT4...">
+                                <input type="text" class="form-control" id="newFT4" placeholder="Enter FT4..." required>
                                 </div>
                             </div>
                         </div>
 
-
-
                         <br>
-                        <div class="form-group">
-                            <label for="newTSH">TSH:</label>
-                            <input type="email" class="form-control" id="newTSH" placeholder="Enter TSH...">
+                        <div class="form-row col-xs-4  col-md-12">
+                            <div class="col" style="text-align: left;">
+                                <label>TSH:</label>
+                                <div>
+                                <input type="text" class="form-control" id="newTSH" placeholder="Enter TSH..." required>
+                                </div>
+                            </div>
                         </div>
                         <br>
                     
-                            <div class="move">
-                                <label>Drug:</label>
-                            
-                                <input class="newDrugName" maxlength="255" placeholder="Enter drug..." required>
-                                
+                           
+                            <div class="form-row col-xs-4  col-md-12">
+                                <div class="col-md-6">
+                                    <label>Drug:</label>
+                                    <div>
+                                    <input type="text" class="newDrugName" placeholder="Enter Drug..." required>
+                                    </div>
+                                </div>
+
                                 <br class="divider">
-                                <br class='divider'>
-                                
-                                <label>Dose:</label>
-                            
-                                <input class="newDrugDose" maxlength="5" placeholder="Enter dose..." required>
+    
+                                <div class="col-md-6">
+                                    <label>Dose:</label>
+                                    <div>
+                                    <input type="text" class="newDrugDose" placeholder="Enter Dose..." required>
+                                    </div>
+                                </div> 
                             </div>
+                        
 
+                        <div id="addon">
+                        </div>
 
-                    <div id="addon" class="col-md-2">
-                    </div>
-                </div>
-                    <div style="text-align: center; margin-top: 1em; margin-bottom: 4em;">
-                        <button id="addMoreRows">Add another drug dose</button>
-                    </div>
-                    <div style="text-align: center; padding-bottom: 2em;">
-                        <button id="btnRegister" type="submit" class="btn btn-dark btn-block bold">Save Report</button>
-                    </div>
+                        </div>
+                            <div style="text-align: center; margin-bottom: 1em;">
+                                <button id="addMoreRows" class="btn btn-secondary custom-class">Add another drug dose</button>
+                            </div>
+                            <div style="text-align: center; padding-bottom: 1em;">
+                                <button type="submit" class="btn btn-dark btn-SaveReport custom-class bold">Save Report</button>
+                            </div>
                     </form>
                 </div>
             </div>
@@ -208,37 +218,49 @@
                     <span onclick="document.getElementById('prescriptionModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
                     <h2 style="text-align: center;">Prescription</h2>
                     
-                    <table id="tableReadings" style="margin-right: auto; margin-left: auto; margin-bottom: 2em;">
+                    <table class="table table-sm" style="width: 95%; margin-left: auto; margin-right: auto;">
                         <tr>
-                            <td style=" text-align:center;">Diagnosis:</td>
+                            <td style=" text-align:left; width: 60%;">Diagnosis:</td>
                             <td id="tdDiagnosis"></td>
                         </tr>
                         <tr>
-                            <td style="text-align:center;">Checkup date:</td>
+                            <td style="text-align:left;">Checkup date:</td>
                             <td id="tdCheckup"></td>
                         </tr>
                         <tr>
-                            <td style="text-align:center;">FT4:</td>
+                            <td style="text-align:left;">FT4:</td>
                             <td id="tdFt4"></td>
                         </tr>
                         <tr>
-                            <td style="text-align:center;">TSH:</td>
-                            <td id="tdTsh"></td>
+                            <td style="text-align:left;">TSH:</td>
+                            <td id="tdTsh" ></td>
                         </tr>
                     </table>
                     
-                    <table style="margin-right: auto; margin-left: auto; margin-bottom: 0.5em;">
-                        <tr>
-                            <th>Drug name</th>
-                            <th style="width: 42%;"></th>
-                            <th>Dosage</th>
-                        </tr>
-                    </table>
+                  <div class="table-responsive-sm">
+                    <table class="table" style="background-color: none">
 
-
-                    <table id="prescriptionTable">
-                    </table>
-
+                        <!--Table head-->
+                        <thead>
+                          <tr>
+                            <th style="width: 59%;">Drug Name</th>
+                            
+                            <th class="th-md">Dosage</th>
+                            
+                          </tr>
+                        </thead>
+                        <!--Table head-->
+                      
+                        <!--Table body-->
+                        <tbody id="prescriptionTable" class="table-light">
+                          
+                        </tbody>
+                        <!--Table body-->
+                      
+                      
+                      </table>
+                      <!--Table-->
+                      </div>
                 </div>
             </div>
         </div>

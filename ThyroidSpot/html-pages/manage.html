@@ -45,7 +45,7 @@
     <main>
         <div class="content">
             <div class="containter container-sm">
-                <h2 class="text-center">Manage</h2>
+                <h1 class="text-center"> <i class="svg-inline--fa fas fa-edit fa-primary fa-w-16"></i> Manage</h1>
 
 
 
@@ -57,7 +57,7 @@
                     <button class="btn btn-link" id="searchButton"><i class="fas fa-search close" onclick="searchFunction(); clearFilter();"></i></button>
 
 
-                    <select id="filterSearch" class="custom-select" style="width:20%; float: right;" onchange="filterByAccountType()">
+                    <select id="filterSearch" class="custom-select" style="width:25%; float: right;" onchange="filterByAccountType()">
                         <option value="">All</option>
                         <option value="admin">Admin</option>
                         <option value="clinician">Clinician</option>
@@ -217,9 +217,6 @@
 <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script>
 
 <script src="../js/manage.js"></script>
-
-
-<!-- <script src="../js/index.js"></script> -->
 
 <script type="text/javascript">
     $(document).ready(function () {

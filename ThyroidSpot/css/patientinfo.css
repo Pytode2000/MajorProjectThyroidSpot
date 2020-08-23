@@ -37,29 +37,42 @@
   /*for dev and debugging purposes only*/
   #newPatientModal{
     text-align: center;
-    
   }
 
-  #newReportModal{
-    text-align: center;
-  }
   .w3-modal-content{
     width: 450px;
   }
 
   #createnfotable{
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 2em;
   }
 
   .newDrugName{
-    width: 25%;
+    width: 100%;
   }
   .newDrugDose{
-    width: 25%;
+    width: 75%;
   }
   .move{
-    margin-left: 2.5em;
+    width: fit-content;
+  }
+
+  #addMoreRows{
+    margin-top: 1em;
+  }
+
+  .btn-SaveReport{
+    width: 45%;
+  }
+
+  #drugInput{
+    float: left;
+    width: 30%;
+  }
+  #doseInput{
+    float: right;
+    width: 40%;
+    margin-right: 25%;
   }
 
   .divider{
@@ -148,7 +161,9 @@
     margin-left: auto;
     margin-right: auto;
   }
-
+  .table-info td, th{
+    background-color: none;
+  }
 
   /*PATIENT REPORT + GRAPH CSS*/
   #reportcontainer {
@@ -222,11 +237,7 @@
     /* margin-bottom: 5rem;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
   }
-  /* th, td{
-    display: block;
-    padding-left: 0%;
-    padding-right: 0%;
-  } */
+  
 
   #missingInfo{
     margin-top: 60%;
@@ -365,20 +376,40 @@
   }
 
   /* create patient info drug name + drug dose */
-  
+  #createnfotable{
+    margin-left: 1em;
+  }
+
   .divider{
     display: block;
   }
 
   .newDrugName{
-    width: 59%;
+    width: 100%;
   }
   .newDrugDose{
-    width: 59%;
+    width: 100%;
   }
 
   .move{
     margin-left: 0em;
   }
+
+  #newFT4{
+    width: 100%;
+  }
+
+  #newTSH{
+    width: 100%;
+  }
+
+  #addMoreRows{
+    margin-top: 1em;
+  }
+
+  .custom-class{
+      width: 100%; display:block; 
+  }
+
 }
   

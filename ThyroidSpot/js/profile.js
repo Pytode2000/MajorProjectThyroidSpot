@@ -199,7 +199,7 @@ function logout() {
     firebase.auth().signOut().then(function () {
         // Sign-out successful.
         console.log("Logged Out");
-        window.location.href = 'index.html';
+        window.location.href = 'account.html';
 
     }).catch(function (error) {
         console.log("Error occurred when logging out.");
@@ -242,7 +242,7 @@ function deleteAccount() {
             });
         }
 
-        window.location.href = "index.html";
+        window.location.href = "account.html";
 
     }).catch(function (error) {
         // An error happened.
