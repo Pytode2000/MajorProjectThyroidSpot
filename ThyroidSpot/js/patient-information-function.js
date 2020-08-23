@@ -242,6 +242,9 @@ function getReportID(){
     });
 }
 
+
+
+
 $(document).on("click", "#viewdosage", function () {
     currentReportID = $(this).attr('num');
     console.log(currentReportID);

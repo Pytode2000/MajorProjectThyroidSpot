@@ -168,9 +168,9 @@
     flex: 0 0 50%;
   }
   
-  #graphcontainer {
+  #graphcontainerr {
     
-    height: 420px;
+    height: 400px;
     background: rgb(151, 151, 151);
     flex: 1;
   }
