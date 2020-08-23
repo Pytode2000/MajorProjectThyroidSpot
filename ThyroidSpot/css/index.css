@@ -1,0 +1,67 @@
+.carousel-caption {
+    background: black;
+    opacity: 0.5;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 30%;
+
+}
+
+.carousel-indicators {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.carousel-indicators>li {
+    border-radius: 100%;
+    width: 10px;
+    height: 10px;
+    border: none;
+}
+
+.carousel-caption>h3,
+.carousel-caption>p {
+    text-align: left;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+
+@media (max-width: 768px) {
+    .carousel-caption>h3 {
+        font-size: 2.5vw;
+        line-height: 0;
+    }
+
+    .carousel-caption>p {
+        font-size: 1.5vw;
+    }
+
+    .carousel-caption {
+
+        height: 35%;
+
+    }
+}
+
+@media (min-width: 769px) {
+    .carousel-caption>h3 {
+        font-size: 1.30vw;
+    }
+
+    .carousel-caption>p {
+        font-size: 1vw;
+    }
+}
+
+.instructionBox {
+    height: 300px;
+    border: 5px solid #df49a6;
+    border-radius: 12px;
+}
+
+.bottomCard {
+    height:30%;
+}
