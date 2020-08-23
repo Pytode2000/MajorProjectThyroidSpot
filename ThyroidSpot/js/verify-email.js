@@ -28,7 +28,7 @@ function resendVerificationEmail() {
 // LOGOUT
 function logout() {
     firebase.auth().signOut().then(function () {
-        window.location.href = 'index.html';
+        window.location.href = 'account.html';
 
     }).catch(function (error) {
     });

@@ -12,7 +12,7 @@ btnLogout.addEventListener("click", e => {
     firebase.auth().signOut().then(function () {
         // Sign-out successful.
         console.log("Logged Out");
-        window.location.href = 'index.html';
+        window.location.href = 'account.html';
 
     }).catch(function (error) {
         console.log("Error occurred when logging out");
@@ -63,13 +63,13 @@ function navigation_control() {
     // const currentLoc = window.location.href;
     // console.log(currentLoc)
     // if (currentLoc == "http://127.0.0.1:5500/html-pages/index.html" && user_logged_in == 'y') {
-    if (matchPath("index.html") == true && user_logged_in == 'y') {
+    if (matchPath("account.html") == true && user_logged_in == 'y') {
         window.location.href = "profile.html";
     }
     // if (currentLoc == "http://127.0.0.1:5500/html-pages/profile.html" && user_logged_in != 'y') {
     if (matchPath("profile.html") == true && user_logged_in != 'y') {
 
-        window.location.href = "index.html";
+        window.location.href = "account.html";
     }
     // User not logged in.
 
@@ -79,7 +79,7 @@ function navigation_control() {
         // if (currentLoc == "http://127.0.0.1:5500/html-pages/manage.html") {
         if (matchPath("manage.html") == true) {
 
-            window.location.href = "index.html";
+            window.location.href = "account.html";
         }
     }
 
@@ -87,7 +87,7 @@ function navigation_control() {
     if (user_logged_in == 'n' || user_account_type != "clinician") {
         // Blocked URLs.
         //if () {
-        //    window.location.href = "index.html";
+        //    window.location.href = "account.html";
         //
     }
 
@@ -97,12 +97,12 @@ function navigation_control() {
         // if (currentLoc == "http://127.0.0.1:5500/html-pages/disease.html") {
         if (matchPath("disease.html") == true) {
 
-            window.location.href = "index.html";
+            window.location.href = "account.html";
         }
         // else if (currentLoc == "http://127.0.0.1:5500/html-pages/patientinfo.html") {
         if (matchPath("patientinfo.html") == true) {
 
-            window.location.href = "index.html";
+            window.location.href = "account.html";
         }
     }
 
