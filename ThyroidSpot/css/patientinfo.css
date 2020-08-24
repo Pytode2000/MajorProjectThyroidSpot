@@ -183,10 +183,10 @@
     flex: 0 0 50%;
   }
   
-  #graphcontainerr {
+  #chart-container {
     
-    height: 400px;
-    background: rgb(151, 151, 151);
+    height: 450px;
+    width: 320px;
     flex: 1;
   }
   
@@ -257,7 +257,7 @@
   }
 
   #searchRPTcontain{
-      margin-bottom: 3em; 
+      margin-bottom: 7em; 
       margin-top: 2em; 
       margin-right: auto;
       margin-left: auto;
@@ -287,7 +287,7 @@
     flex: 1;
   }
   #createrptbtn{
-    margin-left: 5px;
+    margin-left: 1em;
     width: 85%;
   }
 
@@ -310,11 +310,11 @@
     z-index: 2;
   }
 
-  #graphcontainer {
+  #chart-container {
+    margin-top: 15em;
     margin-right: 5%;
-    
     width: auto;
-    background: rgb(151, 151, 151);
+    height: 250px;
     display: block;
     position: relative;
     z-index: 1;
