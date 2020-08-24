@@ -251,9 +251,9 @@ function searchPatientReport(){
     for (i = 0; i < secondReportArray.length; i++){
         viewdosagebtn = "<button id='viewdosage' num="+secondReportArray[i].report_id+" class=' btn btn-info btn-sm'>View Prescription</button>";
         //TODO: onclick on button to view report in a modal (then can add on a button to export it as PDF)
-        $('#dosagehist').append("<div style='margin-bottom: 0.5em;'><table class='dosageTable'>"+
-        "<tr><td class='reportTD'>"+secondReportArray[i].timestamp+"</td><td class='reportFT'>"+secondReportArray[i].FT4+"</td><td class='reportTSH'>"+
-        ""+secondReportArray[i].TSH+"</td><td class='reportDRNA'>"+viewdosagebtn+"</td></tr></table></div>");
+        $('#dosagehist').append("<tr style='margin-bottom: 0.5em;'>"+
+        "<tr><td>"+secondReportArray[i].timestamp+"</td><td>"+secondReportArray[i].FT4+"</td><td>"+
+        ""+secondReportArray[i].TSH+"</td><td>"+viewdosagebtn+"</td></tr></tr>");
     }
 }
 
