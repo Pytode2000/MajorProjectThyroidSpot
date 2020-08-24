@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="../assets/images/thyroidspot-logo.png" />
+
+    <!-- Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" />
+
+    <!-- FontAwesome (Icons) -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+
+
+
+    <!-- Jquery -->
+
+
+    <!-- For Carousel -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX"
+        crossorigin="anonymous">
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+    <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+    <!-- <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"> -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+
+
+    <!-- Local Imports -->
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/index.css" />
+
+
+
+    <title>Thyroid Spot</title>
+</head>
+
+<body>
+
+    <div id="navbar-html"></div>
+
+    <main>
+        <div class="content">
+            <h1 class="text-center"> <i class="svg-inline--fa fas fa-home fa-primary fa-w-16"></i> Home</h1>
+
+            <!-- <h3>New index.html (home page) (introduction page)</h3>
+
+            <a href="" data-toggle="modal" data-target="#helpModal" class="nav-link">
+                <i class="svg-inline--fa fas fa-question-circle fa-primary fa-w-16 fa-2x"></i>
+                <span class="link-text">Help</span>
+            </a> 
+
+            <p>just throwing ideas here, ignore.<br> middle-left 65~75% will be a carousel. right side will be the instructions
+                on how to use TS. Use bootstrap's grid </p> -->
+            <div class="container container-large" style="background: black;">
+                <div class="row" style="padding: 0; margin-top:2%;">
+                    <div class="col-sm-12 col-lg-8">
+
+                        <div id="TScarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
+
+
+
+                            <!-- Indicators -->
+                            <ol class="carousel-indicators">
+                                <li data-target="#TScarousel" data-slide-to="0" class="active"></li>
+                                <li data-target="#TScarousel" data-slide-to="1"></li>
+                                <li data-target="#TScarousel" data-slide-to="2"></li>
+                                <li data-target="#TScarousel" data-slide-to="3"></li>
+
+                            </ol>
+
+
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner">
+
+
+                                <div class="item active">
+                                    <img src="https://unsplash.it/1920/1080?random=1" alt="Chania">
+                                    <div class="carousel-caption">
+                                        <h3>Insert Title</h3>
+                                        <p>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+                                            been the industry's standard dummy text ever since the 1500s, when an unknown
+                                            printer took a galley of type and scrambled it to make a type specimen book.
+                                            When an unknown printer took a galley of type and scrambled it to make a type
+                                            specimen book. Maximum 3 lines.</p>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <img src="https://unsplash.it/1920/1080?random=2" alt="Chicago">
+                                    <div class="carousel-caption">
+                                        <h3>Lorem Ipsum</h3>
+                                        <p>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+                                            been the industry's standard dummy text ever since the 1500s, when an unknown
+                                            printer took a galley of type and scrambled it to make a type specimen book.</p>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <img src="https://unsplash.it/1920/1080?random=3" alt="New York">
+                                    <div class="carousel-caption">
+                                        <h3>Lorem Ipsum</h3>
+                                        <p>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+                                            been the industry's standard dummy text ever since the 1500s, when an unknown
+                                            printer took a galley of type and scrambled it to make a type specimen book.</p>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <img src="https://unsplash.it/1920/1080?random=4" alt="New York">
+                                    <div class="carousel-caption">
+                                        <h3>Lorem Ipsum</h3>
+                                        <p>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+                                            been the industry's standard dummy text ever since the 1500s, when an unknown
+                                            printer took a galley of type and scrambled it to make a type specimen book.</p>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+                            <!-- Left and right controls -->
+                            <a class="left carousel-control" href="#TScarousel" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#TScarousel" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+
+
+
+                    </div>
+
+
+
+                    <div class="col-sm-12 col-lg-4">
+
+                        <div class="container container-large instructionBox">
+                            <!-- INSTRUCTION BOX Test -->
+                            <!-- <h4 class="text-center">How to use <b>ThyroidSpot</b></h4> -->
+                            <div class="card border-danger" style="height: 100%;">
+                                <div class="card-header text-center">
+                                    <h4 card-title>ThyroidSpot Guide</h4>
+                                    <!-- <b>ThyroidSpot</b> Guide -->
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                                </div>
+                                <div class="card-footer text-muted">
+                                    <ul class="instructionUL">
+                                        <li>Find out more about A*STAR in <a href="about.html">About Us</a>.</li>
+
+                                        <li>
+                                            Need help/found a bug? Contact the team <a href="" data-toggle="modal" data-target="#helpModal">here</a>.
+                                        </li>
+                                        <li>Stay connected with us. Follow us on <a>social media</a>.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+
+                <br>
+                <!-- min-height: 200px; max-height:200px; height: 200px;  -->
+                <div class="row" style="margin-left: 1px; margin-right: 1px;">
+                    <!-- <div class="col-sm-2" style="background: red;">About 5 or 6 boxes (less popular news or something). Image on top, caption below.<br></div> -->
+                    <div class="col-sm-6 col-lg-2" style="background: red; height: 200px;"><br></div>
+                    <div class="col-sm-6 col-lg-2" style="background: green; height: 200px;"><br></div>
+                    <div class="col-sm-6 col-lg-2" style="background: yellow; height: 200px;"><br></div>
+                    <div class="col-sm-6 col-lg-2" style="background: orange; height: 200px;"><br></div>
+                    <div class="col-sm-6 col-lg-2" style="background: blue; height: 200px;"><br></div>
+                    <div class="col-sm-6 col-lg-2" style="background: purple; height: 200px;"><br></div>
+                </div>
+
+
+
+                <!-- <div class="card-group">
+                    <div class="card bg-primary">
+                      <div class="card-body text-center">
+                        <p class="card-text">Some text inside the first card</p>
+                      </div>
+                    </div>
+                    <div class="card bg-warning">
+                      <div class="card-body text-center">
+                        <p class="card-text">Some text inside the second card</p>
+                      </div>
+                    </div>
+                    <div class="card bg-success">
+                      <div class="card-body text-center">
+                        <p class="card-text">Some text inside the third card</p>
+                      </div>
+                    </div>
+                    <div class="card bg-danger">
+                      <div class="card-body text-center">
+                        <p class="card-text">Some text inside the fourth card</p>
+                      </div>
+                    </div>
+                  </div> -->
+
+
+
+            </div>
+
+        </div>
+
+
+        <div id="footer-html"></div>
+
+    </main>
+
+    <!-- Help modal -->
+    <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="helpModalLabel">Help</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Clarify if content will be provided. -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#navbar-html").load("../html-components/navbar.html");
+
+        $("#footer-html").load("../html-components/footer.html");
+
+    });
+</script>
+
+
+
+
+
+</html>
