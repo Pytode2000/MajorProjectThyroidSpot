@@ -54,15 +54,26 @@
         <div id="reportcontainer">
             
             <div id="historycontainer">
-                <table class='centerTable' style="margin-top: 1em;">
+                <!-- <table class='centerTable' style="margin-top: 1em;">
                     <tr><th id="labelDate" >Date</th>
                         <th id="labelFT4" >FT4</th>
                         <th id="labelTSH">TSH</th>
                         <th id="labelDrug">Drug Dose</th>
+                </table> -->
+                <table id="class-report" class="table table-md" style="margin-top: 1em;">
+                    <thead>
+                    <tr>
+                        <th class="th-sm">Date</th>
+                        <th class="th-sm">FT4</th>
+                        <th class="th-sm">TSH</th>
+                        <th scope="col">Drug Dose</th>
+                    </tr>
+                    </thead>
+                    <tbody id="dosagehist"></tbody>
                 </table>
                 <hr>
-                <div id="dosagehist">
-                </div>
+                <!-- <div id="dosagehist">
+                </div> -->
             </div>
             <div id="chart-container">
                 <canvas id="graphcontainer" >

@@ -197,9 +197,9 @@ function getPatientReport() {
                     viewdosagebtn = "<button id='viewdosage' num="+reportArray[i].report_id+" class=' btn btn-info btn-sm'>View Prescription</button>";
 
                     //TODO: onclick on button to view report in a modal (then can add on a button to export it as PDF)
-                    $('#dosagehist').append("<div style='margin-bottom: 0.5em;'><table class='dosageTable'>"+
-                    "<tr><td class='reportTD'>"+report.timestamp+"</td><td class='reportFT'>"+report.FT4+"</td><td class='reportTSH'>"+
-                    ""+report.TSH+"</td><td class='reportDRNA'>"+viewdosagebtn+"</td></tr></table></div>");
+                    $('#dosagehist').append("<tr style='margin-bottom: 0.5em;'>"+
+                    "<tr><td>"+report.timestamp+"</td><td>"+report.FT4+"</td><td>"+
+                    ""+report.TSH+"</td><td>"+viewdosagebtn+"</td></tr></tr>");
                     
                 
                     if (currentPatientID != reportArray[i].patient_id && i == reportArray.length-1){

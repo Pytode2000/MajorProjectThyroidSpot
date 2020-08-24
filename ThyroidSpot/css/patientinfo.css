@@ -30,6 +30,10 @@
     flex: 1;
   }
 
+  .class-report{
+    margin-bottom: 5em;
+  }
+
   #rpt{
     text-align: center;
   }
@@ -97,22 +101,6 @@
 
   .shiftedrow{
       padding-left: 40px;
-  }
-  
-  .centerText {
-    margin-top: 20%;
-    text-align: center;
-    position: relative;
-  }
-
-  /*DOSAGE REPORT TABLE CSS*/
-  .centerTable {
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 14px;
-    position: relative;
-    width: 100%;
-    text-align: center;
   }
 
   /*PATIENT INFO TABLE CSS*/
@@ -201,13 +189,7 @@
     max-width: 500px;
   }
   
-  .centerTitle {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 16px;
-  }
+
   #labelDate{
     padding-left:1em;
   }
@@ -257,7 +239,7 @@
   }
 
   #searchRPTcontain{
-      margin-bottom: 7em; 
+      margin-bottom: 8em; 
       margin-top: 2em; 
       margin-right: auto;
       margin-left: auto;
@@ -320,26 +302,9 @@
     z-index: 1;
   }
       
-  .centerTable{
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  #labelDate{
-    padding-left:1em;
-  }
-  #labelFT4{
-    padding-left:5em;
-    padding-right: 0em;
-  }
-  #labelTSH{
-    padding-left: 1em;
-  }
-  #labelDrug{
-    padding-left:1em;
-  }
-  #labelDose{
-    padding-left:3em;
+
+  #class-report{
+    margin-bottom: 5em;
   }
 
 
