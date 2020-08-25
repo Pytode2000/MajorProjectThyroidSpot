@@ -1,6 +1,8 @@
 var userURI = "https://localhost:44395/api/User/";
 var patientInfoURI = "https://localhost:44395/api/patientinfo/";
+var patientInfoURI2 = "https://localhost:44395/api/patientinfo";
 
+var patient_doctor;
 
 if (sessionStorage.getItem("user_account_type") != "patient") // Only user_account_type = patient wil be be able to see their own patient information
 {
@@ -91,6 +93,7 @@ function getPatientInfo() {
             document.getElementById("profBloodType").innerHTML = currentPatientArray.blood_type;
             document.getElementById("profDOB").innerHTML = currentPatientArray.date_of_birth;
             document.getElementById("profNRIC").innerHTML = currentPatientArray.ic_number;
+            patient_doctor = currentPatientArray.doctor_id;
             patient_table_patient_id = currentPatientArray.patient_id;
 
 
@@ -123,7 +126,7 @@ if (sessionStorage.getItem("user_account_type") == "patient") {
 
 
 
-function changeEmail() {
+function changeFbEmail() {
     var user = firebase.auth().currentUser;
 
     const txtEmail = document.getElementById("changeEmail");
@@ -143,6 +146,7 @@ function changeEmail() {
             }, 3000);
 
         }).catch(function (error) {
+
         });
 
 
@@ -280,13 +284,13 @@ function updateProfile() {
 
     var patientInfoInstance = {
         user_id: user_id, diagnosis: diagnosisChosen, ic_number: $('#editId').val(),
-        date_of_birth: $('#editBirthdate').val(), gender: genderChosen, blood_type: bloodTypeChosen, timestamp: "-"
+        date_of_birth: $('#editBirthdate').val(), gender: genderChosen, blood_type: bloodTypeChosen, timestamp: "-", doctor_id: patient_doctor
     };
 
 
     $.ajax({
         type: 'PUT',
-        url: patientInfoURI + patient_table_patient_id,
+        url: patientInfoURI2 +'?userid=' + user_id,
         data: JSON.stringify(patientInfoInstance),
         dataType: 'json',
         contentType: 'application/json',

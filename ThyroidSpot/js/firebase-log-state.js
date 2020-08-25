@@ -18,7 +18,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         if (firebaseUser.emailVerified === true) {
             // If email is verified, on login/registration, GET "user" table's "account_type" via "user_id" (firebase unique id, or uid).
             currentUserArray = []
-            
+
             $.ajax({
                 type: 'GET',
                 url: userURI + firebaseUser.uid,
@@ -43,7 +43,13 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 
                             firebaseUser.delete().then(function () {
                                 // User deleted from FB.
+
                                 console.log("Firebase instance deleted.");
+                                sessionStorage.setItem("user_logged_in", 'n');
+                                sessionStorage.setItem("user_account_type", "none")
+                                sessionStorage.setItem("user_email", "none");
+                                sessionStorage.setItem("user_unique_id", "none")
+
                             }).catch(function (error) {
                                 console.log("FB user null")
 
