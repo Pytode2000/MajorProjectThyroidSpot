@@ -1,3 +1,5 @@
+
+
 .carousel-caption {
     background: black;
     opacity: 0.5;
@@ -28,24 +30,26 @@
     margin-right: 20px;
 }
 
-
+/* Max-width means if screen is less or equal */
 @media (max-width: 768px) {
     .carousel-caption>h3 {
-        font-size: 2.5vw;
+        font-size: 3vw;
         line-height: 0;
     }
 
     .carousel-caption>p {
-        font-size: 1.5vw;
+        font-size: 1.8vw;
     }
 
     .carousel-caption {
 
-        height: 35%;
-
+        height: 45%;
+    }
+    .instructionBox {
+        margin-top: 3%;
     }
 }
-
+/* Min-width means if screen is more or equal */
 @media (min-width: 769px) {
     .carousel-caption>h3 {
         font-size: 1.30vw;
