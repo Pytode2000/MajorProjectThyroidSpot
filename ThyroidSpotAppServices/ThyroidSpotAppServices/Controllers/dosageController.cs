@@ -52,13 +52,16 @@ namespace ThyroidSpotAppServices.Controllers
                 var dosage = entities.drug_dosage.Find(id);
                 dosage.drug_name = drug.drug_name;
                 dosage.drug_dose = drug.drug_dose;
+                dosage.drug_days = drug.drug_days;
+                dosage.drug_img = drug.drug_img;
+                dosage.report_id = drug.report_id;
 
                 entities.Entry(dosage).State = System.Data.Entity.EntityState.Modified;
                 entities.SaveChanges();
             }
         }
 
-        //delete dosage
+        //delete dosage via dosage id
         public string Delete(int id)
         {
             using (ThyroidDataEntities entities = new ThyroidDataEntities())
@@ -67,6 +70,23 @@ namespace ThyroidSpotAppServices.Controllers
                 entities.drug_dosage.Remove(drugdose);
                 entities.SaveChanges();
                 return "Deleted Successfully";
+            }
+        }
+
+        //delete prescriptions by patient id
+        public string DeleteFromPatientID(int patientid)
+        {
+            using (ThyroidDataEntities entities = new ThyroidDataEntities())
+            {
+
+                var infoids = entities.drug_dosage.Where(w => w.patient_id == patientid);
+
+                foreach (drug_dosage infoid in infoids)
+                {
+                    entities.drug_dosage.Remove(infoid);
+                }
+                entities.SaveChanges();
+                return "Prescriptions deleted";
             }
         }
 

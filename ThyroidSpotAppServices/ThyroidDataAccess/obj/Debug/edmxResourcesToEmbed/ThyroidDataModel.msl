@@ -36,9 +36,21 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="diagnosis">
+      <EntityTypeMapping TypeName="ThyroidDataModel.diagnosis">
+        <MappingFragment StoreEntitySet="diagnosis">
+          <ScalarProperty Name="diagnosis1" ColumnName="diagnosis" />
+          <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+          <ScalarProperty Name="diagnosis_id" ColumnName="diagnosis_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="drug_dosage">
       <EntityTypeMapping TypeName="ThyroidDataModel.drug_dosage">
         <MappingFragment StoreEntitySet="drug_dosage">
+          <ScalarProperty Name="drug_img" ColumnName="drug_img" />
+          <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+          <ScalarProperty Name="drug_days" ColumnName="drug_days" />
           <ScalarProperty Name="report_id" ColumnName="report_id" />
           <ScalarProperty Name="drug_dose" ColumnName="drug_dose" />
           <ScalarProperty Name="drug_name" ColumnName="drug_name" />
@@ -55,7 +67,6 @@
           <ScalarProperty Name="gender" ColumnName="gender" />
           <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
           <ScalarProperty Name="ic_number" ColumnName="ic_number" />
-          <ScalarProperty Name="diagnosis" ColumnName="diagnosis" />
           <ScalarProperty Name="user_id" ColumnName="user_id" />
           <ScalarProperty Name="patient_id" ColumnName="patient_id" />
         </MappingFragment>

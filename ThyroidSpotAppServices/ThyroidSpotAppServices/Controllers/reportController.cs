@@ -53,7 +53,7 @@ namespace ThyroidSpotAppServices.Controllers
             }
         }
 
-        //delete report
+        //delete report by report_id
         public string Delete(int id)
         {
             using (ThyroidDataEntities entities = new ThyroidDataEntities())
@@ -65,7 +65,22 @@ namespace ThyroidSpotAppServices.Controllers
             }
         }
 
+        //delete reports by patient id
+        public string DeleteByPatient(int patientid)
+        {
+            using (ThyroidDataEntities entities = new ThyroidDataEntities())
+            {
 
+                var infoids = entities.patient_report.Where(w => w.patient_id == patientid);
+
+                foreach (patient_report infoid in infoids)
+                {
+                    entities.patient_report.Remove(infoid);
+                }
+                entities.SaveChanges();
+                return "Reports deleted";
+            }
+        }
 
     }
 }

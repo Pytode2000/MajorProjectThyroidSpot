@@ -54,6 +54,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="diagnosis.cs">
+      <DependentUpon>ThyroidDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="disease_information.cs">
       <DependentUpon>ThyroidDataModel.tt</DependentUpon>
     </Compile>

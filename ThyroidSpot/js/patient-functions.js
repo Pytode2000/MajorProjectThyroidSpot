@@ -382,6 +382,9 @@ function getReportID(){
     });
 }
 
+
+//TODO (1): add on 3 more input attributes (dosage 2, remarks and img)
+//TODO (2): to be moved to clinician side
 //Post drug name and drug dosage to dosage table
 function postDosage(){
     

@@ -49,13 +49,12 @@ namespace ThyroidSpotAppServices.Controllers
 
 
         //update report
-        public void PUT(string userid, patient_information pinfo)
+        public void PUT(int id, patient_information pinfo)
         {
             using (ThyroidDataEntities entities = new ThyroidDataEntities())
             {
-                var patientinfo = entities.patient_information.FirstOrDefault(e => e.user_id == userid);
+                var patientinfo = entities.patient_information.FirstOrDefault(e => e.patient_id == id);
                 patientinfo.user_id = pinfo.user_id;
-                patientinfo.diagnosis = pinfo.diagnosis;
                 patientinfo.ic_number = pinfo.ic_number;
                 patientinfo.date_of_birth = pinfo.date_of_birth;
                 patientinfo.gender = pinfo.gender;

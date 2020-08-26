@@ -17,6 +17,7 @@
     <EntitySet Name="disease_information" EntityType="Self.disease_information" />
     <EntitySet Name="user" EntityType="ThyroidDataModel.user" />
     <EntitySet Name="patient_report" EntityType="ThyroidDataModel.patient_report" />
+    <EntitySet Name="diagnosis" EntityType="ThyroidDataModel.diagnosis" />
     <EntitySet Name="drug_dosage" EntityType="ThyroidDataModel.drug_dosage" />
     <EntitySet Name="patient_information" EntityType="ThyroidDataModel.patient_information" />
   </EntityContainer>
@@ -39,6 +40,14 @@
     <Property Name="TSH" Type="Double" Nullable="false" />
     <Property Name="timestamp" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityType Name="diagnosis">
+    <Key>
+      <PropertyRef Name="diagnosis_id" />
+    </Key>
+    <Property Name="diagnosis_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="patient_id" Type="Int32" Nullable="false" />
+    <Property Name="diagnosis1" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
   <EntityType Name="drug_dosage">
     <Key>
       <PropertyRef Name="idDosage" />
@@ -47,6 +56,9 @@
     <Property Name="drug_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="drug_dose" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="report_id" Type="Int32" Nullable="false" />
+    <Property Name="drug_days" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="patient_id" Type="Int32" Nullable="false" />
+    <Property Name="drug_img" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="patient_information">
     <Key>
@@ -54,7 +66,6 @@
     </Key>
     <Property Name="patient_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="user_id" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="diagnosis" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="ic_number" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="true" />
     <Property Name="date_of_birth" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="gender" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
