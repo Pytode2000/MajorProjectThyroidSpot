@@ -383,39 +383,55 @@ function getReportID(){
 }
 
 
-//TODO (1): add on 3 more input attributes (dosage 2, remarks and img)
-//TODO (2): to be moved to clinician side
+//FOR KAILONG:
 //Post drug name and drug dosage to dosage table
 function postDosage(){
-    
-    console.log("calling post dosage")
-    
-    send = $('.newDrugName')
-    send2 = $('.newDrugDose')
 
-    array_to_add = []
-    for (i = 0 ; i < send.length; i++){
-        
-        druginfo = {report_id: captureportid, drug_name: send[i].value, drug_dose: send2[i].value}
-        array_to_add.push(druginfo)
-    }
-    
-    console.log(array_to_add)
+    //NOTE TO KAILONG: u need to get the report id on ur end to make this work,
+    //                 furthermore, the input for drug_img has yet to be edited
 
-    
-    $.ajax({
-        type: 'POST',
-        url: dosageURI,
-        data: JSON.stringify(array_to_add),
-        dataType: 'json',
-        contentType: 'application/json',
-        success: function (data) {
+    var f = $(".newDrugImage")[0].files[0]; // get image object (VARNING: NOT SURE IF THIS ONLY TAKES 1 IMAGE)
+    var reader = new FileReader();
+    //This function will be triggered after the code executes reader.readAsBinaryString(f);
+    reader.onload = (function (theFile) {
+        return function (e) {
+            var binaryData = e.target.result;
+            console.log("calling post dosage")
             
-            getOnePatientInfo();
-            document.getElementById('newPatientModal').style.display='none'
-            window.location.reload(); //reload page after adding so it shows the newly added report + prescription
-        }
-    });
+            send = $('.newDrugName')
+            send2 = $('.newDrugDose')
+            send3= $('.newTabletsDay')
+            send4 = $('.newRemarks')
+
+            array_to_add = []
+            for (i = 0 ; i < send.length; i++){
+                
+                //previously I've declared a capturereportid for adding prescription
+                druginfo = {report_id: captureportid, drug_name: send[i].value, drug_dose: send2[i].value, drug_days: send3[i].value, 
+                drug_img: window.btoa(binaryData), remarks: send4[i].value}
+                array_to_add.push(druginfo)
+            }
+            
+            console.log(array_to_add)
+
+            
+            $.ajax({
+                type: 'POST',
+                url: dosageURI,
+                data: JSON.stringify(array_to_add),
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (data) {
+                    
+                    getOnePatientInfo();
+                    document.getElementById('newPatientModal').style.display='none'
+                    window.location.reload(); //reload page after adding so it shows the newly added report + prescription
+                }
+            });
+        };
+    })(f);
+    // Read in the image file as a data URL.
+    reader.readAsBinaryString(f);
 }
 
 
@@ -427,13 +443,20 @@ function exportData(){
 
 
 
-
+//FOR KAILONG:
 $(document).on('click', '#addMoreRows', function(){
     document.getElementById('addon').style.display='block'
-    var html = "<div class='appended'><div class='form-row col-xs-4  col-md-12'><div class='col-md-6'><label>Drug:</label><div>"+
-    "<input type='text' class='newDrugName' placeholder='Enter Drug...' required></div></div>"+
-    "<br class='divider'><div class='col-md-6'><label>Dose:</label><div>"+
-   "<input type='text' class='newDrugDose' placeholder='Enter Dose...' required></div></div> </div></div>";
+    var html = "<div class='form-row col-xs-4  col-md-12'><div class='col-md-6'><label>Drug:</label><div><select name='bloodtype' class='newDrugName'>"+
+    "<option value='' selected disabled hidden>--Choose here--</option><option value='carbimazole'>carbimazole</option>"+
+    "<option value='methimazole'>methimazole</option><option value='thiamazole'>thiamazole</option>"+
+    "<option value='propylthiouracil'>propylthiouracil</option><option value='levothyroxine'>levothyroxine</option>"+
+    "<option value='liothyronine'>liothyronine</option><option value='propranolol'>propranolol</option>"+
+    "<option value='others'>others</option></select></div></div><br class='divider'>"+
+    "<div class='col-md-6'><label>Tablets:</label><div><input type='text' class='newDrugDose' placeholder='Enter No...' required>"+
+    "</div></div> </div><div class='form-row col-xs-4  col-md-12'><div class='col' style='text-align: left;'><label>Tablets per day:</label><div>"+
+    "<input type='text' class='form-control newTabletsDay' placeholder='Enter prescription...' required></div></div></div>"+
+    "<div class='form-row col-xs-4  col-md-12'><div class='col' style='text-align: left;'><label>Remarks:</label><div>"+
+    "<input type='text' class='form-control newRemarks' placeholder='Enter remarks...'></div></div></div><br></br>";
     $("#addon").append(html);
 });
 
