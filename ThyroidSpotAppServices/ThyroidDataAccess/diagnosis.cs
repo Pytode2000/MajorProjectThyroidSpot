@@ -12,15 +12,10 @@ namespace ThyroidDataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class drug_dosage
+    public partial class diagnosis
     {
-        public int idDosage { get; set; }
-        public string drug_name { get; set; }
-        public string drug_dose { get; set; }
-        public int report_id { get; set; }
-        public string drug_days { get; set; }
+        public int diagnosis_id { get; set; }
         public int patient_id { get; set; }
-        public string drug_img { get; set; }
-        public string remarks { get; set; }
+        public string diagnosis1 { get; set; }
     }
 }

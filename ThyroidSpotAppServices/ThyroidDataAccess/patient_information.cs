@@ -16,7 +16,6 @@ namespace ThyroidDataAccess
     {
         public int patient_id { get; set; }
         public string user_id { get; set; }
-        public string diagnosis { get; set; }
         public string ic_number { get; set; }
         public string date_of_birth { get; set; }
         public string gender { get; set; }

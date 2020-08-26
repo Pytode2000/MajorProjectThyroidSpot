@@ -28,12 +28,12 @@ namespace ThyroidSpotAppServices.Controllers
             }
         }
 
-        //get patient info via doctor id(can be used for doctor-only accs)
-        public patient_information GetByDoctorID(string doctorid)
+        //get patient informations via patient id(can be used for doctor-only accs)
+        public IEnumerable<patient_information> GetByDoctor(string doctorid)
         {
             using (ThyroidDataEntities entities = new ThyroidDataEntities())
             {
-                return entities.patient_information.FirstOrDefault(e => e.doctor_id == doctorid);
+                return entities.patient_information.Where(s => s.doctor_id == doctorid).ToList();
             }
         }
 
@@ -49,13 +49,12 @@ namespace ThyroidSpotAppServices.Controllers
 
 
         //update report
-        public void PUT(string userid, patient_information pinfo)
+        public void PUT(int id, patient_information pinfo)
         {
             using (ThyroidDataEntities entities = new ThyroidDataEntities())
             {
-                var patientinfo = entities.patient_information.FirstOrDefault(e => e.user_id == userid);
+                var patientinfo = entities.patient_information.FirstOrDefault(e => e.patient_id == id);
                 patientinfo.user_id = pinfo.user_id;
-                patientinfo.diagnosis = pinfo.diagnosis;
                 patientinfo.ic_number = pinfo.ic_number;
                 patientinfo.date_of_birth = pinfo.date_of_birth;
                 patientinfo.gender = pinfo.gender;
