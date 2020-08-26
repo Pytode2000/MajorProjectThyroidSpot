@@ -59,6 +59,7 @@
     <Property Name="drug_days" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="patient_id" Type="Int32" Nullable="false" />
     <Property Name="drug_img" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="patient_information">
     <Key>

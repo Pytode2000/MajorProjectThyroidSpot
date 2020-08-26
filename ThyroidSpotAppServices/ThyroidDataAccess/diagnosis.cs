@@ -17,6 +17,5 @@ namespace ThyroidDataAccess
         public int diagnosis_id { get; set; }
         public int patient_id { get; set; }
         public string diagnosis1 { get; set; }
-
     }
 }

@@ -21,5 +21,6 @@ namespace ThyroidDataAccess
         public string drug_days { get; set; }
         public int patient_id { get; set; }
         public string drug_img { get; set; }
+        public string remarks { get; set; }
     }
 }

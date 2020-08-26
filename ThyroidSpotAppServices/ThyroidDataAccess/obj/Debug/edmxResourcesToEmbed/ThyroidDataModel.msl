@@ -48,6 +48,7 @@
     <EntitySetMapping Name="drug_dosage">
       <EntityTypeMapping TypeName="ThyroidDataModel.drug_dosage">
         <MappingFragment StoreEntitySet="drug_dosage">
+          <ScalarProperty Name="remarks" ColumnName="remarks" />
           <ScalarProperty Name="drug_img" ColumnName="drug_img" />
           <ScalarProperty Name="patient_id" ColumnName="patient_id" />
           <ScalarProperty Name="drug_days" ColumnName="drug_days" />

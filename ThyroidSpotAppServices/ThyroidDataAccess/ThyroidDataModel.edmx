@@ -37,6 +37,7 @@
           <Property Name="drug_days" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="patient_id" Type="int" Nullable="false" />
           <Property Name="drug_img" Type="text" />
+          <Property Name="remarks" Type="text" />
         </EntityType>
         <EntityType Name="patient_information">
           <Key>
@@ -141,6 +142,7 @@
           <Property Name="drug_days" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="patient_id" Type="Int32" Nullable="false" />
           <Property Name="drug_img" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="patient_information">
           <Key>
@@ -208,6 +210,7 @@
           <EntitySetMapping Name="drug_dosage">
             <EntityTypeMapping TypeName="ThyroidDataModel.drug_dosage">
               <MappingFragment StoreEntitySet="drug_dosage">
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
                 <ScalarProperty Name="drug_img" ColumnName="drug_img" />
                 <ScalarProperty Name="patient_id" ColumnName="patient_id" />
                 <ScalarProperty Name="drug_days" ColumnName="drug_days" />

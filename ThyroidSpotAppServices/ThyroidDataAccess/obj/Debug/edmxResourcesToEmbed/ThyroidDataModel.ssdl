@@ -32,6 +32,7 @@
     <Property Name="drug_days" Type="nvarchar" MaxLength="255" Nullable="false" />
     <Property Name="patient_id" Type="int" Nullable="false" />
     <Property Name="drug_img" Type="text" />
+    <Property Name="remarks" Type="text" />
   </EntityType>
   <EntityType Name="patient_information">
     <Key>

@@ -55,6 +55,7 @@ namespace ThyroidSpotAppServices.Controllers
                 dosage.drug_days = drug.drug_days;
                 dosage.drug_img = drug.drug_img;
                 dosage.report_id = drug.report_id;
+                dosage.remarks = drug.remarks;
 
                 entities.Entry(dosage).State = System.Data.Entity.EntityState.Modified;
                 entities.SaveChanges();
