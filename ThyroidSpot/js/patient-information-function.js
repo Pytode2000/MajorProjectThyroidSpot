@@ -12,6 +12,7 @@ var secondReportArray = [] // for search function
 var storeReports = [] //second array for search function
 
 var diagnosis;
+var currentDiagnosis;
 
 var patientInfo = []
 currentPatientUserId = localStorage.getItem("currentPatientUserId")
@@ -44,6 +45,7 @@ function getSpecificPatientInfo(){
             $('#patient-date-of-birth').text("Date of Birth: "+ patientInfo.date_of_birth)
             $('#patient-gender').text("Gender: "+ patientInfo.gender)
             $('#patient-blood-type').text("Blood Type: "+ patientInfo.blood_type)
+            localStorage.setItem(currentDiagnosis,patientInfo.diagnosis)
 
         }
 });
@@ -163,7 +165,7 @@ function getPrescription(){
                     console.log(prescription)
                     
                     $('#prescriptionTable').append("<tr><td><input id='newDrugName"+i+"' value="+prescription.drug_name+">"+
-                    "</input></td><th style='width: 10%;'></th><td><input id='newDrugDose"+i+"' value="+prescription.drug_dose+"></input><button id='updatePrescriptionBtn' report-id='"+prescription.report_id+"' num='"+i+"' index='"+prescription.dosage_id+"'>update</button></td></tr>");
+                    "</input></td><th style='width: 20%;'></th><td><input id='newDrugDose"+i+"' value="+prescription.drug_dose+"></input><button id='updatePrescriptionBtn' report-id='"+prescription.report_id+"' num='"+i+"' index='"+prescription.dosage_id+"'>update</button></td></tr>");
 
                 }
             }
@@ -208,9 +210,10 @@ function getOneReportInfo(){
                 if (currentReportID == reportArray[i].report_id){
                     
                     var report = {report_id: reportArray[i].report_id, patient_id: reportArray[i].patient_id, drug_name: reportArray[i].drug_name, FT4: reportArray[i].FT4, TSH: reportArray[i].TSH, drug_dose: reportArray[i].drug_dose, timestamp: reportArray[i].timestamp}
-                    
+                    console.log("drugdose:"+report.drug_name)
                     //for prescription modal:
-                    $('#tdDiagnosis').text(diagnosis)
+                    patientDiagnosis = localStorage.getItem(currentDiagnosis)
+                    $('#tdDiagnosis').text(patientDiagnosis)
                     $('#tdCheckup').text(report.timestamp)
                     $('#tdFt4').text(report.FT4)
                     $('#tdTsh').text(report.TSH)

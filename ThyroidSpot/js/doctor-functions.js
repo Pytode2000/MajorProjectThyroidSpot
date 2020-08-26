@@ -42,7 +42,7 @@ function getAllPatientUnderClinician() {
                     $('#patientCard').append("<article class='patient-card'> <div class='text'><h3>Name</h3><p>"+patientInformationArray[i].ic_number+"</p>"+
                     "<p><b>Details</b></p><p>Gender:"+patientInformationArray[i].gender+"</p><p>Blood Type: "+patientInformationArray[i].blood_type+"</p>"+
                     "<button id='patientDetailsBtn' num='"+ patientInformationArray[i].patient_id + "' index='"+ patientInformationArray[i].user_id + "' class=' patient-details-btn' >More Details</button><br>"+
-                    "<button class='patient-details-btn' href='#'>Graph</button></div></article>");
+                    "<button id='openGraphModalBtn' class='patient-details-btn' >Graph</button></div></article>");
                 }   
                         
             }
@@ -90,6 +90,40 @@ $(document).on("click", "#patientDetailsBtn", function () {
 
 });
 
+$(document).on("click","#openGraphModalBtn", function () {
+    document.getElementById('graphModal').style.display='block'
+    var ctx = document.getElementById('displayGraph').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Ft4', 'TSH', 'ABC'],
+                datasets: [{
+                    label: 'value xx',
+                    data: [12, 19, 3],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+})
 
 
 //This function will get the full name of the patient
