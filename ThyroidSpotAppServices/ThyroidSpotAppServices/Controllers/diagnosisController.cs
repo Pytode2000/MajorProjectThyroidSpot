@@ -20,6 +20,16 @@ namespace ThyroidSpotAppServices.Controllers
         }
 
 
+        //get patient diagnosis via patient id
+        public IEnumerable<diagnosis> Get(int id)
+        {
+            using (ThyroidDataEntities entities = new ThyroidDataEntities())
+            {
+                return entities.diagnosis.Where(s => s.patient_id == id).ToList();
+            }
+        }
+
+
         //add patient diagnosis (done when patient signs up)
         public void POST(diagnosis diagnose)
         {
@@ -27,16 +37,6 @@ namespace ThyroidSpotAppServices.Controllers
             {
                 entities.diagnosis.Add(diagnose);
                 entities.SaveChanges();
-            }
-        }
-
-
-        //get patient info via doctor id(can be used for doctor-only accs)
-        public IEnumerable<diagnosis> Get(int id)
-        {
-            using (ThyroidDataEntities entities = new ThyroidDataEntities())
-            {
-                return entities.diagnosis.Where(s => s.patient_id == id).ToList();
             }
         }
 
