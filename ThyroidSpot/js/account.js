@@ -109,7 +109,7 @@ function register() {
 
             var patientInfoInstance = {
                 user_id: userUid, diagnosis: diagnosisChosen, ic_number: $('#registerId').val(),
-                date_of_birth: $('#registerBirthdate').val(), gender: genderChosen, blood_type: bloodTypeChosen, timestamp: "-"
+                date_of_birth: $('#registerBirthdate').val(), gender: genderChosen, blood_type: bloodTypeChosen, timestamp: "-", doctor_id: ""
             };
 
             console.log(patientInfoInstance);

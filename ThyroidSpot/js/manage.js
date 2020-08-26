@@ -33,7 +33,7 @@ function getAllUsers() {
 
 $(document).on("click", "#userAnchorList", function () {
     currentSelectedUserUid = $(this).attr("index");
-    // console.log(currentSelectedUserUid);
+    console.log(currentSelectedUserUid);
     getSelectedUser();
     $('#userModal').modal('toggle');
 });
@@ -61,7 +61,7 @@ function getSelectedUser() {
 
             }
             // For delete.
-            currentSelectedUserId = currentSelectedUserArray.id;;
+            currentSelectedUserId = currentSelectedUserArray.id;
             currentSelectedUserAccountType = currentSelectedUserArray.account_type;
 
         }
@@ -83,22 +83,40 @@ function deleteUser() {
 
     if (currentSelectedUserAccountType == "patient") {
         // If user is a patient, delete from the "patient_information" table.
+        // GET patient_id first
+        patientArray = [];
+        var selectedPatientID;
+
+
         $.ajax({
-            type: 'DELETE',
-            url: patientInfoURI + '/' + currentSelectedUserId,
+            type: 'GET',
+            url: patientInfoURI + '/' + currentSelectedUserUid,
             dataType: 'json',
             contentType: 'application/json',
             success: function (data) {
-                console.log("Patient instance deleted.")
+                patientArray = data;
+                selectedPatientID = patientArray.patient_id;
+                console.log("PATIENT ID" + selectedPatientID)
+
+                $.ajax({
+                    type: 'DELETE',
+                    url: patientInfoURI + '/' + patientArray.patient_id,
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    success: function (data) {
+                        console.log("Patient instance deleted.")
+                    }
+                });
             }
         });
+
     }
     $('#deleteUserModal').modal('hide');
     $('#userModal').modal('hide');
 
     setTimeout(function () {
         window.location.reload();
-    }, 2000);
+    }, 3000);
 
 }
 
