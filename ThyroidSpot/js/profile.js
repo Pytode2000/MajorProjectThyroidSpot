@@ -1,6 +1,6 @@
 var userURI = "https://localhost:44395/api/User/";
 var patientInfoURI = "https://localhost:44395/api/patientinfo/";
-var patientInfoURI2 = "https://localhost:44395/api/patientinfo";
+var diagnosisURI = "https://localhost:44395/api/diagnosis";
 
 var patient_doctor;
 
@@ -77,7 +77,8 @@ function getUser() {
 }
 
 function getPatientInfo() {
-    currentPatientArray = []
+    currentPatientArray = [];
+    currentPatientDiagnosis = [];
     const user_id = sessionStorage.getItem("user_unique_id");
     // const user_email = sessionStorage.getItem("user_email");
     $.ajax({
@@ -101,7 +102,7 @@ function getPatientInfo() {
             // This is for the update (pre-set values).
             document.getElementById("editId").defaultValue = currentPatientArray.ic_number;
             document.getElementById("editBirthdate").defaultValue = currentPatientArray.date_of_birth;
-            $("#editDiagnosis").val(currentPatientArray.diagnosis);
+            // $("#editDiagnosis").val("test");
             $("#editBloodType").val(currentPatientArray.blood_type);
             if (currentPatientArray.gender == "Male") {
                 $('input:radio[name="genderMaleRadio"]').filter('[value="Male"]').attr('checked', true);
@@ -109,6 +110,55 @@ function getPatientInfo() {
             else {
                 $('input:radio[name="genderMaleRadio"]').filter('[value="Female"]').attr('checked', true);
             }
+
+            // GET Diagnosis
+            $.ajax({
+                type: 'GET',
+                url: diagnosisURI + '/' + currentPatientArray.patient_id,
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (data) {
+                    currentPatientDiagnosis = data;
+                    // $("#editDiagnosis").val(currentPatientDiagnosis[0].diagnosis1);
+                    // document.getElementById("editDiagnosis").value = currentPatientDiagnosis[0].diagnosis1
+                    // console.log("TEST " + currentPatientDiagnosis[0].diagnosis1)
+                    // document.getElementById('editDiagnosis').value = currentPatientDiagnosis[0].diagnosis1;
+                    // document.getElementById("diagnosisEditBlock").style
+
+                    for (i = 0; i < currentPatientDiagnosis.length; i++) {
+
+                        // FOR THE EDIT MODAL DIAGNOSIS
+                        var diagnosis_edit =
+                            "<select id='editDiagnosis" + currentPatientDiagnosis[i].diagnosis_id + "' class='custom-select' style='width:70%; margin-bottom: 10px;'>" +
+                            "<option>De Quervain's thyroiditis</option>" +
+                            "<option>Differentiatied thyroid carcinoma</option>" +
+                            " <option>Graves' disease</option>" +
+                            "<option>Hashimoto's thyroiditis</option>" +
+                            "<option>Hyperthyroidism</option>" +
+                            "<option>Hypothyroidsm</option>" +
+                            "<option>Post-radioiodine ablation</option>" +
+                            "<option>Post-thyroidectomy</option>" +
+                            "<option>Riedel's thyroiditis</option>" +
+                            "<option>Thyrotoxicosis</option>" +
+                            "<option>Toxic adenoma</option>" +
+                            "<option>Toxic multinodular goitre</option>" +
+                            "<option>Others</option>" +
+                            "</select>"
+                        $("#diagnosisEditBlock").append(diagnosis_edit);
+
+                        // PRESET DIAGNOSIS VALUE IN EDIT MODAL
+                        $("#editDiagnosis" + currentPatientDiagnosis[i].diagnosis_id).val(currentPatientDiagnosis[i].diagnosis1);
+
+
+                        // FOR PROFILE
+                        var diagnosis = currentPatientDiagnosis[i].diagnosis1 + "<br>"
+                        $("#profDiagnosis").append(diagnosis);
+
+                    }
+                }
+            });
+
+
 
         }
     });
@@ -292,7 +342,6 @@ function updateProfile() {
 
     $.ajax({
         type: 'PUT',
-        // url: patientInfoURI2 + '?userid=' + user_id,
         url: patientInfoURI + patient_table_patient_id,
         data: JSON.stringify(patientInfoInstance),
         dataType: 'json',
