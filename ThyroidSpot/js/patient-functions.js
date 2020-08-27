@@ -309,12 +309,16 @@ function getPrescription(){
             for (i = 0; i < doseArray.length; i++) {
                 if (currentReportID == doseArray[i].report_id){
                     
-                    var prescription = {report_id: doseArray[i].report_id, drug_name: doseArray[i].drug_name, drug_dose: doseArray[i].drug_dose}
+                    var prescription = {report_id: doseArray[i].report_id, drug_name: doseArray[i].drug_name, drug_dose: doseArray[i].drug_dose, 
+                        drug_days: doseArray[i].drug_days, drug_img: doseArray[i].drug_img, remarks: doseArray[i].remarks}
                     
                     console.log(prescription)
+
+                    coverImage = "<img style='width:100px' src='data:image/jpeg;base64," + prescription.drug_img + "'/>";
                     
                     $('#prescriptionTable').append("<tr><td>"+prescription.drug_name+"</td>"+
-                    "<td>"+prescription.drug_dose+"</td></tr>");
+                    "<td>"+prescription.drug_dose+"</td><td>"+prescription.drug_days+"</td>"+
+                    "<td>"+coverImage+"</td><td>"+prescription.remarks+"</td></tr>");
 
                 }
             }
@@ -390,7 +394,7 @@ function postDosage(){
     //NOTE TO KAILONG: u need to get the report id on ur end to make this work,
     //                 furthermore, the input for drug_img has yet to be edited
 
-    var f = $(".newDrugImage")[0].files[0]; // get image object (VARNING: NOT SURE IF THIS ONLY TAKES 1 IMAGE)
+    var f = $(".newDrugImage")[i].files[0]; // get image object (VARNING: NOT SURE IF THIS ONLY TAKES 1 IMAGE)
     var reader = new FileReader();
     //This function will be triggered after the code executes reader.readAsBinaryString(f);
     reader.onload = (function (theFile) {
@@ -456,11 +460,11 @@ $(document).on('click', '#addMoreRows', function(){
     "</div></div> </div><div class='form-row col-xs-4  col-md-12'><div class='col' style='text-align: left;'><label>Tablets per day:</label><div>"+
     "<input type='text' class='form-control newTabletsDay' placeholder='Enter prescription...' required></div></div></div>"+
     "<div class='form-row col-xs-4  col-md-12'><div class='col' style='text-align: left;'><label>Remarks:</label><div>"+
-    "<input type='text' class='form-control newRemarks' placeholder='Enter remarks...'></div></div></div><br></br>";
+    "<input type='text' class='form-control newRemarks' placeholder='Enter remarks...'></div></div></div>"+
+    "<div class='form-row col-xs-4  col-md-12'><div class='col' style='text-align: left;'><label>Medicine image:</label><div>"+
+    "<input type='file' class='form-control newDrugImage' required></div></div></div><br></br>";
     $("#addon").append(html);
 });
-
-
 
 
 $(document).on('click', '#closereportmodal', function(){
