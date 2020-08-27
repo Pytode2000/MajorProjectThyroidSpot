@@ -62,13 +62,13 @@
                         <th id="labelTSH">TSH</th>
                         <th id="labelDrug">Drug Dose</th>
                 </table> -->
+                <div id="prescriptionButton"></div>
                 <table id="class-report" class="table table-md" style="margin-top: 1em;">
                     <thead>
                     <tr>
                         <th class="th-sm">Date</th>
                         <th class="th-sm">FT4</th>
                         <th class="th-sm">TSH</th>
-                        <th scope="col">Drug Dose</th>
                     </tr>
                     </thead>
                     <tbody id="dosagehist"></tbody>
@@ -176,7 +176,7 @@
                     <hr>
                     
                     <div class="modal-body">
-                    <form id="createnfotable" onsubmit="postPatientReport(); return false;">
+                    <!-- <form id="createnfotable" onsubmit="postPatientReport(); return false;"> -->
                         <div class="form-row col-xs-4  col-md-12">
                             <div class="col" style="text-align: left;">
                                 <label>FT4:</label>
@@ -198,7 +198,7 @@
                         <br>
                     
                            <!-- FOR KAILONG: to be moved to clinician side -->
-                            <div class="form-row col-xs-4  col-md-12">
+                            <!-- <div class="form-row col-xs-4  col-md-12">
                                 <div class="col-md-6">
                                     <label>Drug:</label>
                                     <div>
@@ -245,7 +245,7 @@
                                 <div class="col" style="text-align: left;">
                                     <label>Medicine image:</label>
                                     <div>
-                                    <input type="file" class="form-control newDrugImage" required>
+                                    <input type="file" name="files[]" class="form-control newDrugImage" required>
                                     </div>
                                 </div>
                             </div>
@@ -253,14 +253,14 @@
                         
 
                         <div id="addon">
-                        </div>
+                        </div> -->
 
                         </div>
-                            <div style="text-align: center; margin-bottom: 1em;">
+                            <!-- <div style="text-align: center; margin-bottom: 1em;">
                                 <button id="addMoreRows" class="btn btn-secondary custom-class">Add another drug dose</button>
-                            </div>
+                            </div> -->
                             <div style="text-align: center; padding-bottom: 1em;">
-                                <button type="submit" class="btn btn-dark btn-SaveReport custom-class bold">Save Report</button>
+                                <button onclick="postDosage()" class="btn btn-dark btn-SaveReport custom-class bold">Save Report</button>
                             </div>
                     </form>
                 </div>
@@ -300,7 +300,7 @@
                         <!--Table head-->
                         <thead>
                           <tr>
-                            <th style="width: 59%;">Drug Name</th>
+                            <th style="width: 40%;">Drug Name</th>
                             
                             <th class="th-md">Pills</th>
 
@@ -324,6 +324,39 @@
                       </table>
                       <!--Table-->
                       </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Modal For Diagnosis-->
+        <div id="DiagnosisCardContent" class="w3-modal">
+            <div class="w3-modal-content">
+                <div class="w3-container">
+                    <span onclick="document.getElementById('DiagnosisCardContent').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                    <h2 style="text-align: center;">Diagnosis</h2>
+                    
+                    <table class="table table-sm" style="width: 95%; margin-left: auto; margin-right: auto;">
+                        <tr>
+                            <td style=" text-align:left; width: 60%;">Diagnosis:</td>
+                            <td id="diagnosisDispl">test</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">Date of Birth:</td>
+                            <td id="tdDOB"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">Gender:</td>
+                            <td id="tdGender"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">Blood Type:</td>
+                            <td id="tdBloodType" ></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">Most Recent Appointment Date:</td>
+                            <td id="tdAptDate" ></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>

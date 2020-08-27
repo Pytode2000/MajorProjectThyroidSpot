@@ -206,6 +206,20 @@
     padding-left:3.5em;
   }
 
+  #prescriptionButton{
+    float: right;
+  }
+  #diagnosisbtn{
+    float: left;
+  }
+  #viewdosage{
+    margin-left: 1em;
+    float:left; 
+    margin-bottom: 1em;
+  }
+  #tdAptDate{
+    font-weight: bold;
+  }
 
 
 /* TODO: prescriptionModal, newReportModal for mobile */
@@ -374,6 +388,18 @@
 
   .custom-class{
       width: 100%; display:block; 
+  }
+  #prescriptionButton{
+    float: none;
+  }
+  #diagnosisbtn{
+    float: none;
+    margin-bottom: 1em;
+  }
+  #viewdosage{
+    margin-left: 1em;
+    float:right; 
+    margin-bottom: 1em;
   }
 
 }

@@ -26,12 +26,15 @@ function getUserName(){
 }
 
 
-//disease functions
+//patient functions
 var patientURI = 'https://localhost:44395/api/patientInfo';
 var patientInfoArray = [];
 var currentPatientID; //this variable will contain the patient ID that's selected
-var diagnosis; //this variable will get diagnosis and display it at prescription modal
-
+var dob; //this variable will get diagnosis and display it at diagnosis modal
+var bt; //this variable will get blood type and display at diagnosis modal
+var gender; //this variable will get gender and display at diagnosis modal
+var aptdate //this variable will get most recent appointment date for diagnosis modal
+var viewdiagnosisbutton;
 
 //This function will consume the patient info GET API (FOR DOCTORS)
 function getOnePatientInfo() {
@@ -58,19 +61,25 @@ function getOnePatientInfo() {
 
                     currentPatientID = patientInfoArray[i].patient_id;
 
-                    diagnosis = patientInfoArray[i].diagnosis;
+                    
+                    
+                    dob = patientInfoArray[i].date_of_birth;
+                    bt = patientInfoArray[i].blood_type;
+                    gender = patientInfoArray[i].gender
+
+                    viewdiagnosisbutton = "<button id='diagnosisbtn' class=' btn btn-info btn-sm custom-class' index='" + patientInfoArray[i].patient_id + "'>View Diagnosis</button>"
 
                     viewreportbutton = "<button id='forumdescbtn' class=' btn btn-info btn-sm' index='" + patientInfoArray[i].patient_id + "'>View Report</button>"
                    
-                    
-                    $('#patientCardContent').append("<h2 style='text-align: center'>"+username+"</h2><table class='infoTable'><tr>"+
-                        "<td class='shiftedrow' style='padding-left: -5px'><b>IC number: " + patientInfoArray[i].ic_number + 
-                        "</b></td><td class='shiftedrow'>Diagnosis: "+patientInfoArray[i].diagnosis+"</td>"+
-                        "<td class='shiftedrow'>D.O.B: "+patientInfoArray[i].date_of_birth+"</td><td class='shiftedrow'>Gender: "+patientInfoArray[i].gender+
-                        "</td><td class='shiftedrow'>Blood Type: "+patientInfoArray[i].blood_type+"</td></tr></table>");
+                    //TODO: make table to bootstrap
+                    $('#patientCardContent').append("<h2 style='text-align: center'>"+username+"</h2><table class='infoTable table-sm'><tr>"+
+                        "<td class='shiftedrow' style='width: 25%'><b>IC number: " + patientInfoArray[i].ic_number + 
+                        "</b></td><td style='width: 20%'>Blood Type: "+patientInfoArray[i].blood_type+"</td>"+
+                        "<td class='shiftedrow' style='width: 25%'>Gender: "+patientInfoArray[i].gender+
+                        "</td><td class='shiftedrow'>D.O.B: "+patientInfoArray[i].date_of_birth+"</td></tr></table>");
 
 
-                    return  getPatientReport();
+                    return  getDiagnosisDetails();
 
 
                 }
@@ -90,35 +99,34 @@ function getOnePatientInfo() {
     });
 }
 
-// //only patients can access it based on their assigned unique ID
-// function getPatientInfo_DoctorOnly() {
-//     console.log("retrieving all patient info...")
-//     $.ajax({
-//         type: 'GET',
-//         url: patientURI,
-//         dataType: 'json',
-//         contentType: 'application/json',
-//         success: function (data) {
-//             //put json data into bookArray
-//             patientInfoArray = data;
-//             console.log(patientInfoArray)
-//             //clear the tbody of the table so that it will be refreshed everytime
-//             $('#patientCardContent').html('');
-//             //Iterate through the diseaseInfoArray to generate rows to populate the table
-//             for (i = 0; i < patientInfoArray.length; i++) {
-//                
-
-//                 viewreportbutton = "<button id='forumdescbtn' class=' btn btn-info btn-sm' index='" + patientInfoArray[i].patient_id + "'>View Report</button>"
-//                 // $('#diseaseCard').append("<div onclick="+viewmorebutton+"  class = 'centerText'>" +
-//                 //     coverImage + "<div class='centerTitle'><b>" + diseaseInfoArray[i].disease + "</b></div></div>");
-//                 $('#patientCardContent').append("<div class = 'centerText'>" +
-//                     "<img src='https://www.mei.edu/sites/default/files/2019-01/Virus.jpg'>"+
-//                      "<div class='centerTitle'></p><b>" + patientInfoArray[i].ic_number + 
-//                      "</b></p><div class='centerContent'><p>Diagnosis: "+patientInfoArray[i].diagnosis+"</p></div>" +viewreportbutton+ "</div>");
-//             }
-//         }
-//     });
-// }
+//get diagnosis
+var diagnosisURL = "https://localhost:44395/api/diagnosis"
+var diagnosisArray = []
+function getPatientDiagnosis() {
+    console.log(currentPatientID)
+    $.ajax({
+        type: 'GET',
+        url: diagnosisURL +"/"+currentPatientID,
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            //put json data into bookArray
+            diagnosisArray = data;
+            console.log(diagnosisArray)
+            //clear the tbody of the table so that it will be refreshed everytime
+            $('#diagnosisDispl').html('');
+            //Iterate through the diseaseInfoArray to generate rows to populate the table
+            for (i = 0; i < diagnosisArray.length; i++) {
+                //storediagnosis.push(diagnosis[i].diagnosis1)
+                $('#diagnosisDispl').append(diagnosisArray[i].diagnosis1+"<br>");
+            }
+            $("#tdDOB").text(dob);
+            $("#tdGender").text(gender);
+            $("#tdBloodType").text(bt);
+            $("#tdAptDate").text(aptdate)
+        }
+    });
+}
 
 //create patient info (FOR DEBUGGING PURPOSES)
 function postPatientInfo() {
@@ -159,14 +167,35 @@ var reportArray = [];
 var currentreportID; //this variable will contain the report ID that's selected
 var reportIDArray = [];
 
+storediagnosis = []; //to capture all diagnosis matched to user id
+
 var secondReportArray = [] // for search function
 var storeReports = [] //second array for search function
 
 //only patients can access it based on their assigned unique ID
+function getDiagnosisDetails(){
+    $.ajax({
+        type: 'GET',
+        url: diagnosisURL +"/"+currentPatientID,
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            //put json data into bookArray
+            storediagnosis = data;
+            //console.log(storediagnosis)
+            //clear the tbody of the table so that it will be refreshed everytime
+            $('#diagnosisDispl').html('');
+            //Iterate through the diseaseInfoArray to generate rows to populate the table
+            return getPatientReport();
+        }
+    });
+}
+
 function getPatientReport() {
     console.log("retrieving all patient report...")
 
     console.log(currentPatientID)
+    console.log(storediagnosis)
     
     $.ajax({
         type: 'GET',
@@ -194,12 +223,13 @@ function getPatientReport() {
                     
                     var report = {report_id: reportArray[i].report_id, patient_id: reportArray[i].patient_id, drug_name: reportArray[i].drug_name, FT4: reportArray[i].FT4, TSH: reportArray[i].TSH, drug_dose: reportArray[i].drug_dose, timestamp: reportArray[i].timestamp}
                     storeReports.push(report)
-                    viewdosagebtn = "<button id='viewdosage' num="+reportArray[i].report_id+" class=' btn btn-info btn-sm'>View Prescription</button>";
+                    viewdosagebtn = "<button id='viewdosage' num="+reportArray[reportArray.length-1].report_id+" class='btn btn-info btn-sm custom-class'>View Prescription</button>";
+                    aptdate = reportArray[reportArray.length-1].timestamp;
 
                     //TODO: onclick on button to view report in a modal (then can add on a button to export it as PDF)
                     $('#dosagehist').append("<tr style='margin-bottom: 0.5em;'>"+
                     "<tr><td>"+report.timestamp+"</td><td>"+report.FT4+"</td><td>"+
-                    ""+report.TSH+"</td><td>"+viewdosagebtn+"</td></tr></tr>");
+                    ""+report.TSH+"</td></tr></tr>");
                     
                 
                     if (currentPatientID != reportArray[i].patient_id && i == reportArray.length-1){
@@ -208,6 +238,11 @@ function getPatientReport() {
                         createreportbtn = "<button id='rpt' class=' btn btn-info btn-sm'>Create Report</button>"
                         $('#reportcontainer').append("<div style='text-align: center; margin-top: 10%; margin-left: auto; margin-right: auto;'><h3>No patient report found</h3><div>"+createreportbtn+"<div></div>");
                         return console.log("no report history")
+                    }
+
+                    if (i == reportArray.length-1){
+
+                        return $('#prescriptionButton').append(viewdiagnosisbutton+"<br class='divider'>"+viewdosagebtn);
                     }
                 }
             }
@@ -249,7 +284,7 @@ function searchPatientReport(){
     console.log(secondReportArray)
     $('#dosagehist').html('');
     for (i = 0; i < secondReportArray.length; i++){
-        viewdosagebtn = "<button id='viewdosage' num="+secondReportArray[i].report_id+" class=' btn btn-info btn-sm'>View Prescription</button>";
+        viewdosagebtn = "<button id='viewdosage' num="+secondReportArray[secondReportArray.length-1].report_id+" class=' btn btn-info btn-sm'>View Prescription</button>";
         //TODO: onclick on button to view report in a modal (then can add on a button to export it as PDF)
         $('#dosagehist').append("<tr style='margin-bottom: 0.5em;'>"+
         "<tr><td>"+secondReportArray[i].timestamp+"</td><td>"+secondReportArray[i].FT4+"</td><td>"+
@@ -274,13 +309,19 @@ function getOneReportInfo(){
             //clear the tbody of the table so that it will be refreshed everytime
             console.log(reportArray)
             // $('#reportContent').html('');
+            $('#tdDiagnosis').html('');
             for (i = 0; i < reportArray.length; i++) {
                 if (currentReportID == reportArray[i].report_id){
                     
                     var report = {report_id: reportArray[i].report_id, patient_id: reportArray[i].patient_id, drug_name: reportArray[i].drug_name, FT4: reportArray[i].FT4, TSH: reportArray[i].TSH, drug_dose: reportArray[i].drug_dose, timestamp: reportArray[i].timestamp}
                     
                     //for prescription modal:
-                    $('#tdDiagnosis').text(diagnosis)
+                    
+                    console.log(storediagnosis)
+                    
+                    for (x = 0; x < storediagnosis.length; x++){
+                        $('#tdDiagnosis').append(storediagnosis[x].diagnosis1+"<br>")
+                    }
                     $('#tdCheckup').text(report.timestamp)
                     $('#tdFt4').text(report.FT4)
                     $('#tdTsh').text(report.TSH)
@@ -393,8 +434,7 @@ function postDosage(){
 
     //NOTE TO KAILONG: u need to get the report id on ur end to make this work,
     //                 furthermore, the input for drug_img has yet to be edited
-
-    var f = $(".newDrugImage")[i].files[0]; // get image object (VARNING: NOT SURE IF THIS ONLY TAKES 1 IMAGE)
+    var f = $(".newDrugImage")[i].files[0]; // get image object (VARNING: THIS ONLY TAKES 1 IMAGE)
     var reader = new FileReader();
     //This function will be triggered after the code executes reader.readAsBinaryString(f);
     reader.onload = (function (theFile) {
@@ -419,19 +459,19 @@ function postDosage(){
             console.log(array_to_add)
 
             
-            $.ajax({
-                type: 'POST',
-                url: dosageURI,
-                data: JSON.stringify(array_to_add),
-                dataType: 'json',
-                contentType: 'application/json',
-                success: function (data) {
+            // $.ajax({
+            //     type: 'POST',
+            //     url: dosageURI,
+            //     data: JSON.stringify(array_to_add),
+            //     dataType: 'json',
+            //     contentType: 'application/json',
+            //     success: function (data) {
                     
-                    getOnePatientInfo();
-                    document.getElementById('newPatientModal').style.display='none'
-                    window.location.reload(); //reload page after adding so it shows the newly added report + prescription
-                }
-            });
+            //         getOnePatientInfo();
+            //         document.getElementById('newPatientModal').style.display='none'
+            //         window.location.reload(); //reload page after adding so it shows the newly added report + prescription
+            //     }
+            // });
         };
     })(f);
     // Read in the image file as a data URL.
@@ -450,7 +490,7 @@ function exportData(){
 //FOR KAILONG:
 $(document).on('click', '#addMoreRows', function(){
     document.getElementById('addon').style.display='block'
-    var html = "<div class='form-row col-xs-4  col-md-12'><div class='col-md-6'><label>Drug:</label><div><select name='bloodtype' class='newDrugName'>"+
+    var html = "<div class='appended'><div class='form-row col-xs-4  col-md-12'><div class='col-md-6'><label>Drug:</label><div><select name='bloodtype' class='newDrugName'>"+
     "<option value='' selected disabled hidden>--Choose here--</option><option value='carbimazole'>carbimazole</option>"+
     "<option value='methimazole'>methimazole</option><option value='thiamazole'>thiamazole</option>"+
     "<option value='propylthiouracil'>propylthiouracil</option><option value='levothyroxine'>levothyroxine</option>"+
@@ -462,7 +502,7 @@ $(document).on('click', '#addMoreRows', function(){
     "<div class='form-row col-xs-4  col-md-12'><div class='col' style='text-align: left;'><label>Remarks:</label><div>"+
     "<input type='text' class='form-control newRemarks' placeholder='Enter remarks...'></div></div></div>"+
     "<div class='form-row col-xs-4  col-md-12'><div class='col' style='text-align: left;'><label>Medicine image:</label><div>"+
-    "<input type='file' class='form-control newDrugImage' required></div></div></div><br></br>";
+    "<input type='file' class='form-control newDrugImage' required></div></div></div></div><br></br>";
     $("#addon").append(html);
 });
 
@@ -477,8 +517,16 @@ $(document).on("click", "#createnewinfo", function () {
 });
 
 //doc model for postPatientReport
-$(document).on("click", "#createrpt", function () {
+$(document).on("click", "#createrptbtn", function () {
     document.getElementById('newReportModal').style.display='block'
+});
+
+//doc model for getDiagnosisInfo
+$(document).on("click", "#diagnosisbtn", function () {
+    currentReportID = $(this).attr('num');
+    console.log(currentReportID);
+    getPatientDiagnosis(currentReportID);
+    document.getElementById('DiagnosisCardContent').style.display='block'
 });
 
 //doc model for postPatientReport (using middle report button)
@@ -494,8 +542,8 @@ $(document).on("click", "#viewdosage", function () {
     document.getElementById('prescriptionModal').style.display='block'
 });
 
-window.onload = function () {
-document.getElementById('addon').style.display = "none";
-}
+// window.onload = function () {
+//     document.getElementById('addon').style.display = "none";
+// }
 
 getUserName();
