@@ -76,6 +76,28 @@ function adoptPatient(){
 
 }
 
+function removePatient(){
+    console.log(patientInformationArray)
+    for(i=0; i < patientInformationArray.length;i++){
+        var patientInformation = { patient_id: patientInformationArray[i].patient_id, user_id: patientInformationArray[i].user_id,
+            diagnosis: patientInformationArray[i].diagnosis, ic_number: patientInformationArray[i].ic_number, date_of_birth: patientInformationArray[i].date_of_birth,
+            gender: patientInformationArray[i].gender, blood_type: patientInformationArray[i].blood_type, timestamp: patientInformationArray[i].timestamp,
+            doctor_id: ""};
+        $.ajax({
+            type: 'PUT',
+            url: patientURI +'?userid='+ patientInformationArray[i].user_id,
+            data: JSON.stringify(patientInformation),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                console.log("success")
+            }
+        });
+    
+    }
+
+}
+
 $("#adoptPatientForm").submit(function(e) {
     e.preventDefault();
 });
