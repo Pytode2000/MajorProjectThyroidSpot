@@ -45,8 +45,13 @@ function navigation_control() {
     // If user is *not* logged in OR account type is not patient, "Health" button (used by account_type="patient") in navbar will not show.
     if (user_logged_in == "n" || user_account_type != "patient") {
         document.getElementById('nav-tab-health').style.display = "none";
+    }
+
+    // need to allow admin soon
+    if (user_logged_in == "n" || user_account_type != "patient") {
         document.getElementById('nav-tab-diseases').style.display = "none";
     }
+
 
     // If user is *not* logged in OR account type is not clinician, "Patients" button (used by account_type="clinician") in navbar will not show.
     if (user_logged_in == "n" || user_account_type != "clinician") {
@@ -102,16 +107,30 @@ function navigation_control() {
     if (user_logged_in == 'n' || user_account_type != "patient") {
         // Blocked URLs.
         // if (currentLoc == "http://127.0.0.1:5500/html-pages/disease.html") {
-        if (matchPath("disease.html") == true) {
+        // if (matchPath("disease.html") == true) {
 
-            window.location.href = "account.html";
-        }
+        //     window.location.href = "account.html";
+        // }
         // else if (currentLoc == "http://127.0.0.1:5500/html-pages/patientinfo.html") {
         if (matchPath("patientinfo.html") == true) {
 
             window.location.href = "account.html";
         }
     }
+
+    // Maybe need to edit.
+    // if (user_logged_in == 'n' || user_account_type != "patient" || user_account_type != "admin") {
+    //     if (matchPath("disease.html") == true) {
+    //         window.location.href = "account.html";
+    //     }
+    // }
+
+    if (matchPath("navbar.html") == true || matchPath("footer.html") == true) {
+        window.location.href = "index.html";
+    }
+
+
+
 
 }
 

@@ -89,7 +89,8 @@ function getPatientInfo() {
             currentPatientArray = data;
 
             document.getElementById("profGender").innerHTML = currentPatientArray.gender;
-            document.getElementById("profDiagnosis").innerHTML = currentPatientArray.diagnosis;
+            // document.getElementById("profDiagnosis").innerHTML = currentPatientArray.diagnosis;
+            // console.log(currentPatientArray.diagnosis)
             document.getElementById("profBloodType").innerHTML = currentPatientArray.blood_type;
             document.getElementById("profDOB").innerHTML = currentPatientArray.date_of_birth;
             document.getElementById("profNRIC").innerHTML = currentPatientArray.ic_number;
@@ -268,8 +269,8 @@ function deleteAccount() {
 function updateProfile() {
     const user_id = sessionStorage.getItem("user_unique_id");
 
-    var diagnosis = document.getElementById("editDiagnosis");
-    var diagnosisChosen = diagnosis.options[diagnosis.selectedIndex].text;
+    // var diagnosis = document.getElementById("editDiagnosis");
+    // var diagnosisChosen = diagnosis.options[diagnosis.selectedIndex].text;
 
     var genderChosen;
     if (document.getElementById('genderMaleRadio').checked) {
@@ -283,14 +284,16 @@ function updateProfile() {
     var bloodTypeChosen = bloodType.options[bloodType.selectedIndex].text;
 
     var patientInfoInstance = {
-        user_id: user_id, diagnosis: diagnosisChosen, ic_number: $('#editId').val(),
+        // user_id: user_id, diagnosis: diagnosisChosen, ic_number: $('#editId').val(),
+        user_id: user_id, ic_number: $('#editId').val(),
         date_of_birth: $('#editBirthdate').val(), gender: genderChosen, blood_type: bloodTypeChosen, timestamp: "-", doctor_id: patient_doctor
     };
 
 
     $.ajax({
         type: 'PUT',
-        url: patientInfoURI2 +'?userid=' + user_id,
+        // url: patientInfoURI2 + '?userid=' + user_id,
+        url: patientInfoURI + patient_table_patient_id,
         data: JSON.stringify(patientInfoInstance),
         dataType: 'json',
         contentType: 'application/json',

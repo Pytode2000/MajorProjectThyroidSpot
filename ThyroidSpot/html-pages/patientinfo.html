@@ -197,7 +197,7 @@
                         </div>
                         <br>
                     
-                           <!-- TODO: to be moved to clinician side -->
+                           <!-- FOR KAILONG: to be moved to clinician side -->
                             <div class="form-row col-xs-4  col-md-12">
                                 <div class="col-md-6">
                                     <label>Drug:</label>
@@ -229,16 +229,23 @@
                                 <div class="col" style="text-align: left;">
                                     <label>Tablets per day:</label>
                                     <div>
-                                    <input type="text" class="form-control" id="newTSH" placeholder="Enter prescription..." required>
+                                    <input type="text" class="form-control newTabletsDay" placeholder="Enter prescription..." required>
                                     </div>
                                 </div>
                             </div>
-                            <br>
                             <div class="form-row col-xs-4  col-md-12">
                                 <div class="col" style="text-align: left;">
                                     <label>Remarks:</label>
                                     <div>
-                                    <input type="text" class="form-control" id="newTSH" placeholder="Enter remarks...">
+                                    <input type="text" class="form-control newRemarks" placeholder="Enter remarks...">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row col-xs-4  col-md-12">
+                                <div class="col" style="text-align: left;">
+                                    <label>Medicine image:</label>
+                                    <div>
+                                    <input type="file" class="form-control newDrugImage" required>
                                     </div>
                                 </div>
                             </div>
@@ -295,7 +302,13 @@
                           <tr>
                             <th style="width: 59%;">Drug Name</th>
                             
-                            <th class="th-md">Dosage</th>
+                            <th class="th-md">Pills</th>
+
+                            <th class="th-md">Prescription</th>
+
+                            <th class="th-md">Image</th>
+
+                            <th class="th-md">Remarks</th>
                             
                           </tr>
                         </thead>
