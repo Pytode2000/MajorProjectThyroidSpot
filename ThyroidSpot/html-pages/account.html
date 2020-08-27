@@ -176,7 +176,7 @@
                                 <div class="white-text text-center">
                                     <h5>Select Diagnosis</h5>
                                 </div>
-                                <select id="registerDiagnosis" class="custom-select">
+                                <select id="registerDiagnosis" class="custom-select diagnosisClass" style="margin-bottom: 10px;">
                                     <option>De Quervain's thyroiditis</option>
                                     <option>Differentiatied thyroid carcinoma</option>
                                     <option>Graves' disease</option>
@@ -191,13 +191,30 @@
                                     <option>Toxic multinodular goitre</option>
                                     <option>Others</option>
                                 </select>
+                                <!-- <button type="button" class="close" >Close -->
+
+                                <!-- </button> -->
+
+                                <div id="diagnosisBlock"></div>
+
                                 <div class="text-center">
-                                    <button type="button" class="btn btn-default"><i class="fas fa-plus-circle fa-2x" style="color: rgba(255, 255, 255, 0.789);"></i></button>
+                                    <button onclick="addNewDiagnosis()" type="button" class="btn btn-default diagnosisBtn"><i
+                                            class="fas fa-plus-circle fa-2x" style="color: rgba(255, 255, 255, 0.789);"></i></button>
                                 </div>
+
+                                <div class="text-center">
+                                        <button onclick="testGet()" type="button" class="btn btn-default diagnosisBtn">Click here to Test create diagnosis</button>
+                                    </div>
                             </div>
                         </div>
 
-
+                        <style>
+                            .diagnosisBtn:focus,
+                            .diagnosisBtn:active {
+                                outline: none !important;
+                                box-shadow: none;
+                            }
+                        </style>
 
                         <!-- GENDER -->
                         <style>

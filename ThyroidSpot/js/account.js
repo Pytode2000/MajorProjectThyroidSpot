@@ -93,8 +93,8 @@ function register() {
             });
 
             // Creates an instance (row) in the "patient_information" table.
-            var diagnosis = document.getElementById("registerDiagnosis");
-            var diagnosisChosen = diagnosis.options[diagnosis.selectedIndex].text;
+            // var diagnosis = document.getElementById("registerDiagnosis");
+            // var diagnosisChosen = diagnosis.options[diagnosis.selectedIndex].text;
 
             var genderChosen;
             if (document.getElementById('genderMaleRadio').checked) {
@@ -108,7 +108,7 @@ function register() {
             var bloodTypeChosen = bloodType.options[bloodType.selectedIndex].text;
 
             var patientInfoInstance = {
-                user_id: userUid, diagnosis: diagnosisChosen, ic_number: $('#registerId').val(),
+                user_id: userUid, ic_number: $('#registerId').val(),
                 date_of_birth: $('#registerBirthdate').val(), gender: genderChosen, blood_type: bloodTypeChosen, timestamp: "-", doctor_id: ""
             };
 
@@ -120,8 +120,30 @@ function register() {
                 dataType: 'json',
                 contentType: 'application/json',
                 success: function (data) {
+                    console.log("Patient's Data: " + data)
+
+
+                    // GET patient'id using firebase UID FOR DIAGNOSIS
+                    var patient_array = []
+                    $.ajax({
+                        type: 'GET',
+                        url: patientInfoURI + "/" + userUid,
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        success: function (data) {
+                            console.log("DATA " + data)
+                            patient_array = data;
+                            createDiagnosis(patient_array.patient_id)
+                            console.log("patient_array.patient_id: " + patient_array.patient_id)
+                            console.log("Created diagnosis!")
+                        }
+                    });
+
+
+
                 }
             });
+
 
             // Send Email
             user.sendEmailVerification().then(function () {
@@ -173,5 +195,118 @@ function forgotPassword() {
 
         forgotPwAlert.classList.remove("hide");
         forgotPwAlert.innerHTML = error.message;
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// DIAGNOSIS
+var diagnosisCounter = 1;
+function addNewDiagnosis() {
+    diagnosisCounter = diagnosisCounter + 1;
+    document.getElementById("diagnosisBlock").style.display = "block";
+    var html = "<div id='diagnosis-" + diagnosisCounter + "'>" +
+        "<select class='custom-select diagnosisClass' style='margin-bottom: 10px; width: 80%;'>" +
+        "<option>De Quervain's thyroiditis</option>" +
+        "<option>Differentiatied thyroid carcinoma</option>" +
+        "<option>Graves' disease</option>" +
+        "<option>Hashimoto's thyroiditis</option>" +
+        "<option>Hyperthyroidism</option>" +
+        "<option>Hypothyroidsm</option>" +
+        "<option>Post-radioiodine ablation</option>" +
+        "<option>Post-thyroidectomy</option>" +
+        "<option>Riedel's thyroiditis</option>" +
+        "<option>Thyrotoxicosis</option>" +
+        "<option>Toxic adenoma</option>" +
+        "<option>Toxic multinodular goitre</option>" +
+        "<option>Others</option>" +
+        "</select>" +
+        "<button  onclick='removeAddedDiagnosis(" + diagnosisCounter + ")' type='button' class='btn btn-default diagnosisBtn'>" +
+        "<i class='fas fa-times fa-2x' style='color: rgba(255, 255, 255, 0.789); '></i></button></div>";
+
+    $("#diagnosisBlock").append(html);
+
+    console.log("New diagnosis number: " + diagnosisCounter)
+    // console.log(diagnosisCounter)
+}
+// id='removeDiagnosis'" + diagnosisCounter + "' index='" + diagnosisCounter + "'
+function removeAddedDiagnosis(counter) {
+    var diagnosisNumberX = document.getElementById("diagnosis-" + counter);
+    diagnosisNumberX.remove();
+    console.log("Removed Diagnosis Number: " + counter)
+}
+
+var diagnosisURI = "https://localhost:44395/api/diagnosis"
+
+function createDiagnosis(patient_number) {
+    // var diagnosis = document.getElementById("registerDiagnosis");
+    // var diagnosisChosen = diagnosis.options[diagnosis.selectedIndex].text;
+
+    allDiagnosis = $('.diagnosisClass');
+    diagnosis_data = [];
+    for (i = 0; i < allDiagnosis.length; i++) {
+        // console.log(allDiagnosis[i].options[allDiagnosis[i].selectedIndex].text)
+        // diagnosis_data.push(allDiagnosis[i].options[allDiagnosis[i].selectedIndex].text) // This gets me  (3) ["De Quervain's thyroiditis", "Hashimoto's thyroiditis", "Post-radioiodine ablation"]
+        single_diagnosis = { patient_id: patient_number, diagnosis1: allDiagnosis[i].options[allDiagnosis[i].selectedIndex].text };
+        // i put 1 first to test
+
+        console.log(single_diagnosis);
+        // diagnosis_data.push(single_diagnosis); // doesnt work, not sure why.
+
+        $.ajax({
+            type: 'POST',
+            url: diagnosisURI,
+            data: JSON.stringify(single_diagnosis),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                console.log("Diagnosis created.");
+
+            }
+        });
+
+        // diagnosis_data = { patient_id: 1, diagnosis1: allDiagnosis.options[allDiagnosis.selectedIndex].text }
+
+    }
+    console.log(diagnosis_data);
+
+    // $.ajax({
+    //     type: 'POST',
+    //     url: diagnosisURI,
+    //     data: JSON.stringify(diagnosis_data),
+    //     dataType: 'json',
+    //     contentType: 'application/json',
+    //     success: function (data) {
+    //         console.log("Diagnosis created.");
+
+    //     }
+    // });
+
+}
+
+
+function testGet() {
+    var patient_array = []
+    $.ajax({
+        type: 'GET',
+        url: patientInfoURI + "/" + "PrlJbFESLrWGjGUN8nFfXu0if3p2",
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            console.log("DATA " + data)
+            patient_array = data;
+            createDiagnosis(patient_array.patient_id)
+            console.log("patient_array.patient_id: " + patient_array.patient_id)
+            console.log("Created diagnosis!")
+        }
     });
 }
