@@ -396,20 +396,15 @@
                         </script>
 
 
-                        <!-- Radio buttons for gender -->
-                        <label>Select gender: </label>
-                        <div class="custom-control custom-radio custom-control-inline" style="left:15%;">
-                            <input type="radio" id="genderMaleRadio" name="genderMaleRadio" value="Male" class="custom-control-input" checked>
-                            <label class="custom-control-label" for="genderMaleRadio">Male</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline" style="float: right;">
-                            <input type="radio" id="genderFemaleRadio" name="genderMaleRadio" value="Female" class="custom-control-input">
-                            <label class="custom-control-label" for="genderFemaleRadio">Female</label>
-                        </div>
-                        <br> <br>
 
-                        <div>
-                            <label for="editDiagnosis" style="display:inline;">Select diagnosis: </label>
+
+
+                        <div style="background: grey; border-radius: 6px; margin-bottom: 15px;">
+                            <div class="white-text text-center">
+                                <h5>Diagnosis</h5>
+                            </div>
+                            <div id="diagnosisEditBlock" style="width: 90%; " class="mx-auto">
+                                <!-- <label for="editDiagnosis" style="display:inline;">Diagnosis: </label>
                             <select id="editDiagnosis" class="custom-select" style="width:70%; float: right;">
                                 <option>De Quervain's thyroiditis</option>
                                 <option>Differentiatied thyroid carcinoma</option>
@@ -424,15 +419,37 @@
                                 <option>Toxic adenoma</option>
                                 <option>Toxic multinodular goitre</option>
                                 <option>Others</option>
-                            </select>
+                            </select> -->
+                            </div>
+                            <div class="text-center">
+                                <button onclick="addNewDiagnosis()" type="button" class="btn btn-default diagnosisBtn"><i
+                                        class="fas fa-plus-circle fa-2x" style="color: rgba(255, 255, 255, 0.789);"></i></button>
+                            </div>
                         </div>
-                        <br>
-                        <div>
-                            <!-- SELECT MENU FOR Blood type -->
-                            <label for="editBloodType" style="display:inline;">Select blood type:
-                            </label>
+                        <!-- <br> <br> <br> <br> -->
 
-                            <select id="editBloodType" class="custom-select" style="width:70%; float: right;">
+
+
+                        <!-- Radio buttons for gender -->
+                        <!-- <label>Select gender: </label>
+                        <div class="custom-control custom-radio custom-control-inline" style="left:15%;">
+                            <input type="radio" id="genderMaleRadio" name="genderMaleRadio" value="Male" class="custom-control-input" checked>
+                            <label class="custom-control-label" for="genderMaleRadio">Male</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline" style="float: right;">
+                            <input type="radio" id="genderFemaleRadio" name="genderMaleRadio" value="Female" class="custom-control-input">
+                            <label class="custom-control-label" for="genderFemaleRadio">Female</label>
+                        </div>
+                        <br> <br>
+
+
+                        <br>
+                        <div> -->
+                        <!-- SELECT MENU FOR Blood type -->
+                        <!-- <label for="editBloodType" style="display:inline;">Blood Type:
+                            </label> -->
+
+                        <!-- <select id="editBloodType" class="custom-select" style="width:70%; float: right;">
                                 <option>A-</option>
                                 <option>A+</option>
 
@@ -445,10 +462,71 @@
                                 <option>O-</option>
                                 <option>O+</option>
                             </select>
+                        </div> -->
+                        <style>
+                            @media (max-width: 768px) {
+
+                                [class*="col-sm"] {
+                                    margin-bottom: 15px;
+                                    margin-left: 0;
+                                    margin-right: 0; 
+                                }
+
+                            }
+                        </style>
+                        <div class="row" style="margin-left: 1px; margin-right: 1px; margin-bottom: 5px;">
+                            <div class="col-sm" style="background: grey; border-radius: 6px;">
+                                <div class="white-text text-center">
+                                    <h5>Gender</h5>
+                                </div>
+                                <div style="display: block">
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="genderMaleRadio" name="genderMaleRadio" class="custom-control-input" checked>
+                                        <label class="custom-control-label white-text" for="genderMaleRadio">Male</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline" style="float: right;">
+                                        <input type="radio" id="genderFemaleRadio" name="genderMaleRadio" class="custom-control-input">
+                                        <label class="custom-control-label white-text" for="genderFemaleRadio">Female</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- BLOOD TYPE -->
+
+                            <div class="text-center col-sm offset-1" style="background: grey; border-radius: 6px; padding-bottom:5px;">
+
+                                <div class="white-text text-center">
+                                    <h5>Blood Type</h5>
+                                </div>
+                                <select id="editBloodType" class="custom-select" style="width:60%;">
+                                    <option>A-</option>
+                                    <option>A+</option>
+
+                                    <option>B-</option>
+                                    <option>B+</option>
+
+                                    <option>AB-</option>
+                                    <option>AB+</option>
+
+                                    <option>O-</option>
+                                    <option>O+</option>
+                                </select>
+                            </div>
                         </div>
 
 
 
+
+
+
+
+
+
+
+
+
+
+                        <!-- End of modal body -->
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

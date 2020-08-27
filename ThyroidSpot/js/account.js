@@ -292,21 +292,3 @@ function createDiagnosis(patient_number) {
     // });
 
 }
-
-
-function testGet() {
-    var patient_array = []
-    $.ajax({
-        type: 'GET',
-        url: patientInfoURI + "/" + "PrlJbFESLrWGjGUN8nFfXu0if3p2",
-        dataType: 'json',
-        contentType: 'application/json',
-        success: function (data) {
-            console.log("DATA " + data)
-            patient_array = data;
-            createDiagnosis(patient_array.patient_id)
-            console.log("patient_array.patient_id: " + patient_array.patient_id)
-            console.log("Created diagnosis!")
-        }
-    });
-}
