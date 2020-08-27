@@ -66,7 +66,9 @@
                 <div id="loginForm">
                     <br>
                     <div class="text-center white-text">
-                        <h2><i class="svg-inline--fa fas fa-user fa-primary fa-w-16"></i> <b>Already have an account? Login now!</b></h1>
+                        <h2><i class="svg-inline--fa fas fa-user fa-primary fa-w-16"></i> <b>Already have an account? Login
+                                now!
+                            </b></h1>
                     </div>
                     <br>
                     <br>
@@ -109,7 +111,9 @@
                 <div id="registerForm" class="hide">
                     <br>
                     <div class="text-center white-text">
-                        <h2><i class="svg-inline--fa fas fa-user fa-primary fa-w-16"></i> <b>New here? Register an account now!</b></h1>
+                        <h2><i class="svg-inline--fa fas fa-user fa-primary fa-w-16"></i> <b>New here? Register an account
+                                now!
+                            </b></h1>
                     </div>
                     <br>
                     <br>
@@ -166,58 +170,92 @@
                         </script>
 
 
-                        <!-- Radio buttons for gender -->
-                        <label class="white-text">Select gender: </label>
-                        <div class="custom-control custom-radio custom-control-inline" style="left:15%;">
-                            <input type="radio" id="genderMaleRadio" name="genderMaleRadio" class="custom-control-input" checked>
-                            <label class="custom-control-label white-text" for="genderMaleRadio">Male</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline" style="float: right;">
-                            <input type="radio" id="genderFemaleRadio" name="genderMaleRadio" class="custom-control-input">
-                            <label class="custom-control-label white-text" for="genderFemaleRadio">Female</label>
-                        </div>
-                        <br> <br>
+                        <div style="background: grey; border-radius: 6px; margin-bottom: 15px;">
+                            <div style="width: 90%; " class="mx-auto">
 
-                        <div>
-                            <label for="registerDiagnosis" class="white-text" style="display:inline;">Select diagnosis: </label>
-                            <select id="registerDiagnosis" class="custom-select" style="width:70%; float: right;">
-                                <option>De Quervain's thyroiditis</option>
-                                <option>Differentiatied thyroid carcinoma</option>
-                                <option>Graves' disease</option>
-                                <option>Hashimoto's thyroiditis</option>
-                                <option>Hyperthyroidism</option>
-                                <option>Hypothyroidsm</option>
-                                <option>Post-radioiodine ablation</option>
-                                <option>Post-thyroidectomy</option>
-                                <option>Riedel's thyroiditis</option>
-                                <option>Thyrotoxicosis</option>
-                                <option>Toxic adenoma</option>
-                                <option>Toxic multinodular goitre</option>
-                                <option>Others</option>
-                            </select>
-                        </div>
-                        <br>
-                        <div>
-                            <!-- SELECT MENU FOR Blood type -->
-                            <label for="registerBloodType" class="white-text" style="display:inline;">Select blood type:
-                            </label>
-
-                            <select id="registerBloodType" class="custom-select" style="width:70%; float: right;">
-                                <option>A-</option>
-                                <option>A+</option>
-
-                                <option>B-</option>
-                                <option>B+</option>
-
-                                <option>AB-</option>
-                                <option>AB+</option>
-
-                                <option>O-</option>
-                                <option>O+</option>
-                            </select>
+                                <div class="white-text text-center">
+                                    <h5>Select Diagnosis</h5>
+                                </div>
+                                <select id="registerDiagnosis" class="custom-select">
+                                    <option>De Quervain's thyroiditis</option>
+                                    <option>Differentiatied thyroid carcinoma</option>
+                                    <option>Graves' disease</option>
+                                    <option>Hashimoto's thyroiditis</option>
+                                    <option>Hyperthyroidism</option>
+                                    <option>Hypothyroidsm</option>
+                                    <option>Post-radioiodine ablation</option>
+                                    <option>Post-thyroidectomy</option>
+                                    <option>Riedel's thyroiditis</option>
+                                    <option>Thyrotoxicosis</option>
+                                    <option>Toxic adenoma</option>
+                                    <option>Toxic multinodular goitre</option>
+                                    <option>Others</option>
+                                </select>
+                                <div class="text-center">
+                                    <button type="button" class="btn btn-default"><i class="fas fa-plus-circle fa-2x" style="color: rgba(255, 255, 255, 0.789);"></i></button>
+                                </div>
+                            </div>
                         </div>
 
-                        <br>
+
+
+                        <!-- GENDER -->
+                        <style>
+                            @media (max-width: 768px) {
+
+                                [class*="col-sm"] {
+                                    margin-bottom: 15px;
+                                }
+
+                            }
+                        </style>
+                        <div class="row" style="margin-left: 1px; margin-right: 1px;">
+                            <div class="col-sm" style="background: grey; border-radius: 6px;">
+                                <div class="white-text text-center">
+                                    <h5>Gender</h5>
+                                </div>
+                                <div style="display: block">
+                                    <div class="custom-control custom-radio custom-control-inline" style="margin-left: 15px;">
+                                        <input type="radio" id="genderMaleRadio" name="genderMaleRadio" class="custom-control-input" checked>
+                                        <label class="custom-control-label white-text" for="genderMaleRadio">Male</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline" style="float: right;">
+                                        <input type="radio" id="genderFemaleRadio" name="genderMaleRadio" class="custom-control-input">
+                                        <label class="custom-control-label white-text" for="genderFemaleRadio">Female</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- BLOOD TYPE -->
+
+                            <div class="text-center col-sm offset-md-2" style="background: grey; border-radius: 6px; padding-bottom:5px;">
+                                <!-- SELECT MENU FOR Blood type -->
+                                <!-- <label for="registerBloodType" class="white-text" style="font-size: 1.25em;">Select
+                                    Blood Type
+                                </label> -->
+                                <div class="white-text text-center">
+                                    <h5>Blood Type</h5>
+                                </div>
+                                <!-- <h5>Select Blood Type</h5> -->
+
+
+                                <select id="registerBloodType" class="custom-select" style="width:60%;">
+                                    <option>A-</option>
+                                    <option>A+</option>
+
+                                    <option>B-</option>
+                                    <option>B+</option>
+
+                                    <option>AB-</option>
+                                    <option>AB+</option>
+
+                                    <option>O-</option>
+                                    <option>O+</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!--END OF DIV FOR GENDER + BLOOD-->
+
                         <br>
                         <!-- <button id="btnRegister" class="btn btn-dark btn-block bold" onclick="register()">Register</button> -->
                         <button type="submit" id="btnRegister" class="btn btn-dark btn-block bold">Register</button>
