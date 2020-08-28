@@ -136,7 +136,13 @@
     .navbar-nav {
         flex-direction: row;
     }
-
+    .nav-link i,
+    .nav-link svg {
+        /* width: 2rem; */
+        /* min-width: 2rem; */
+        margin: 0;
+        padding: 0;
+    }
     .nav-link {
         justify-content: center;
     }
