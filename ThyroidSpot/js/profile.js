@@ -1,6 +1,8 @@
 var userURI = "https://localhost:44395/api/User/";
 var patientInfoURI = "https://localhost:44395/api/patientinfo/";
 var diagnosisURI = "https://localhost:44395/api/diagnosis";
+var dosageURI = "https://localhost:44395/api/dosage"; //?patientid={patientid}
+var reportURI = "https://localhost:44395/api/report"; //?patientid={patientid}
 
 var patient_doctor;
 
@@ -450,11 +452,62 @@ function deleteAccount() {
                 contentType: 'application/json',
                 success: function (data) {
                     console.log("Patient instance deleted.")
+
+
+                    try {
+                        $.ajax({
+                            type: 'DELETE',
+                            url: diagnosisURI + "?patientid=" + patient_table_patient_id,//?patientid={patientid}
+                            dataType: 'json',
+                            contentType: 'application/json',
+                            success: function (data) {
+                                console.log("diagnosis instance deleted.")
+                            }
+                        })
+                    }
+                    catch (err) {
+                        console.log("No diagnosis to delete")
+                    }
+
+                    try {
+                        $.ajax({
+                            type: 'DELETE',
+                            url: reportURI + "?patientid=" + patient_table_patient_id,//?patientid={patientid}
+                            dataType: 'json',
+                            contentType: 'application/json',
+                            success: function (data) {
+                                console.log("report instance deleted.")
+                            }
+                        })
+                    }
+                    catch (err) {
+                        console.log("No report to delete")
+                    }
+
+                    try {
+                        $.ajax({
+                            type: 'DELETE',
+                            url: dosageURI + "?patientid=" + patient_table_patient_id,//?patientid={patientid}
+                            dataType: 'json',
+                            contentType: 'application/json',
+                            success: function (data) {
+                                console.log("diagnosis instance deleted.")
+                            }
+                        })
+                    }
+                    catch (err) {
+                        console.log("No dosage to delete")
+                    }
+
+
+
                 }
             });
         }
-
-        window.location.href = "account.html";
+        setTimeout(function () {
+            // Redirect user to "verify-email.html"
+            window.location.href = "account.html";
+        }, 3000);
 
     }).catch(function (error) {
         // An error happened.

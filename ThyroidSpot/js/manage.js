@@ -105,6 +105,56 @@ function deleteUser() {
                     contentType: 'application/json',
                     success: function (data) {
                         console.log("Patient instance deleted.")
+
+
+
+                        try {
+                            $.ajax({
+                                type: 'DELETE',
+                                url: diagnosisURI + "?patientid=" + selectedPatientID,//?patientid={patientid}
+                                dataType: 'json',
+                                contentType: 'application/json',
+                                success: function (data) {
+                                    console.log("diagnosis instance deleted.")
+                                }
+                            })
+                        }
+                        catch (err) {
+                            console.log("No diagnosis to delete")
+                        }
+
+                        try {
+                            $.ajax({
+                                type: 'DELETE',
+                                url: reportURI + "?patientid=" + selectedPatientID,//?patientid={patientid}
+                                dataType: 'json',
+                                contentType: 'application/json',
+                                success: function (data) {
+                                    console.log("report instance deleted.")
+                                }
+                            })
+                        }
+                        catch (err) {
+                            console.log("No report to delete")
+                        }
+
+                        try {
+                            $.ajax({
+                                type: 'DELETE',
+                                url: dosageURI + "?patientid=" + selectedPatientID,//?patientid={patientid}
+                                dataType: 'json',
+                                contentType: 'application/json',
+                                success: function (data) {
+                                    console.log("diagnosis instance deleted.")
+                                }
+                            })
+                        }
+                        catch (err) {
+                            console.log("No dosage to delete")
+                        }
+
+
+
                     }
                 });
             }

@@ -292,4 +292,8 @@ button:active {
     box-shadow: none !important;
 }
 
+.page-heading {
+  margin-bottom:3%;
+}
+
 /********** </Global stylesheet> **********/
