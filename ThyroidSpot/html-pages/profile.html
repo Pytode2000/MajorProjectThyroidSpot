@@ -56,130 +56,141 @@
 
 
             <!-- TOGGLER -->
-            <div class="container container-small container-fluid form-container" style="padding: 0; margin-top:2%;">
+            <div class="container container-medium container-fluid form-container" style="padding: 0; margin-top:2%;">
 
                 <div class="btn-group btn-group-toggle" style="width: 100%;">
                     <label class="btn btn-secondary active btn-lg" onclick="toggleProfile()" id="toggleProfileBtn" style=" border: none; border-radius: 0;">
-                        <input type="radio" name="options" id="profileTab" autocomplete="off" checked> <b>User Profile</b>
+                        <input type="radio" name="options" id="profileTab" autocomplete="off" checked> <b style="font-size: 2rem;">User</b>
                     </label>
                     <label class="btn btn-secondary btn-lg" onclick="toggleInformation()" id="togglePatientBtn" style=" border: none; border-radius: 0;">
-                        <input type="radio" name="options" id="patientTab" autocomplete="off"> <b>Information</b>
+                        <input type="radio" name="options" id="patientTab" autocomplete="off"> <b style="font-size: 2rem;">Patient</b>
                     </label>
                 </div>
             </div>
 
 
-            <div class="container container-small container-fluid form-container white-text" id="main-cont">
+            <div class="container container-medium container-fluid form-container white-text" id="main-cont">
 
                 <div id="profileSection">
 
                     <br>
+                    <!-- <div class="row">
+    <div class="col-sm">
 
-                    <div class="alert alert-dark" role="alert">
-                        <p class="mb-0">Full Name
+    </div>
+</div> -->
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="alert alert-dark" role="alert">
+                                <p class="mb-0 tag-header tag-header">Full Name
 
-                            <i class="fas fa-user close"></i>
-                            <div class="text-center">
-                                <h4 class="alert-heading"> <span id="profName"></span>
-                                </h4>
+                                    <i class="fas fa-user close"></i>
+                                    <div class="text-center">
+                                        <h5 class="alert-heading"> <span id="profName"></span>
+                                        </h5>
+                                    </div>
+                                </p>
+                                <hr>
                             </div>
-                        </p>
-                        <hr>
+                        </div>
 
+                        <div class="col-sm">
+                            <div class="alert alert-dark" role="alert">
+                                <p class="mb-0 tag-header">Email Address
+                                    <i class="fas fa-envelope close"></i>
+                                    <div class="text-center">
+                                        <h5 class="alert-heading" style="  overflow: hidden;
+                                text-overflow: ellipsis; "><span id="profEmail"></span></h5>
+                                    </div>
+                                </p>
+                                <hr>
+
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="alert alert-dark" role="alert">
-                        <p class="mb-0">Email Address
-                            <i class="fas fa-envelope close"></i>
-                            <div class="text-center">
-                                <h4 class="alert-heading" style="  overflow: hidden;
-                                text-overflow: ellipsis; "><span id="profEmail"></span></h4>
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="alert alert-dark" role="alert">
+                                <p class="mb-0 tag-header">Account Type
+                                    <i class="fas fa-lock close"></i>
+                                    <div class="text-center">
+                                        <h5 class="alert-heading" style="  overflow: hidden;
+                                text-overflow: ellipsis; "><span id="profType"></span></h5>
+                                    </div>
+                                </p>
+                                <hr>
+
                             </div>
-                        </p>
-                        <hr>
+                        </div>
 
-                    </div>
+                        <div class="col-sm">
 
-                    <div class="alert alert-dark" role="alert">
-                        <p class="mb-0">Account Type
-                            <i class="fas fa-lock close"></i>
-                            <div class="text-center">
-                                <h4 class="alert-heading" style="  overflow: hidden;
-                                text-overflow: ellipsis; "><span id="profType"></span></h4>
+                            <div class="alert alert-dark" role="alert">
+                                <p class="mb-0 tag-header">UID
+                                    <i class="fas fa-fingerprint close"></i>
+                                    <div class="text-center">
+                                        <h5 class="alert-heading" style="  overflow: hidden;
+                                        text-overflow: ellipsis; "><span id="profUid"></span></h5>
+                                    </div>
+                                </p>
+                                <hr>
+
                             </div>
-                        </p>
-                        <hr>
 
+                        </div>
                     </div>
-
-
-                    <div class="alert alert-dark" role="alert">
-                        <p class="mb-0">UID
-                            <i class="fas fa-fingerprint close"></i>
-                            <div class="text-center">
-                                <h6 class="alert-heading"><span id="profUid"></span></h6>
-                            </div>
-                        </p>
-                        <hr>
-
-                    </div>
-
-
-                    <br>
+                    <!-- <br> -->
                 </div>
+
 
 
 
                 <div id="patientSection" class="hide">
                     <br>
 
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="alert alert-dark" role="alert">
+                                <p class="mb-0 tag-header">NRIC Number
 
-                    <div class="alert alert-dark" role="alert">
-                        <p class="mb-0">NRIC Number
+                                    <i class="fas fa-id-card close"></i>
+                                    <div class="text-center">
+                                        <h5 class="alert-heading"> <span id="profNRIC"></span>
+                                        </h5>
+                                    </div>
+                                </p>
+                                <hr>
 
-                            <i class="fas fa-id-card close"></i>
-                            <div class="text-center">
-                                <h4 class="alert-heading"> <span id="profNRIC"></span>
-                                </h4>
                             </div>
-                        </p>
-                        <hr>
+                        </div>
 
+                        <div class="col-sm">
+
+                            <div class="alert alert-dark" role="alert">
+                                <p class="mb-0 tag-header">Birthdate
+
+                                    <i class="fas fa-calendar close"></i>
+                                    <div class="text-center">
+                                        <h5 class="alert-heading"> <span id="profDOB"></span>
+                                        </h5>
+                                    </div>
+                                </p>
+                                <hr>
+                            </div>
+
+                        </div>
                     </div>
 
 
-                    <div class="alert alert-dark" role="alert">
-                        <p class="mb-0">Birthdate
-
-                            <i class="fas fa-calendar close"></i>
-                            <div class="text-center">
-                                <h4 class="alert-heading"> <span id="profDOB"></span>
-                                </h4>
-                            </div>
-                        </p>
-                        <hr>
-
-                    </div>
 
 
                     <div class="alert alert-dark" role="alert">
-                        <p class="mb-0">Gender
-
-                            <i class="fas fa-venus-mars close"></i> <div class="text-center">
-                                <h4 class="alert-heading"> <span id="profGender"></span>
-                                </h4>
-                            </div>
-                        </p>
-                        <hr>
-
-                    </div>
-
-                    <div class="alert alert-dark" role="alert">
-                        <p class="mb-10">Diagnosis
+                        <p class="mb-10 tag-header">Diagnosis
 
                             <i class="fas fa-stethoscope close"></i> <div class="text-center">
-                                <h4 class="alert-heading"> <span id="profDiagnosis"></span>
-                                </h4>
+                                <h5 class="alert-heading"> <span id="profDiagnosis"></span>
+                                </h5>
                             </div>
                         </p>
                         <hr>
@@ -187,22 +198,37 @@
                     </div>
 
 
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="alert alert-dark" role="alert">
+                                <p class="mb-0 tag-header">Gender
 
-                    <div class="alert alert-dark" role="alert">
-                        <p class="mb-0">Blood Type
+                                    <i class="fas fa-venus-mars close"></i> <div class="text-center">
+                                        <h5 class="alert-heading"> <span id="profGender"></span>
+                                        </h5>
+                                    </div>
+                                </p>
+                                <hr>
 
-                            <i class="fas fa-tint close"></i>
-                            <div class="text-center">
-                                <h4 class="alert-heading"> <span id="profBloodType"></span>
-                                </h4>
                             </div>
-                        </p>
-                        <hr>
+                        </div>
+                        <div class="col-sm">
 
+                            <div class="alert alert-dark" role="alert">
+                                <p class="mb-0 tag-header">Blood Type
+
+                                    <i class="fas fa-tint close"></i>
+                                    <div class="text-center">
+                                        <h5 class="alert-heading"> <span id="profBloodType"></span>
+                                        </h5>
+                                    </div>
+                                </p>
+                                <hr>
+
+                            </div>
+                        </div>
                     </div>
 
-
-                    <br>
                 </div>
 
             </div>

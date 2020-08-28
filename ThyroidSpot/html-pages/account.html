@@ -44,54 +44,89 @@
                 .form-container {
                     background: rgb(84, 91, 98);
                 }
+
+                label {
+                    font-size: 20px;
+                }
+
+                h5 {
+                    font-size: 24px;
+                }
             </style>
 
             <!-- TOGGLER -->
-            <div class="container container-small container-fluid form-container" style="padding: 0; margin-top: 3%;">
+            <div class="container container-medium container-fluid form-container" style="padding: 0; margin-top: 3%;">
 
                 <div class="btn-group btn-group-toggle" style="width: 100%;">
                     <label class="btn btn-secondary active btn-lg" onclick="toggleLogin()" id="toggleLoginBtn" style=" border: none; border-radius: 0;">
-                        <input type="radio" name="options" id="loginTab" autocomplete="off" checked> <b>Sign In</b>
+                        <input type="radio" name="options" id="loginTab" autocomplete="off" checked> <b style="font-size: 2rem;">Sign
+                            In
+                        </b>
                     </label>
                     <label class="btn btn-secondary btn-lg" onclick="toggleRegister()" id="toggleRegisterBtn" style=" border: none; border-radius: 0;">
-                        <input type="radio" name="options" id="registerTab" autocomplete="off"> <b>Sign Up</b>
+                        <input type="radio" name="options" id="registerTab" autocomplete="off"> <b style="font-size: 2rem;">Sign
+                            Up
+                        </b>
                     </label>
                 </div>
 
             </div>
 
-            <div class="container container-small container-fluid form-container" style="border-bottom-left-radius: 16px; border-bottom-right-radius: 16px;">
+            <div class="container container-medium container-fluid form-container" style="border-bottom-left-radius: 16px; border-bottom-right-radius: 16px;">
 
                 <!-- LOGIN -->
                 <div id="loginForm">
                     <br>
                     <div class="text-center white-text">
-                        <h2><i class="svg-inline--fa fas fa-user fa-primary fa-w-16"></i> <b>Already have an account? Login
+                        <h3><i class="svg-inline--fa fas fa-user fa-primary fa-w-16"></i> <b>Already have an account? Login
                                 now!
-                            </b></h1>
+                            </b></h3>
                     </div>
                     <br>
                     <br>
                     <form onsubmit="login(); return false;">
+                        <div class="row">
+                            <div class="col-sm">
 
-                        <div class="form-label-group">
-                            <input type="email" id="loginEmail" class="form-control" placeholder="Enter email address..." required="" autofocus="">
-                            <label for="loginEmail">Enter email address...<i class="fas fa-envelope close"></i></label>
-                        </div>
-                        <div class="form-label-group">
-                            <input type="password" class="form-control" id="loginPassword" placeholder="Enter password..." required="" autofocus="" minlength="8">
-                            <label for="loginPassword">Enter password...<i class="fas fa-key close"></i></label>
-                        </div>
+                                <div class="form-label-group">
+                                    <input type="email" id="loginEmail" class="form-control form-control-lg" placeholder="Enter email address..." required=""
+                                        autofocus="">
+                                    <label for="loginEmail">Enter email address...<i class="fas fa-envelope close"></i></label>
+                                </div>
+                            </div>
+                            <div class="col-sm">
 
+                                <div class="form-label-group">
+                                    <input type="password" class="form-control form-control-lg" id="loginPassword" placeholder="Enter password..." required=""
+                                        autofocus="" minlength="8">
+                                    <label for="loginPassword">Enter password...<i class="fas fa-key close"></i></label>
+                                </div>
+                            </div>
+                        </div>
                         <br>
-                        <button type="submit" id="btnLogin" class="btn btn-dark btn-block bold">Login</button>
+                        <!-- <br> -->
+                        <div class="row">
+                            <div class="col-md-4">
+
+                                <button type="submit" id="btnLogin" class="btn btn-dark btn-block bold"><h4 style="letter-spacing: 4px;">Login</h4></button>
+                            </div>
+                            <div class="col-md-4 offset-md-4 text-light text-right">
+
+                                <!-- <div class="text-left white-text"> -->
+                                <a id="forgetPasswordTxt" type="button" data-toggle="modal" data-target="#forgotPasswordModal" style="font-size: 20px;">
+                                    Forgot your password?
+                                </a>
+                                <!-- </div> -->
+                            </div>
+
+                        </div>
                     </form>
 
-                    <div class="text-right white-text" style="margin: 1%;">
+                    <!-- <div class="text-right white-text" style="margin: 1%;">
                         <a id="forgetPasswordTxt" type="button" data-toggle="modal" data-target="#forgotPasswordModal">
                             Forgot your password?
                         </a>
-                    </div>
+                    </div> -->
 
                     <style>
                         #forgetPasswordTxt:hover {
@@ -111,44 +146,69 @@
                 <div id="registerForm" class="hide">
                     <br>
                     <div class="text-center white-text">
-                        <h2><i class="svg-inline--fa fas fa-user fa-primary fa-w-16"></i> <b>New here? Register an account
+                        <h3><i class="svg-inline--fa fas fa-user fa-primary fa-w-16"></i> <b>New here? Register an account
                                 now!
-                            </b></h1>
+                            </b></h3>
                     </div>
                     <br>
                     <br>
                     <form onsubmit="register(); return false;">
-                        <div class="form-label-group">
-                            <input type="email" class="form-control" id="registerEmail" placeholder="Enter email address..." required="" autofocus="">
-                            <label for="registerEmail">Enter email address...<i class="fas fa-envelope close"></i></label>
-                        </div>
-                        <div class="form-label-group">
-                            <input type="password" class="form-control" id="registerPassword" placeholder="Enter password..." required="" autofocus=""
-                                minlength="8">
-                            <label for="registerPassword">Enter password...<i class="fas fa-key close"></i></label>
-                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <div class="form-label-group">
+                                    <input type="email" class="form-control form-control-lg" id="registerEmail" placeholder="Enter email address..." required=""
+                                        autofocus="">
+                                    <label for="registerEmail">Enter email address...<i class="fas fa-envelope close"></i></label>
+                                </div>
+                            </div>
+                            <div class="col-sm">
 
-                        <div class="form-label-group">
-                            <input type="password" class="form-control" id="registerRetypePassword" placeholder="Re-type password..." required="" autofocus=""
-                                minlength="8">
-                            <label for="registerRetypePassword">Re-type password...<i class="fas fa-key close"></i></label>
-                        </div>
+                                <div class="form-label-group">
+                                    <input type="text" class="form-control form-control-lg" id="registerFullName" placeholder="Enter full name..." required=""
+                                        autofocus="" minlength="5" maxlength="70">
+                                    <label for="registerFullName">Enter full name...<i class="fas fa-user close"></i></label>
+                                </div>
+                            </div>
 
-                        <div class="form-label-group">
-                            <input type="text" class="form-control" id="registerId" placeholder="Enter NRIC..." required="" autofocus="" minlength="9"
-                                maxlength="9">
-                            <label for="registerId">Enter NRIC number...<i class="fas fa-id-card close"></i></label>
                         </div>
+                        <div class="row">
+                            <div class="col-sm">
 
-                        <div class="form-label-group">
-                            <input type="text" class="form-control" id="registerFullName" placeholder="Enter full name..." required="" autofocus="" minlength="5"
-                                maxlength="70">
-                            <label for="registerFullName">Enter full name...<i class="fas fa-user close"></i></label>
+                                <div class="form-label-group">
+                                    <input type="password" class="form-control form-control-lg" id="registerPassword" placeholder="Enter password..." required=""
+                                        autofocus="" minlength="8">
+                                    <label for="registerPassword">Enter password...<i class="fas fa-key close"></i></label>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+
+                                <div class="form-label-group">
+                                    <input type="password" class="form-control form-control-lg" id="registerRetypePassword" placeholder="Re-type password..."
+                                        required="" autofocus="" minlength="8">
+                                    <label for="registerRetypePassword">Re-type password...<i class="fas fa-key close"></i></label>
+                                </div>
+                            </div>
+
                         </div>
-                        <!-- Jquery Datepicker for Birthdate -->
-                        <div class="form-label-group">
-                            <input type="text" class="form-control" id="registerBirthdate" placeholder="Select birthdate..." required="" autofocus="">
-                            <label for="registerBirthdate">Select birthdate...<i class="fas fa-calendar close"></i></label>
+                        <div class="row">
+
+
+                            <div class="col-sm">
+
+                                <div class="form-label-group">
+                                    <input type="text" class="form-control form-control-lg" id="registerId" placeholder="Enter NRIC..." required="" autofocus=""
+                                        minlength="9" maxlength="9">
+                                    <label for="registerId">Enter NRIC number...<i class="fas fa-id-card close"></i></label>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <!-- Jquery Datepicker for Birthdate -->
+                                <div class="form-label-group">
+                                    <input type="text" class="form-control form-control-lg" id="registerBirthdate" placeholder="Select birthdate..." required=""
+                                        autofocus="">
+                                    <label for="registerBirthdate">Select birthdate...<i class="fas fa-calendar close"></i></label>
+                                </div>
+                            </div>
                         </div>
 
                         <script>
@@ -176,7 +236,7 @@
                                 <div class="white-text text-center">
                                     <h5>Select Diagnosis</h5>
                                 </div>
-                                <select id="registerDiagnosis" class="custom-select diagnosisClass" style="margin-bottom: 10px;">
+                                <select id="registerDiagnosis" class="custom-select diagnosisClass" style="margin-bottom: 10px; font-size: 20px;">
                                     <option>De Quervain's thyroiditis</option>
                                     <option>Differentiatied thyroid carcinoma</option>
                                     <option>Graves' disease</option>
@@ -271,8 +331,13 @@
 
                         <br>
                         <!-- <button id="btnRegister" class="btn btn-dark btn-block bold" onclick="register()">Register</button> -->
-                        <button type="submit" id="btnRegister" class="btn btn-dark btn-block bold">Register</button>
-
+                        <div class="row">
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-4">
+                                <button type="submit" id="btnRegister" class="btn btn-dark btn-block bold"><h4 style="letter-spacing: 4px;">Register</h4></button>
+                            </div>
+                        </div>
                     </form>
 
                     <br>
@@ -305,8 +370,8 @@
                     <div class="modal-body">
 
                         <div class="form-label-group">
-                            <input type="email" id="forgotPasswordEmail" class="form-control" placeholder="Enter email address..." required="" minlength=""
-                                autofocus="">
+                            <input type="email" id="forgotPasswordEmail" class="form-control form-control-lg" placeholder="Enter email address..." required=""
+                                minlength="" autofocus="">
                             <label for="forgotPasswordEmail">Enter email address...<i class="fas fa-envelope close"></i></label>
                         </div>
                     </div>

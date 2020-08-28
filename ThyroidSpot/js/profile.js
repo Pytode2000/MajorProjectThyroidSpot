@@ -159,7 +159,7 @@ function getPatientInfo() {
 
                         // FOR PROFILE
                         var diagnosis = "  <div class='alert alert-secondary' role='alert'>" +
-                            currentPatientDiagnosis[i].diagnosis1 + "<br></div>"
+                            currentPatientDiagnosis[i].diagnosis1 + "<hr></div>"
                         $("#profDiagnosis").append(diagnosis);
 
                     }

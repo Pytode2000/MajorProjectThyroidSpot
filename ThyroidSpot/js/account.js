@@ -215,7 +215,7 @@ function addNewDiagnosis() {
     diagnosisCounter = diagnosisCounter + 1;
     document.getElementById("diagnosisBlock").style.display = "block";
     var html = "<div id='diagnosis-" + diagnosisCounter + "'>" +
-        "<select class='custom-select diagnosisClass' style='margin-bottom: 10px; width: 80%;'>" +
+        "<select class='custom-select diagnosisClass' style='margin-bottom: 10px; width: 80%; font-size: 20px;'>" +
         "<option>De Quervain's thyroiditis</option>" +
         "<option>Differentiatied thyroid carcinoma</option>" +
         "<option>Graves' disease</option>" +
