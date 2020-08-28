@@ -44,6 +44,9 @@
 .link-text {
     display: none;
     margin-left: 1rem;
+    font-size: 1.15rem;
+    transition: var(--transition-speed);
+
 }
 
 .nav-link i,

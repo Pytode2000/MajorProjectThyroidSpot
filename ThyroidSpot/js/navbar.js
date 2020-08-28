@@ -48,8 +48,10 @@ function navigation_control() {
     }
 
     // need to allow admin soon
-    if (user_logged_in == "n" || user_account_type != "patient") {
-        document.getElementById('nav-tab-diseases').style.display = "none";
+    if (user_logged_in == "n") {
+        if (user_account_type != "patient" || user_account_type != "admin") {
+            document.getElementById('nav-tab-diseases').style.display = "none";
+        }
     }
 
 
@@ -115,6 +117,14 @@ function navigation_control() {
         if (matchPath("patientinfo.html") == true) {
 
             window.location.href = "account.html";
+        }
+    }
+
+    if (user_logged_in == 'n') {
+        if (user_account_type != "patient" || user_account_type != "admin") {
+            if (matchPath("disease.html") == true) {
+                window.location.href = "account.html";
+            }
         }
     }
 
