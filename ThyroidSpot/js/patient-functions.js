@@ -395,7 +395,11 @@ function postPatientReport() {
                 contentType: 'application/json',
                 success: function (data) {
                     console.log(data)
-                    getReportID();
+                    //getReportID();
+
+                    getOnePatientInfo();
+                    document.getElementById('newPatientModal').style.display='none'
+                    window.location.reload();
                 }
             });
     }

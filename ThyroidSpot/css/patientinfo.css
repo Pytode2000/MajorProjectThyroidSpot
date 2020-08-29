@@ -171,7 +171,7 @@
     flex: 0 0 50%;
   }
   
-  #chart-container {
+  #openGraphModalBtn {
     
     height: 450px;
     width: 320px;
@@ -306,7 +306,7 @@
     z-index: 2;
   }
 
-  #chart-container {
+  #openGraphModalBtn {
     margin-top: 15em;
     margin-right: 5%;
     width: auto;
