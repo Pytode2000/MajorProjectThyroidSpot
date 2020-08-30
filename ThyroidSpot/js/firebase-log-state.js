@@ -89,3 +89,13 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     console.log("User UID: " + sessionStorage.getItem("user_unique_id"));
 });
 
+
+// Keeping my password checking function here since this file is imported to (almost) every page.
+function checkPasswordVisibility(passwordInputId) {
+    var password = document.getElementById(passwordInputId);
+    if (password.type === "password") {
+        password.type = "text";
+    } else {
+        password.type = "password";
+    }
+}

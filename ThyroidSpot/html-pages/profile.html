@@ -325,13 +325,15 @@
                         <div class="form-label-group">
                             <input type="password" id="changePassword" class="form-control" placeholder="Enter new password..." required="" autofocus=""
                                 minlength="8">
-                            <label for="changePassword">Enter new password...<i class="fas fa-key close"></i></label>
+                            <label for="changePassword">Enter new password...<i class="fas fa-key close"></i><i class="fas fa-xs fa-eye close"
+                                    onclick="checkPasswordVisibility('changePassword')"></i></label>
                         </div>
 
                         <div class="form-label-group">
                             <input type="password" id="retypeChangePassword" class="form-control" placeholder="Re-type new password..." required="" autofocus=""
                                 minlength="8">
-                            <label for="retypeChangePassword">Re-type new password...<i class="fas fa-key close"></i></label>
+                            <label for="retypeChangePassword">Re-type new password...<i class="fas fa-key close"></i><i class="fas fa-xs fa-eye close"
+                                    onclick="checkPasswordVisibility('retypeChangePassword')"></i></label>
                         </div>
                     </div>
                     <div class="modal-footer">

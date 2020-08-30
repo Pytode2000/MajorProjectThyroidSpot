@@ -136,12 +136,14 @@
                         <div class="form-label-group">
                             <input type="password" class="form-control" id="newUserPassword" placeholder="Enter password..." required="" autofocus=""
                                 minlength="8">
-                            <label for="newUserPassword">Enter password...<i class="fas fa-key close"></i></label>
+                            <label for="newUserPassword">Enter password...<i class="fas fa-key close"></i><i class="fas fa-xs fa-eye close"
+                                    onclick="checkPasswordVisibility('newUserPassword')"></i></label>
                         </div>
                         <div class="form-label-group">
                             <input type="password" class="form-control" id="newUserRePassword" placeholder="Re-type password..." required="" autofocus=""
                                 minlength="8">
-                            <label for="newUserRePassword">Re-type password...<i class="fas fa-key close"></i></label>
+                            <label for="newUserRePassword">Re-type password...<i class="fas fa-key close"></i><i class="fas fa-xs fa-eye close"
+                                    onclick="checkPasswordVisibility('newUserRePassword')"></i></label>
                         </div>
                         <div class="form-label-group">
                             <input type="text" class="form-control" id="newUserFullName" placeholder="Enter full name..." required="" autofocus="" minlength="5"
