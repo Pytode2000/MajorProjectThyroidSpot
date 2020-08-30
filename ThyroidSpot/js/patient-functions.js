@@ -167,6 +167,11 @@ var reportArray = [];
 var currentreportID; //this variable will contain the report ID that's selected
 var reportIDArray = [];
 
+//Arrays to be sent to graph_algorithm.js
+FT4Array = []; //array to store FT4 readings of patient
+TSHArray = []; //array to store TSH readings of patient
+TreatmentArray = []; //FT4 + TSH array
+
 storediagnosis = []; //to capture all diagnosis matched to user id
 
 var secondReportArray = [] // for search function
@@ -223,6 +228,9 @@ function getPatientReport() {
                     
                     var report = {report_id: reportArray[i].report_id, patient_id: reportArray[i].patient_id, drug_name: reportArray[i].drug_name, FT4: reportArray[i].FT4, TSH: reportArray[i].TSH, drug_dose: reportArray[i].drug_dose, timestamp: reportArray[i].timestamp}
                     storeReports.push(report)
+                    FT4Array.push(report.FT4)
+                    TSHArray.push(report.TSH)
+                    TreatmentArray.push({TSH: report.TSH, FT4: report.FT4, timestamp: report.timestamp})
                     viewdosagebtn = "<button id='viewdosage' num="+reportArray[reportArray.length-1].report_id+" class='btn btn-info btn-sm custom-class'>View Prescription</button>";
                     aptdate = reportArray[reportArray.length-1].timestamp;
 
@@ -242,7 +250,8 @@ function getPatientReport() {
 
                     if (i == reportArray.length-1){
 
-                        return $('#prescriptionButton').append(viewdiagnosisbutton+"<br class='divider'>"+viewdosagebtn);
+                        $('#prescriptionButton').append(viewdiagnosisbutton+"<br class='divider'>"+viewdosagebtn);
+                        return startCalc();
                     }
                 }
             }
