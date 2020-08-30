@@ -149,23 +149,22 @@ function bestfitCurve(){
 		phi = roPhi;
 		snum = roSnum;
 
-		//determining error list and avg error
+        //WARNING: for some reason averageError is displaying NaN so there's a small problem to fix
+        //determining error list and avg error
+        console.log(validArray)
 		errorList = [];
-		var totalError = 0.0;
-		var averageError = 0.0;
+		var totalError = 0;
+		var averageError = 0;
 		for (var i = 0; i < validArray.length; i++) {
 
-			var iError1 = Math.abs(validArray[i].TSH
-					- (roSnum * Math.pow(Math.E,
-							(-roPhi * validArray[i].FT4))));
-                            var iError2 = Math.abs(validArray[i]).FT4
-					- (Math.log(roSnum / validArray[i].TSH) / roPhi);
-                    var iError = Math.min(iError1, iError2);
+            var iError1 = Math.abs(validArray[i].TSH - (roSnum * Math.pow(Math.E,(-roPhi * validArray[i].FT4)))); 
+            var iError2 = Math.abs(validArray[i]).FT4 - (Math.log(roSnum / validArray[i].TSH) / roPhi);
+            var iError = Math.min(iError1, iError2);
 			errorList.push(iError);
 			totalError += iError;
-		}
+        }
 		averageError = totalError / errorList.length;
-
+        console.log(errorList)
 		return averageError;
 }
 
