@@ -17,6 +17,8 @@ var prevErrorList = [];
 var bestfitvalidft4List = [];
 var bestfitvalidtshList = [];
 
+var bestfitvalidData = [];
+
 var errorThreshold;
 var currentMinAvgError;
 var prevTreatment;
@@ -29,6 +31,9 @@ var snum;
 //setting units for FT4 and TSH
 var ft4Unit;
 var tshUnit;
+
+var myChart
+
 //initialising calculation functions
 function startCalc(){
     console.log("initialising calculations...")
@@ -41,12 +46,12 @@ function startCalc(){
     
     validArray = treatmentList
 
-    bestfitCurve();
-
+    
+    console.log(treatmentList)
     console.log(validArray)
     totalNumOfTreatments = treatmentList.length;
     console.log(totalNumOfTreatments)
-    //removeOutliers(); //call function to remove outliers
+    removeOutliers(); //call function to remove outliers
     for (var i = 0; i < treatmentList.length; i++) {
         found = false;
         for (var j = 0; j < validArray.length; j++) {
@@ -103,12 +108,35 @@ function startCalc(){
         bestfitvalidtshList.push(TSH);
     }
 
+
+    bestfitvalidData = [];
+    if (bestfitvalidft4List.length != 0) {
+        for (var i = 0; i < bestfitvalidft4List.length; i++) {
+            bestfitvalidData.push(bestfitvalidft4List[i], bestfitvalidtshList[i]);
+        }
+    }
+    else{
+        console.log("nada")
+    }
+
+    console.log(bestfitvalidft4List)
+    console.log(bestfitvalidtshList)
+
+    launchgraph(); //send data to the graph for rendering display
+
+    // chart.data.labels.push(label);
+    // chart.data.datasets.forEach((dataset) => {
+    //     dataset.data.push(bestfitvalidData);
+    // });
+    // chart.update();
 }
 
 
 //TODO: set up algorithm (phi and snum) & integrating it with the main function
-function bestfitCurve(){
+function bestfitCurve(vaz){
     console.log("calculating best fit curve...")
+
+        validArray = vaz
 
         treatmentROList = [];
 		
@@ -171,69 +199,106 @@ function bestfitCurve(){
 
 
 
-//TODO: getting outlier data
+//removeOutliers seems to be working
 function removeOutliers(){
     console.log("removing outliers...")
 
+    //set min max FT4 and TSH outliers variables
+    var minFT4 = treatmentList[0].FT4;
+    var maxFT4 = treatmentList[0].FT4;
+    var minTSH = treatmentList[0].TSH;
+    var maxTSH = treatmentList[0].TSH;
+
+    //Get max and min via for loop if else conditions
+    for (var i = 1; i < treatmentList.length; i++) {
+        if (treatmentList[i].FT4 > maxFT4)
+            maxFT4 = treatmentList[i].FT4;
+        if (treatmentList[i].FT4 < minFT4)
+            minFT4 = treatmentList[i].FT4;
+        if (treatmentList[i].TSH > maxTSH)
+            maxTSH = treatmentList[i].TSH;
+        if (treatmentList[i].TSH < minTSH)
+            minTSH = treatmentList[i].TSH;
+    }
+
+    //calculating error threshold
+    errorThreshold = Math.min(((maxTSH - minTSH) / 20),
+            ((maxFT4 - minFT4) / 20));
+
+    //calculating min avg error with error list
+    currentMinAvgError = Math.min((maxTSH - minTSH), (maxFT4 - minFT4));
+    var iterationCount = 0;
+    var avgError = bestfitCurve(validArray);
+    //prevErrorList = (ArrayList<Double>) errorList.clone();
+    prevErrorList = [];
+    for (var i=0;i<errorList.length;i++){
+        var d= errorList[i];
+        prevErrorList.push(d);
+    }
+        
+    while (avgError > errorThreshold
+            && iterationCount < 2*totalNumOfTreatments) {
+        if (avgError < currentMinAvgError) {
+            // can improve curve
+            currentMinAvgError = avgError;
+            //prevErrorList = (ArrayList<Double>) errorList.clone();
+            prevErrorList= [];
+            for (var i=0;i<errorList.length;i++){
+                var d= errorList[i];
+                prevErrorList.push(d);
+            }
+
+            // find the largest
+            var maxError = errorList[0];
+            var maxErrorIndex = 0;
+            for (var i = 1; i < errorList.length; i++) {
+                if (errorList[i] > maxError) {
+                    maxError = errorList[i];
+                    maxErrorIndex = i;
+                }
+            }
+            prevTreatment = validArray[maxErrorIndex];
+            validArray.pop(maxErrorIndex);
+            errorList.pop(maxErrorIndex);
+
+        } else {
+            
+            validArray.push(prevTreatment);// put the recent removed
+                                                // treatment back to the
+                                                // validArray
+
+            // find the next-largest
+            var maxError = prevErrorList[0];
+            var maxErrorIndex = 0;
+            for (var i = 1; i < prevErrorList.length; i++) {
+                if (prevErrorList[i] > maxError) {
+                    maxError = prevErrorList[i];
+                    maxErrorIndex = i;
+                }
+            }
+            prevTreatment = validArray[maxErrorIndex];
+            validArray.pop(maxErrorIndex);
+            prevErrorList.pop(maxErrorIndex);
+
+        }
+        avgError = bestfitCurve(validArray);
+    }
 }
 
 
 
 
-
-
-
-
-
-//TODO: displaying calculated chart
-var ctx = document.getElementById('graphcontainer').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'line',
-    
-    data: {
-        labels: ['Ft4', 'TSH', 'ABC'],
-        datasets: [{
-            label: 'value xx',
-            data: [12, 19, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                    
-                }
-            }]
-        }
-    }
-});
-
-//onclick function
-$(document).on("click", "#openGraphModalBtn", function(){
-    document.getElementById('GraphModal').style.display='block'
-    var ctx = document.getElementById('graphcontainer1').getContext('2d');
-    var myChart = new Chart(ctx, {
+//TODO: displaying calculated chart (chart hasn't been fully implemented)
+function launchgraph(){
+    var ctx = document.getElementById('graphcontainer').getContext('2d');
+    myChart = new Chart(ctx, {
         type: 'line',
         
         data: {
-            labels: ['Ft4', 'TSH', 'ABC'],
+            labels: ['Ft4', 'TSH'],
             datasets: [{
                 label: 'value xx',
-                data: [12, 19, 3],
+                data: bestfitvalidData,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -248,8 +313,8 @@ $(document).on("click", "#openGraphModalBtn", function(){
             }]
         },
         options: {
-            // responsive: true,
-            // maintainAspectRatio: false,
+            responsive: true,
+            maintainAspectRatio: false,
             scales: {
                 yAxes: [{
                     ticks: {
@@ -260,7 +325,50 @@ $(document).on("click", "#openGraphModalBtn", function(){
             }
         }
     });
-})
+
+    //onclick function
+    $(document).on("click", "#openGraphModalBtn", function(){
+        document.getElementById('GraphModal').style.display='block'
+        var ctx = document.getElementById('graphcontainer1').getContext('2d');
+        myChart = new Chart(ctx, {
+            type: 'line',
+            
+            data: {
+                labels: ['Ft4', 'TSH'],
+                datasets: [{
+                    label: 'value xx',
+                    data: bestfitvalidData,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                //responsive: true,
+                //maintainAspectRatio: false,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                            
+                        }
+                    }]
+                }
+            }
+        });
+    })
+
+    //startCalc();
+
+}
 
 
 
