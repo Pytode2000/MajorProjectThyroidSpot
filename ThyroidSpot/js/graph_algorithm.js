@@ -123,12 +123,6 @@ function startCalc(){
     console.log(bestfitvalidtshList)
 
     launchgraph(); //send data to the graph for rendering display
-
-    // chart.data.labels.push(label);
-    // chart.data.datasets.forEach((dataset) => {
-    //     dataset.data.push(bestfitvalidData);
-    // });
-    // chart.update();
 }
 
 
@@ -263,9 +257,7 @@ function removeOutliers(){
 
         } else {
             
-            validArray.push(prevTreatment);// put the recent removed
-                                                // treatment back to the
-                                                // validArray
+            validArray.push(prevTreatment);// put the recent removed treatment back to the validArray
 
             // find the next-largest
             var maxError = prevErrorList[0];
@@ -365,9 +357,6 @@ function launchgraph(){
             }
         });
     })
-
-    //startCalc();
-
 }
 
 
