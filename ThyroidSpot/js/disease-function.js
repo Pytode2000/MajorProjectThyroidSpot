@@ -44,8 +44,6 @@ function updateDisease() {
         timestamp: "-"
     }
 
-    // $('#editDiseaseName').val();
-
     $.ajax({
         type: 'PUT',
         url: diseaseURI + '/' + localStorage.getItem("diseasename"),
