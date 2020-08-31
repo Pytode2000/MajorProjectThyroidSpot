@@ -1,7 +1,6 @@
 //THIS WILL BE WHERE THE GRAPH FUNCTION COMES
 
 
-//TODO: bring in FT4 and TSH arrays from patient-function and patient-info-function
 console.log(FT4Array) //successfully retrieved from patientinfo.html
 console.log(TSHArray) //successfully retrieved from patientinfo.html
 console.log(TreatmentArray) //successfully retrieved from patientinfo.html
@@ -112,7 +111,7 @@ function startCalc(){
     bestfitvalidData = [];
     if (bestfitvalidft4List.length != 0) {
         for (var i = 0; i < bestfitvalidft4List.length; i++) {
-            bestfitvalidData.push(bestfitvalidft4List[i], bestfitvalidtshList[i]);
+            bestfitvalidData.push({x: bestfitvalidft4List[i], y: bestfitvalidtshList[i]});
         }
     }
     else{
@@ -121,6 +120,7 @@ function startCalc(){
 
     console.log(bestfitvalidft4List)
     console.log(bestfitvalidtshList)
+    console.log(bestfitvalidData)
 
     launchgraph(); //send data to the graph for rendering display
 }
@@ -287,10 +287,14 @@ function launchgraph(){
         type: 'line',
         
         data: {
-            labels: ['Ft4', 'TSH'],
+            //labels: ['Ft4', 'TSH'],
             datasets: [{
-                label: 'value xx',
+                label: 'Best Fit Curve',
                 data: bestfitvalidData,
+                // data: [{
+                //     x: bestfitvalidft4List,
+                //     y: bestfitvalidtshList
+                // }],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -308,11 +312,15 @@ function launchgraph(){
             responsive: true,
             maintainAspectRatio: false,
             scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
+                // yAxes: [{
+                //     ticks: {
+                //         beginAtZero: true
                         
-                    }
+                //     }
+                // }]
+                xAxes: [{
+                    type: 'linear',
+                    position: 'bottom'
                 }]
             }
         }
@@ -326,10 +334,14 @@ function launchgraph(){
             type: 'line',
             
             data: {
-                labels: ['Ft4', 'TSH'],
+                //labels: ['Ft4', 'TSH'],
                 datasets: [{
-                    label: 'value xx',
+                    label: 'Best Fit Curve',
                     data: bestfitvalidData,
+                    // data: [{
+                    //     x: bestfitvalidft4List,
+                    //     y: bestfitvalidtshList
+                    // }],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -347,11 +359,15 @@ function launchgraph(){
                 //responsive: true,
                 //maintainAspectRatio: false,
                 scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
+                    // yAxes: [{
+                    //     ticks: {
+                    //         beginAtZero: true
                             
-                        }
+                    //     }
+                    // }],
+                    xAxes: [{
+                        type: 'linear',
+                        position: 'bottom'
                     }]
                 }
             }
