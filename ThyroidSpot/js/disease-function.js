@@ -32,6 +32,45 @@ function createNewDisease() {
     });
 }
 
+function updateDisease() {
+
+    disease_data = {
+        thumbnail: null,
+        description: $('#editDiseaseDesc').val(),
+        disease_content: $('#editDiseaseContent').val(),
+        symptom: $('#editDiseaseSymptom').val(),
+        cause: $('#editDiseaseCause').val(),
+        treatment: $('#editDiseaseTreatment').val(),
+        timestamp: "-"
+    }
+
+    // $('#editDiseaseName').val();
+
+    $.ajax({
+        type: 'PUT',
+        url: diseaseURI + '/' + localStorage.getItem("diseasename"),
+        data: JSON.stringify(disease_data),
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            console.log("Updated Disease");
+            window.location.reload();
+        }
+    });
+}
+
+function deleteDisease() {
+    $.ajax({
+        type: 'DELETE',
+        url: diseaseURI + "/" + localStorage.getItem("diseasename"),
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            console.log("Disease instance deleted.")
+            window.location.reload();
+        }
+    });
+}
 
 //This function will consume the disease GET API
 function getAllDiseaseInfo() {
@@ -92,6 +131,17 @@ function getOneDiseaseInfo(id) {
                     $('#diseaseSymptoms').text(diseaseInfoArray[i].symptom)
                     $('#diseaseCause').text(diseaseInfoArray[i].cause)
                     $('#diseaseTreatment').text(diseaseInfoArray[i].treatment)
+
+
+                    // Preset value in edit disease modal.
+                    $('#editDiseaseName').text(diseaseInfoArray[i].disease);
+                    $('#editDiseaseDesc').val(diseaseInfoArray[i].description);
+                    $('#editDiseaseContent').val(diseaseInfoArray[i].disease_content);
+                    $('#editDiseaseSymptom').val(diseaseInfoArray[i].symptom);
+                    $('#editDiseaseCause').val(diseaseInfoArray[i].cause);
+                    $('#editDiseaseTreatment').val(diseaseInfoArray[i].treatment);
+
+                    // $("#editBloodType").val(currentPatientArray.blood_type);
                 }
             };
         }

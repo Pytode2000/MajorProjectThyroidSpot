@@ -118,11 +118,11 @@
                     </style>
                     <div class="row" id="deleteUpdateDiv">
                         <div class="col-md-3">
-                            <button type="button" class="btn btn-primary btn-block">Update</button>
+                            <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#editDiseaseModal">Update</button>
                         </div>
                         <div class=" offset-6"></div>
                         <div class="col-md-3">
-                            <button type="button" class="btn btn-danger btn-block">Delete</button>
+                            <button type="button" class="btn btn-danger btn-block" onclick="deleteDisease()">Delete</button>
                         </div>
                     </div>
                     <br><br>
@@ -144,7 +144,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="newDiseaseModalLabel">Add New Disease</h5>
+                        <h5 class="modal-title" id="newDiseaseModalLabel">List New Disease</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -159,23 +159,23 @@
                                     <label for="newDiseaseName">Disease name</label>
                                 </div>
                                 <div class="form-group">
-                                    <label for="newDiseaseDesc">Description</label>
+                                    <label for="newDiseaseDesc" style="font-weight: bold;">Description</label>
                                     <textarea class="form-control" id="newDiseaseDesc" rows="2" required="" autofocus=""></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="newDiseaseContent">Content</label>
+                                    <label for="newDiseaseContent" style="font-weight: bold;">Content</label>
                                     <textarea class="form-control" id="newDiseaseContent" rows="2" required="" autofocus=""></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="newDiseaseSymptom">Symptom</label>
+                                    <label for="newDiseaseSymptom" style="font-weight: bold;">Symptom</label>
                                     <textarea class="form-control" id="newDiseaseSymptom" rows="2" required="" autofocus=""></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="newDiseaseCause">Cause</label>
+                                    <label for="newDiseaseCause" style="font-weight: bold;">Cause</label>
                                     <textarea class="form-control" id="newDiseaseCause" rows="2" required="" autofocus=""></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="newDiseaseTreatment">Treatment</label>
+                                    <label for="newDiseaseTreatment" style="font-weight: bold;">Treatment</label>
                                     <textarea class="form-control" id="newDiseaseTreatment" rows="2" required="" autofocus=""></textarea>
                                 </div>
 
@@ -188,9 +188,59 @@
                             <button type="submit" class="btn btn-primary">Create</button>
                         </div>
                     </form>
-                    <div id="adminCreateUserAlert" class="alert alert-danger hide" role="alert">
-                        <!-- Error message. -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Edit Disease Modal -->
+        <div class="modal fade" id="editDiseaseModal" tabindex="-1" role="dialog" aria-labelledby="editDiseaseModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editDiseaseName"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
+                    <form onsubmit="updateDisease(); return false;">
+
+                        <div class="modal-body">
+
+                            <div class="form-label-group">
+                                <!-- <div class="form-label-group">
+                                    <input type="text" class="form-control" id="editDiseaseName" placeholder="Enter the name of disease..." required="" autofocus="">
+                                    <label for="newDiseaseName">Disease name</label>
+                                </div> -->
+                                <div class="form-group">
+                                    <label for="editDiseaseDesc" style="font-weight: bold;">Description</label>
+                                    <textarea class="form-control" id="editDiseaseDesc" rows="2" required="" autofocus=""></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="editDiseaseContent"  style="font-weight: bold;">Content</label>
+                                    <textarea class="form-control" id="editDiseaseContent" rows="2" required="" autofocus=""></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="editDiseaseSymptom"  style="font-weight: bold;">Symptom</label>
+                                    <textarea class="form-control" id="editDiseaseSymptom" rows="2" required="" autofocus=""></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="editDiseaseCause"  style="font-weight: bold;">Cause</label>
+                                    <textarea class="form-control" id="editDiseaseCause" rows="2" required="" autofocus=""></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="editDiseaseTreatment"  style="font-weight: bold;">Treatment</label>
+                                    <textarea class="form-control" id="editDiseaseTreatment" rows="2" required="" autofocus=""></textarea>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-info">Update</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
