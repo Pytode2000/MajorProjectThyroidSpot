@@ -1,50 +1,53 @@
 .container {
-    display: grid;
-    column-gap: 30px;
-    margin-left: 50px;
-    margin-right: 50px;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  }
-  
-  .centerText {
-    text-align: center;
-    position: relative;
-  }
-  
-  #searchcontain{
-    width: 100%; 
-    margin-top: 2em; 
-    margin-bottom: 1em;
-    height: fit-content;
-    text-align: center;
-  }
-  #diseaseSearch{
-    margin-left: auto; 
-    margin-right: auto; 
-    width: 25%;
-  }
-  
-  .container > div > img {
-    opacity: 0.5;
-    border-radius: 25px;
-    width: 100%;  
-    height: 100%;  
-    object-fit: cover;  
-    margin-bottom: 15px;
-    margin-top: 15px;
-    max-width: 500px;
-  }
-  
-  .centerTitle {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 2rem;
-  }
+  display: grid;
+  column-gap: 30px;
+  margin-left: 50px;
+  margin-right: 50px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.centerText {
+  text-align: center;
+  position: relative;
+}
+
+#searchcontain {
+  width: 100%;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  height: fit-content;
+  text-align: center;
+}
+
+#diseaseSearch {
+  margin-left: auto;
+  margin-right: auto;
+  width: 25%;
+}
+
+.container>div>img {
+  opacity: 0.5;
+  border-radius: 25px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin-bottom: 15px;
+  margin-top: 15px;
+  max-width: 500px;
+}
+
+.centerTitle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+}
 
 @media only screen and (max-width: 600px) {
-·/* Adding margin-bottom so that content does not get blocked by the navigation bar*/
+  ·
+
+  /* Adding margin-bottom so that content does not get blocked by the navigation bar*/
   .container {
     display: grid;
     column-gap: 30px;
@@ -54,14 +57,78 @@
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
 
-  #diseaseSearch{
-    margin-left: auto; 
-    margin-right: auto; 
+  #diseaseSearch {
+    margin-left: auto;
+    margin-right: auto;
     width: 70%;
   }
 
-  main{
+  main {
     margin-bottom: 5em;
   }
 }
-  
+
+
+
+
+
+
+/* JC: MY ADMIN's Create, Update, and Delete. */
+
+/*** <FLOATING ACTION BUTTON> ***/
+.floating-btn {
+  width: 80px;
+  height: 80px;
+  /* background: #007b5e6c; */
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border-radius: 50%;
+  color: black;
+  /*if using text*/
+  font-size: 40px;
+  position: fixed;
+
+  bottom: 20px;
+  /*For the hover animation*/
+  -webkit-transition-duration: var(--transition-speed);
+  transition-duration: var(--transition-speed);
+  z-index: 1000;
+
+  /*<button>*/
+  outline: black;
+  border: none;
+  cursor: pointer;
+}
+
+.floating-btn:focus {
+  outline: 0;
+}
+
+.newDisease-fab:hover {
+  background: black;
+  color: white;
+}
+
+.newDisease-fab {
+  background: white;
+  color: black;
+  margin-right: 20px;
+}
+
+.hide {
+  display: none;
+}
+/*** </FLOATING ACTION BUTTON> ***/
+
+/***** <Small Screens> *****/
+@media only screen and (max-width: 600px) {
+  .floating-btn {
+    bottom: 90px;
+  }
+}
+
+
+/***** </Small Screens> *****/

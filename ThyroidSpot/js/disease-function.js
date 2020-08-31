@@ -5,6 +5,34 @@ var secondInfoArray = [];
 var currentDiseaseID; //this variable will contain the disease name that's selected
 var storage = []; //this array will define the search
 
+// JC ADMIN CREATE DISEASE
+function createNewDisease() {
+
+    diseaseInstance = {
+        disease: $('#newDiseaseName').val(),
+        thumbnail: null,
+        description: $('#newDiseaseDesc').val(),
+        disease_content: $('#newDiseaseContent').val(),
+        symptom: $('#newDiseaseSymptom').val(),
+        cause: $('#newDiseaseCause').val(),
+        treatment: $('#newDiseaseTreatment').val(),
+        timestamp: "-"
+    }
+    $.ajax({
+        type: 'POST',
+        url: diseaseURI,
+        data: JSON.stringify(diseaseInstance),
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            console.log("Disease instance created.");
+            $('#newDiseaseModal').modal('hide');
+            window.location.reload();
+        }
+    });
+}
+
+
 //This function will consume the disease GET API
 function getAllDiseaseInfo() {
     console.log("retrieving all disease info...")
@@ -23,14 +51,15 @@ function getAllDiseaseInfo() {
             //Iterate through the diseaseInfoArray to generate rows to populate the table
             for (i = 0; i < diseaseInfoArray.length; i++) {
                 coverImage = "<img style='width:100px' src='data:image/jpeg;base64," + diseaseInfoArray[i].thumbnail + "'/>";
-                def = {id: i, disease: diseaseInfoArray[i].disease}
+                def = { id: i, disease: diseaseInfoArray[i].disease }
+                updateDeleteButtons = "<button>TEST</button>"
                 storage.push(def)
                 //use sample image for now:
-                coverImage= "<img src='https://www.mei.edu/sites/default/files/2019-01/Virus.jpg'>"
+                coverImage = "<img src='https://www.mei.edu/sites/default/files/2019-01/Virus.jpg'>"
                 // viewmorebutton = "document.getElementById('diseaseModal').style.display='block'"
                 // $('#diseaseCard').append("<div onclick="+viewmorebutton+"  class = 'centerText'>" +
                 //     coverImage + "<div class='centerTitle'><b>" + diseaseInfoArray[i].disease + "</b></div></div>");
-                $('#diseaseCard').append("<div id='viewmore' num="+i+"  class = 'centerText'>" +
+                $('#diseaseCard').append("<div id='viewmore' num=" + i + "  class = 'centerText'>" +
                     coverImage + "<div class='centerTitle'><b>" + diseaseInfoArray[i].disease + "</b></div></div>");
             }
         }
@@ -50,7 +79,7 @@ function getOneDiseaseInfo(id) {
             //put json data into bookArray
             diseaseInfoArray = data;
             //Iterate through the bookArray to generate rows to populate the table
-            
+
             for (i = 0; i < diseaseInfoArray.length; i++) {
                 if (id == i) {
                     localStorage.setItem("diseasename", diseaseInfoArray[i].disease);
@@ -74,40 +103,39 @@ var stonks
 function diseaseSearch() {
     const searchTerm = document.getElementById("diseaseSearch").value;
 
-    if (searchTerm.length == 0)
-    { 
+    if (searchTerm.length == 0) {
         storage = []
         secondInfoArray = []
-       getAllDiseaseInfo();	
-       stonks = ""
-       return false; 
-    }  	
-    
+        getAllDiseaseInfo();
+        stonks = ""
+        return false;
+    }
+
     if (!searchTerm) {
         return;
     }
-    
+
     secondInfoArray = storage.filter(currentGoal => {
         if (currentGoal.disease && searchTerm) {
             if (currentGoal.disease.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
-                    stonks =  currentGoal.disease
-                    console.log(currentGoal.disease)
-                    return true; 
+                stonks = currentGoal.disease
+                console.log(currentGoal.disease)
+                return true;
             }
             return false;
-          }
+        }
     });
 
     console.log(secondInfoArray)
     $('#diseaseCard').html('');
-    for (i = 0; i < secondInfoArray.length; i++){
-        $('#diseaseCard').append("<div id='viewmore' num="+secondInfoArray[i].id+"  class = 'centerText'>" +
-        coverImage + "<div class='centerTitle'><b>" + secondInfoArray[i].disease + "</b></div></div>");
+    for (i = 0; i < secondInfoArray.length; i++) {
+        $('#diseaseCard').append("<div id='viewmore' num=" + secondInfoArray[i].id + "  class = 'centerText'>" +
+            coverImage + "<div class='centerTitle'><b>" + secondInfoArray[i].disease + "</b></div></div>");
     }
 
 }
 
-function call(){
+function call() {
     //console.log(stonksid)
 
     $('#diseaseCard').html('');
@@ -118,8 +146,8 @@ function call(){
     //     //use sample image for now:
     //     coverImage= "<img src='https://www.mei.edu/sites/default/files/2019-01/Virus.jpg'>"
     //     // viewmorebutton = "document.getElementById('diseaseModal').style.display='block'"
-        // $('#diseaseCard').append("<div onclick="+viewmorebutton+"  class = 'centerText'>" +
-        //     coverImage + "<div class='centerTitle'><b>" + diseaseInfoArray[i].disease + "</b></div></div>");
+    // $('#diseaseCard').append("<div onclick="+viewmorebutton+"  class = 'centerText'>" +
+    //     coverImage + "<div class='centerTitle'><b>" + diseaseInfoArray[i].disease + "</b></div></div>");
     //     $('#diseaseCard').append("<div id='viewmore' num="+stonksid+"  class = 'centerText'>" +
     //         coverImage + "<div class='centerTitle'><b>" + stonks + "</b></div></div>");
     //  }
@@ -131,7 +159,7 @@ $(document).on("click", "#viewmore", function () {
     currentDiseaseID = $(this).attr('num');
     console.log(currentDiseaseID);
     getOneDiseaseInfo(currentDiseaseID);
-    document.getElementById('diseaseModal').style.display='block'
+    document.getElementById('diseaseModal').style.display = 'block'
 });
 
 getAllDiseaseInfo();

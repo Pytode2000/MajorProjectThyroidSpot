@@ -13,6 +13,17 @@
     <link rel="stylesheet" href="../css/disease.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" />
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX"
+        crossorigin="anonymous">
+
+
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script src="../js/disease-function.js"></script>
 
@@ -21,11 +32,13 @@
 </head>
 
 <body>
+
+
     <div id="navbar-html"></div>
     <main>
         <h1 style="text-align: center;">Thyroid Disease Page</h1>
         <div id="searchcontain">
-            <input id="diseaseSearch" onkeyup="diseaseSearch()" placeholder="Search thyroid disease..."> 
+            <input id="diseaseSearch" onkeyup="diseaseSearch()" placeholder="Search thyroid disease...">
         </div>
         <!--Disease Cards-->
         <div id="diseaseCard" class="container">
@@ -39,8 +52,16 @@
             </div>
         </div>
 
+
+        <!-- Floating action button to create new disease -->
+
+        <button type="button" id="newDiseaseBtn" class="floating-btn newDisease-fab hide" data-toggle="modal" data-target="#newDiseaseModal">
+            <i class="fas fa-plus"></i>
+        </button>
+
+
         <!--Modal For Diease Info-->
-        <div id="diseaseModal" class="w3-modal">
+        <div id="diseaseModal" class="w3-modal" style="z-index: 1001">
             <div class="w3-modal-content">
                 <div class="w3-container">
                     <span onclick="document.getElementById('diseaseModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
@@ -85,9 +106,95 @@
                         bibendum vel sapien. Sed nisl urna, mattis sed orci et, lobortis efficitur leo. Maecenas sit amet
                         massa urna. Phasellus accumsan est nisi, in faucibus turpis commodo sed.
                     </p>
+                    <style>
+                        @media (max-width: 768px) {
+
+                            [class*="col-md-3"] {
+                                margin-bottom: 15px;
+                                margin-left: 0;
+                                margin-right: 0;
+                            }
+                        }
+                    </style>
+                    <div class="row" id="deleteUpdateDiv">
+                        <div class="col-md-3">
+                            <button type="button" class="btn btn-primary btn-block">Update</button>
+                        </div>
+                        <div class=" offset-6"></div>
+                        <div class="col-md-3">
+                            <button type="button" class="btn btn-danger btn-block">Delete</button>
+                        </div>
+                    </div>
+                    <br><br>
+
+                </div>
+            </div>
+            <br>
+        </div>
+
+        <script>
+            if (sessionStorage.getItem("user_account_type") == "admin") {
+                document.getElementById("newDiseaseBtn").classList.remove("hide");
+                document.getElementById("deleteUpdateDiv").classList.remove("hide");
+            }
+        </script>
+
+        <!-- New Disease Modal -->
+        <div class="modal fade" id="newDiseaseModal" tabindex="-1" role="dialog" aria-labelledby="newDiseaseModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="newDiseaseModalLabel">Add New Disease</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form onsubmit="createNewDisease(); return false;">
+
+                        <div class="modal-body">
+
+                            <div class="form-label-group">
+                                <div class="form-label-group">
+                                    <input type="text" class="form-control" id="newDiseaseName" placeholder="Enter the name of disease..." required="" autofocus="">
+                                    <label for="newDiseaseName">Disease name</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newDiseaseDesc">Description</label>
+                                    <textarea class="form-control" id="newDiseaseDesc" rows="2" required="" autofocus=""></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newDiseaseContent">Content</label>
+                                    <textarea class="form-control" id="newDiseaseContent" rows="2" required="" autofocus=""></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newDiseaseSymptom">Symptom</label>
+                                    <textarea class="form-control" id="newDiseaseSymptom" rows="2" required="" autofocus=""></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newDiseaseCause">Cause</label>
+                                    <textarea class="form-control" id="newDiseaseCause" rows="2" required="" autofocus=""></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newDiseaseTreatment">Treatment</label>
+                                    <textarea class="form-control" id="newDiseaseTreatment" rows="2" required="" autofocus=""></textarea>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        </div>
+                    </form>
+                    <div id="adminCreateUserAlert" class="alert alert-danger hide" role="alert">
+                        <!-- Error message. -->
+                    </div>
                 </div>
             </div>
         </div>
+
 
 
     </main>
