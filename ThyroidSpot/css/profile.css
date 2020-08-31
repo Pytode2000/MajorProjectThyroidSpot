@@ -72,3 +72,10 @@
 
 
 /***** </Small Screens> *****/
+
+
+.tag-header {
+    font-size: 20px;
+    letter-spacing: 1px;
+    color: rgb(88, 88, 88);
+}

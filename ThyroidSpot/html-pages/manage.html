@@ -44,30 +44,46 @@
 
     <main>
         <div class="content">
-            <div class="containter container-sm">
-                <h1 class="text-center"> <i class="svg-inline--fa fas fa-edit fa-primary fa-w-16"></i> Manage</h1>
+            <div class="container container-medium">
+                <h1 class="text-center page-heading"> <i class="svg-inline--fa fas fa-edit fa-primary fa-w-16"></i> Manage</h1>
 
+                <div class="row">
+                    <div class="col-md-5">
+                        <!-- GENDER -->
+                        <style>
+                            @media (max-width: 768px) {
 
+                                [class*="col-md-3"] {
+                                    margin-bottom: 15px;
+                                }
 
-                <div style="width:100%; display:inline-block;">
-                    <div class="form-label-group" style="width:30%; float:left;">
-                        <input type="text" id="searchInput" name="searchInput" class="form-control" placeholder="Search..." required="" autofocus="">
-                        <label for="searchInput">Search...<i class="fas fa-times close" onclick="resetFilterOnSearch()"></i></label>
+                            }
+                        </style>
+                        <!-- <div style="width:100%; display:inline-block;"> -->
+                        <div class="form-label-group">
+                            <input type="text" id="searchInput" name="searchInput" class="form-control" placeholder="Search..." required="" autofocus="">
+                            <label for="searchInput">Search...
+                                <i class="fas fa-search close" onclick="searchFunction(); clearFilter();"></i>
+                                <i class="fas fa-times close text-secondary" onclick="resetFilterOnSearch()"></i>
+                            </label>
+
+                            <!-- </div> -->
+                        </div>
                     </div>
-                    <button class="btn btn-link" id="searchButton"><i class="fas fa-search close" onclick="searchFunction(); clearFilter();"></i></button>
-
-
-                    <select id="filterSearch" class="custom-select" style="width:25%; float: right;" onchange="filterByAccountType()">
-                        <option value="">All</option>
-                        <option value="admin">Admin</option>
-                        <option value="clinician">Clinician</option>
-                        <option value="patient">Patient</option>
-                        <!-- <option><b>Clear X</b></option> -->
-                    </select>
-
+                    <div class="offset-4">
+                    </div>
+                    <div class="col-md-3">
+                        <select id="filterSearch" class="custom-select" onchange="filterByAccountType()">
+                            <option value="">All</option>
+                            <option value="admin">Admin</option>
+                            <option value="clinician">Clinician</option>
+                            <option value="patient">Patient</option>
+                            <!-- <option><b>Clear X</b></option> -->
+                        </select>
+                    </div>
                 </div>
 
-
+                <!-- </div> -->
 
 
                 <table class="table table-dark table-striped" style="margin-bottom: 0; font-size: 1.25em;">
@@ -120,12 +136,14 @@
                         <div class="form-label-group">
                             <input type="password" class="form-control" id="newUserPassword" placeholder="Enter password..." required="" autofocus=""
                                 minlength="8">
-                            <label for="newUserPassword">Enter password...<i class="fas fa-key close"></i></label>
+                            <label for="newUserPassword">Enter password...<i class="fas fa-key close"></i><i class="fas fa-xs fa-eye close"
+                                    onclick="checkPasswordVisibility('newUserPassword')"></i></label>
                         </div>
                         <div class="form-label-group">
                             <input type="password" class="form-control" id="newUserRePassword" placeholder="Re-type password..." required="" autofocus=""
                                 minlength="8">
-                            <label for="newUserRePassword">Re-type password...<i class="fas fa-key close"></i></label>
+                            <label for="newUserRePassword">Re-type password...<i class="fas fa-key close"></i><i class="fas fa-xs fa-eye close"
+                                    onclick="checkPasswordVisibility('newUserRePassword')"></i></label>
                         </div>
                         <div class="form-label-group">
                             <input type="text" class="form-control" id="newUserFullName" placeholder="Enter full name..." required="" autofocus="" minlength="5"

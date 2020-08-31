@@ -160,6 +160,10 @@ main {
     width: 500px;
   }
 
+  .container-medium {
+    width: 735px;
+  }
+
   .container-large {
     width: 970px;
   }
@@ -168,6 +172,10 @@ main {
 @media (min-width: 992px) {
   .container-small {
     width: 500px;
+  }
+
+  .container-medium {
+    width: 735px;
   }
 
   .container-large {
@@ -180,12 +188,17 @@ main {
     width: 700px;
   }
 
+  .container-medium {
+    width: 1100px;
+  }
+
   .container-large {
     width: 1500px;
   }
 }
 
 .container-small,
+.container-medium,
 .container-large {
   max-width: 100%;
 }
@@ -222,7 +235,7 @@ main {
   color: #495057;
   border: 1px solid transparent;
   border-radius: .25rem;
-  transition: all .1s ease-in-out;
+  transition: all .4s ease-in-out;
 }
 
 .form-label-group input::-webkit-input-placeholder {
@@ -271,6 +284,16 @@ main {
 
 .white-text {
   color: white;
+}
+
+button:focus,
+button:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.page-heading {
+  margin-bottom: 3%;
 }
 
 

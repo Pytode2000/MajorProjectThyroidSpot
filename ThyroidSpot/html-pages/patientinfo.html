@@ -77,7 +77,7 @@
                 <!-- <div id="dosagehist">
                 </div> -->
             </div>
-            <div id="chart-container">
+            <div id="openGraphModalBtn">
                 <canvas id="graphcontainer" >
                     <!--<h2 style="text-align: center;">Graph over here</h2>-->
                 </canvas>
@@ -260,7 +260,7 @@
                                 <button id="addMoreRows" class="btn btn-secondary custom-class">Add another drug dose</button>
                             </div> -->
                             <div style="text-align: center; padding-bottom: 1em;">
-                                <button onclick="postDosage()" class="btn btn-dark btn-SaveReport custom-class bold">Save Report</button>
+                                <button onclick="postPatientReport()" class="btn btn-dark btn-SaveReport custom-class bold">Save Report</button>
                             </div>
                     </form>
                 </div>
@@ -360,7 +360,24 @@
                 </div>
             </div>
         </div>
+        
+         <!--Modal For Graph-->
+         <div id="GraphModal" class="w3-modal">
+            <div class="w3-modal-content">
+                <div class="w3-container">
+                    <span onclick="document.getElementById('GraphModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                    <h2 style="text-align: center;">Dosage Chart</h2>
                     
+                   <div class="modal-body" style="text-align: center">
+                        <canvas id="graphcontainer1" >
+                            <!--<h2 style="text-align: center;">Graph over here</h2>-->
+                        </canvas>
+                        <br>
+                        <button class="btn btn-info btn-sm custom-class" id="exportcalc">Export chart calculations</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <!-- Firebase -->
@@ -377,44 +394,7 @@
 
 
     </script>
-
-<script type="text/javascript">
-    var ctx = document.getElementById('graphcontainer').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'line',
-        
-        data: {
-            labels: ['Ft4', 'TSH', 'ABC'],
-            datasets: [{
-                label: 'value xx',
-                data: [12, 19, 3],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                        
-                    }
-                }]
-            }
-        }
-    });
-</script>
+    <script src="../js/graph_algorithm.js"></script>
 </body>
 
 </html>

@@ -52,134 +52,145 @@
 
         <div class="content">
             <!-- <h1> PROFILE PAGE </h1> -->
-            <h1 class="text-center"> <i class="svg-inline--fa fas fa-user fa-primary fa-w-16"></i> Profile</h1>
+            <h1 class="text-center page-heading"> <i class="svg-inline--fa fas fa-user fa-primary fa-w-16"></i> Profile</h1>
 
 
             <!-- TOGGLER -->
-            <div class="container container-small container-fluid form-container" style="padding: 0; margin-top:2%;">
+            <div class="container container-medium container-fluid form-container" style="padding: 0;">
 
                 <div class="btn-group btn-group-toggle" style="width: 100%;">
                     <label class="btn btn-secondary active btn-lg" onclick="toggleProfile()" id="toggleProfileBtn" style=" border: none; border-radius: 0;">
-                        <input type="radio" name="options" id="profileTab" autocomplete="off" checked> <b>User Profile</b>
+                        <input type="radio" name="options" id="profileTab" autocomplete="off" checked> <b style="font-size: 2rem;">User</b>
                     </label>
                     <label class="btn btn-secondary btn-lg" onclick="toggleInformation()" id="togglePatientBtn" style=" border: none; border-radius: 0;">
-                        <input type="radio" name="options" id="patientTab" autocomplete="off"> <b>Information</b>
+                        <input type="radio" name="options" id="patientTab" autocomplete="off"> <b style="font-size: 2rem;">Patient</b>
                     </label>
                 </div>
             </div>
 
 
-            <div class="container container-small container-fluid form-container white-text" id="main-cont">
+            <div class="container container-medium container-fluid form-container white-text" id="main-cont">
 
                 <div id="profileSection">
 
                     <br>
+                    <!-- <div class="row">
+    <div class="col-sm">
 
-                    <div class="alert alert-dark" role="alert">
-                        <p class="mb-0">Full Name
+    </div>
+</div> -->
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="alert alert-dark" role="alert">
+                                <p class="mb-0 tag-header tag-header">Full Name
 
-                            <i class="fas fa-user close"></i>
-                            <div class="text-center">
-                                <h4 class="alert-heading"> <span id="profName"></span>
-                                </h4>
+                                    <i class="fas fa-user close"></i>
+                                    <div class="text-center">
+                                        <h5 class="alert-heading"> <span id="profName"></span>
+                                        </h5>
+                                    </div>
+                                </p>
+                                <hr>
                             </div>
-                        </p>
-                        <hr>
+                        </div>
 
+                        <div class="col-sm">
+                            <div class="alert alert-dark" role="alert">
+                                <p class="mb-0 tag-header">Email Address
+                                    <i class="fas fa-envelope close"></i>
+                                    <div class="text-center">
+                                        <h5 class="alert-heading" style="  overflow: hidden;
+                                text-overflow: ellipsis; "><span id="profEmail"></span></h5>
+                                    </div>
+                                </p>
+                                <hr>
+
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="alert alert-dark" role="alert">
-                        <p class="mb-0">Email Address
-                            <i class="fas fa-envelope close"></i>
-                            <div class="text-center">
-                                <h4 class="alert-heading" style="  overflow: hidden;
-                                text-overflow: ellipsis; "><span id="profEmail"></span></h4>
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="alert alert-dark" role="alert">
+                                <p class="mb-0 tag-header">Account Type
+                                    <i class="fas fa-lock close"></i>
+                                    <div class="text-center">
+                                        <h5 class="alert-heading" style="  overflow: hidden;
+                                text-overflow: ellipsis; "><span id="profType"></span></h5>
+                                    </div>
+                                </p>
+                                <hr>
+
                             </div>
-                        </p>
-                        <hr>
+                        </div>
 
-                    </div>
+                        <div class="col-sm">
 
-                    <div class="alert alert-dark" role="alert">
-                        <p class="mb-0">Account Type
-                            <i class="fas fa-lock close"></i>
-                            <div class="text-center">
-                                <h4 class="alert-heading" style="  overflow: hidden;
-                                text-overflow: ellipsis; "><span id="profType"></span></h4>
+                            <div class="alert alert-dark" role="alert">
+                                <p class="mb-0 tag-header">UID
+                                    <i class="fas fa-fingerprint close"></i>
+                                    <div class="text-center">
+                                        <h5 class="alert-heading" style="  overflow: hidden;
+                                        text-overflow: ellipsis; "><span id="profUid"></span></h5>
+                                    </div>
+                                </p>
+                                <hr>
+
                             </div>
-                        </p>
-                        <hr>
 
+                        </div>
                     </div>
-
-
-                    <div class="alert alert-dark" role="alert">
-                        <p class="mb-0">UID
-                            <i class="fas fa-fingerprint close"></i>
-                            <div class="text-center">
-                                <h6 class="alert-heading"><span id="profUid"></span></h6>
-                            </div>
-                        </p>
-                        <hr>
-
-                    </div>
-
-
-                    <br>
+                    <!-- <br> -->
                 </div>
+
 
 
 
                 <div id="patientSection" class="hide">
                     <br>
 
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="alert alert-dark" role="alert">
+                                <p class="mb-0 tag-header">NRIC Number
 
-                    <div class="alert alert-dark" role="alert">
-                        <p class="mb-0">NRIC Number
+                                    <i class="fas fa-id-card close"></i>
+                                    <div class="text-center">
+                                        <h5 class="alert-heading"> <span id="profNRIC"></span>
+                                        </h5>
+                                    </div>
+                                </p>
+                                <hr>
 
-                            <i class="fas fa-id-card close"></i>
-                            <div class="text-center">
-                                <h4 class="alert-heading"> <span id="profNRIC"></span>
-                                </h4>
                             </div>
-                        </p>
-                        <hr>
+                        </div>
 
+                        <div class="col-sm">
+
+                            <div class="alert alert-dark" role="alert">
+                                <p class="mb-0 tag-header">Birthdate
+
+                                    <i class="fas fa-calendar close"></i>
+                                    <div class="text-center">
+                                        <h5 class="alert-heading"> <span id="profDOB"></span>
+                                        </h5>
+                                    </div>
+                                </p>
+                                <hr>
+                            </div>
+
+                        </div>
                     </div>
 
 
-                    <div class="alert alert-dark" role="alert">
-                        <p class="mb-0">Birthdate
-
-                            <i class="fas fa-calendar close"></i>
-                            <div class="text-center">
-                                <h4 class="alert-heading"> <span id="profDOB"></span>
-                                </h4>
-                            </div>
-                        </p>
-                        <hr>
-
-                    </div>
 
 
                     <div class="alert alert-dark" role="alert">
-                        <p class="mb-0">Gender
-
-                            <i class="fas fa-venus-mars close"></i> <div class="text-center">
-                                <h4 class="alert-heading"> <span id="profGender"></span>
-                                </h4>
-                            </div>
-                        </p>
-                        <hr>
-
-                    </div>
-
-                    <div class="alert alert-dark" role="alert">
-                        <p class="mb-0">Diagnosis
+                        <p class="mb-10 tag-header">Diagnosis
 
                             <i class="fas fa-stethoscope close"></i> <div class="text-center">
-                                <h4 class="alert-heading"> <span id="profDiagnosis"></span>
-                                </h4>
+                                <h5 class="alert-heading"> <span id="profDiagnosis"></span>
+                                </h5>
                             </div>
                         </p>
                         <hr>
@@ -187,22 +198,37 @@
                     </div>
 
 
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="alert alert-dark" role="alert">
+                                <p class="mb-0 tag-header">Gender
 
-                    <div class="alert alert-dark" role="alert">
-                        <p class="mb-0">Blood Type
+                                    <i class="fas fa-venus-mars close"></i> <div class="text-center">
+                                        <h5 class="alert-heading"> <span id="profGender"></span>
+                                        </h5>
+                                    </div>
+                                </p>
+                                <hr>
 
-                            <i class="fas fa-tint close"></i>
-                            <div class="text-center">
-                                <h4 class="alert-heading"> <span id="profBloodType"></span>
-                                </h4>
                             </div>
-                        </p>
-                        <hr>
+                        </div>
+                        <div class="col-sm">
 
+                            <div class="alert alert-dark" role="alert">
+                                <p class="mb-0 tag-header">Blood Type
+
+                                    <i class="fas fa-tint close"></i>
+                                    <div class="text-center">
+                                        <h5 class="alert-heading"> <span id="profBloodType"></span>
+                                        </h5>
+                                    </div>
+                                </p>
+                                <hr>
+
+                            </div>
+                        </div>
                     </div>
 
-
-                    <br>
                 </div>
 
             </div>
@@ -299,13 +325,15 @@
                         <div class="form-label-group">
                             <input type="password" id="changePassword" class="form-control" placeholder="Enter new password..." required="" autofocus=""
                                 minlength="8">
-                            <label for="changePassword">Enter new password...<i class="fas fa-key close"></i></label>
+                            <label for="changePassword">Enter new password...<i class="fas fa-key close"></i><i class="fas fa-xs fa-eye close"
+                                    onclick="checkPasswordVisibility('changePassword')"></i></label>
                         </div>
 
                         <div class="form-label-group">
                             <input type="password" id="retypeChangePassword" class="form-control" placeholder="Re-type new password..." required="" autofocus=""
                                 minlength="8">
-                            <label for="retypeChangePassword">Re-type new password...<i class="fas fa-key close"></i></label>
+                            <label for="retypeChangePassword">Re-type new password...<i class="fas fa-key close"></i><i class="fas fa-xs fa-eye close"
+                                    onclick="checkPasswordVisibility('retypeChangePassword')"></i></label>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -428,7 +456,13 @@
                         </div>
                         <!-- <br> <br> <br> <br> -->
 
-
+                        <style>
+                            .diagnosisBtn:focus,
+                            .diagnosisBtn:active {
+                                outline: none !important;
+                                box-shadow: none;
+                            }
+                        </style>
 
                         <!-- Radio buttons for gender -->
                         <!-- <label>Select gender: </label>
@@ -469,7 +503,7 @@
                                 [class*="col-sm"] {
                                     margin-bottom: 15px;
                                     margin-left: 0;
-                                    margin-right: 0; 
+                                    margin-right: 0;
                                 }
 
                             }
@@ -538,26 +572,31 @@
     </div>
 
 
-    <!-- Error modal (for user timeout) -->
-
-    <!-- Error Modal -->
-    <!-- <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <!-- Delete Diagnosis Modal -->
+    <div class="modal fade" id="deleteDiagnosisModal" tabindex="-1" role="dialog" aria-labelledby="deleteDiagnosisModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                    <h5 class="modal-title" id="deleteDiagnosisModalLabel">Delete Diagnosis</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+
                 <div class="modal-body">
 
-                    <p>An error occurred! A possible reason is that your account have been logged in for too long and the
-                        token is no longer valid. <br> Please re-login and try again, thanks!</p>
+                    Are you sure you want to delete this diagnosis?
+
                 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger" onclick="removeDefaultDiagnosis()">Delete</button>
+                </div>
+
             </div>
         </div>
-    </div> -->
+    </div>
 
 
     <!-- Alert Email Modal -->

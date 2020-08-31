@@ -44,6 +44,9 @@
 .link-text {
     display: none;
     margin-left: 1rem;
+    font-size: 1.15rem;
+    transition: var(--transition-speed);
+
 }
 
 .nav-link i,
@@ -86,12 +89,12 @@
 /** <Navbar Logo> **/
 .logo {
     font-weight: bold;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     margin-bottom: 1rem;
     text-align: center;
     color: var(--text-secondary);
     background: var(--bg-secondary);
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     letter-spacing: 0.3ch;
     width: 100%;
 }
@@ -133,7 +136,13 @@
     .navbar-nav {
         flex-direction: row;
     }
-
+    .nav-link i,
+    .nav-link svg {
+        /* width: 2rem; */
+        /* min-width: 2rem; */
+        margin: 0;
+        padding: 0;
+    }
     .nav-link {
         justify-content: center;
     }
