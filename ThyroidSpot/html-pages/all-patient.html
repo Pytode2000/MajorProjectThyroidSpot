@@ -13,6 +13,8 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script src="../js/doctor-functions.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
 
@@ -68,6 +70,40 @@
 
                 </canvas>
             </div>
+        </div> 
+    </div>
+
+
+        <!-- Test Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <div class="grid-container">
+                    <div class="grid_item">
+                        <p>Are you sure you want to abandon this patient?</p>
+                        <button id="confirmAbandonPatientBtn">Confirm Abandon Patient</button>
+                    </div>
+                    <div class="grid_item">
+                        <p>Transfer Patient</p>
+                        <input id="newClinicianID" type="text" placeholder="New Clinician UID">
+                        <p id="wrongIDPrompt" style="display: none;"></p>
+                        <button id="transferPatientBtn">Tranfer Patient</button>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
         </div>
     </div>
     </main>

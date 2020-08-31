@@ -22,3 +22,15 @@
     margin-bottom: 5px;
     text-decoration: none;
 }
+
+.grid-container {
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(2, 1fr) ;
+  gap: 2vh;
+}
+
+.grid-item {
+  display: grid;
+  place-items: center;
+}

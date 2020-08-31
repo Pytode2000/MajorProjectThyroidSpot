@@ -1,6 +1,7 @@
 var patientURI = 'https://localhost:44395/api/patientInfo';
 var userURI = 'https://localhost:44395/api/user';
 var reportURI = 'https://localhost:44395/api/report';
+var diagnosisURI = 'https://localhost:44395/api/diagnosis';
 
 var dosageURI = 'https://localhost:44395/api/dosage';
 var reportArray = [];
@@ -14,10 +15,12 @@ var storeReports = [] //second array for search function
 var diagnosis;
 var currentDiagnosis;
 
-var patientInfo = []
-currentPatientUserId = localStorage.getItem("currentPatientUserId")
-currentPatientId = localStorage.getItem("currentPatientId")
+var diagnosisInformation = [];
+var patientInfo = [];
+currentPatientUserId = localStorage.getItem("currentPatientUserId");
+currentPatientId = localStorage.getItem("currentPatientId");
 
+// Get The Current Patient Name
 function getPatientName(){
     $.ajax({
         type: 'GET',
@@ -32,6 +35,7 @@ function getPatientName(){
     })
 }
 
+// Get Patient Full Information From Users table
 function getSpecificPatientInfo(){
     $.ajax({
         type: 'GET',
@@ -40,13 +44,23 @@ function getSpecificPatientInfo(){
         contentType: 'application/json',
         success: function (data) {
             patientInfo = data
-            $('#patient-ic-number').text("IC Number: "+ patientInfo.ic_number)
-            $('#patient-diagnosis').text("Diagnosis: "+ patientInfo.diagnosis)
-            $('#patient-date-of-birth').text("Date of Birth: "+ patientInfo.date_of_birth)
-            $('#patient-gender').text("Gender: "+ patientInfo.gender)
-            $('#patient-blood-type').text("Blood Type: "+ patientInfo.blood_type)
-            localStorage.setItem(currentDiagnosis,patientInfo.diagnosis)
+            $.ajax({
+                type: 'GET',
+                url: diagnosisURI +"/"+currentPatientId,
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (data) {
+                    diagnosisInformation = data
+                    console.log(diagnosisInformation.diagnosis1)
+                    $('#patient-ic-number').text("IC Number: "+ patientInfo.ic_number)
+                    $('#patient-diagnosis').text("Diagnosis: "+ diagnosisInformation[0].diagnosis1)
+                    $('#patient-date-of-birth').text("Date of Birth: "+ patientInfo.date_of_birth)
+                    $('#patient-gender').text("Gender: "+ patientInfo.gender)
+                    $('#patient-blood-type').text("Blood Type: "+ patientInfo.blood_type)
+                    localStorage.setItem(currentDiagnosis,patientInfo.diagnosis)
 
+        }
+            });
         }
 });
 }
