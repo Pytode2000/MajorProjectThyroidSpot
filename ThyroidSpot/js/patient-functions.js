@@ -215,6 +215,7 @@ function getPatientReport() {
             console.log(reportArray)
             // $('#reportContent').html('');
             $('#dosagehist').html('');
+            $('#prescriptionButton').html('')
             //Iterate through the diseaseInfoArray to generate rows to populate the table
             if (reportArray == ""){
                 $('#searchRPTcontain').html('');
@@ -231,15 +232,14 @@ function getPatientReport() {
                     FT4Array.push(report.FT4)
                     TSHArray.push(report.TSH)
                     TreatmentArray.push({TSH: report.TSH, FT4: report.FT4, timestamp: report.timestamp})
-                    viewdosagebtn = "<button id='viewdosage' num="+reportArray[reportArray.length-1].report_id+" class='btn btn-info btn-sm custom-class'>View Prescription</button>";
-                    aptdate = reportArray[reportArray.length-1].timestamp;
+                    viewdosagebtn = "<button id='viewdosage' num="+storeReports[storeReports.length-1].report_id+" class='btn btn-info btn-sm custom-class'>View Prescription</button>";
+                    aptdate = storeReports[storeReports.length-1].timestamp;
 
                     //TODO: onclick on button to view report in a modal (then can add on a button to export it as PDF)
                     $('#dosagehist').append("<tr style='margin-bottom: 0.5em;'>"+
                     "<tr><td>"+report.timestamp+"</td><td>"+report.FT4+"</td><td>"+
                     ""+report.TSH+"</td></tr></tr>");
                     
-                
                     if (currentPatientID != reportArray[i].patient_id && i == reportArray.length-1){
                         $('#searchRPTcontain').html('');
                         $('#reportcontainer').html('');
@@ -248,11 +248,12 @@ function getPatientReport() {
                         return console.log("no report history")
                     }
 
-                    if (i == reportArray.length-1){
+                }
+                //console.log(reportArray.length)
+                if (i == reportArray.length-1){
 
-                        $('#prescriptionButton').append(viewdiagnosisbutton+"<br class='divider'>"+viewdosagebtn);
-                        return startCalc();
-                    }
+                    $('#prescriptionButton').append(viewdiagnosisbutton+"<br class='divider'>"+viewdosagebtn);
+                    return startCalc();
                 }
             }
         }
@@ -270,6 +271,7 @@ function searchPatientReport(){
     {  
         storeReports = []
         secondReportArray = []
+        //reportArray = []
        getPatientReport();	
        stonks = ""
        return false; 
@@ -292,12 +294,19 @@ function searchPatientReport(){
 
     console.log(secondReportArray)
     $('#dosagehist').html('');
+    $('#prescriptionButton').html('');
     for (i = 0; i < secondReportArray.length; i++){
         viewdosagebtn = "<button id='viewdosage' num="+secondReportArray[secondReportArray.length-1].report_id+" class=' btn btn-info btn-sm'>View Prescription</button>";
         //TODO: onclick on button to view report in a modal (then can add on a button to export it as PDF)
         $('#dosagehist').append("<tr style='margin-bottom: 0.5em;'>"+
         "<tr><td>"+secondReportArray[i].timestamp+"</td><td>"+secondReportArray[i].FT4+"</td><td>"+
-        ""+secondReportArray[i].TSH+"</td><td>"+viewdosagebtn+"</td></tr></tr>");
+        ""+secondReportArray[i].TSH+"</td></tr></tr>");
+
+        if (i == secondReportArray.length-1){
+
+            return $('#prescriptionButton').append(viewdiagnosisbutton+"<br class='divider'>"+viewdosagebtn);
+            //return startCalc();
+        }
     }
 }
 
