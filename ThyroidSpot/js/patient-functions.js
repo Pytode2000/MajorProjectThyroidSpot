@@ -261,6 +261,71 @@ function getPatientReport() {
     });
 }
 
+//function for getting patient report without affecting graph
+function regetPatientReport() {
+    console.log("retrieving all patient report...")
+
+    console.log(currentPatientID)
+    console.log(storediagnosis)
+    
+    $.ajax({
+        type: 'GET',
+        url: reportURI,
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            //put json data into bookArray
+            reportArray = data;
+            secondReportArray = data;
+            //clear the tbody of the table so that it will be refreshed everytime
+            console.log(reportArray)
+            // $('#reportContent').html('');
+            $('#dosagehist').html('');
+            $('#prescriptionButton').html('')
+            //Iterate through the diseaseInfoArray to generate rows to populate the table
+            if (reportArray == ""){
+                $('#searchRPTcontain').html('');
+                $('#reportcontainer').html('');
+                createreportbtn = "<button id='rpt' class=' btn btn-info btn-sm'>Create Report</button>"
+                $('#reportcontainer').append("<div style='text-align: center; margin-top: 10%; margin-left: auto; margin-right: auto;'><h3 >No patient report found</h3><div>"+createreportbtn+"<div></div>");
+            }
+            else{
+            for (i = 0; i < reportArray.length; i++) {
+                if (currentPatientID == reportArray[i].patient_id){
+                    
+                    var report = {report_id: reportArray[i].report_id, patient_id: reportArray[i].patient_id, drug_name: reportArray[i].drug_name, FT4: reportArray[i].FT4, TSH: reportArray[i].TSH, drug_dose: reportArray[i].drug_dose, timestamp: reportArray[i].timestamp}
+                    storeReports.push(report)
+                    FT4Array.push(report.FT4)
+                    TSHArray.push(report.TSH)
+                    TreatmentArray.push({TSH: report.TSH, FT4: report.FT4, timestamp: report.timestamp})
+                    viewdosagebtn = "<button id='viewdosage' num="+storeReports[storeReports.length-1].report_id+" class='btn btn-info btn-sm custom-class'>View Prescription</button>";
+                    aptdate = storeReports[storeReports.length-1].timestamp;
+
+                    //TODO: onclick on button to view report in a modal (then can add on a button to export it as PDF)
+                    $('#dosagehist').append("<tr style='margin-bottom: 0.5em;'>"+
+                    "<tr><td>"+report.timestamp+"</td><td>"+report.FT4+"</td><td>"+
+                    ""+report.TSH+"</td></tr></tr>");
+                    
+                    if (currentPatientID != reportArray[i].patient_id && i == reportArray.length-1){
+                        $('#searchRPTcontain').html('');
+                        $('#reportcontainer').html('');
+                        createreportbtn = "<button id='rpt' class=' btn btn-info btn-sm'>Create Report</button>"
+                        $('#reportcontainer').append("<div style='text-align: center; margin-top: 10%; margin-left: auto; margin-right: auto;'><h3>No patient report found</h3><div>"+createreportbtn+"<div></div>");
+                        return console.log("no report history")
+                    }
+
+                }
+                //console.log(reportArray.length)
+                if (i == reportArray.length-1){
+
+                    return $('#prescriptionButton').append(viewdiagnosisbutton+"<br class='divider'>"+viewdosagebtn);
+                }
+            }
+        }
+        }
+    });
+}
+
 //search function based on date (WILL EDIT: date format currently in YYYY-M-DD, will change to DD/MM/YYYY)
 var stonks
 function searchPatientReport(){
@@ -272,7 +337,7 @@ function searchPatientReport(){
         storeReports = []
         secondReportArray = []
         //reportArray = []
-       getPatientReport();	
+       regetPatientReport(); //call function when backspace
        stonks = ""
        return false; 
     }  	
