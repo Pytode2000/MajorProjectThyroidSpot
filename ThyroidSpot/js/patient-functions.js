@@ -49,7 +49,7 @@ function getOnePatientInfo() {
         success: function (data) {
             //put json data into bookArray
             patientInfoArray = data;
-            console.log(patientInfoArray)
+            //console.log(patientInfoArray)
             //clear the tbody of the table so that it will be refreshed everytime
             $('#patientCardContent').html('');
 
@@ -71,7 +71,7 @@ function getOnePatientInfo() {
 
                     viewreportbutton = "<button id='forumdescbtn' class=' btn btn-info btn-sm' index='" + patientInfoArray[i].patient_id + "'>View Report</button>"
                    
-                    //TODO: make table to bootstrap
+                    
                     $('#patientCardContent').append("<h2 style='text-align: center'>"+username+"</h2><table class='infoTable table-sm'><tr>"+
                         "<td class='shiftedrow' style='width: 25%'><b>IC number: " + patientInfoArray[i].ic_number + 
                         "</b></td><td style='width: 20%'>Blood Type: "+patientInfoArray[i].blood_type+"</td>"+
@@ -171,6 +171,7 @@ var reportIDArray = [];
 FT4Array = []; //array to store FT4 readings of patient
 TSHArray = []; //array to store TSH readings of patient
 TreatmentArray = []; //FT4 + TSH array
+ExportationArray = []; //FT4 + TSH array for export
 
 storediagnosis = []; //to capture all diagnosis matched to user id
 
@@ -199,8 +200,8 @@ function getDiagnosisDetails(){
 function getPatientReport() {
     console.log("retrieving all patient report...")
 
-    console.log(currentPatientID)
-    console.log(storediagnosis)
+    //console.log(currentPatientID)
+    //console.log(storediagnosis)
     
     $.ajax({
         type: 'GET',
@@ -212,7 +213,7 @@ function getPatientReport() {
             reportArray = data;
             secondReportArray = data;
             //clear the tbody of the table so that it will be refreshed everytime
-            console.log(reportArray)
+            //console.log(reportArray)
             // $('#reportContent').html('');
             $('#dosagehist').html('');
             $('#prescriptionButton').html('')
@@ -232,6 +233,7 @@ function getPatientReport() {
                     FT4Array.push(report.FT4)
                     TSHArray.push(report.TSH)
                     TreatmentArray.push({TSH: report.TSH, FT4: report.FT4, timestamp: report.timestamp})
+                    ExportationArray.push({TSH: report.TSH, FT4: report.FT4, timestamp: report.timestamp})
                     viewdosagebtn = "<button id='viewdosage' num="+storeReports[storeReports.length-1].report_id+" class='btn btn-info btn-sm custom-class'>View Prescription</button>";
                     aptdate = storeReports[storeReports.length-1].timestamp;
 
@@ -264,9 +266,6 @@ function getPatientReport() {
 //function for getting patient report without affecting graph
 function regetPatientReport() {
     console.log("retrieving all patient report...")
-
-    console.log(currentPatientID)
-    console.log(storediagnosis)
     
     $.ajax({
         type: 'GET',
@@ -278,7 +277,7 @@ function regetPatientReport() {
             reportArray = data;
             secondReportArray = data;
             //clear the tbody of the table so that it will be refreshed everytime
-            console.log(reportArray)
+           
             // $('#reportContent').html('');
             $('#dosagehist').html('');
             $('#prescriptionButton').html('')
@@ -457,7 +456,7 @@ function postPatientReport() {
     var getuser_id = currentPatientID
     console.log(currentPatientID)
 
-    //TODO: change date format to DD-MM-YYYY instead
+    
     var date =  moment(new Date()).format("DD-MM-YYYY")
     console.log(date);
 
@@ -567,7 +566,7 @@ function postDosage(){
 
 
 
-//TODO: function to export patient info with dosage report as PDF (ignore the graph first bc that one is really hard)
+//TODO: function to export patient info with dosage report as CSV (ignore the graph first bc that one is really hard)
 function exportData(){
     
 }

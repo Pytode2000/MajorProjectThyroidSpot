@@ -1,9 +1,9 @@
 //THIS WILL BE WHERE THE GRAPH FUNCTION COMES
 
 
-console.log(FT4Array) //successfully retrieved from patientinfo.html
-console.log(TSHArray) //successfully retrieved from patientinfo.html
-console.log(TreatmentArray) //successfully retrieved from patientinfo.html
+// console.log(FT4Array) //successfully retrieved from patientinfo.html
+// console.log(TSHArray) //successfully retrieved from patientinfo.html
+// console.log(TreatmentArray) //successfully retrieved from patientinfo.html
 
 var treatmentList = [];//set FT4 + TSH array from patient-info 
 var validArray = []; //array for valid treatments
@@ -12,6 +12,8 @@ var outlierArray = [] //array for outlier treatments
 var totalNumOfTreatments; //get length of treatmentList array
 var errorList = [];
 var prevErrorList = [];
+
+var extraTreatment = [];
 
 var bestfitvalidft4List = [];
 var bestfitvalidtshList = [];
@@ -36,20 +38,20 @@ var myChart
 //initialising calculation functions
 function startCalc(){
     console.log("initialising calculations...")
-
+    extraTreatment = TreatmentArray
     treatmentList = TreatmentArray //set FT4 + TSH array from patient-info 
 
     ft4Unit = " pmol/L";
     tshUnit = " mU/L";
-    console.log(TreatmentArray.length)
+    //console.log(TreatmentArray.length)
     
     validArray = treatmentList
 
     
-    console.log(treatmentList)
-    console.log(validArray)
+    //console.log(treatmentList)
+    //console.log(validArray)
     totalNumOfTreatments = treatmentList.length;
-    console.log(totalNumOfTreatments)
+    //console.log(totalNumOfTreatments)
     removeOutliers(); //call function to remove outliers
     for (var i = 0; i < treatmentList.length; i++) {
         found = false;
@@ -58,12 +60,12 @@ function startCalc(){
                     && treatmentList[i].FT4 == validArray[j].FT4
                     && treatmentList[i].timestamp == validArray[i].timestamp) {
                 found = true;
-                console.log("owo")
+                //console.log("owo")
                 break;
             }
         }
         if (found == false) {
-            console.log("no signs of intelligent life anywhere")
+            //console.log("no signs of intelligent life anywhere")
             outlierTreatments.push(treatmentList[i]); //ADD OUTLIER DATA TO OUTLIER ARRAY
         }
     }
@@ -118,15 +120,13 @@ function startCalc(){
         console.log("nada")
     }
 
-    console.log(bestfitvalidft4List)
-    console.log(bestfitvalidtshList)
-    console.log(bestfitvalidData)
+  
+    //console.log(bestfitvalidData)
 
     launchgraph(); //send data to the graph for rendering display
 }
 
 
-//TODO: set up algorithm (phi and snum) & integrating it with the main function
 function bestfitCurve(vaz){
     console.log("calculating best fit curve...")
 
@@ -377,7 +377,58 @@ function launchgraph(){
 
 
 
-//TODO: export calculations to CSV
+//fucntion to export FT4 and TSH calculation
 $(document).on("click", "#exportcalc", function(){
-    console.log("hi there, what's up man?")
+
+
+    let csv = ""
+    
+    console.log(ExportationArray)
+    // Loop the array of objects
+    for(let row = 0; row < ExportationArray.length; row++){
+        let keysAmount = Object.keys(ExportationArray[row]).length+1
+        let keysCounter = 0
+
+        // If this is the first row, generate the headings
+        if(row === 0){
+
+            // Loop each property of the object
+            for(let key in ExportationArray[row]){
+
+                // This is to not add a comma at the last cell
+                // The '\r\n' adds a new line
+                csv += key + (keysCounter < keysAmount ? ',' : '\r\n' )
+                // csv += ExportationArray[0][key] + (keysCounter+1 < keysAmount ? ',' : '\r\n' )
+                console.log(csv)
+                //console.log(key)
+                //keysCounter++
+            }
+            csv += "\r\n"
+            for(let key in ExportationArray[0]){
+                csv += ExportationArray[0][key] + (keysCounter < keysAmount ? ',' : '\r\n' )
+                console.log(csv)
+                keysCounter++
+            }
+            csv += "\r\n"
+        }
+        else{
+            for(let key in ExportationArray[row]){
+                //console.log(ExportationArray[key])
+                csv += ExportationArray[row][key] + (keysCounter+1 < keysAmount ? ',' : '\r\n' )
+                console.log(csv)
+                keysCounter++
+            }
+            csv += "\r\n"
+        }
+
+        keysCounter = 0
+    }
+
+    // Once we are done looping, download the .csv by creating a link
+    let link = document.createElement('a')
+    link.id = 'download-csv'
+    link.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(csv));
+    link.setAttribute('download', 'FT4_TSH_calculation.csv');
+    document.body.appendChild(link)
+    document.querySelector('#download-csv').click()
 })

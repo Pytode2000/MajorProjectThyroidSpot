@@ -30,8 +30,9 @@
     flex: 1;
   }
 
-  .class-report{
-    margin-bottom: 5em;
+  #class-report{
+    margin-bottom: 1em;
+    overflow: auto;
   }
 
   #rpt{
@@ -318,7 +319,8 @@
       
 
   #class-report{
-    margin-bottom: 5em;
+    height: 2em;
+    overflow: auto;
   }
 
 
