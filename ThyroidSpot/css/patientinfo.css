@@ -400,11 +400,14 @@
   }
 
   #newFT4{
-    width: 100%;
+    display: inline-block;
+  }
+  #newUnitDDL{
+    display: inline-block;
   }
 
   #newTSH{
-    width: 100%;
+    width: 60%;
   }
 
   #addMoreRows{

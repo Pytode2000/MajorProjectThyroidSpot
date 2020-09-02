@@ -450,42 +450,70 @@ function getPrescription(){
     });
 }
 
-//TODO: enable user to select FT4 and TSH units, then convert them respectively to pmol/L for FT4
-//and mU/L for TSH.
+
 //create function for postPatientReport
 function postPatientReport() {
     //getting patient id and putting it into a variable
     var getuser_id = currentPatientID
     console.log(currentPatientID)
 
-    
+
     var date =  moment(new Date()).format("DD-MM-YYYY")
     console.log(date);
 
     //regex to check decimals for FT4 and TSH
     var decimalregex = new RegExp('[+-]?([0-9]*[.])?[0-9]+');
    
-    
-    var patientinfo = {patient_id: getuser_id, FT4: $('#newFT4').val(), TSH: $('#newTSH').val(), timestamp: date}
+    console.log($('#newUnitDDL').val())
+    console.log($('#newUnit1DDL').val())
+
+    var FT4unit = $('#newUnitDDL').val()
+    var TSHunit = $('#newUnit1DDL').val()
+
+    var FT4reading = $('#newFT4').val()
+    var TSHreading =  $('#newTSH').val()
+
+    var FT4string = ""
+    var TSHstring = ""
+
+    if(FT4unit == "mU/L"){
+        FT4reading = (FT4reading / 7.125).toString();
+        FT4string = "(" + $('#newFT4').val() + "mU/L)"
+    }
+    if (TSHunit == "pmol/L"){
+        TSHreading = (TSHreading * 7.125).toString();
+        TSHstring = "(" + $('#newTSH').val() + "pmol/L)"
+    }
+    console.log(FT4string)
+    console.log(TSHstring)
+
+    var patientinfo = {patient_id: getuser_id, FT4: FT4reading, TSH:TSHreading, timestamp: date}
     console.log(patientinfo);
 
     //check if FT4 and TSH matches with defined regex
     if (patientinfo.FT4.match(decimalregex) && patientinfo.TSH.match(decimalregex)){
-            $.ajax({
-                type: 'POST',
-                url: reportURI,
-                data: JSON.stringify(patientinfo),
-                dataType: 'json',
-                contentType: 'application/json',
-                success: function (data) {
-                    console.log(data)
-                    //getReportID();
+            var cfm  = confirm("Please confirm your results before saving it to database: \r\n" +
+             "FT4: "+ patientinfo.FT4+ "pmol/L "+ FT4string + "\r\n"+
+             "TSH: "+ patientinfo.TSH+ "mU/L "+ TSHstring )
+            if (cfm == true){
+                $.ajax({
+                    type: 'POST',
+                    url: reportURI,
+                    data: JSON.stringify(patientinfo),
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    success: function (data) {
+                        console.log(data)
 
-                    getOnePatientInfo();
-                    document.getElementById('newPatientModal').style.display='none'
-                    window.location.reload();
-                }
-            });
+                        getOnePatientInfo();
+                        document.getElementById('newPatientModal').style.display='none'
+                        window.location.reload();
+                    }
+                });
+            }
+            else{
+                alert("entry not saved to database")
+            }
     }
     //if FT4 and TSH DOES NOT match with defined regex
     else{
