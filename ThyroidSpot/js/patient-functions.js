@@ -71,11 +71,12 @@ function getOnePatientInfo() {
 
                     viewreportbutton = "<button id='forumdescbtn' class=' btn btn-info btn-sm' index='" + patientInfoArray[i].patient_id + "'>View Report</button>"
                    
+                    createreport = "<button id='createrptbtn1' class=' btn btn-info btn-sm custom-class'>Add Results</button>"
                     
                     $('#patientCardContent').append("<h2 style='text-align: center'>"+username+"</h2><table class='infoTable table-sm'><tr>"+
-                        "<td class='shiftedrow' style='width: 25%'><b>IC number: " + patientInfoArray[i].ic_number + 
-                        "</b></td><td style='width: 20%'>Blood Type: "+patientInfoArray[i].blood_type+"</td>"+
-                        "<td class='shiftedrow' style='width: 25%'>Gender: "+patientInfoArray[i].gender+
+                        "<td class='shiftedrow1'><b>IC number: " + patientInfoArray[i].ic_number + 
+                        "</b></td><td class='shiftedrow2''>Blood Type: "+patientInfoArray[i].blood_type+"</td>"+
+                        "<td class='shiftedrow3'>Gender: "+patientInfoArray[i].gender+
                         "</td><td class='shiftedrow'>D.O.B: "+patientInfoArray[i].date_of_birth+"</td></tr></table>");
 
 
@@ -254,7 +255,7 @@ function getPatientReport() {
                 //console.log(reportArray.length)
                 if (i == reportArray.length-1){
 
-                    $('#prescriptionButton').append(viewdiagnosisbutton+"<br class='divider'>"+viewdosagebtn);
+                    $('#prescriptionButton').append(viewdiagnosisbutton+"<br class='divider'>"+viewdosagebtn +"<br class='divider'>" +createreport);
                     return startCalc();
                 }
             }
@@ -317,7 +318,7 @@ function regetPatientReport() {
                 //console.log(reportArray.length)
                 if (i == reportArray.length-1){
 
-                    return $('#prescriptionButton').append(viewdiagnosisbutton+"<br class='divider'>"+viewdosagebtn);
+                    return $('#prescriptionButton').append(viewdiagnosisbutton+"<br class='divider'>"+viewdosagebtn +"<br class='divider'>" +createreport);
                 }
             }
         }
@@ -360,7 +361,7 @@ function searchPatientReport(){
     $('#dosagehist').html('');
     $('#prescriptionButton').html('');
     for (i = 0; i < secondReportArray.length; i++){
-        viewdosagebtn = "<button id='viewdosage' num="+secondReportArray[secondReportArray.length-1].report_id+" class=' btn btn-info btn-sm'>View Prescription</button>";
+        viewdosagebtn = "<button id='viewdosage' num="+secondReportArray[secondReportArray.length-1].report_id+" class=' btn btn-info btn-sm custom-class'>View Prescription</button>";
         //TODO: onclick on button to view report in a modal (then can add on a button to export it as PDF)
         $('#dosagehist').append("<tr style='margin-bottom: 0.5em;'>"+
         "<tr><td>"+secondReportArray[i].timestamp+"</td><td>"+secondReportArray[i].FT4+"</td><td>"+
@@ -368,7 +369,7 @@ function searchPatientReport(){
 
         if (i == secondReportArray.length-1){
 
-            return $('#prescriptionButton').append(viewdiagnosisbutton+"<br class='divider'>"+viewdosagebtn);
+            return $('#prescriptionButton').append(viewdiagnosisbutton+"<br class='divider'>"+viewdosagebtn+"<br class='divider'>" +createreport);
             //return startCalc();
         }
     }
@@ -449,7 +450,8 @@ function getPrescription(){
     });
 }
 
-
+//TODO: enable user to select FT4 and TSH units, then convert them respectively to pmol/L for FT4
+//and mU/L for TSH.
 //create function for postPatientReport
 function postPatientReport() {
     //getting patient id and putting it into a variable
@@ -566,7 +568,7 @@ function postDosage(){
 
 
 
-//TODO: function to export patient info with dosage report as CSV (ignore the graph first bc that one is really hard)
+//TODO: function to export patient info with dosage report as CSV/PDF
 function exportData(){
     
 }
@@ -604,6 +606,11 @@ $(document).on("click", "#createnewinfo", function () {
 
 //doc model for postPatientReport
 $(document).on("click", "#createrptbtn", function () {
+    document.getElementById('newReportModal').style.display='block'
+});
+
+//doc model for postPatientReport
+$(document).on("click", "#createrptbtn1", function () {
     document.getElementById('newReportModal').style.display='block'
 });
 

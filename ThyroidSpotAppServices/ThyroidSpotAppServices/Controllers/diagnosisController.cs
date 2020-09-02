@@ -19,6 +19,14 @@ namespace ThyroidSpotAppServices.Controllers
             }
         }
 
+        //get one patient info via firebase UID (can be used for patient-only accs)
+        public diagnosis GetDiagnosis(int diagnosisid)
+        {
+            using (ThyroidDataEntities entities = new ThyroidDataEntities())
+            {
+                return entities.diagnosis.FirstOrDefault(s => s.diagnosis_id == diagnosisid);
+            }
+        }
 
         //get patient diagnosis via patient id
         public IEnumerable<diagnosis> Get(int id)
