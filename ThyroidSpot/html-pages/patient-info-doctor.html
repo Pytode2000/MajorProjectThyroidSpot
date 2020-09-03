@@ -16,16 +16,22 @@
 
     <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://printjs-4de6.kxcdn.com/print.min.css">
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
 
     <script src="../js/patient-information-function.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js" integrity="sha512-G8JE1Xbr0egZE5gNGyUm1fF764iHVfRXshIoUWCTPAbKkkItp/6qal5YAHXrxEu4HNfPTQs6HOu3D5vCGS1j3w==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js" integrity="sha512-vBmx0N/uQOXznm/Nbkp7h0P1RfLSj0HQrFSzV8m7rOGyj30fYAOKHYvCNez+yM8IrfnW0TCodDEjRqf6fodf/Q==" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css" integrity="sha512-SUJFImtiT87gVCOXl3aGC00zfDl6ggYAw5+oheJvRJ8KBXZrr/TMISSdVJ5bBarbQDRC2pR5Kto3xTR0kpZInA==" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js" integrity="sha512-QEiC894KVkN9Tsoi6+mKf8HaCLJvyA6QIRzY5KrfINXYuP9NxdIkRQhGq3BZi0J4I7V5SidGM3XUQ5wFiMDuWg==" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg=="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js" integrity="sha512-G8JE1Xbr0egZE5gNGyUm1fF764iHVfRXshIoUWCTPAbKkkItp/6qal5YAHXrxEu4HNfPTQs6HOu3D5vCGS1j3w=="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js" integrity="sha512-vBmx0N/uQOXznm/Nbkp7h0P1RfLSj0HQrFSzV8m7rOGyj30fYAOKHYvCNez+yM8IrfnW0TCodDEjRqf6fodf/Q=="
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css" integrity="sha512-SUJFImtiT87gVCOXl3aGC00zfDl6ggYAw5+oheJvRJ8KBXZrr/TMISSdVJ5bBarbQDRC2pR5Kto3xTR0kpZInA=="
+        crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js" integrity="sha512-QEiC894KVkN9Tsoi6+mKf8HaCLJvyA6QIRzY5KrfINXYuP9NxdIkRQhGq3BZi0J4I7V5SidGM3XUQ5wFiMDuWg=="
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w=="
+        crossorigin="anonymous" />
 
 
     <title>Thyroid Spot</title>
@@ -39,29 +45,30 @@
             <h2 id="patient-name" style='text-align: center'>username</h2>
             <table class='infoTable'>
                 <tr>
-                <td id="patient-ic-number" class='shiftedrow' style='padding-left: -5px'>IC number: </td>
-                <td id="patient-diagnosis" class='shiftedrow'>Diagnosis: </td>
-                <td id="patient-date-of-birth" class='shiftedrow'>D.O.B: </td>
-                <td id="patient-gender" class='shiftedrow'>Gender: </td>
-                <td id="patient-blood-type" class='shiftedrow'>Blood Type: </td>
-            </tr>
-        </table>
+                    <td id="patient-ic-number" class='shiftedrow' style='padding-left: -5px'>IC number: </td>
+                    <td id="patient-diagnosis" class='shiftedrow'>Diagnosis: </td>
+                    <td id="patient-date-of-birth" class='shiftedrow'>D.O.B: </td>
+                    <td id="patient-gender" class='shiftedrow'>Gender: </td>
+                    <td id="patient-blood-type" class='shiftedrow'>Blood Type: </td>
+                </tr>
+            </table>
         </div>
 
         <div id="searchRPTcontain">
             <div id="searchInput">
-            <input id="searchInputBox" onkeyup="searchPatientReport();" placeholder="Search Date...">
+                <input id="searchInputBox" onkeyup="searchPatientReport();" placeholder="Search Date...">
             </div>
             <div id="createrpt">
-            <button id='createrptbtn' class=' btn btn-info btn-sm'>Create Report</button>
+                <button id='createrptbtn' class=' btn btn-info btn-sm'>Create Report</button>
             </div>
         </div>
         <div id="reportcontainer">
-            
+
             <div id="historycontainer">
                 <table class='centerTable' style="margin-top: 1em;">
-                    <tr><th id="labelDate" >Date</th>
-                        <th id="labelFT4" >FT4</th>
+                    <tr>
+                        <th id="labelDate">Date</th>
+                        <th id="labelFT4">FT4</th>
                         <th id="labelTSH">TSH</th>
                         <th id="labelDrug">Drug Dose</th>
                 </table>
@@ -69,7 +76,7 @@
                 <div id="dosagehist">
                 </div>
             </div>
-            <canvas id="graphcontainer" style="position: relative; height:10vh; width:10vw" >
+            <canvas id="graphcontainer" style="position: relative; height:10vh; width:10vw">
                 <!--<h2 style="text-align: center;">Graph over here</h2>-->
             </canvas>
         </div>
@@ -81,76 +88,83 @@
                     <h1 id="diseaseName">Create Patient Info</h1>
                     <hr>
                     <table id="createnfotable">
-                    <tr>
-                    <td class="firsttd">
-                    <label>NRIC:</label>
-                    </td>
-                    <td class="labeltd">
-                    <input id="newIC">
-                    </td>
-                    </tr>
-                    
-                    <tr>
-                    <td class="firsttd">
-                    <label>Date of birth:</label>
-                    </td>
-                    <td class="labeltd">
-                    <input id="newDOB">
-                    </td>
-                    </tr>
+                        <tr>
+                            <td class="firsttd">
+                                <label>NRIC:</label>
+                            </td>
+                            <td class="labeltd">
+                                <input id="newIC">
+                            </td>
+                        </tr>
 
-                    <tr>
-                    <td class="firsttd">
-                    <label>Gender:</label>
-                    </td>
-                    <td class="labeltd">
-                    <select name="gender" id="newGenderDDL">
-                        <option value="" selected disabled hidden>--Choose here--</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                    </select>
-                    </td>
-                    </tr>
-                    
-                    <tr>
-                    <td class="firsttd">
-                    <label>Diagnosis:</label>
-                    </td>
-                    <td class="labeltd">
-                    <select name="diagnosis" id="newDiagnosisDDL">
-                        <option value="" selected disabled hidden>--Choose here--</option>
-                        <option value="De Quervain's Thyroiditis">De Quervain's Thyroiditis</option>
-                        <option value="Differentiated thyroid carcinoma">Differentiated thyroid carcinoma</option>
-                        <option value="Graves' disease">Graves' disease</option>
-                        <option value="Hashimoto's thyroiditis">Hashimoto's thyroiditis</option>
-                        <option value="Hypothyroidism">Hypothyroidism</option>
-                        <option value="Post-thyroidectomy">Post-thyroidectomy</option>
-                        <option value="Riedel's thyroiditis">Riedel's thyroiditis</option>
-                    </select>
-                    </td>
-                    </tr>
-                    
-                    <tr>
-                    <td class="firsttd">
-                    <label>Blood Type:</label>
-                    </td>
-                    <td class="labeltd">
-                    <select name="bloodtype" id="newBloodTypeDDL">
-                        <option value="" selected disabled hidden>--Choose here--</option>
-                        <option value="A+">A+</option>
-                        <option value="A-">A-</option>
-                        <option value="B+">B+</option>
-                        <option value="B-">B-</option>
-                        <option value="AB+">AB+</option>
-                        <option value="AB-">AB-</option>
-                        <option value="O+">O+</option>
-                        <option value="O-">O-</option>
-                    </select>
-                    </td>
-                    </tr>
+                        <tr>
+                            <td class="firsttd">
+                                <label>Date of birth:</label>
+                            </td>
+                            <td class="labeltd">
+                                <input id="newDOB">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="firsttd">
+                                <label>Gender:</label>
+                            </td>
+                            <td class="labeltd">
+                                <select name="gender" id="newGenderDDL">
+                                    <option value="" selected disabled hidden>--Choose here--</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="firsttd">
+                                <label>Diagnosis:</label>
+                            </td>
+                            <td class="labeltd">
+                                <select name="diagnosis" id="newDiagnosisDDL">
+                                    <option value="" selected disabled hidden>--Choose here--</option>
+                                    <option value="De Quervain's thyroiditis">De Quervain's thyroiditis</option>
+                                    <option value="Differentiated thyroid carcinoma">Differentiated thyroid carcinoma</option>
+                                    <option value="Graves' disease">Graves' disease</option>
+                                    <option value="Hashimoto's thyroiditis">Hashimoto's thyroiditis</option>
+                                    <option value="Hyperthyroidism">Hyperthyroidism</option>
+                                    <option value="Hypothyroidism">Hypothyroidism</option>
+                                    <option value="Post-radioiodine ablation">Post-radioiodine ablation</option>
+                                    <option value="Post-thyroidectomy">Post-thyroidectomy</option>
+                                    <option value="Riedel's thyroiditis">Riedel's thyroiditis</option>
+                                    <option value="Thyrotoxicosis">Thyrotoxicosis</option>
+                                    <option value="Toxic adenoma">Toxic adenoma</option>
+                                    <option value="Toxic multinodular goitre">Toxic multinodular goitre</option>
+                                    <option value="Others">Others</option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="firsttd">
+                                <label>Blood Type:</label>
+                            </td>
+                            <td class="labeltd">
+                                <select name="bloodtype" id="newBloodTypeDDL">
+                                    <option value="" selected disabled hidden>--Choose here--</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                </select>
+                            </td>
+                        </tr>
                     </table>
                     <div style="text-align: center; margin-bottom: 2em;">
-                        <button id="btnRegister" class="btn btn-dark btn-block bold" onclick="postPatientInfo()">Create Patient Info</button>
+                        <button id="btnRegister" class="btn btn-dark btn-block bold" onclick="postPatientInfo()">Create Patient
+                            Info</button>
                     </div>
                 </div>
             </div>
@@ -164,66 +178,66 @@
                     <span id="closereportmodal" onclick="document.getElementById('newReportModal').style.display='none' " class="w3-button w3-display-topright">&times;</span>
                     <h1 id="diseaseName">Create Health Report</h1>
                     <hr>
-                    
+
                     <form id="test" onsubmit="postPatientReport(); return false;">
-                    <table id="createnfotable">
-                    <tr>
-                    <td class="firsttd">
-                    <label>FT4:</label>
-                    </td>
-                    <td class="labeltd">
-                    <input id="newFT4" placeholder="Enter FT4" required>
-                    </td>
-                    </tr>
-                    
-                    <tr>
-                    <td class="firsttd">
-                    <label>TSH:</label>
-                    </td>
-                    <td class="labeltd">
-                    <input id="newTSH" placeholder="Enter TSH" required>
-                    </td>
-                    </tr>
+                        <table id="createnfotable">
+                            <tr>
+                                <td class="firsttd">
+                                    <label>FT4:</label>
+                                </td>
+                                <td class="labeltd">
+                                    <input id="newFT4" placeholder="Enter FT4" required>
+                                </td>
+                            </tr>
 
-                    <tr>
-                    <td class="firsttd">
-                    <label>Drug Name:</label>
-                    </td>
-                    <td class="labeltd">
-                    <input class="newDrugName" maxlength="255" placeholder="Enter drug name..." required>
-                    </td>
-                    <td class="firsttd">
-                        <label>Drug dose:</label>
-                        </td>
-                        </td>
-                        <td class="labeltd">
-                        <input class="newDrugDose" maxlength="5" placeholder="Enter dose..." required>
-                        </td>
-                    </tr>
-                    </table>
+                            <tr>
+                                <td class="firsttd">
+                                    <label>TSH:</label>
+                                </td>
+                                <td class="labeltd">
+                                    <input id="newTSH" placeholder="Enter TSH" required>
+                                </td>
+                            </tr>
 
-                    <table id="addon">
-                    </table>
-                    
-                    <div style="text-align: center; margin-top: 1em; margin-bottom: 4em;">
-                        <button id="addMoreRows">Add another drug dose</button>
-                    </div>
-                    <div style="text-align: center; margin-bottom: 2em;">
-                        <button id="btnRegister" type="submit" class="btn btn-dark btn-block bold">Save Report</button>
-                    </div>
+                            <tr>
+                                <td class="firsttd">
+                                    <label>Drug Name:</label>
+                                </td>
+                                <td class="labeltd">
+                                    <input class="newDrugName" maxlength="255" placeholder="Enter drug name..." required>
+                                </td>
+                                <td class="firsttd">
+                                    <label>Drug dose:</label>
+                                </td>
+                                </td>
+                                <td class="labeltd">
+                                    <input class="newDrugDose" maxlength="5" placeholder="Enter dose..." required>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table id="addon">
+                        </table>
+
+                        <div style="text-align: center; margin-top: 1em; margin-bottom: 4em;">
+                            <button id="addMoreRows">Add another drug dose</button>
+                        </div>
+                        <div style="text-align: center; margin-bottom: 2em;">
+                            <button id="btnRegister" type="submit" class="btn btn-dark btn-block bold">Save Report</button>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
 
 
-         <!--Modal For Prescriptions-->
-         <div id="prescriptionModal" class="w3-modal">
+        <!--Modal For Prescriptions-->
+        <div id="prescriptionModal" class="w3-modal">
             <div class="w3-modal-content">
                 <div class="w3-container">
                     <span onclick="document.getElementById('prescriptionModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
                     <h2 style="text-align: center;">Prescription</h2>
-                    
+
                     <table id="tableReadings" style="margin-right: auto; margin-left: auto; margin-bottom: 2em;">
                         <tr>
                             <td style=" text-align:center;">Diagnosis:</td>
@@ -242,7 +256,7 @@
                             <td id="tdTsh"></td>
                         </tr>
                     </table>
-                    
+
                     <table style="margin-right: auto; margin-left: auto; margin-bottom: 0.5em;">
                         <tr>
                             <th>Drug name</th>
@@ -258,7 +272,7 @@
                 </div>
             </div>
         </div>
-                    
+
     </main>
 
     <!-- Firebase -->
