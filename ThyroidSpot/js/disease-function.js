@@ -32,7 +32,7 @@ function viewDiagnosisDisease() {
 
         setTimeout(function () {
             sessionStorage.removeItem("view_disease");
-        }, 5000);
+        }, 2000);
 
     }
     else {
