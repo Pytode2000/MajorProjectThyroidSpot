@@ -217,11 +217,11 @@ function addNewDiagnosis() {
     var html = "<div id='diagnosis-" + diagnosisCounter + "'>" +
         "<select class='custom-select diagnosisClass' style='margin-bottom: 10px; width: 80%; font-size: 20px;'>" +
         "<option>De Quervain's thyroiditis</option>" +
-        "<option>Differentiatied thyroid carcinoma</option>" +
+        "<option>Differentiated thyroid carcinoma</option>" +
         "<option>Graves' disease</option>" +
         "<option>Hashimoto's thyroiditis</option>" +
         "<option>Hyperthyroidism</option>" +
-        "<option>Hypothyroidsm</option>" +
+        "<option>Hypothyroidism</option>" +
         "<option>Post-radioiodine ablation</option>" +
         "<option>Post-thyroidectomy</option>" +
         "<option>Riedel's thyroiditis</option>" +

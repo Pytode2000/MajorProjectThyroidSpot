@@ -5,6 +5,42 @@ var secondInfoArray = [];
 var currentDiseaseID; //this variable will contain the disease name that's selected
 var storage = []; //this array will define the search
 
+
+// PROFILE click diagnosis -> open disease modal
+function viewDiagnosisDisease() {
+    disease_diagnosis = sessionStorage.getItem("view_disease");
+    if (disease_diagnosis != null) {
+        disease_diagnosis_remove_quotes = disease_diagnosis.replace('"', '')
+        $.ajax({
+            type: 'GET',
+            url: encodeURI(diseaseURI + "/" + disease_diagnosis_remove_quotes),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (disease_data) {
+                console.log(disease_data)
+                document.getElementById('diseaseModal').style.display = 'block'
+                $('#diseaseName').text(disease_data.disease)
+                $('#diseaseShortDescription').text(disease_data.description)
+                $('#diseaseContent').text(disease_data.disease_content)
+                $('#diseaseSymptoms').text(disease_data.symptom)
+                $('#diseaseCause').text(disease_data.cause)
+                $('#diseaseTreatment').text(disease_data.treatment)
+
+            }
+        });
+
+
+        setTimeout(function () {
+            sessionStorage.removeItem("view_disease");
+        }, 5000);
+
+    }
+    else {
+        console.log("Not from profile")
+    }
+}
+// sessionStorage.removeItem("view_disease");
+
 // JC ADMIN CREATE DISEASE
 function createNewDisease() {
 
@@ -82,7 +118,7 @@ function getAllDiseaseInfo() {
             //put json data into bookArray
             diseaseInfoArray = data;
             secondInfoArray = data;
-            console.log(diseaseInfoArray)
+            // console.log(diseaseInfoArray)
             //clear the tbody of the table so that it will be refreshed everytime
             $('#diseaseCard').html('');
             //Iterate through the diseaseInfoArray to generate rows to populate the table

@@ -31,7 +31,7 @@
     <title>Thyroid Spot</title>
 </head>
 
-<body>
+<body onload="viewDiagnosisDisease();">
 
 
     <div id="navbar-html"></div>
@@ -59,7 +59,7 @@
 
             <!-- Floating action button to create new disease -->
 
-            <button type="button" id="newDiseaseBtn" class="floating-btn newDisease-fab hide" data-toggle="modal" data-target="#newDiseaseModal">
+            <button type="button" id="newDiseaseBtn" class="floating-btn newDisease-fab" data-toggle="modal" data-target="#newDiseaseModal">
                 <i class="fas fa-plus"></i>
             </button>
 
@@ -147,6 +147,54 @@
                     console.log("hidden")
                 }
             </script>
+
+            <!-- View Disease Modal -->
+            <div class="modal fade" id="viewDiseaseModal" tabindex="-1" role="dialog" aria-labelledby="viewDiseaseModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="viewDiseaseName"></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p id="viewDiseaseShortDescription" class="centerText">
+                            </p>
+                            <p id="viewDiseaseContent">
+
+                            </p>
+                            <h2 class="centerText">
+                                Symptoms
+                            </h2>
+                            <p id="viewDiseaseSymptoms">
+
+                            </p>
+                            <h2 class="centerText">
+                                Cause
+                            </h2>
+                            <p id="viewDiseaseCause">
+
+                            </p>
+                            <h2 class="centerText">
+                                Treatment
+                            </h2>
+                            <p id="viewDiseaseTreatment">
+
+                            </p>
+
+
+                        </div>
+
+
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
             <!-- New Disease Modal -->
             <div class="modal fade" id="newDiseaseModal" tabindex="-1" role="dialog" aria-labelledby="newDiseaseModalLabel" aria-hidden="true">
