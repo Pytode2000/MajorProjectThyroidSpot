@@ -28,7 +28,7 @@
     <script src="../js/disease-function.js"></script>
 
 
-    <title>Thyroid Spot</title>
+    <title>Thyroid-SPOT</title>
 </head>
 
 <body onload="viewDiagnosisDisease();">
@@ -148,54 +148,7 @@
                 }
             </script>
 
-            <!-- View Disease Modal -->
-            <div class="modal fade" id="viewDiseaseModal" tabindex="-1" role="dialog" aria-labelledby="viewDiseaseModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="viewDiseaseName"></h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p id="viewDiseaseShortDescription" class="centerText">
-                            </p>
-                            <p id="viewDiseaseContent">
-
-                            </p>
-                            <h2 class="centerText">
-                                Symptoms
-                            </h2>
-                            <p id="viewDiseaseSymptoms">
-
-                            </p>
-                            <h2 class="centerText">
-                                Cause
-                            </h2>
-                            <p id="viewDiseaseCause">
-
-                            </p>
-                            <h2 class="centerText">
-                                Treatment
-                            </h2>
-                            <p id="viewDiseaseTreatment">
-
-                            </p>
-
-
-                        </div>
-
-
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
+         
             <!-- New Disease Modal -->
             <div class="modal fade" id="newDiseaseModal" tabindex="-1" role="dialog" aria-labelledby="newDiseaseModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -212,28 +165,28 @@
 
                                 <div class="form-label-group">
                                     <div class="form-label-group">
-                                        <input type="text" class="form-control" id="newDiseaseName" placeholder="Enter the name of disease..." required="" autofocus="">
+                                        <input type="text" class="form-control" id="newDiseaseName" placeholder="Enter the name of disease..."  autofocus="">
                                         <label for="newDiseaseName">Disease name</label>
                                     </div>
                                     <div class="form-group">
                                         <label for="newDiseaseDesc" style="font-weight: bold;">Description</label>
-                                        <textarea class="form-control" id="newDiseaseDesc" rows="2" required="" autofocus=""></textarea>
+                                        <textarea class="form-control" id="newDiseaseDesc" rows="2"  autofocus=""></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="newDiseaseContent" style="font-weight: bold;">Content</label>
-                                        <textarea class="form-control" id="newDiseaseContent" rows="2" required="" autofocus=""></textarea>
+                                        <textarea class="form-control" id="newDiseaseContent" rows="2"  autofocus=""></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="newDiseaseSymptom" style="font-weight: bold;">Symptom</label>
-                                        <textarea class="form-control" id="newDiseaseSymptom" rows="2" required="" autofocus=""></textarea>
+                                        <textarea class="form-control" id="newDiseaseSymptom" rows="2"  autofocus=""></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="newDiseaseCause" style="font-weight: bold;">Cause</label>
-                                        <textarea class="form-control" id="newDiseaseCause" rows="2" required="" autofocus=""></textarea>
+                                        <textarea class="form-control" id="newDiseaseCause" rows="2"  autofocus=""></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="newDiseaseTreatment" style="font-weight: bold;">Treatment</label>
-                                        <textarea class="form-control" id="newDiseaseTreatment" rows="2" required="" autofocus=""></textarea>
+                                        <textarea class="form-control" id="newDiseaseTreatment" rows="2"  autofocus=""></textarea>
                                     </div>
 
                                 </div>
@@ -265,28 +218,28 @@
 
                                 <div class="form-label-group">
                                     <!-- <div class="form-label-group">
-                                    <input type="text" class="form-control" id="editDiseaseName" placeholder="Enter the name of disease..." required="" autofocus="">
+                                    <input type="text" class="form-control" id="editDiseaseName" placeholder="Enter the name of disease..."  autofocus="">
                                     <label for="newDiseaseName">Disease name</label>
                                 </div> -->
                                     <div class="form-group">
                                         <label for="editDiseaseDesc" style="font-weight: bold;">Description</label>
-                                        <textarea class="form-control" id="editDiseaseDesc" rows="2" required="" autofocus=""></textarea>
+                                        <textarea class="form-control" id="editDiseaseDesc" rows="2"  autofocus=""></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="editDiseaseContent" style="font-weight: bold;">Content</label>
-                                        <textarea class="form-control" id="editDiseaseContent" rows="2" required="" autofocus=""></textarea>
+                                        <textarea class="form-control" id="editDiseaseContent" rows="2"  autofocus=""></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="editDiseaseSymptom" style="font-weight: bold;">Symptom</label>
-                                        <textarea class="form-control" id="editDiseaseSymptom" rows="2" required="" autofocus=""></textarea>
+                                        <textarea class="form-control" id="editDiseaseSymptom" rows="2"  autofocus=""></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="editDiseaseCause" style="font-weight: bold;">Cause</label>
-                                        <textarea class="form-control" id="editDiseaseCause" rows="2" required="" autofocus=""></textarea>
+                                        <textarea class="form-control" id="editDiseaseCause" rows="2"  autofocus=""></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="editDiseaseTreatment" style="font-weight: bold;">Treatment</label>
-                                        <textarea class="form-control" id="editDiseaseTreatment" rows="2" required="" autofocus=""></textarea>
+                                        <textarea class="form-control" id="editDiseaseTreatment" rows="2"  autofocus=""></textarea>
                                     </div>
 
                                 </div>
