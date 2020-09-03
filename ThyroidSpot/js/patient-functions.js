@@ -238,7 +238,7 @@ function getPatientReport() {
                     viewdosagebtn = "<button id='viewdosage' num="+storeReports[storeReports.length-1].report_id+" class='btn btn-info btn-sm custom-class'>View Prescription</button>";
                     aptdate = storeReports[storeReports.length-1].timestamp;
 
-                    //TODO: onclick on button to view report in a modal (then can add on a button to export it as PDF)
+                    
                     $('#dosagehist').append("<tr style='margin-bottom: 0.5em;'>"+
                     "<tr><td>"+report.timestamp+"</td><td>"+report.FT4+"</td><td>"+
                     ""+report.TSH+"</td></tr></tr>");
@@ -301,7 +301,7 @@ function regetPatientReport() {
                     viewdosagebtn = "<button id='viewdosage' num="+storeReports[storeReports.length-1].report_id+" class='btn btn-info btn-sm custom-class'>View Prescription</button>";
                     aptdate = storeReports[storeReports.length-1].timestamp;
 
-                    //TODO: onclick on button to view report in a modal (then can add on a button to export it as PDF)
+                    
                     $('#dosagehist').append("<tr style='margin-bottom: 0.5em;'>"+
                     "<tr><td>"+report.timestamp+"</td><td>"+report.FT4+"</td><td>"+
                     ""+report.TSH+"</td></tr></tr>");
@@ -362,7 +362,7 @@ function searchPatientReport(){
     $('#prescriptionButton').html('');
     for (i = 0; i < secondReportArray.length; i++){
         viewdosagebtn = "<button id='viewdosage' num="+secondReportArray[secondReportArray.length-1].report_id+" class=' btn btn-info btn-sm custom-class'>View Prescription</button>";
-        //TODO: onclick on button to view report in a modal (then can add on a button to export it as PDF)
+        
         $('#dosagehist').append("<tr style='margin-bottom: 0.5em;'>"+
         "<tr><td>"+secondReportArray[i].timestamp+"</td><td>"+secondReportArray[i].FT4+"</td><td>"+
         ""+secondReportArray[i].TSH+"</td></tr></tr>");
@@ -376,7 +376,10 @@ function searchPatientReport(){
 }
 
 
-
+var reportft //store ft4 for pdf
+var reportts //store tsh for pdf
+var reporttime //store timestamp for pdf
+var reportdia = [] //store diagnosis for pdf
 //get one patient info
 function getOneReportInfo(){
     console.log("retrieving all patient report...")
@@ -404,10 +407,16 @@ function getOneReportInfo(){
                     
                     for (x = 0; x < storediagnosis.length; x++){
                         $('#tdDiagnosis').append(storediagnosis[x].diagnosis1+"<br>")
+                        reportdia.push(storediagnosis[x].diagnosis1)
                     }
                     $('#tdCheckup').text(report.timestamp)
                     $('#tdFt4').text(report.FT4)
                     $('#tdTsh').text(report.TSH)
+
+                    reportft = report.FT4
+                    reportts = report.TSH
+                    reporttime = report.timestamp
+
 
                     getPrescription(); //function to show drug name and drug dose
                 }
@@ -417,6 +426,7 @@ function getOneReportInfo(){
 }
 
 //get dosage and display it on a table
+var currentDosageID //get dosage ID to retrieve img in a bootstrap modal
 var doseArray = []//defining array to store all dosages
 function getPrescription(){
     $.ajax({
@@ -438,7 +448,9 @@ function getPrescription(){
                     
                     console.log(prescription)
 
-                    coverImage = "<img style='width:100px' src='data:image/jpeg;base64," + prescription.drug_img + "'/>";
+                    //TODO: allow img to be clicakable and capture idDosage
+                    //currentDosageID = doseArray[i].idDosage
+                    coverImage = "<img id='expandImg' data-toggle='modal' num="+doseArray[i].idDosage+" style='width:100px' src='data:image/jpeg;base64," + prescription.drug_img + "'/>";
                     
                     $('#prescriptionTable').append("<tr><td>"+prescription.drug_name+"</td>"+
                     "<td>"+prescription.drug_dose+"</td><td>"+prescription.drug_days+"</td>"+
@@ -449,6 +461,96 @@ function getPrescription(){
         }
     });
 }
+
+var getDosageInfo;
+function getMedicineImg(){
+    console.log("getting drug image...")
+   
+    $.ajax({
+        type: 'GET',
+        url: dosageURI,
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            
+            doseArray = data;
+            
+            
+            $('#newImageModal').html('');
+            for (i = 0; i < doseArray.length; i++) {
+                if (currentDosageID == doseArray[i].idDosage){
+                    
+                    getDosageInfo = {report_id: doseArray[i].report_id, drug_name: doseArray[i].drug_name, drug_dose: doseArray[i].drug_dose, 
+                        drug_days: doseArray[i].drug_days, drug_img: doseArray[i].drug_img, remarks: doseArray[i].remarks}
+                    
+                    
+                    currentDosageID = doseArray[i].idDosage
+                    var medImage = "<img style='width:100%; height:300px' src='data:image/jpeg;base64," + getDosageInfo.drug_img + "'/>";
+                    
+                    $('#newImageModal').append(medImage)
+                    // $('#prescriptionTable').append("<tr><td>"+prescription.drug_name+"</td>"+
+                    // "<td>"+prescription.drug_dose+"</td><td>"+prescription.drug_days+"</td>"+
+                    // "<td id='expandImg'>"+coverImage+"</td><td>"+prescription.remarks+"</td></tr>");
+
+                }
+            }
+        }
+    });   
+}
+
+function updateMedicineImg(){
+    var file = $(".newDrugImage")[0].files[0];
+    var fileType = file["type"];
+    var validImageTypes = ["image/gif", "image/jpeg", "image/png"];
+    if ($.inArray(fileType, validImageTypes) < 0) {
+        // invalid file type code goes here.
+        alert("not stonks yo bro")
+    }
+    else{
+        console.log("updating drug image...")
+        var checksub = confirm("Are you sure you want to save image?")
+
+        console.log(getDosageInfo)
+        console.log(currentDosageID)
+
+        if (checksub == true){
+            var reader = new FileReader();
+            //This function will be triggered after the code executes reader.readAsBinaryString(f);
+            reader.onload = (function (theFile) {
+                return function (e) {
+                    var binaryData = e.target.result;
+                
+                    
+                    getDosageInfo.drug_img = window.btoa(binaryData)
+
+                   
+                    console.log(currentDosageID)
+                    console.log(getDosageInfo)
+
+                    
+                    $.ajax({
+                        type: 'PUT',
+                        url: dosageURI +"/"+currentDosageID,
+                        data: JSON.stringify(getDosageInfo),
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        success: function (data) {
+                            alert("Image successfully saved!")
+                            $('#updatemodalImg').modal('hide')
+                            window.location.reload(); //reload page after adding so it shows the newly added report + prescription
+                        }
+                    });
+                };
+            })(file);
+            // Read in the image file as a data URL.
+            reader.readAsBinaryString(file);
+        }
+        else{
+            console.log("DO NOT RUN FUNCTION")
+        }
+    }
+}
+
 
 
 //create function for postPatientReport
@@ -521,84 +623,132 @@ function postPatientReport() {
     }
 }
 
-//get report id after posting
-var captureportid;
-function getReportID(){
-    console.log("calling get rpt id")
+// //get report id after posting
+// var captureportid;
+// function getReportID(){
+//     console.log("calling get rpt id")
     
-    $.ajax({
-        type: 'GET',
-        url: reportURI,
-        dataType: 'json',
-        contentType: 'application/json',
-        success: function (data) {
-            //calling the function again so that the new books are updated
-            reportIDArray = data
-            console.log(reportIDArray)
+//     $.ajax({
+//         type: 'GET',
+//         url: reportURI,
+//         dataType: 'json',
+//         contentType: 'application/json',
+//         success: function (data) {
+//             //calling the function again so that the new books are updated
+//             reportIDArray = data
+//             console.log(reportIDArray)
 
-            console.log(reportIDArray[reportIDArray.length-1].report_id); //get recent added id
-            captureportid = reportIDArray[reportIDArray.length-1].report_id
-            postDosage();
-        }
-    });
-}
+//             console.log(reportIDArray[reportIDArray.length-1].report_id); //get recent added id
+//             captureportid = reportIDArray[reportIDArray.length-1].report_id
+//             postDosage();
+//         }
+//     });
+// }
 
 
-//FOR KAILONG:
-//Post drug name and drug dosage to dosage table
-function postDosage(){
+// //FOR KAILONG:
+// //Post drug name and drug dosage to dosage table
+// function postDosage(){
 
-    //NOTE TO KAILONG: u need to get the report id on ur end to make this work,
-    //                 furthermore, the input for drug_img has yet to be edited
-    var f = $(".newDrugImage")[i].files[0]; // get image object (VARNING: THIS ONLY TAKES 1 IMAGE)
-    var reader = new FileReader();
-    //This function will be triggered after the code executes reader.readAsBinaryString(f);
-    reader.onload = (function (theFile) {
-        return function (e) {
-            var binaryData = e.target.result;
-            console.log("calling post dosage")
+//     //NOTE TO KAILONG: u need to get the report id on ur end to make this work,
+//     //                 furthermore, the input for drug_img has yet to be edited
+//     var f = $(".newDrugImage")[i].files[0]; // get image object (VARNING: THIS ONLY TAKES 1 IMAGE)
+//     var reader = new FileReader();
+//     //This function will be triggered after the code executes reader.readAsBinaryString(f);
+//     reader.onload = (function (theFile) {
+//         return function (e) {
+//             var binaryData = e.target.result;
+//             console.log("calling post dosage")
             
-            send = $('.newDrugName')
-            send2 = $('.newDrugDose')
-            send3= $('.newTabletsDay')
-            send4 = $('.newRemarks')
+//             send = $('.newDrugName')
+//             send2 = $('.newDrugDose')
+//             send3= $('.newTabletsDay')
+//             send4 = $('.newRemarks')
 
-            array_to_add = []
-            for (i = 0 ; i < send.length; i++){
+//             array_to_add = []
+//             for (i = 0 ; i < send.length; i++){
                 
-                //previously I've declared a capturereportid for adding prescription
-                druginfo = {report_id: captureportid, drug_name: send[i].value, drug_dose: send2[i].value, drug_days: send3[i].value, 
-                drug_img: window.btoa(binaryData), remarks: send4[i].value}
-                array_to_add.push(druginfo)
-            }
+//                 //previously I've declared a capturereportid for adding prescription
+//                 druginfo = {report_id: captureportid, drug_name: send[i].value, drug_dose: send2[i].value, drug_days: send3[i].value, 
+//                 drug_img: window.btoa(binaryData), remarks: send4[i].value}
+//                 array_to_add.push(druginfo)
+//             }
             
-            console.log(array_to_add)
+//             console.log(array_to_add)
 
             
-            // $.ajax({
-            //     type: 'POST',
-            //     url: dosageURI,
-            //     data: JSON.stringify(array_to_add),
-            //     dataType: 'json',
-            //     contentType: 'application/json',
-            //     success: function (data) {
+//             // $.ajax({
+//             //     type: 'POST',
+//             //     url: dosageURI,
+//             //     data: JSON.stringify(array_to_add),
+//             //     dataType: 'json',
+//             //     contentType: 'application/json',
+//             //     success: function (data) {
                     
-            //         getOnePatientInfo();
-            //         document.getElementById('newPatientModal').style.display='none'
-            //         window.location.reload(); //reload page after adding so it shows the newly added report + prescription
-            //     }
-            // });
-        };
-    })(f);
-    // Read in the image file as a data URL.
-    reader.readAsBinaryString(f);
-}
+//             //         getOnePatientInfo();
+//             //         document.getElementById('newPatientModal').style.display='none'
+//             //         window.location.reload(); //reload page after adding so it shows the newly added report + prescription
+//             //     }
+//             // });
+//         };
+//     })(f);
+//     // Read in the image file as a data URL.
+//     reader.readAsBinaryString(f);
+// }
 
 
 
-//TODO: function to export patient info with dosage report as CSV/PDF
 function exportData(){
+    console.log("Exporting data...")
+
+    var ch = reporttime
+    var ft = reportft
+    var ts = reportts
+    var di = reportdia
+    console.log(doseArray)
+    console.log(ch)
+    console.log(ft)
+    console.log(ts)
+    console.log(di)
     
+
+    
+    // const doc = new jsPDF();
+    // doc.text('hello world');
+    // doc.save('test.pdf');
+
+
+    // filepreview.generate('test.pdf', 'test_preview.png', function(error) {
+    //     if (error) {
+    //       return console.log(error);
+    //     }
+    //     console.log('File preview is test_preview.png');
+    //   });
+
+    //Sending data to the hidden div (located in prescription modal)
+    for (x = 0; x < reportdia.length; x++){
+        $("#exDiagnosis").text(reportdia[x])
+    }
+
+    $("#exCheckup").text(ch)
+    $("#exFt4").text(ft)
+    $("#exTsh").text(ts)
+    $("#exportDoseTable").html('')
+    console.log(doseArray.length)
+    for (x = 0; x<doseArray.length; x++){
+        stonksImage = "<img style='width:120px; height:120px' src='data:image/jpeg;base64," + doseArray[x].drug_img + "'/>";
+
+        
+        $("#exportDoseTable").append("<tr><td style='font-size: 20px ;text-align:left; width: 40%; font-weight: bold;padding-top: 50px; padding-bottom: 10px;'><u>Prescription no. "+ (x+1)+"</u></td>"+
+        "</tr><tr><td style=' text-align:left; padding-bottom: 10px;  width: 30%; font-weight: bold;'>Drug Name:</td><td>"+doseArray[x].drug_name+"</td></tr>"+
+        "<tr><td style='text-align:left; vertical-align: top; padding-bottom: 10px; font-weight: bold;'>Pills:</td><td>"+doseArray[x].drug_dose+"</td></tr><tr>"+
+        "<td style='text-align:left; vertical-align: top; padding-bottom: 10px; font-weight: bold;'>Prescription:</td><td>"+doseArray[x].drug_days+"</td></tr><tr>"+
+        "<td style='text-align:left; vertical-align: top; padding-bottom: 10px; font-weight: bold;'>Image:</td><td>"+stonksImage+"</td></tr><tr>"+
+        "<td style='text-align:left; vertical-align: top; font-weight: bold;'>Remarks:</td><td>"+doseArray[x].remarks+"</td></tr><br/>")
+    }
+
+    //Export selected div class as PDF
+    printJS({ printable: "export1", type: 'html'})
 }
 
 
@@ -663,8 +813,22 @@ $(document).on("click", "#viewdosage", function () {
     document.getElementById('prescriptionModal').style.display='block'
 });
 
-// window.onload = function () {
-//     document.getElementById('addon').style.display = "none";
-// }
+//doc model for postPatientReport
+$(document).on("click", "#expandImg", function () {
+    currentDosageID = $(this).attr('num');
+    console.log(currentDosageID);
+    $('#modalImg').modal('show')
+    getMedicineImg();
+});
+
+$(document).on("click", "#editImageBtn", function () {
+    //currentDosageID = $(this).attr('num');
+    document.getElementById('prescriptionModal').style.display='none'
+    $('#modalImg').modal('hide')
+    $('#updatemodalImg').modal('show')
+    
+});
+
+
 
 getUserName();

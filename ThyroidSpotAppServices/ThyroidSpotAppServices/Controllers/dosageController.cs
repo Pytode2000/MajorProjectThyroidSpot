@@ -30,15 +30,14 @@ namespace ThyroidSpotAppServices.Controllers
         }
 
         //add dosage
-        public void POST(List<drug_dosage> drugdoses)
+        public void POST(drug_dosage drugdoses)
         {
             using (ThyroidDataEntities entities = new ThyroidDataEntities())
             {
-                foreach (drug_dosage drugdose in drugdoses)
-                {
-                    entities.drug_dosage.Add(drugdose);
-               
-                }
+                
+                entities.drug_dosage.Add(drugdoses);
+           
+             
                 entities.SaveChanges();
             }
         }
