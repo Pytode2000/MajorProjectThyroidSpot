@@ -255,7 +255,7 @@ function createDiagnosis(patient_number) {
     diagnosis_data = [];
     for (i = 0; i < allDiagnosis.length; i++) {
         // console.log(allDiagnosis[i].options[allDiagnosis[i].selectedIndex].text)
-        // diagnosis_data.push(allDiagnosis[i].options[allDiagnosis[i].selectedIndex].text) // 
+        // diagnosis_data.push(allDiagnosis[i].options[allDiagnosis[i].selectedIndex].text) // This gets me  (3) ["De Quervain's thyroiditis", "Hashimoto's thyroiditis", "Post-radioiodine ablation"]
         single_diagnosis = { patient_id: patient_number, diagnosis1: allDiagnosis[i].options[allDiagnosis[i].selectedIndex].text };
         // i put 1 first to test
 
