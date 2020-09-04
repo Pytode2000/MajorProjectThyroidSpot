@@ -64,7 +64,7 @@ namespace ThyroidSpotAppServices.Controllers
             }
         }
 
-        //delete diagnosis by diagnosis_id
+        //delete diagnosis by diagnosis_id (can be deleted by both user and admins)
         public  string Delete(int id)
         {
             using (ThyroidDataEntities entities = new ThyroidDataEntities())

@@ -1,12 +1,16 @@
-//disease functions
+//FORUM POST + COMMENT FUNCTIONS
+
+
+//FORUM POST FUNCTIONS:
 var diseaseURI = 'https://localhost:44395/api/Disease';
+var forumpostURI = 'https://localhost:44395/api/forumpost';
 var diseaseInfoArray = [];
 var secondInfoArray = [];
 var currentDiseaseID; //this variable will contain the disease name that's selected
 var storage = []; //this array will define the search
 
 
-// PROFILE click diagnosis -> open disease modal
+// TODO: do query check to see if sessionStorage name is correct or not
 function viewDiagnosisDisease() {
     disease_diagnosis = sessionStorage.getItem("view_disease");
     if (disease_diagnosis != null) {
@@ -39,9 +43,46 @@ function viewDiagnosisDisease() {
         console.log("Not from profile")
     }
 }
-// sessionStorage.removeItem("view_disease");
 
-// JC ADMIN CREATE DISEASE
+
+//TODO: show all forum posts based on disease name
+function getAllDiseaseInfo() {
+    console.log("retrieving all disease info...")
+
+    //TODO: get disease name from query check
+
+    $.ajax({
+        type: 'GET',
+        url: diseaseURI,
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            //put json data into bookArray
+            diseaseInfoArray = data;
+            secondInfoArray = data;
+            // console.log(diseaseInfoArray)
+            //clear the tbody of the table so that it will be refreshed everytime
+            $('#diseaseCard').html('');
+            //Iterate through the diseaseInfoArray to generate rows to populate the table
+            for (i = 0; i < diseaseInfoArray.length; i++) {
+                coverImage = "<img style='width:100px' src='data:image/jpeg;base64," + diseaseInfoArray[i].thumbnail + "'/>";
+                def = { id: i, disease: diseaseInfoArray[i].disease }
+                updateDeleteButtons = "<button>TEST</button>"
+                storage.push(def)
+                //use sample image for now:
+                coverImage = "<img src='https://www.mei.edu/sites/default/files/2019-01/Virus.jpg'>"
+                // viewmorebutton = "document.getElementById('diseaseModal').style.display='block'"
+                // $('#diseaseCard').append("<div onclick="+viewmorebutton+"  class = 'centerText'>" +
+                //     coverImage + "<div class='centerTitle'><b>" + diseaseInfoArray[i].disease + "</b></div></div>");
+                $('#diseaseCard').append("<div id='viewmore' num=" + i + "  class = 'centerText'>" +
+                    coverImage + "<div class='centerTitle'><b>" + diseaseInfoArray[i].disease + "</b></div></div>");
+            }
+        }
+    });
+}
+
+
+// TODO: create forum (allow checking if image exists)
 function createNewDisease() {
 
     diseaseInstance = {
@@ -68,6 +109,8 @@ function createNewDisease() {
     });
 }
 
+// TODO: user update forum (only user who posted it can do so)
+//(allow checking if image exists)
 function updateDisease() {
 
     disease_data = {
@@ -106,41 +149,57 @@ function deleteDisease() {
     });
 }
 
-//This function will consume the disease GET API
-function getAllDiseaseInfo() {
-    console.log("retrieving all disease info...")
-    $.ajax({
-        type: 'GET',
-        url: diseaseURI,
-        dataType: 'json',
-        contentType: 'application/json',
-        success: function (data) {
-            //put json data into bookArray
-            diseaseInfoArray = data;
-            secondInfoArray = data;
-            // console.log(diseaseInfoArray)
-            //clear the tbody of the table so that it will be refreshed everytime
-            $('#diseaseCard').html('');
-            //Iterate through the diseaseInfoArray to generate rows to populate the table
-            for (i = 0; i < diseaseInfoArray.length; i++) {
-                coverImage = "<img style='width:100px' src='data:image/jpeg;base64," + diseaseInfoArray[i].thumbnail + "'/>";
-                def = { id: i, disease: diseaseInfoArray[i].disease }
-                updateDeleteButtons = "<button>TEST</button>"
-                storage.push(def)
-                //use sample image for now:
-                coverImage = "<img src='https://www.mei.edu/sites/default/files/2019-01/Virus.jpg'>"
-                // viewmorebutton = "document.getElementById('diseaseModal').style.display='block'"
-                // $('#diseaseCard').append("<div onclick="+viewmorebutton+"  class = 'centerText'>" +
-                //     coverImage + "<div class='centerTitle'><b>" + diseaseInfoArray[i].disease + "</b></div></div>");
-                $('#diseaseCard').append("<div id='viewmore' num=" + i + "  class = 'centerText'>" +
-                    coverImage + "<div class='centerTitle'><b>" + diseaseInfoArray[i].disease + "</b></div></div>");
+//TODO: delete forum + all comments related to post id
+
+
+
+
+
+
+var stonks
+//TODO: filter posts by recent date
+function diseaseSearch() {
+    const searchTerm = document.getElementById("diseaseSearch").value;
+
+    if (searchTerm.length == 0) {
+        storage = []
+        secondInfoArray = []
+        getAllDiseaseInfo();
+        stonks = ""
+        return false;
+    }
+
+    if (!searchTerm) {
+        return;
+    }
+
+    secondInfoArray = storage.filter(currentGoal => {
+        if (currentGoal.disease && searchTerm) {
+            if (currentGoal.disease.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
+                stonks = currentGoal.disease
+                console.log(currentGoal.disease)
+                return true;
             }
+            return false;
         }
     });
+
+    console.log(secondInfoArray)
+    $('#diseaseCard').html('');
+    for (i = 0; i < secondInfoArray.length; i++) {
+        $('#diseaseCard').append("<div id='viewmore' num=" + secondInfoArray[i].id + "  class = 'centerText'>" +
+            coverImage + "<div class='centerTitle'><b>" + secondInfoArray[i].disease + "</b></div></div>");
+    }
+
 }
 
 
-//This function will get one disease info
+
+//FORUM COMMENT FUNCTIONS:
+var forumcommentURI = 'https://localhost:44395/api/forumcomments';
+
+
+//TODO: get comment based on post id
 function getOneDiseaseInfo(id) {
     console.log(id);
     $.ajax({
@@ -182,61 +241,23 @@ function getOneDiseaseInfo(id) {
     });
 }
 
-var stonks
-//disease search function
-function diseaseSearch() {
-    const searchTerm = document.getElementById("diseaseSearch").value;
 
-    if (searchTerm.length == 0) {
-        storage = []
-        secondInfoArray = []
-        getAllDiseaseInfo();
-        stonks = ""
-        return false;
-    }
+//TODO: add comment
 
-    if (!searchTerm) {
-        return;
-    }
 
-    secondInfoArray = storage.filter(currentGoal => {
-        if (currentGoal.disease && searchTerm) {
-            if (currentGoal.disease.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
-                stonks = currentGoal.disease
-                console.log(currentGoal.disease)
-                return true;
-            }
-            return false;
-        }
-    });
 
-    console.log(secondInfoArray)
-    $('#diseaseCard').html('');
-    for (i = 0; i < secondInfoArray.length; i++) {
-        $('#diseaseCard').append("<div id='viewmore' num=" + secondInfoArray[i].id + "  class = 'centerText'>" +
-            coverImage + "<div class='centerTitle'><b>" + secondInfoArray[i].disease + "</b></div></div>");
-    }
 
-}
+//TODO: update comment (user can only update their own comment)
 
-function call() {
-    //console.log(stonksid)
 
-    $('#diseaseCard').html('');
-    // //Iterate through the diseaseInfoArray to generate rows to populate the table
-    // for (i = 0; i < diseaseInfoArray.length; i++) {
-    //     coverImage = "<img style='width:100px' src='data:image/jpeg;base64," + diseaseInfoArray[i].thumbnail + "'/>";
 
-    //     //use sample image for now:
-    //     coverImage= "<img src='https://www.mei.edu/sites/default/files/2019-01/Virus.jpg'>"
-    //     // viewmorebutton = "document.getElementById('diseaseModal').style.display='block'"
-    // $('#diseaseCard').append("<div onclick="+viewmorebutton+"  class = 'centerText'>" +
-    //     coverImage + "<div class='centerTitle'><b>" + diseaseInfoArray[i].disease + "</b></div></div>");
-    //     $('#diseaseCard').append("<div id='viewmore' num="+stonksid+"  class = 'centerText'>" +
-    //         coverImage + "<div class='centerTitle'><b>" + stonks + "</b></div></div>");
-    //  }
 
-}
+
+//TODO: delete comment itself
+
+
+
+
 
 
 $(document).on("click", "#viewmore", function () {
@@ -253,4 +274,3 @@ $(document).on("click", "#viewForums", function () {
 });
 
 getAllDiseaseInfo();
-call();
