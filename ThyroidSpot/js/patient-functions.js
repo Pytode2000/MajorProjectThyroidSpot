@@ -701,6 +701,7 @@ function postPatientReport() {
 function exportData(){
     console.log("Exporting data...")
 
+    var titlename = username.replace(/ /g,"_").toUpperCase();
     var ch = reporttime
     var ft = reportft
     var ts = reportts
@@ -710,6 +711,7 @@ function exportData(){
     console.log(ft)
     console.log(ts)
     console.log(di)
+    
     
 
     
@@ -731,9 +733,12 @@ function exportData(){
     }
 
     $("#exCheckup").text(ch)
-    $("#exFt4").text(ft)
-    $("#exTsh").text(ts)
+    $("#exFt4").text(ft + " pmol/L")
+    $("#exTsh").text(ts + " mU/L")
     $("#exportDoseTable").html('')
+
+    var title= titlename +"_Appointment_"+ch
+    console.log(title)
     console.log(doseArray.length)
     for (x = 0; x<doseArray.length; x++){
         stonksImage = "<img style='width:120px; height:120px' src='data:image/jpeg;base64," + doseArray[x].drug_img + "'/>";
