@@ -404,7 +404,8 @@ function getOneReportInfo(){
                     //for prescription modal:
                     
                     console.log(storediagnosis)
-                    
+
+                    reportdia = [] //clear array
                     for (x = 0; x < storediagnosis.length; x++){
                         $('#tdDiagnosis').append(storediagnosis[x].diagnosis1+"<br>")
                         reportdia.push(storediagnosis[x].diagnosis1)
@@ -728,8 +729,9 @@ function exportData(){
     //   });
 
     //Sending data to the hidden div (located in prescription modal)
+    $("#exDiagnosis").html("")
     for (x = 0; x < reportdia.length; x++){
-        $("#exDiagnosis").text(reportdia[x])
+        $("#exDiagnosis").append(reportdia[x] +"<br/>")
     }
 
     $("#exCheckup").text(ch)

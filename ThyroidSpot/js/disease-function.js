@@ -136,7 +136,7 @@ function getAllDiseaseInfo() {
             //Iterate through the diseaseInfoArray to generate rows to populate the table
             for (i = 0; i < diseaseInfoArray.length; i++) {
                 coverImage = "<img style='width:100px' src='data:image/jpeg;base64," + diseaseInfoArray[i].thumbnail + "'/>";
-                def = { id: i, disease: diseaseInfoArray[i].disease }
+                def = { id: i, disease: diseaseInfoArray[i].disease, description: diseaseInfoArray[i].description }
                 updateDeleteButtons = "<button>TEST</button>"
                 storage.push(def)
                 //use sample image for now:
@@ -144,8 +144,29 @@ function getAllDiseaseInfo() {
                 // viewmorebutton = "document.getElementById('diseaseModal').style.display='block'"
                 // $('#diseaseCard').append("<div onclick="+viewmorebutton+"  class = 'centerText'>" +
                 //     coverImage + "<div class='centerTitle'><b>" + diseaseInfoArray[i].disease + "</b></div></div>");
-                $('#diseaseCard').append("<div id='viewmore' num=" + i + "  class = 'centerText'>" +
-                    coverImage + "<div class='centerTitle'><b>" + diseaseInfoArray[i].disease + "</b></div></div>");
+                // $('#diseaseCard').append("<div id='viewmore' num=" + i + "  class = 'centerText'>" +
+                //     coverImage + "<div class='centerTitle'><b>" + diseaseInfoArray[i].disease + "</b></div></div>");
+
+                //TODO: gather and limit short description (limit to 94 chars)
+                var limitdesc = diseaseInfoArray[i].description
+
+                var maxLength = 94 // maximum number of characters to extract
+              
+                //Trim and re-trim only when necessary (prevent re-trim when string is shorted than maxLength, it causes last word cut) 
+                if(limitdesc.length > maxLength){
+                    //trim the string to the maximum length
+                    var trimmedString = limitdesc.substr(0, maxLength);
+
+                    //re-trim if we are in the middle of a word and 
+                    trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
+                }
+               
+
+                $('#diseaseCard').append("<div class='card' style='width: 18rem; margin-bottom: 2em'><div class='card-body'><h5 class='card-title'>"+ diseaseInfoArray[i].disease +"</h5>"+
+                "<p class='card-text'>"+trimmedString+"...</p>"+
+                "</div><div class='card-footer'><a href='#' id='viewmore' num=" + i + " class='card-link'>View More</a>"+
+                "<a href='#' id='viewForums' num=" + i + " class='card-link'>View Forums</a></div></div>")
+                   
             }
         }
     });
@@ -173,6 +194,7 @@ function getOneDiseaseInfo(id) {
                     //coverImage = "<img style='width:100px' src='data:image/jpeg;base64," + disinfoArray[i].thumbnail + "'/>";
                     $('#diseaseName').text(diseaseInfoArray[i].disease)
                     $('#diseaseShortDescription').text(diseaseInfoArray[i].description)
+                    $('#diseaseShortDescription1').text(diseaseInfoArray[i].description)
                     $('#diseaseContent').text(diseaseInfoArray[i].disease_content)
                     $('#diseaseSymptoms').text(diseaseInfoArray[i].symptom)
                     $('#diseaseCause').text(diseaseInfoArray[i].cause)
@@ -225,8 +247,27 @@ function diseaseSearch() {
     console.log(secondInfoArray)
     $('#diseaseCard').html('');
     for (i = 0; i < secondInfoArray.length; i++) {
-        $('#diseaseCard').append("<div id='viewmore' num=" + secondInfoArray[i].id + "  class = 'centerText'>" +
-            coverImage + "<div class='centerTitle'><b>" + secondInfoArray[i].disease + "</b></div></div>");
+        // $('#diseaseCard').append("<div id='viewmore' num=" + secondInfoArray[i].id + "  class = 'centerText'>" +
+        //     coverImage + "<div class='centerTitle'><b>" + secondInfoArray[i].disease + "</b></div></div>");
+
+         //TODO: gather and limit short description (limit to 94 chars)
+         var limitdesc = secondInfoArray[i].description
+
+         var maxLength = 94 // maximum number of characters to extract
+       
+         //Trim and re-trim only when necessary (prevent re-trim when string is shorted than maxLength, it causes last word cut) 
+         if(limitdesc.length > maxLength){
+             //trim the string to the maximum length
+             var trimmedString = limitdesc.substr(0, maxLength);
+
+             //re-trim if we are in the middle of a word and 
+             trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
+         }
+
+        $('#diseaseCard').append("<div class='card' style='width: 18rem; margin-bottom: 2em'><div class='card-body'><h5 class='card-title'>"+ secondInfoArray[i].disease  +"</h5>"+
+        "<p class='card-text'>"+trimmedString+"...</p>"+
+        "<a href='#' id='viewmore' num=" + secondInfoArray[i].id + " class='card-link'>View More</a>"+
+        "<a href='#' id='viewForums' num=" + secondInfoArray[i].id + " class='card-link'>View Forums</a></div></div>")
     }
 
 }
@@ -255,11 +296,13 @@ $(document).on("click", "#viewmore", function () {
     currentDiseaseID = $(this).attr('num');
     console.log(currentDiseaseID);
     getOneDiseaseInfo(currentDiseaseID);
-    document.getElementById('diseaseModal').style.display = 'block'
+    $('#diseaseModal').modal('show')
+    //document.getElementById('diseaseModal').style.display = 'block'
 });
 
 $(document).on("click", "#viewForums", function () {
     currentDiseaseID = $(this).attr('num');
+    alert(currentDiseaseID)
     sessionStorage.setItem("disID", currentDiseaseID)
     window.location.href = "disease-forum.html";
 });
