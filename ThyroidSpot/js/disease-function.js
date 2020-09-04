@@ -63,7 +63,10 @@ function createNewDisease() {
         success: function (data) {
             console.log("Disease instance created.");
             $('#newDiseaseModal').modal('hide');
-            window.location.reload();
+            // window.location.reload();
+
+            getAllDiseaseInfo();
+            call();
         }
     });
 }
@@ -88,7 +91,12 @@ function updateDisease() {
         contentType: 'application/json',
         success: function (data) {
             console.log("Updated Disease");
-            window.location.reload();
+            // window.location.reload();
+            $('#editDiseaseModal').modal('hide');
+            document.getElementById('diseaseModal').style.display='none'
+
+            getAllDiseaseInfo();
+            call();
         }
     });
 }
@@ -101,7 +109,11 @@ function deleteDisease() {
         contentType: 'application/json',
         success: function (data) {
             console.log("Disease instance deleted.")
-            window.location.reload();
+            // window.location.reload();
+            document.getElementById('diseaseModal').style.display='none'
+
+            getAllDiseaseInfo();
+            call();
         }
     });
 }

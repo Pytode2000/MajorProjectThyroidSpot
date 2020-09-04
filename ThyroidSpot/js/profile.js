@@ -225,7 +225,15 @@ function removeDefaultDiagnosis() {
         contentType: 'application/json',
         success: function (data) {
             console.log("Diagnosis instance deleted.")
-            window.location.reload();
+            // window.location.reload();
+            // $('#editPatientModal').modal('hide');
+
+            $('#deleteDiagnosisModal').modal('hide');
+            $('#diagnosisEditBlock').html('');
+            $('#profDiagnosis').html('');
+            
+
+            getPatientInfo();
         }
     });
 }
@@ -346,9 +354,12 @@ function updateProfile() {
         dataType: 'json',
         contentType: 'application/json',
         success: function (data) {
-            $('#editPatientModal').modal('hide');
+            // $('#editPatientModal').modal('hide');
             console.log("Successfully updated patient's information.")
-            window.location.reload();
+            // window.location.reload();
+            $('#diagnosisEditBlock').html('');
+            $('#profDiagnosis').html('');
+            getPatientInfo()
         }
     });
 

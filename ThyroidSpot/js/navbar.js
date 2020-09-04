@@ -47,12 +47,10 @@ function navigation_control() {
         document.getElementById('nav-tab-health').style.display = "none";
     }
 
-    // need to allow admin soon
-    // if (user_logged_in == "n") {
-    //     if (user_account_type != "patient" || user_account_type != "admin") {
-    //         document.getElementById('nav-tab-diseases').style.display = "none";
-    //     }
-    // }
+   
+    if (user_account_type == "clinician") {
+        document.getElementById('nav-tab-diseases').style.display = "none";
+    }
 
 
     // If user is *not* logged in OR account type is not clinician, "Patients" button (used by account_type="clinician") in navbar will not show.
