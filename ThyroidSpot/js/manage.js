@@ -165,7 +165,7 @@ function deleteUser() {
     $('#userModal').modal('hide');
 
     setTimeout(function () {
-        window.location.reload();
+        getAllUsers()
     }, 3000);
 
 }
@@ -223,8 +223,8 @@ function createUser() {
                     console.log("User instance created.");
                     $('#newUserModal').modal('hide');
                     // Send verification email? maybe
-                    window.location.reload();
-
+                    // window.location.reload();
+                    getAllUsers()
 
                 }
             });
