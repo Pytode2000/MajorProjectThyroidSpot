@@ -173,8 +173,8 @@ function getAllDiseaseInfo() {
                 }
 
 
-                $('#diseaseCard').append("<div class='card' style='width: 18rem; margin-bottom: 2em'><div class='card-body'><h5 class='card-title'>" + diseaseInfoArray[i].disease + "</h5>" +
-                    "<p class='card-text'>" + trimmedString + "...</p>" +
+                $('#diseaseCard').append("<div class='card' style='width: 18rem; margin-bottom: 2em'><div class='card-header' style='height: 65px;'><h5 class='card-title'>" + diseaseInfoArray[i].disease + "</h5></div><div class='card-body'>" +
+                    "<p class='card-text descript-length'>" + diseaseInfoArray[i].description + "</p>" +
                     "</div><div class='card-footer'><a href='#' id='viewmore' num=" + i + " class='card-link'>View More</a>" +
                     "<a href='#' id='viewForums' num=" + i + " class='card-link'>View Forums</a></div></div>")
 
