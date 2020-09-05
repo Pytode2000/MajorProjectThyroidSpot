@@ -67,8 +67,10 @@ function createNewDisease() {
             $('#newDiseaseModal').modal('hide');
             // window.location.reload();
 
-            getAllDiseaseInfo();
-            call();
+            // getAllDiseaseInfo();
+            // call();
+            window.location.reload();
+
         }
     });
 }
@@ -100,8 +102,10 @@ function updateDisease() {
 
             // document.getElementById('diseaseModal').style.display='none'
 
-            getAllDiseaseInfo();
-            call();
+            // getAllDiseaseInfo();
+            // call();
+            window.location.reload();
+
         }
     });
 }
@@ -118,8 +122,9 @@ function deleteDisease() {
             // document.getElementById('diseaseModal').style.display='none'
             $('#diseaseModal').modal('hide');
 
-            getAllDiseaseInfo();
-            call();
+            // getAllDiseaseInfo();
+            // call();
+            window.location.reload();
         }
     });
 }
