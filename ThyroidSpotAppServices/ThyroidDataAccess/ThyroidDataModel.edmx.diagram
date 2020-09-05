@@ -11,8 +11,8 @@
         <EntityTypeShape EntityType="ThyroidDataModel.diagnosis" Width="1.5" PointX="2.75" PointY="3.625" />
         <EntityTypeShape EntityType="ThyroidDataModel.drug_dosage" Width="1.5" PointX="6.875" PointY="0.75" />
         <EntityTypeShape EntityType="ThyroidDataModel.patient_information" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ThyroidDataModel.disease_forum" Width="1.5" PointX="6.75" PointY="3.5" />
         <EntityTypeShape EntityType="ThyroidDataModel.forum_comment" Width="1.5" PointX="4.75" PointY="3.5" />
+        <EntityTypeShape EntityType="ThyroidDataModel.disease_forum" Width="1.5" PointX="6.75" PointY="3.625" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -20,6 +20,5 @@ namespace ThyroidDataAccess
         public string post_description { get; set; }
         public string timestamp { get; set; }
         public string user_name { get; set; }
-        public string post_img { get; set; }
     }
 }

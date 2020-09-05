@@ -199,6 +199,7 @@ function getOneDiseaseInfo(id) {
 
             for (i = 0; i < diseaseInfoArray.length; i++) {
                 if (id == i) {
+                    currentDiseaseID = id
                     localStorage.setItem("diseasename", diseaseInfoArray[i].disease);
                     //generate the buttons html with information hidden into its attributes (index)
                     //num attribute is used to store the array index so that in can be used later to retrieve information from the bookArray
@@ -308,12 +309,15 @@ $(document).on("click", "#viewmore", function () {
     console.log(currentDiseaseID);
     getOneDiseaseInfo(currentDiseaseID);
     $('#diseaseModal').modal('show')
+    $('body').css("overflow", "hidden");
     //document.getElementById('diseaseModal').style.display = 'block'
 });
 
 $(document).on("click", "#viewForums", function () {
-    currentDiseaseID = $(this).attr('num');
-    alert(currentDiseaseID)
+    //currentDiseaseID = $(this).attr('num');
+    if (currentDiseaseID == undefined){
+        currentDiseaseID = $(this).attr('num');
+    }
     sessionStorage.setItem("disID", currentDiseaseID)
     window.location.href = "disease-forum.html";
 });

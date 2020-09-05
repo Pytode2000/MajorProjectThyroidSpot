@@ -60,8 +60,6 @@ namespace ThyroidSpotAppServices.Controllers
                 var fpost = entities.disease_forum.Find(id);
                 fpost.post_title = forum.post_title;
                 fpost.post_description = forum.post_description;
-                fpost.timestamp = forum.timestamp;
-                fpost.post_img = forum.post_img;
                 fpost.disease_name = forum.disease_name;
                 fpost.user_name = forum.user_name;
 

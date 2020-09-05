@@ -44,6 +44,27 @@
   font-size: 2rem;
 }
 
+#diseaseName{
+  margin-left: 0.75em;
+}
+.headers{
+  text-align:left;
+  width: 20%;
+}
+#test{
+  display: block;
+  margin-bottom: 50px;
+}
+#mobilVersjon{
+  display: none;
+}
+
+.body{
+    overflow: hidden;
+    padding-right: 0px;
+}
+
+
 @media only screen and (max-width: 600px) {
   ·
 
@@ -120,20 +141,6 @@
 
 
 
-#diseaseName{
-  margin-left: 0.75em;
-}
-.headers{
-  text-align:left;
-  width: 20%;
-}
-#test{
-  display: block;
-  margin-bottom: 50px;
-}
-#mobilVersjon{
-  display: none;
-}
 /*** </FLOATING ACTION BUTTON> ***/
 
 /***** <Small Screens> *****/

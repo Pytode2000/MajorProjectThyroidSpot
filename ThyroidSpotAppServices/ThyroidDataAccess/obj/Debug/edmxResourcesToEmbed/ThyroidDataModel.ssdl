@@ -18,7 +18,6 @@
     <Property Name="post_description" Type="text" Nullable="false" />
     <Property Name="timestamp" Type="nvarchar" MaxLength="255" Nullable="false" />
     <Property Name="user_name" Type="nvarchar" MaxLength="70" Nullable="false" />
-    <Property Name="post_img" Type="text" />
   </EntityType>
   <EntityType Name="disease_information">
     <Key>

@@ -449,8 +449,7 @@ function getPrescription(){
                     
                     console.log(prescription)
 
-                    //TODO: allow img to be clicakable and capture idDosage
-                    //currentDosageID = doseArray[i].idDosage
+                    
                     coverImage = "<img id='expandImg' data-toggle='modal' num="+doseArray[i].idDosage+" style='width:100px' src='data:image/jpeg;base64," + prescription.drug_img + "'/>";
                     
                     $('#prescriptionTable').append("<tr><td>"+prescription.drug_name+"</td>"+
@@ -505,7 +504,7 @@ function updateMedicineImg(){
     var validImageTypes = ["image/gif", "image/jpeg", "image/png"];
     if ($.inArray(fileType, validImageTypes) < 0) {
         // invalid file type code goes here.
-        alert("not stonks yo bro")
+        alert("This file is not an image")
     }
     else{
         console.log("updating drug image...")

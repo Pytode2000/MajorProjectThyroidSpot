@@ -73,19 +73,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="disease_forum">
-      <EntityTypeMapping TypeName="ThyroidDataModel.disease_forum">
-        <MappingFragment StoreEntitySet="disease_forum">
-          <ScalarProperty Name="post_img" ColumnName="post_img" />
-          <ScalarProperty Name="user_name" ColumnName="user_name" />
-          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
-          <ScalarProperty Name="post_description" ColumnName="post_description" />
-          <ScalarProperty Name="post_title" ColumnName="post_title" />
-          <ScalarProperty Name="disease_name" ColumnName="disease_name" />
-          <ScalarProperty Name="idForum" ColumnName="idForum" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="forum_comment">
       <EntityTypeMapping TypeName="ThyroidDataModel.forum_comment">
         <MappingFragment StoreEntitySet="forum_comment">
@@ -94,6 +81,18 @@
           <ScalarProperty Name="comment" ColumnName="comment" />
           <ScalarProperty Name="forum_id" ColumnName="forum_id" />
           <ScalarProperty Name="idForumComment" ColumnName="idForumComment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="disease_forum">
+      <EntityTypeMapping TypeName="ThyroidDataModel.disease_forum">
+        <MappingFragment StoreEntitySet="disease_forum">
+          <ScalarProperty Name="user_name" ColumnName="user_name" />
+          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+          <ScalarProperty Name="post_description" ColumnName="post_description" />
+          <ScalarProperty Name="post_title" ColumnName="post_title" />
+          <ScalarProperty Name="disease_name" ColumnName="disease_name" />
+          <ScalarProperty Name="idForum" ColumnName="idForum" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
