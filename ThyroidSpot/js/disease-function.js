@@ -19,8 +19,10 @@ function viewDiagnosisDisease() {
             success: function (disease_data) {
                 console.log(disease_data)
                 document.getElementById('diseaseModal').style.display = 'block'
+
+                $('#diseaseModal').modal('toggle');
                 $('#diseaseName').text(disease_data.disease)
-                $('#diseaseShortDescription').text(disease_data.description)
+                $('#diseaseShortDescription1').text(disease_data.description)
                 $('#diseaseContent').text(disease_data.disease_content)
                 $('#diseaseSymptoms').text(disease_data.symptom)
                 $('#diseaseCause').text(disease_data.cause)
@@ -92,8 +94,11 @@ function updateDisease() {
         success: function (data) {
             console.log("Updated Disease");
             // window.location.reload();
+
             $('#editDiseaseModal').modal('hide');
-            document.getElementById('diseaseModal').style.display='none'
+            $('#diseaseModal').modal('hide');
+
+            // document.getElementById('diseaseModal').style.display='none'
 
             getAllDiseaseInfo();
             call();
@@ -110,7 +115,8 @@ function deleteDisease() {
         success: function (data) {
             console.log("Disease instance deleted.")
             // window.location.reload();
-            document.getElementById('diseaseModal').style.display='none'
+            // document.getElementById('diseaseModal').style.display='none'
+            $('#diseaseModal').modal('hide');
 
             getAllDiseaseInfo();
             call();
@@ -151,22 +157,22 @@ function getAllDiseaseInfo() {
                 var limitdesc = diseaseInfoArray[i].description
 
                 var maxLength = 94 // maximum number of characters to extract
-              
+
                 //Trim and re-trim only when necessary (prevent re-trim when string is shorted than maxLength, it causes last word cut) 
-                if(limitdesc.length > maxLength){
+                if (limitdesc.length > maxLength) {
                     //trim the string to the maximum length
                     var trimmedString = limitdesc.substr(0, maxLength);
 
                     //re-trim if we are in the middle of a word and 
                     trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
                 }
-               
 
-                $('#diseaseCard').append("<div class='card' style='width: 18rem; margin-bottom: 2em'><div class='card-body'><h5 class='card-title'>"+ diseaseInfoArray[i].disease +"</h5>"+
-                "<p class='card-text'>"+trimmedString+"...</p>"+
-                "</div><div class='card-footer'><a href='#' id='viewmore' num=" + i + " class='card-link'>View More</a>"+
-                "<a href='#' id='viewForums' num=" + i + " class='card-link'>View Forums</a></div></div>")
-                   
+
+                $('#diseaseCard').append("<div class='card' style='width: 18rem; margin-bottom: 2em'><div class='card-body'><h5 class='card-title'>" + diseaseInfoArray[i].disease + "</h5>" +
+                    "<p class='card-text'>" + trimmedString + "...</p>" +
+                    "</div><div class='card-footer'><a href='#' id='viewmore' num=" + i + " class='card-link'>View More</a>" +
+                    "<a href='#' id='viewForums' num=" + i + " class='card-link'>View Forums</a></div></div>")
+
             }
         }
     });
@@ -250,24 +256,24 @@ function diseaseSearch() {
         // $('#diseaseCard').append("<div id='viewmore' num=" + secondInfoArray[i].id + "  class = 'centerText'>" +
         //     coverImage + "<div class='centerTitle'><b>" + secondInfoArray[i].disease + "</b></div></div>");
 
-         //TODO: gather and limit short description (limit to 94 chars)
-         var limitdesc = secondInfoArray[i].description
+        //TODO: gather and limit short description (limit to 94 chars)
+        var limitdesc = secondInfoArray[i].description
 
-         var maxLength = 94 // maximum number of characters to extract
-       
-         //Trim and re-trim only when necessary (prevent re-trim when string is shorted than maxLength, it causes last word cut) 
-         if(limitdesc.length > maxLength){
-             //trim the string to the maximum length
-             var trimmedString = limitdesc.substr(0, maxLength);
+        var maxLength = 94 // maximum number of characters to extract
 
-             //re-trim if we are in the middle of a word and 
-             trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
-         }
+        //Trim and re-trim only when necessary (prevent re-trim when string is shorted than maxLength, it causes last word cut) 
+        if (limitdesc.length > maxLength) {
+            //trim the string to the maximum length
+            var trimmedString = limitdesc.substr(0, maxLength);
 
-        $('#diseaseCard').append("<div class='card' style='width: 18rem; margin-bottom: 2em'><div class='card-body'><h5 class='card-title'>"+ secondInfoArray[i].disease  +"</h5>"+
-        "<p class='card-text'>"+trimmedString+"...</p>"+
-        "<a href='#' id='viewmore' num=" + secondInfoArray[i].id + " class='card-link'>View More</a>"+
-        "<a href='#' id='viewForums' num=" + secondInfoArray[i].id + " class='card-link'>View Forums</a></div></div>")
+            //re-trim if we are in the middle of a word and 
+            trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
+        }
+
+        $('#diseaseCard').append("<div class='card' style='width: 18rem; margin-bottom: 2em'><div class='card-body'><h5 class='card-title'>" + secondInfoArray[i].disease + "</h5>" +
+            "<p class='card-text'>" + trimmedString + "...</p>" +
+            "<a href='#' id='viewmore' num=" + secondInfoArray[i].id + " class='card-link'>View More</a>" +
+            "<a href='#' id='viewForums' num=" + secondInfoArray[i].id + " class='card-link'>View Forums</a></div></div>")
     }
 
 }

@@ -354,7 +354,7 @@ function updateProfile() {
         dataType: 'json',
         contentType: 'application/json',
         success: function (data) {
-            // $('#editPatientModal').modal('hide');
+            $('#editPatientModal').modal('hide');
             console.log("Successfully updated patient's information.")
             // window.location.reload();
             $('#diagnosisEditBlock').html('');
