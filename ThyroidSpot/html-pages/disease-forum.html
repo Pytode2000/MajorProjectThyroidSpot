@@ -64,9 +64,9 @@
                     </script>
                     <div id="sortSearch">
                         <input id="postSearch" placeholder="Search Post Title...">
-                        <select name="unitselection" id="newFilterDDL" onmousedown="this.value='';" onchange="filterByActivity(this.value);">
-                            <option disabled selected hidden value>--Filter By Activity--</option>
-                            <option value="Latest">Latest</option>
+                        <select name="unitselection" id="newFilterDDL" onchange="filterByActivity(this.value);">
+                            <!-- <option disabled selected hidden value>--Filter By Activity--</option> -->
+                            <option selected value="Latest">Latest</option>
                             <option value="Oldest">Oldest</option>
                         </select>
                     </div>
