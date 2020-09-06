@@ -19,7 +19,7 @@ function getUserName(){
             for (i = 0; i < userInfoArray.length; i++) {
                 if (getuid == userInfoArray[i].user_id){
                     uname = userInfoArray[i].full_name;
-                    return checkDiseaseName();
+                    // return checkDiseaseName();
                 }
             }
         }
@@ -382,3 +382,4 @@ $(document).on("click", "#redirect", function () {
 });
 
 getUserName();
+checkDiseaseName()

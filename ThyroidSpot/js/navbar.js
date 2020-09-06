@@ -48,9 +48,9 @@ function navigation_control() {
     }
 
    
-    if (user_account_type == "clinician") {
-        document.getElementById('nav-tab-diseases').style.display = "none";
-    }
+    // if (user_account_type == "clinician") {
+    //     document.getElementById('nav-tab-diseases').style.display = "none";
+    // }
 
 
     // If user is *not* logged in OR account type is not clinician, "Patients" button (used by account_type="clinician") in navbar will not show.
