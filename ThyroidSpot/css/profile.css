@@ -79,3 +79,11 @@
     letter-spacing: 1px;
     color: rgb(88, 88, 88);
 }
+
+
+.diagnosis-class {
+    cursor: pointer;
+}
+.diagnosis-class:hover {
+    text-decoration-color: black;
+}

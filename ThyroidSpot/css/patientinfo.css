@@ -30,8 +30,9 @@
     flex: 1;
   }
 
-  .class-report{
-    margin-bottom: 5em;
+  #class-report{
+    margin-bottom: 1em;
+    overflow: auto;
   }
 
   #rpt{
@@ -69,7 +70,7 @@
     width: 45%;
   }
 
-  #drugInput{
+  /* #drugInput{
     float: left;
     width: 30%;
   }
@@ -77,7 +78,7 @@
     float: right;
     width: 40%;
     margin-right: 25%;
-  }
+  } */
 
   .divider{
     display: none;
@@ -91,16 +92,21 @@
   .firsttd{
     text-align: right;
   }
-
-  .finaltd{
-    text-align: right;
-  }
   .labeltd{
     text-align: left;
   }
 
-  .shiftedrow{
+  .shiftedrow1{
       padding-left: 40px;
+      width: 25%;  
+  }
+
+  .shiftedrow2{
+    width: 20%; 
+  }
+
+  .shiftedrow3{
+    width: 25%; 
   }
 
   /*PATIENT INFO TABLE CSS*/
@@ -213,6 +219,11 @@
   #diagnosisbtn{
     float: left;
   }
+
+  #createrptbtn1{
+    margin-left: 1em;
+    float: right;
+  }
   #viewdosage{
     margin-left: 1em;
     float:left; 
@@ -234,6 +245,17 @@
     /* margin-bottom: 5rem;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
   }
+
+  /* Force table to not be like tables anymore */
+  .infoTable table,
+  .infoTable thead,
+  .infoTable tbody,
+  .infoTable th,
+  .infoTable td,
+  .infoTable tr {
+  display: block;
+  width: 100%;
+  }
   
 
   #missingInfo{
@@ -248,13 +270,15 @@
   }
 
   .shiftedrow{
-    display: block;
+    /* display: block;
     padding-left: 5px;
-    margin-top: 0.5em;
+    margin-top: 0.5em; */
+    float: left; 
+    width: 100%
   }
 
   #searchRPTcontain{
-      margin-bottom: 8em; 
+      margin-bottom: 15em; 
       margin-top: 2em; 
       margin-right: auto;
       margin-left: auto;
@@ -319,7 +343,8 @@
       
 
   #class-report{
-    margin-bottom: 5em;
+    height: 2em;
+    overflow: auto;
   }
 
 
@@ -376,11 +401,14 @@
   }
 
   #newFT4{
-    width: 100%;
+    display: inline-block;
+  }
+  #newUnitDDL{
+    display: inline-block;
   }
 
   #newTSH{
-    width: 100%;
+    width: 60%;
   }
 
   #addMoreRows{
@@ -388,7 +416,8 @@
   }
 
   .custom-class{
-      width: 100%; display:block; 
+      width: 100%; 
+      display:block; 
   }
   #prescriptionButton{
     float: none;
@@ -400,6 +429,15 @@
   #viewdosage{
     margin-left: 1em;
     float:right; 
+    margin-bottom: 1em;
+  }
+
+  #graphcontainer{
+    height: 250px;
+  }
+
+
+  #createrptbtn1{
     margin-bottom: 1em;
   }
 

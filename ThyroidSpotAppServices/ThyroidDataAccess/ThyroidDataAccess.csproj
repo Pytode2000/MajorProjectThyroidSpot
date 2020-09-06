@@ -57,10 +57,16 @@
     <Compile Include="diagnosis.cs">
       <DependentUpon>ThyroidDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="disease_forum.cs">
+      <DependentUpon>ThyroidDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="disease_information.cs">
       <DependentUpon>ThyroidDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="drug_dosage.cs">
+      <DependentUpon>ThyroidDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="forum_comment.cs">
       <DependentUpon>ThyroidDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="patient_information.cs">

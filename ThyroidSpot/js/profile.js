@@ -136,11 +136,11 @@ function getPatientInfo() {
                         var diagnosis_edit =
                             "<select id='editDiagnosis" + currentPatientDiagnosis[i].diagnosis_id + "' class='custom-select' style='width:80%; margin-bottom: 10px;'>" +
                             "<option>De Quervain's thyroiditis</option>" +
-                            "<option>Differentiatied thyroid carcinoma</option>" +
+                            "<option>Differentiated thyroid carcinoma</option>" +
                             " <option>Graves' disease</option>" +
                             "<option>Hashimoto's thyroiditis</option>" +
                             "<option>Hyperthyroidism</option>" +
-                            "<option>Hypothyroidsm</option>" +
+                            "<option>Hypothyroidism</option>" +
                             "<option>Post-radioiodine ablation</option>" +
                             "<option>Post-thyroidectomy</option>" +
                             "<option>Riedel's thyroiditis</option>" +
@@ -158,10 +158,12 @@ function getPatientInfo() {
                         // PRESET DIAGNOSIS VALUE IN EDIT MODAL
                         $("#editDiagnosis" + currentPatientDiagnosis[i].diagnosis_id).val(currentPatientDiagnosis[i].diagnosis1);
 
-
                         // FOR PROFILE
-                        var diagnosis = "  <div class='alert alert-secondary' role='alert'>" +
-                            currentPatientDiagnosis[i].diagnosis1 + "<hr></div>"
+                        // var test = "<a onclick='profileClickDiagnosis(" + currentPatientDiagnosis[i].diagnosis1 + ")'>"
+                        var diagnosis = "  <a class='diagnosis-class' onclick='profileClickDiagnosis(" +
+                            currentPatientDiagnosis[i].diagnosis_id +
+                            ")'><div class='alert alert-secondary' role='alert'>" +
+                            currentPatientDiagnosis[i].diagnosis1 + "<hr></div></a>"
                         $("#profDiagnosis").append(diagnosis);
 
                     }
@@ -173,6 +175,42 @@ function getPatientInfo() {
         }
     });
 }
+
+function profileClickDiagnosis(selected_profile_diagnosis_id) {
+    // no choice, cannot get the disease's name coz some diseases have names that contains apostrophe (')
+
+    // toDisease = []
+    // var selected_profile_diagnosis_name;
+    $.ajax({
+        type: 'GET',
+        url: diagnosisURI + '?diagnosisid=' + selected_profile_diagnosis_id,
+        // /diagnosis?diagnosisid={diagnosisid}
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            // toDisease = data;
+            // console.log(toDisease);
+            // console.log(toDisease.diagnosis_id)
+            // toDisease = data;
+            // selected_profile_diagnosis_name = toDisease.diagnosis1
+            console.log(data.diagnosis1)
+            sessionStorage.setItem("view_disease", data.diagnosis1);
+            window.location.href = "disease.html";
+        }
+    });
+    // console.log(selected_profile_diagnosis_name)
+
+
+
+
+
+    // window.location.href = "disease.html";
+    // console.log(diagnosis_id)
+    // sessionStorage.setItem("selected_disease", diagnosis_id);
+}
+
+
+
 var selectedDiagnosis;
 function selectedDeleteModal(diagnosis_id) {
     $('#deleteDiagnosisModal').modal('toggle');
@@ -187,7 +225,15 @@ function removeDefaultDiagnosis() {
         contentType: 'application/json',
         success: function (data) {
             console.log("Diagnosis instance deleted.")
-            window.location.reload();
+            // window.location.reload();
+            // $('#editPatientModal').modal('hide');
+
+            $('#deleteDiagnosisModal').modal('hide');
+            $('#diagnosisEditBlock').html('');
+            $('#profDiagnosis').html('');
+            
+
+            getPatientInfo();
         }
     });
 }
@@ -199,11 +245,11 @@ function addNewDiagnosis() {
     var html = "<div id='diagnosis-" + diagnosisCounter + "'>" +
         "<select class='custom-select diagnosisClass' style='margin-bottom: 10px; width: 80%;'>" +
         "<option>De Quervain's thyroiditis</option>" +
-        "<option>Differentiatied thyroid carcinoma</option>" +
+        "<option>Differentiated thyroid carcinoma</option>" +
         "<option>Graves' disease</option>" +
         "<option>Hashimoto's thyroiditis</option>" +
         "<option>Hyperthyroidism</option>" +
-        "<option>Hypothyroidsm</option>" +
+        "<option>Hypothyroidism</option>" +
         "<option>Post-radioiodine ablation</option>" +
         "<option>Post-thyroidectomy</option>" +
         "<option>Riedel's thyroiditis</option>" +
@@ -310,7 +356,10 @@ function updateProfile() {
         success: function (data) {
             $('#editPatientModal').modal('hide');
             console.log("Successfully updated patient's information.")
-            window.location.reload();
+            // window.location.reload();
+            $('#diagnosisEditBlock').html('');
+            $('#profDiagnosis').html('');
+            getPatientInfo()
         }
     });
 

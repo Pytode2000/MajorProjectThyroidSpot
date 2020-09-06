@@ -8,21 +8,20 @@
     <link rel="shortcut icon" href="../assets/images/thyroidspot-logo.png" />
 
     <!-- Imports -->
-
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/patientinfo.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" />
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
 
     <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://printjs-4de6.kxcdn.com/print.min.css">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
-
-    <script src="../js/patient-functions.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js" integrity="sha512-G8JE1Xbr0egZE5gNGyUm1fF764iHVfRXshIoUWCTPAbKkkItp/6qal5YAHXrxEu4HNfPTQs6HOu3D5vCGS1j3w==" crossorigin="anonymous"></script>
@@ -30,9 +29,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css" integrity="sha512-SUJFImtiT87gVCOXl3aGC00zfDl6ggYAw5+oheJvRJ8KBXZrr/TMISSdVJ5bBarbQDRC2pR5Kto3xTR0kpZInA==" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js" integrity="sha512-QEiC894KVkN9Tsoi6+mKf8HaCLJvyA6QIRzY5KrfINXYuP9NxdIkRQhGq3BZi0J4I7V5SidGM3XUQ5wFiMDuWg==" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous" />
+    
 
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+    <script type="text/javascript" src="../js/patient-functions.js"></script>
 
-    <title>Thyroid Spot</title>
+    <title>Thyroid-SPOT</title>
 </head>
 
 <body>
@@ -48,9 +51,6 @@
         <div id="searchRPTcontain">
             <div id="searchInput">
             <input id="searchInputBox" onkeyup="searchPatientReport();" placeholder="Search Date...">
-            </div>
-            <div id="createrpt">
-            <button id='createrptbtn' class=' btn btn-info btn-sm'>Create Report</button>
             </div>
         </div>
         <div id="reportcontainer">
@@ -83,89 +83,13 @@
                 </canvas>
             </div>
         </div>
-        <!--Modal For Patient Info-->
-        <div id="newPatientModal" class="w3-modal">
-            <div class="w3-modal-content">
-                <div class="w3-container">
-                    <span onclick="document.getElementById('newPatientModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                    <h1 id="diseaseName">Create Patient Info</h1>
-                    <hr>
-                    <table id="createnfotable">
-                    <tr>
-                    <td class="firsttd">
-                    <label>NRIC:</label>
-                    </td>
-                    <td class="labeltd">
-                    <input id="newIC">
-                    </td>
-                    </tr>
-                    
-                    <tr>
-                    <td class="firsttd">
-                    <label>Date of birth:</label>
-                    </td>
-                    <td class="labeltd">
-                    <input id="newDOB">
-                    </td>
-                    </tr>
+        
+        <!-- End of page -->
 
-                    <tr>
-                    <td class="firsttd">
-                    <label>Gender:</label>
-                    </td>
-                    <td class="labeltd">
-                    <select name="gender" id="newGenderDDL">
-                        <option value="" selected disabled hidden>--Choose here--</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                    </select>
-                    </td>
-                    </tr>
-                    
-                    <tr>
-                    <td class="firsttd">
-                    <label>Diagnosis:</label>
-                    </td>
-                    <td class="labeltd">
-                    <select name="diagnosis" id="newDiagnosisDDL">
-                        <option value="" selected disabled hidden>--Choose here--</option>
-                        <option value="De Quervain's Thyroiditis">De Quervain's Thyroiditis</option>
-                        <option value="Differentiated thyroid carcinoma">Differentiated thyroid carcinoma</option>
-                        <option value="Graves' disease">Graves' disease</option>
-                        <option value="Hashimoto's thyroiditis">Hashimoto's thyroiditis</option>
-                        <option value="Hypothyroidism">Hypothyroidism</option>
-                        <option value="Post-thyroidectomy">Post-thyroidectomy</option>
-                        <option value="Riedel's thyroiditis">Riedel's thyroiditis</option>
-                    </select>
-                    </td>
-                    </tr>
-                    
-                    <tr>
-                    <td class="firsttd">
-                    <label>Blood Type:</label>
-                    </td>
-                    <td class="labeltd">
-                    <select name="bloodtype" id="newBloodTypeDDL">
-                        <option value="" selected disabled hidden>--Choose here--</option>
-                        <option value="A+">A+</option>
-                        <option value="A-">A-</option>
-                        <option value="B+">B+</option>
-                        <option value="B-">B-</option>
-                        <option value="AB+">AB+</option>
-                        <option value="AB-">AB-</option>
-                        <option value="O+">O+</option>
-                        <option value="O-">O-</option>
-                    </select>
-                    </td>
-                    </tr>
-                    </table>
-                    <div style="text-align: center; margin-bottom: 2em;">
-                        <button id="btnRegister" class="btn btn-dark custom-class bold" onclick="postPatientInfo()">Create Patient Info</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
+
+
+        <!-- ALL MODALS -->
 
         <!--Modal For Create Patient Report-->
         <div id="newReportModal" class="w3-modal">
@@ -176,12 +100,16 @@
                     <hr>
                     
                     <div class="modal-body">
-                    <!-- <form id="createnfotable" onsubmit="postPatientReport(); return false;"> -->
+                    <form id="createnfotable" onsubmit="postPatientReport(); return false;">
                         <div class="form-row col-xs-4  col-md-12">
                             <div class="col" style="text-align: left;">
                                 <label>FT4:</label>
                                 <div>
-                                <input type="text" class="form-control" id="newFT4" placeholder="Enter FT4..." required>
+                                <input type="text" class="form-control" id="newFT4" style="width: 70%; display: inline;" placeholder="Enter FT4..." required>
+                                <select name="unitselection" id="newUnitDDL" style="float: inherit;">
+                                    <option value="mU/L">mU/L</option>
+                                    <option value="pmol/L" selected>pmol/L</option>
+                                </select>
                                 </div>
                             </div>
                         </div>
@@ -191,7 +119,11 @@
                             <div class="col" style="text-align: left;">
                                 <label>TSH:</label>
                                 <div>
-                                <input type="text" class="form-control" id="newTSH" placeholder="Enter TSH..." required>
+                                <input type="text" class="form-control" id="newTSH" style="width: 70%; display: inline;" placeholder="Enter TSH..." required>
+                                <select name="unitselection" id="newUnit1DDL" style="float: inherit;">
+                                    <option value="mU/L" selected>mU/L</option>
+                                    <option value="pmol/L">pmol/L</option>
+                                </select>
                                 </div>
                             </div>
                         </div>
@@ -260,70 +192,9 @@
                                 <button id="addMoreRows" class="btn btn-secondary custom-class">Add another drug dose</button>
                             </div> -->
                             <div style="text-align: center; padding-bottom: 1em;">
-                                <button onclick="postPatientReport()" class="btn btn-dark btn-SaveReport custom-class bold">Save Report</button>
+                                <button class="btn btn-dark btn-SaveReport custom-class bold">Save Report</button>
                             </div>
                     </form>
-                </div>
-            </div>
-        </div>
-
-
-         <!--Modal For Prescriptions-->
-         <div id="prescriptionModal" class="w3-modal">
-            <div class="w3-modal-content">
-                <div class="w3-container">
-                    <span onclick="document.getElementById('prescriptionModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                    <h2 style="text-align: center;">Prescription</h2>
-                    
-                    <table class="table table-sm" style="width: 95%; margin-left: auto; margin-right: auto;">
-                        <tr>
-                            <td style=" text-align:left; width: 60%;">Diagnosis:</td>
-                            <td id="tdDiagnosis"></td>
-                        </tr>
-                        <tr>
-                            <td style="text-align:left;">Checkup date:</td>
-                            <td id="tdCheckup"></td>
-                        </tr>
-                        <tr>
-                            <td style="text-align:left;">FT4:</td>
-                            <td id="tdFt4"></td>
-                        </tr>
-                        <tr>
-                            <td style="text-align:left;">TSH:</td>
-                            <td id="tdTsh" ></td>
-                        </tr>
-                    </table>
-                    
-                  <div class="table-responsive-sm">
-                    <table class="table" style="background-color: none">
-
-                        <!--Table head-->
-                        <thead>
-                          <tr>
-                            <th style="width: 40%;">Drug Name</th>
-                            
-                            <th class="th-md">Pills</th>
-
-                            <th class="th-md">Prescription</th>
-
-                            <th class="th-md">Image</th>
-
-                            <th class="th-md">Remarks</th>
-                            
-                          </tr>
-                        </thead>
-                        <!--Table head-->
-                      
-                        <!--Table body-->
-                        <tbody id="prescriptionTable" class="table-light">
-                          
-                        </tbody>
-                        <!--Table body-->
-                      
-                      
-                      </table>
-                      <!--Table-->
-                      </div>
                 </div>
             </div>
         </div>
@@ -378,6 +249,160 @@
                 </div>
             </div>
         </div>
+
+        <!--Drug Image modal-->
+        <div id="modalImg" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Medicine Image</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body" id="newImageModal">
+                  <p>.</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" id="editImageBtn">Edit Image</button>
+                  <button type="button" class="btn btn-secondary" id="closeImageBtn" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--Edit Image modal-->
+        <div id="updatemodalImg" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Medicine Image</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form id="submitImage" onsubmit="updateMedicineImg(); return false;">
+                    <div class="form-row col-xs-4  col-md-12">
+                        <div class="col" style="text-align: left;">
+                            <label>Medicine image:</label>
+                            <div>
+                            <input type="file" name="resume" class="form-control newDrugImage" required>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <button class="btn btn-primary custom-class">Save Image</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+         <!--Modal For Prescriptions-->
+         <div id="prescriptionModal" class="w3-modal">
+            <div class="w3-modal-content">
+                <div class="w3-container">
+                    <span onclick="document.getElementById('prescriptionModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                    <h2 style="text-align: center;">Prescription</h2>
+                    <div id="export">
+                    <table class="table table-sm" style="width: 95%; margin-left: auto; margin-right: auto;">
+                        <tr>
+                            <td style=" text-align:left; width: 60%;">Diagnosis:</td>
+                            <td id="tdDiagnosis"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">Checkup date:</td>
+                            <td id="tdCheckup"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">FT4:</td>
+                            <td id="tdFt4"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;">TSH:</td>
+                            <td id="tdTsh" ></td>
+                        </tr>
+                    </table>
+                    
+                  <div class="table-responsive-sm">
+                    <table class="table" style="background-color: none">
+
+                        <!--Table head-->
+                        <thead>
+                          <tr>
+                            <th style="width: 20%;">Drug Name</th>
+                            
+                            <th class="th-md">Pills</th>
+
+                            <th class="th-md">Prescription</th>
+
+                            <th style="width: 20%;">Image</th>
+
+                            <th class="th-md">Remarks</th>
+                            
+                          </tr>
+                        </thead>
+                        <!--Table head-->
+                      
+                        <!--Table body-->
+                        <tbody id="prescriptionTable" class="table-light">
+                          
+                        </tbody>
+                        <!--Table body-->
+                      
+                      
+                      </table>
+                      <!--Table-->
+                      </div>
+                    </div>
+                    <div style="text-align: center;">
+                        <button class="btn btn-info custom-class" onclick="exportData()"> Export to PDF </button>
+                    </div>
+
+                    
+
+
+                    <!-- WARNING: exported data div, do not show, keep it display:none at all times-->
+                    <div style="display: none;">
+                        <div id="export1">
+                            <h2 style="text-align: center;">Test Results</h2>
+                            <table class="table table-sm" style="width: 50%; margin-left: auto; margin-right: auto; margin-bottom: 50px;">
+                                <tr>
+                                    <td style=" text-align:left; vertical-align: top; width: 60%;">Diagnosis:</td>
+                                    <td id="exDiagnosis"></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Checkup date:</td>
+                                    <td id="exCheckup"></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">FT4:</td>
+                                    <td id="exFt4"></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">TSH:</td>
+                                    <td id="exTsh" ></td>
+                                </tr>
+                            </table>
+                        
+                          <div class="table-responsive-sm">
+                            <h2 style="text-align: center;">Prescription</h2>
+                            <table id="exportDoseTable" class="table" style="width: 70%; margin-left: auto; margin-right: auto;">
+                              </table>
+                              <!--Table-->
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+
+        
     </main>
 
     <!-- Firebase -->

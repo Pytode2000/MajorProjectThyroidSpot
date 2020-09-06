@@ -217,11 +217,11 @@ function addNewDiagnosis() {
     var html = "<div id='diagnosis-" + diagnosisCounter + "'>" +
         "<select class='custom-select diagnosisClass' style='margin-bottom: 10px; width: 80%; font-size: 20px;'>" +
         "<option>De Quervain's thyroiditis</option>" +
-        "<option>Differentiatied thyroid carcinoma</option>" +
+        "<option>Differentiated thyroid carcinoma</option>" +
         "<option>Graves' disease</option>" +
         "<option>Hashimoto's thyroiditis</option>" +
         "<option>Hyperthyroidism</option>" +
-        "<option>Hypothyroidsm</option>" +
+        "<option>Hypothyroidism</option>" +
         "<option>Post-radioiodine ablation</option>" +
         "<option>Post-thyroidectomy</option>" +
         "<option>Riedel's thyroiditis</option>" +
@@ -255,7 +255,7 @@ function createDiagnosis(patient_number) {
     diagnosis_data = [];
     for (i = 0; i < allDiagnosis.length; i++) {
         // console.log(allDiagnosis[i].options[allDiagnosis[i].selectedIndex].text)
-        // diagnosis_data.push(allDiagnosis[i].options[allDiagnosis[i].selectedIndex].text) // This gets me  (3) ["De Quervain's thyroiditis", "Hashimoto's thyroiditis", "Post-radioiodine ablation"]
+        // diagnosis_data.push(allDiagnosis[i].options[allDiagnosis[i].selectedIndex].text) // 
         single_diagnosis = { patient_id: patient_number, diagnosis1: allDiagnosis[i].options[allDiagnosis[i].selectedIndex].text };
         // i put 1 first to test
 
