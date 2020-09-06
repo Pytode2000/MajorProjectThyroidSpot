@@ -4,16 +4,17 @@
 <head>
     <title>Thyroid-SPOT App</title>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+        crossorigin="anonymous"></script>
     <!-- <script src="../js/functions.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/forum-comment.css" />
     <!-- <link rel="stylesheet" href="../css/forum-post.css" /> -->
-     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" />
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
@@ -30,122 +31,135 @@
 
 
 <body>
-<div id="navbar-html"></div>
+    <div id="navbar-html"></div>
     <main>
         <div class="content">
             <!-- <h1 style="text-align: center;">Thyroid Disease Page</h1> -->
             <h1 style="text-align: center;">Forum</h1>
-            
 
-        <div class="container">
-        
-            <div style="text-align: center; margin-top: 20px">
-                <button type="button" class="btn btn-sm btn-primary" id="redirectBack">
+
+            <div class="container">
+
+                <div style="text-align: center; margin-top: 20px">
+                    <button type="button" class="btn btn-sm btn-primary" id="redirectBack">
                         Back to Forum Page
-                    </button>  
-            </div>
-            <br/>
-            <br/>
-            <div id="headerfucntions">
-                
-            </div>
-            <br/>
-            <div>
-                <div id="tableBody">
-                    
-              
+                    </button>
                 </div>
-                <!-- <div >
+                <br/>
+                <br/>
+                <div id="headerfucntions">
+
+                </div>
+                <br/>
+                <div>
+                    <div id="tableBody">
+
+
+                    </div>
+                    <!-- <div >
                     <h3>testing title</h3>
                     <p>testing subtitle</p>
                 </div> -->
-                <div id="commentSection">
-
-                    <div>
-                    <button type="button" class="btn btn-info" id="addNewComment" data-toggle="modal" data-target="#newCommentModal">
-                        Add Comment
-                    </button>
-                    </div>
-                    <div id="allComments" class="list-group">
-                        <!-- <table id="check" class="table table-hover td-responsive">
+                    <div id="commentSection">
+                        <style>
+                            .hide {
+                                display: none;
+                            }
+                        </style>
+                        <div>
+                            <button type="button" class="btn btn-info" id="addNewComment" data-toggle="modal" data-target="#newCommentModal">
+                                Add Comment
+                            </button>
+                        </div>
+                        <script>
+                            if (sessionStorage.getItem("user_logged_in") != "y") {
+                                document.getElementById("addNewComment").classList.add("hide");
+                            }
+                        </script>
+                        <div id="allComments" class="list-group">
+                            <!-- <table id="check" class="table table-hover td-responsive">
                         <tbody id="commentsTabl"></tbody> -->
-                        <div class='list-group-item list-group-item-action flex-column align-items-start'><div>
-                            <small id='comUsname'>test</small><small> · today</small>
-                            <div class="dropdown" style='float:right'>
-                                <button class="btn btn-sm btn-secondary" style="background-color:transparent; border-style: none; " type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-three-dots-vertical" fill="dark-grey" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-                                    </svg>
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                    <button class="dropdown-item" type="button">Update</button>
-                                    <button class="dropdown-item" type="button">Delete Comment</button>
+                            <div class='list-group-item list-group-item-action flex-column align-items-start'>
+                                <div>
+                                    <small id='comUsname'>test</small><small> · today</small>
+                                    <div class="dropdown" style='float:right'>
+                                        <button class="btn btn-sm btn-secondary" style="background-color:transparent; border-style: none; " type="button" id="dropdownMenu2"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-three-dots-vertical" fill="dark-grey" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+                                                />
+                                            </svg>
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                            <button class="dropdown-item" type="button">Update</button>
+                                            <button class="dropdown-item" type="button">Delete Comment</button>
+                                        </div>
+                                    </div>
                                 </div>
+                                <p class='mb-1'>test comment</p>
                             </div>
                         </div>
-                        <p class='mb-1'>test comment</p></div>  
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- New Comment -->
+            <div class="modal fade" id="newCommentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel">Post New Thread</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Comment</label>
+                                <input type="text" class="form-control" id="newComment" placeholder="Enter Title">
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="getUserName();" id="newProductBtn">Post</button>
+                        </div>
                     </div>
                 </div>
             </div>
 
 
-    </div>
-
-    <!-- New Comment -->
-    <div class="modal fade" id="newCommentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Post New Thread</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>  
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Comment</label>
-                        <input type="text" class="form-control" id="newComment" placeholder="Enter Title">
+            <!-- Update Thread -->
+            <div class="modal fade" id="updateCommentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel">Update Thread</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="updating">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="updateComment" placeholder="Enter Comment...">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="updateComment();">Update</button>
+                        </div>
                     </div>
-                
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="getUserName();" id="newProductBtn">Post</button>
                 </div>
             </div>
-        </div>
-    </div>
+            <div id="footer-html"></div>
+    </main>
 
 
-    <!-- Update Thread -->
-    <div class="modal fade" id="updateCommentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Update Thread</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
-               <div class="modal-body">
-                    <form id="updating">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="updateComment" placeholder="Enter Comment...">
-                    </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="updateComment();">Update</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="footer-html"></div>
-</main>
-
-
-  <!-- Firebase -->
+    <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script>
- <script type="text/javascript">
+    <script type="text/javascript">
         $(document).ready(function () {
             $("#navbar-html").load("../html-components/navbar.html");
 
@@ -153,4 +167,5 @@
         });
     </script>
 </body>
+
 </html>
