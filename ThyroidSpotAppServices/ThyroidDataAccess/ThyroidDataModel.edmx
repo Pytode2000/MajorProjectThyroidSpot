@@ -54,7 +54,7 @@
           <Key>
             <PropertyRef Name="idForumComment" />
           </Key>
-          <Property Name="idForumComment" Type="int" Nullable="false" />
+          <Property Name="idForumComment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="forum_id" Type="int" Nullable="false" />
           <Property Name="comment" Type="text" Nullable="false" />
           <Property Name="timestamp" Type="nvarchar" MaxLength="255" Nullable="false" />
@@ -126,8 +126,8 @@
           <EntitySet Name="diagnosis" EntityType="ThyroidDataModel.diagnosis" />
           <EntitySet Name="drug_dosage" EntityType="ThyroidDataModel.drug_dosage" />
           <EntitySet Name="patient_information" EntityType="ThyroidDataModel.patient_information" />
-          <EntitySet Name="forum_comment" EntityType="ThyroidDataModel.forum_comment" />
           <EntitySet Name="disease_forum" EntityType="ThyroidDataModel.disease_forum" />
+          <EntitySet Name="forum_comment" EntityType="ThyroidDataModel.forum_comment" />
         </EntityContainer>
         <EntityType Name="user">
           <Key>
@@ -182,16 +182,6 @@
           <Property Name="timestamp" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="doctor_id" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="forum_comment">
-          <Key>
-            <PropertyRef Name="idForumComment" />
-          </Key>
-          <Property Name="idForumComment" Type="Int32" Nullable="false" />
-          <Property Name="forum_id" Type="Int32" Nullable="false" />
-          <Property Name="comment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="timestamp" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="username" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="disease_forum">
           <Key>
             <PropertyRef Name="idForum" />
@@ -202,6 +192,16 @@
           <Property Name="post_description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="timestamp" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="user_name" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="forum_comment">
+          <Key>
+            <PropertyRef Name="idForumComment" />
+          </Key>
+          <Property Name="idForumComment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="forum_id" Type="Int32" Nullable="false" />
+          <Property Name="comment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="timestamp" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -281,17 +281,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="forum_comment">
-            <EntityTypeMapping TypeName="ThyroidDataModel.forum_comment">
-              <MappingFragment StoreEntitySet="forum_comment">
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
-                <ScalarProperty Name="comment" ColumnName="comment" />
-                <ScalarProperty Name="forum_id" ColumnName="forum_id" />
-                <ScalarProperty Name="idForumComment" ColumnName="idForumComment" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="disease_forum">
             <EntityTypeMapping TypeName="ThyroidDataModel.disease_forum">
               <MappingFragment StoreEntitySet="disease_forum">
@@ -301,6 +290,17 @@
                 <ScalarProperty Name="post_title" ColumnName="post_title" />
                 <ScalarProperty Name="disease_name" ColumnName="disease_name" />
                 <ScalarProperty Name="idForum" ColumnName="idForum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="forum_comment">
+            <EntityTypeMapping TypeName="ThyroidDataModel.forum_comment">
+              <MappingFragment StoreEntitySet="forum_comment">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="forum_id" ColumnName="forum_id" />
+                <ScalarProperty Name="idForumComment" ColumnName="idForumComment" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

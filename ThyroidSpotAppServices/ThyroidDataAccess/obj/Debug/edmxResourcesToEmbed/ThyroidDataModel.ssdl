@@ -49,7 +49,7 @@
     <Key>
       <PropertyRef Name="idForumComment" />
     </Key>
-    <Property Name="idForumComment" Type="int" Nullable="false" />
+    <Property Name="idForumComment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="forum_id" Type="int" Nullable="false" />
     <Property Name="comment" Type="text" Nullable="false" />
     <Property Name="timestamp" Type="nvarchar" MaxLength="255" Nullable="false" />
