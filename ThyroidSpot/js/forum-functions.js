@@ -5,7 +5,7 @@
 var userURI = 'https://localhost:44395/api/user';
 var userInfoArray = [];
 var uname;
-function getUserName(){
+function getUserName() {
     var getuid = sessionStorage.getItem("user_unique_id");
     $.ajax({
         type: 'GET',
@@ -13,11 +13,11 @@ function getUserName(){
         dataType: 'json',
         contentType: 'application/json',
         success: function (data) {
-            
+
             userInfoArray = data;
 
             for (i = 0; i < userInfoArray.length; i++) {
-                if (getuid == userInfoArray[i].user_id){
+                if (getuid == userInfoArray[i].user_id) {
                     uname = userInfoArray[i].full_name;
                     // return checkDiseaseName();
                 }
@@ -39,7 +39,7 @@ var diseasename;
 function checkDiseaseName() {
     disease_id = sessionStorage.getItem("disID");
 
-     $.ajax({
+    $.ajax({
         type: 'GET',
         url: encodeURI(diseaseURI),
         dataType: 'json',
@@ -47,8 +47,8 @@ function checkDiseaseName() {
         success: function (data) {
             diseaseInfoArray = data
 
-            for (x=0; x< diseaseInfoArray.length; x++){
-                if (disease_id == x){
+            for (x = 0; x < diseaseInfoArray.length; x++) {
+                if (disease_id == x) {
                     console.log(diseaseInfoArray[x].disease)
                     diseasename = diseaseInfoArray[x].disease
                     $('#getDiseaseName').text("Showing Forum Posts for: " + diseasename)
@@ -57,13 +57,13 @@ function checkDiseaseName() {
             }
         }
     });
-}   
+}
 
 
 var postArray = []
 var postArray1 = []
 var secondPostArray = [];
-var currentForumID; 
+var currentForumID;
 var getPostId;
 var commentNumber;
 
@@ -71,14 +71,14 @@ var commentNumber;
 function getAllForumByDisease() {
     console.log("retrieving all disease info...")
 
-    
+
     var dname = diseasename;
     console.log(dname)
-    
+
 
     $.ajax({
         type: 'GET',
-        url: forumpostURI ,
+        url: forumpostURI,
         dataType: 'json',
         contentType: 'application/json',
         success: function (data) {
@@ -89,31 +89,41 @@ function getAllForumByDisease() {
             // console.log(diseaseInfoArray)
             //clear the tbody of the table so that it will be refreshed everytime
             $('#tableBody').html('');
-             
+
             //Iterate through the diseaseInfoArray to generate rows to populate the table
-            if (postArray == ""){
-                
+            if (postArray == "") {
+
                 $('#allPosts').html('')
                 return $('#allPosts').append("<div style='text-align: center'><p>No forum post created yet!</p><button>Create Forum Post</button></div>")
             }
-            else{
+            else {
                 for (i = 0; i < postArray.length; i++) {
-                    if (dname == postArray[i].disease_name){
+                    if (dname == postArray[i].disease_name) {
 
                         getPostId = postArray[i].idForum
                         getNumberOfComments(getPostId);
                         console.log("num of comments: " + commentNumber)
 
                         updateButton = ""
-                        if (uname == postArray[i].user_name){
+
+                        // Only creator can update thread.
+                        if (uname == postArray[i].user_name) {
                             updateButton = "<button num='" + postArray[i].idForum + "' id='updateForumbtn' class=' btn-sm btn btn-warning' data-toggle='modal'>Update</button> ";
                         }
 
-                        $('#tableBody').append("<tr num="+ postArray[i].idForum +"><td ><a href='#' id='viewComments' num="+ postArray[i].idForum +">" + postArray[i].post_title + "</a> "+updateButton+"</td><td>" + postArray[i].user_name + "</td>"+
-                        "<td>" + postArray[i].timestamp + "</td><td>" + commentNumber + "</td></tr>");
+                        // Only admin and creator can delete the thread.
+                        if (uname == postArray[i].user_name || sessionStorage.getItem("user_account_type") == "admin") {
+                            deleteButton = "<button num='" + postArray[i].idForum + "'  id='deleteForumbtn' class='btn-sm btn btn-danger' data-target='#deleteThreadModal' data-toggle='modal'>Delete</button> ";
+                        }
+                        else {
+                            deleteButton = ""
+                        }
 
-                        if (dname != postArray[i].disease_name && i == postArray.length-1){
-                            
+                        $('#tableBody').append("<tr num=" + postArray[i].idForum + "><td ><a href='#' id='viewComments' num=" + postArray[i].idForum + ">" + postArray[i].post_title + "</a></td><td>" + postArray[i].user_name + "</td>" +
+                            "<td>" + postArray[i].timestamp + "</td><td>" + commentNumber + "</td><td> " + updateButton + deleteButton + "</td></tr>");
+
+                        if (dname != postArray[i].disease_name && i == postArray.length - 1) {
+
                             $('#allPosts').html('')
                             $('#allPosts').append("<div style='text-align: center'><p>No forum post created yet!</p><button>Create Forum Post</button></div>")
                             return console.log("no forum post")
@@ -131,7 +141,7 @@ function getNumberOfComments(forum_id) {
     console.log(sid)
     $.ajax({
         type: 'GET',
-        url: forumcommentURI +"?forumid="+ sid,
+        url: forumcommentURI + "?forumid=" + sid,
         dataType: 'json',
         contentType: 'application/json',
         success: function (data) {
@@ -144,24 +154,24 @@ function getNumberOfComments(forum_id) {
 
 //create forum 
 function createNewThread() {
-    
+
     //creating date
-    var date =  moment(new Date()).format("DD-MM-YYYY")
+    var date = moment(new Date()).format("DD-MM-YYYY")
     console.log(date);
 
-    
+
     var postInstance = {
         disease_name: diseasename,
         post_title: $('#newThreadName').val(),
         post_description: $('#newThreadDesc').val(),
         user_name: uname,
-        post_img : "",
+        post_img: "",
         timestamp: date
     }
 
     console.log(postInstance)
-    
-     $.ajax({
+
+    $.ajax({
         type: 'POST',
         url: forumpostURI,
         data: JSON.stringify(postInstance),
@@ -181,9 +191,9 @@ function updateThread() {
     console.log(currentForumID)
 
     //creating date
-    var date =  moment(new Date()).format("DD-MM-YYYY")
+    var date = moment(new Date()).format("DD-MM-YYYY")
     console.log(date);
-     
+
     thread_data = {
         user_name: uname,
         disease_name: diseasename,
@@ -194,7 +204,7 @@ function updateThread() {
     console.log(thread_data)
 
     var t = confirm("Save changes?")
-    if (t == true){
+    if (t == true) {
         $.ajax({
             type: 'PUT',
             url: forumpostURI + "/" + currentForumID,
@@ -207,35 +217,35 @@ function updateThread() {
             }
         });
     }
-    else{
+    else {
         console.log("function was not run")
     }
-    
+
 }
 
 
 //delete forum + all comments related to post id (YET TO TEST, DO NOT TOUCH)
 var deletingPost
 function deleteThread() {
-    
+
     deletingPost = currentForumID
     console.log(currentForumID)
 
-    var cfm = confirm("Are you sure you want to delete thread? All comments will be deleted as well...")
-    if (cfm == true){
-        $.ajax({
-            type: 'DELETE',
-            url: forumpostURI + "/" + deletingPost,
-            dataType: 'json',
-            contentType: 'application/json',
-            success: function (data) {
-                deleteAllComments();
-            }
-        });
-    }
-    else{
-        console.log("Delete function was not executed")
-    }
+    // var cfm = confirm("Are you sure you want to delete thread? All comments will be deleted as well...")
+    // if (cfm == true) {
+    $.ajax({
+        type: 'DELETE',
+        url: forumpostURI + "/" + deletingPost,
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            deleteAllComments();
+        }
+    });
+    // }
+    // else {
+    //     console.log("Delete function was not executed")
+    // }
 }
 function deleteAllComments() {
     $.ajax({
@@ -255,30 +265,30 @@ function deleteAllComments() {
 
 var stonks
 //search function for posts
-$(document).ready(function(){
-    $('#postSearch').on("keyup", function(){
+$(document).ready(function () {
+    $('#postSearch').on("keyup", function () {
         var v = $(this).val().toLowerCase();
 
-        $('#tableBody tr').filter(function(){
+        $('#tableBody tr').filter(function () {
             $(this).toggle($(this).text().toLowerCase().indexOf(v) > -1)
         })
     })
 })
 
 //TODO: filter posts by recent date
-function filterByActivity(value){
+function filterByActivity(value) {
     console.log("test")
     console.log(secondPostArray.timestamp)
-    
+
     //Sort by latest
-    if (value == "Latest"){
+    if (value == "Latest") {
         console.log("showing most recent posts...")
-        secondPostArray.sort(function(a,b){
+        secondPostArray.sort(function (a, b) {
             console.log(dateToNum(a.timestamp))
             return dateToNum(b.timestamp) - dateToNum(a.timestamp);
         });
         function dateToNum(d) {
-            d = d.split("-"); return Number(d[2]+d[1]+d[0]);
+            d = d.split("-"); return Number(d[2] + d[1] + d[0]);
         }
 
         console.log(secondPostArray)
@@ -286,22 +296,32 @@ function filterByActivity(value){
 
         $('#tableBody').html('');
         for (i = 0; i < secondPostArray.length; i++) {
-            if (diseasename == secondPostArray[i].disease_name){
+            if (diseasename == secondPostArray[i].disease_name) {
 
                 getPostId = secondPostArray[i].idForum
                 getNumberOfComments(getPostId);
                 console.log("num of comments: " + commentNumber)
 
                 updateButton = ""
-                if (uname == secondPostArray[i].user_name){
+                // Only creator can update thread.
+                if (uname == secondPostArray[i].user_name) {
                     updateButton = "<button num='" + secondPostArray[i].idForum + "' id='updateForumbtn' class=' btn-sm btn btn-warning' data-toggle='modal'>Update</button> ";
                 }
 
-                $('#tableBody').append("<tr num="+ secondPostArray[i].idForum +"><td ><a href='#' id='viewComments' num="+ secondPostArray[i].idForum +">" + secondPostArray[i].post_title + "</a> "+updateButton+"</td><td>" + secondPostArray[i].user_name + "</td>"+
-                "<td>" + secondPostArray[i].timestamp + "</td><td>" + commentNumber + "</td></tr>");
+                // Only admin and creator can delete the thread.
+                if (uname == secondPostArray[i].user_name || sessionStorage.getItem("user_account_type" == "admin")) {
+                    deleteButton = "<button num='" + secondPostArray[i].idForum + "'  id='deleteForumbtn' class=' btn-sm btn btn-danger' data-target='#deleteThreadModal' data-toggle='modal'>Delete</button> ";
+                }
+                else {
+                    deleteButton = ""
+                }
 
-                if (diseasename != secondPostArray[i].disease_name && i == secondPostArray.length-1){
-                    
+
+                $('#tableBody').append("<tr num=" + secondPostArray[i].idForum + "><td ><a href='#' id='viewComments' num=" + secondPostArray[i].idForum + ">" + secondPostArray[i].post_title + "</a></td><td>" + secondPostArray[i].user_name + "</td>" +
+                    "<td>" + secondPostArray[i].timestamp + "</td><td>" + commentNumber + "</td><td> " + updateButton + deleteButton + "</td></tr>");
+
+                if (diseasename != secondPostArray[i].disease_name && i == secondPostArray.length - 1) {
+
                     $('#allPosts').html('')
                     $('#allPosts').append("<div style='text-align: center'><p>No forum post created yet!</p><button>Create Forum Post</button></div>")
                     return console.log("no forum post")
@@ -312,34 +332,45 @@ function filterByActivity(value){
     }
 
     //Sort by oldest
-    else{
+    else {
         console.log("showing oldest posts...")
 
-        secondPostArray.sort(function(a,b){
-            return  dateToNum(a.timestamp) - dateToNum(b.timestamp);
+        secondPostArray.sort(function (a, b) {
+            return dateToNum(a.timestamp) - dateToNum(b.timestamp);
         });
         function dateToNum(d) {
-            d = d.split("-"); return Number(d[2]+d[1]+d[0]);
+            d = d.split("-"); return Number(d[2] + d[1] + d[0]);
         }
 
 
         $('#tableBody').html('');
         for (i = 0; i < secondPostArray.length; i++) {
-            if (diseasename == secondPostArray[i].disease_name){
+            if (diseasename == secondPostArray[i].disease_name) {
 
                 getPostId = secondPostArray[i].idForum
                 getNumberOfComments(getPostId);
 
                 updateButton = ""
-                if (uname == secondPostArray[i].user_name){
+
+                // Only creator can update thread.
+                if (uname == secondPostArray[i].user_name) {
                     updateButton = "<button num='" + secondPostArray[i].idForum + "' id='updateForumbtn' class=' btn-sm btn btn-warning' data-toggle='modal'>Update</button> ";
                 }
 
-                $('#tableBody').append("<tr num="+ secondPostArray[i].idForum +"><td ><a href='#' id='viewComments' num="+ secondPostArray[i].idForum +">" + secondPostArray[i].post_title + "</a> "+updateButton+"</td><td>" + secondPostArray[i].user_name + "</td>"+
-                "<td>" + secondPostArray[i].timestamp + "</td><td>" + commentNumber + "</td></tr>");
+                // Only admin and creator can delete the thread.
+                if (uname == secondPostArray[i].user_name || sessionStorage.getItem("user_account_type" == "admin")) {
+                    deleteButton = "<button num='" + secondPostArray[i].idForum + "' id='deleteForumbtn' class=' btn-sm btn btn-danger' data-target='#deleteThreadModal' data-toggle='modal'>Delete</button> ";
+                }
+                else {
+                    deleteButton = ""
+                }
 
-                if (diseasename != secondPostArray[i].disease_name && i == secondPostArray.length-1){
-                    
+
+                $('#tableBody').append("<tr num=" + secondPostArray[i].idForum + "><td ><a href='#' id='viewComments' num=" + secondPostArray[i].idForum + ">" + secondPostArray[i].post_title + "</a></td><td>" + secondPostArray[i].user_name + "</td>" +
+                    "<td>" + secondPostArray[i].timestamp + "</td><td>" + commentNumber + "</td><td> " + updateButton + deleteButton + "</td></tr>");
+
+                if (diseasename != secondPostArray[i].disease_name && i == secondPostArray.length - 1) {
+
                     $('#allPosts').html('')
                     $('#allPosts').append("<div style='text-align: center'><p>No forum post created yet!</p><button>Create Forum Post</button></div>")
                     return console.log("no forum post")
@@ -352,23 +383,28 @@ function filterByActivity(value){
 
 
 $(document).on("click", "#addNewThread", function () {
-     $('#newThreadModal').modal('show');
+    $('#newThreadModal').modal('show');
 });
 
 $(document).on("click", "#updateForumbtn", function () {
     currentForumID = $(this).attr('num');
 
-    for (y = 0; y < postArray1.length; y++){
-        if (currentForumID == postArray1[y].idForum){
+    for (y = 0; y < postArray1.length; y++) {
+        if (currentForumID == postArray1[y].idForum) {
             console.log(postArray1[y])
             $('#updateThreadModal').modal('show');
             $('#updateThreadName').val(postArray1[y].post_title)
             $('#updateThreadDesc').val(postArray1[y].post_description)
-            
-           
+
+
         }
     }
 });
+
+$(document).on("click", "#deleteForumbtn", function () {
+    currentForumID = $(this).attr('num');
+});
+
 
 $(document).on("click", "#viewComments", function () {
     currentForumID = $(this).attr('num');
@@ -382,4 +418,4 @@ $(document).on("click", "#redirect", function () {
 });
 
 getUserName();
-checkDiseaseName()
+checkDiseaseName();
