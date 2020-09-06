@@ -11,9 +11,9 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/forum-post.css" />
-     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" />
 
-     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
@@ -31,127 +31,137 @@
 
 
 <body>
-<div id="navbar-html"></div>
+    <div id="navbar-html"></div>
     <main>
         <div class="content">
             <!-- <h1 style="text-align: center;">Thyroid Disease Page</h1> -->
             <h1 style="text-align: center;">Forum</h1>
-            
 
-    <div class="container">
-       
-        <div style="text-align: center; margin-top: 20px">
-            <button type="button" class="btn btn-sm btn-primary" id="redirect">
-                    Back to Disease Page
-                </button>  
-        </div>
-        <br/>
-        <br/>
-        <div id="headerfucntions">
-            
-            <button type="button" class="btn btn-info" id="addNewThread" data-toggle="modal" data-target="#newBookModal">
-                New Thread
-            </button>
-            <div id="sortSearch">
-            <input id="postSearch" placeholder="Search Post Title...">
-            <select name="unitselection" id="newFilterDDL" onmousedown="this.value='';" onchange="filterByActivity(this.value);">
-                <option disabled selected  hidden  value>--Filter By Activity--</option>
-                <option value="Latest">Latest</option>
-                <option value="Oldest">Oldest</option>
-            </select>
+
+            <div class="container">
+
+                <div style="text-align: center; margin-top: 20px">
+                    <button type="button" class="btn btn-sm btn-primary" id="redirect">
+                        Back to Disease Page
+                    </button>
+                </div>
+                <br/>
+                <br/>
+                <div id="headerfucntions">
+                    <style>
+                        .hide {
+                            display: none;
+                        }
+                    </style>
+                    <button type="button" class="btn btn-info" id="addNewThread" data-toggle="modal" data-target="#newBookModal">
+                        New Thread
+                    </button>
+
+                    <script>
+                        if (sessionStorage.getItem("user_logged_in") != "y") {
+                            document.getElementById("addNewThread").classList.add("hide");
+                        }
+                    </script>
+                    <div id="sortSearch">
+                        <input id="postSearch" placeholder="Search Post Title...">
+                        <select name="unitselection" id="newFilterDDL" onmousedown="this.value='';" onchange="filterByActivity(this.value);">
+                            <option disabled selected hidden value>--Filter By Activity--</option>
+                            <option value="Latest">Latest</option>
+                            <option value="Oldest">Oldest</option>
+                        </select>
+                    </div>
+                </div>
+                <br/>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th id="getDiseaseName"></th>
+                        </tr>
+                    </thead>
+                </table>
+
+                <div id="allPosts">
+                    <table id="check" class="table table-hover td-responsive">
+                        <thead>
+                            <tr>
+                                <th style="width: 55%">Post</th>
+                                <th>By</th>
+                                <th>Date Posted</th>
+                                <th>Replies</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                </div>
+
             </div>
-        </div>
-        <br/>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th id="getDiseaseName"></th>
-                </tr>
-            </thead>
-        </table>
 
-        <div id="allPosts">
-            <table id="check" class="table table-hover td-responsive">
-            <thead>
-                <tr>
-                    <th style="width: 55%">Post</th>
-                    <th>By</th>
-                    <th>Date Posted</th>
-                    <th>Replies</th>
-                </tr>
-            </thead>
-            <tbody id="tableBody"></tbody>
-        </table>
-        </div>
+            <!-- New Thread -->
+            <div class="modal fade" id="newThreadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel">Post New Thread</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Title:</label>
+                                <input type="text" class="form-control" id="newThreadName" placeholder="Enter Title">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Description:</label>
+                                <textarea class="form-control" id="newThreadDesc" placeholder="Write your description here..." rows="5"></textarea>
+                            </div>
 
-    </div>
-
-    <!-- New Thread -->
-    <div class="modal fade" id="newThreadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Post New Thread</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>  
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Title:</label>
-                        <input type="text" class="form-control" id="newThreadName" placeholder="Enter Title">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="createNewThread();" id="newProductBtn">Post</button>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Description:</label>
-                         <textarea class="form-control" id="newThreadDesc" placeholder="Write your description here..." rows="5"></textarea>
-                    </div>
-                
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="createNewThread();" id="newProductBtn">Post</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Update Thread -->
-    <div class="modal fade" id="updateThreadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Update Thread</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
-               <div class="modal-body">
-                    <form id="updating">
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Title:</label>
-                        <input type="text" class="form-control" id="updateThreadName" placeholder="Enter Title">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Description:</label>
-                        <textarea class="form-control" id="updateThreadDesc" placeholder="Write your description here..." rows="5"></textarea>
-                    </div>
-                   
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="updateThread();">Update</button>
-                    <button type="button" class="btn btn-danger" onclick="deleteThread();">Delete</button>
                 </div>
             </div>
-        </div>
-    </div>
-    <div id="footer-html"></div>
-</main>
 
 
-  <!-- Firebase -->
+            <!-- Update Thread -->
+            <div class="modal fade" id="updateThreadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel">Update Thread</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="updating">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Title:</label>
+                                    <input type="text" class="form-control" id="updateThreadName" placeholder="Enter Title">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Description:</label>
+                                    <textarea class="form-control" id="updateThreadDesc" placeholder="Write your description here..." rows="5"></textarea>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="updateThread();">Update</button>
+                            <button type="button" class="btn btn-danger" onclick="deleteThread();">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="footer-html"></div>
+    </main>
+
+
+    <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script>
- <script type="text/javascript">
+    <script type="text/javascript">
         $(document).ready(function () {
             $("#navbar-html").load("../html-components/navbar.html");
 
@@ -159,4 +169,5 @@
         });
     </script>
 </body>
+
 </html>
