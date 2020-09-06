@@ -33,53 +33,107 @@
 <body>
     <div id="navbar-html"></div>
     <main>
-    <button onclick= "document.getElementById('diseaseModal').style.display='block'" style="margin-left: 1000px;margin-top: 50px;">Add Patient</button>
-    <div id="patientCard" class="grid">
-     <!--   <article>
-            <div class="text">
-              <h3>Yu KaiLong</h3>
-              <p>12 August 2020</p>
-              <p><b>Latest Update</b></p>
-              <p>FT4: 20.1</p>
-              <p>TSH: 11.1</p>
-              <a class="button" href="patient-info-doctor.html" >More Details</a>
-              <a class="button" href="#">Graph</a>
-            </div>
-        </article>
-    -->
-</div>
+        <div class="container">
+            <div class="row row-margin-top-30">
 
-    <!--Modal For Adding Patient-->
-    <div id="diseaseModal" class="w3-modal">
-        <div class="w3-modal-content">
-            <div class="w3-container">
-                <span onclick="document.getElementById('diseaseModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                <h1 id="diseaseName" class="centerText">Enter Patient Information</h1>
-                <label for="lname">Patient IC</label>
-                <input type="text" id="patientICInput" ><br><br>
-                <button style="margin-bottom: 50px;" type="button" onclick="adoptPatient()">Adopt Patient</button><br>
+                <!--Show Doctor's Name-->
+                <div class="col text-center">
+                    <h3 id="displayClinicianName">Clinician's Name</h3>
+                </div>
+            </div>
+
+            <!-- Show Search / Filter / Add Patient-->
+            <div class="row row-margin-top-50">
+
+                <!--Search Button-->
+                <div class="col-5 align-baseline">
+                    <div class="input-group input-group-sm mb-3 align-baseline">
+                        <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Small</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                    </div>
+                </div>
+
+                <!--Filter Button-->
+                <div class="col-4">
+                  <div class="dropdown align-middle">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Filter By
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="#">Action</a>
+                      <a class="dropdown-item" href="#">Another action</a>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                  </div>
+                </div>
+
+                <!--Adopt Patient Button-->
+                <div class="col-3">
+                  <button type="button" class="btn btn-secondary float-right align-middle">Add Patient</button>
+                </div>
+
+            </div>
+
+            <div> 
+                <div id="patientCard" class="col card-deck row-margin-top-30" style="padding-left: 0px;">                  
+                </div>
             </div>
         </div>
-    </div>
 
-    <div id="graphModal" class="w3-modal">
-        <div class="w3-modal-content">
-            <div class="w3-container">
-                <span onclick="document.getElementById('graphModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+    <!-- Display Graph Modal -->
+    <div class="modal fade" id="graphModal" tabindex="-1" role="dialog" aria-labelledby="graphModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="abandonPatientModalLabel">Graph</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
                 <canvas id="displayGraph">
 
                 </canvas>
             </div>
-        </div> 
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        </div>
     </div>
 
-
-        <!-- Test Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Adopt Patient Modal -->
+    <div class="modal fade" id="adoptPatientModal" tabindex="-1" role="dialog" aria-labelledby="adoptPatientModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <h5 class="modal-title" id="abandonPatientModalLabel">Adopt Patient</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <h1 id="diseaseName" class="centerText">Enter Patient Information</h1>
+                <label for="lname">Patient IC</label>
+                <input type="text" id="patientICInput" ><br><br>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button onclick="adoptPatient()" class="btn btn-primary">Adopt</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+
+        <!-- Abandon Patient Modal -->
+    <div class="modal fade" id="abandonPatientModal" tabindex="-1" role="dialog" aria-labelledby="abandonPatientModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="abandonPatientModalLabel">Abandon Patient</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -101,7 +155,6 @@
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
         </div>

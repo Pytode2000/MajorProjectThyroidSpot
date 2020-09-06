@@ -48,11 +48,17 @@ function getAllPatientUnderClinician() {
                         if(patientInformationArray[i].doctor_id == doctorID){
                             for (j = 0; j < userInfoArray.length; j++){
                                 if(patientInformationArray[i].user_id == userInfoArray[j].user_id){
-                                    $('#patientCard').append("<article class='patient-card'> <div class='text'><h3>"+userInfoArray[j].full_name+"</h3><p>"+patientInformationArray[i].ic_number+"</p>"+
-                                    "<p><b>Details</b></p><p>Gender:"+patientInformationArray[i].gender+"</p><p>Blood Type: "+patientInformationArray[i].blood_type+"</p>"+
-                                    "<button id='patientDetailsBtn' num='"+ patientInformationArray[i].patient_id + "' index='"+ patientInformationArray[i].user_id + "' class='patient-details-btn' >More Details</button><br>"+
-                                    "<button id='openGraphModalBtn' class='patient-details-btn' >Graph</button><br>"+
-                                    "<button id='abandonPatientBtn' index = '"+i+"'num='"+ patientInformationArray[i].patient_id +"' index='"+ patientInformationArray[i].user_id + "' class='patient-details-btn' data-toggle='modal' data-target='#exampleModal'>Abandon Patient</button></div></article>");
+                                    $('#patientCard').append("<div class='card patient-card'><div class='card-body'>"+
+                                        "<h5 class='card-title text-center'>"+userInfoArray[j].full_name+"</h5>"+
+                                        "<p class='card-text text-center'>Gender : "+patientInformationArray[i].gender+"</p>"+
+                                        "<p class='card-text text-center'>FT4 :</p>"+
+                                        "<p class='card-text text-center'>TSH :</p>"+
+                                        "<button id='patientDetailsBtn' num='"+patientInformationArray[i].patient_id+"' index='"+patientInformationArray[i].user_id +"'"+
+                                        "class='btn btn-secondary btn-block'>More Details</button>"+
+                                        "<button id='openGraphModalBtn' class='btn btn-secondary btn-block' data-toggle='modal' data-target='#graphModal'>Graph</button>"+
+                                        "<button id='abandonPatientBtn' index='"+i+"' num='"+ patientInformationArray[i].patient_id +"' class='btn btn-secondary btn-block' data-toggle='modal' data-target='#abandonPatientModal'>Abandon Patient</button>"+
+                                        "</div><div class='card-footer'>"+
+                                        "<small class='text-muted'>Last Updated :</small></div></div>")
                                 }   
                             }
   
@@ -98,34 +104,33 @@ function adoptPatient(){
 }
 
 $(document).on("click", "#transferPatientBtn", function (){
-    var currentPatientId = $(this).attr('num')
     var currentPatient = document.getElementById("confirmAbandonPatientBtn").val
     console.log(userInfoArray)
     newClinicianID = $('#newClinicianID').val()
     for(i=0; i < userInfoArray.length;i++){
-        if (userInfoArray[i].account_type != "clinician"){
-            document.getElementById("wrongIDPrompt").style.display = "";
-            document.getElementById("wrongIDPrompt").innerHTML= "This user is not a clinician"
-        }
         if (newClinicianID == userInfoArray[i].user_id){
-            var patientInformation = { patient_id: patientInformationArray[currentPatient].patient_id, user_id: patientInformationArray[currentPatient].user_id,
-                diagnosis: patientInformationArray[currentPatient].diagnosis, ic_number: patientInformationArray[currentPatient].ic_number, date_of_birth: patientInformationArray[currentPatient].date_of_birth,
-                gender: patientInformationArray[currentPatient].gender, blood_type: patientInformationArray[currentPatient].blood_type, timestamp: patientInformationArray[currentPatient].timestamp,
-                doctor_id: newClinicianID};
-            $.ajax({
-                type: 'PUT',
-                url: patientURI +'/'+ patientInformationArray[currentPatientId].patient_id,
-                data: JSON.stringify(patientInformation),
-                dataType: 'json',
-                contentType: 'application/json',
-                success: function (data) {
-                    console.log("success")
-                }
-            });
-
-
+            if (userInfoArray[i].account_type != "clinician"){
+                document.getElementById("wrongIDPrompt").style.display = "";
+                document.getElementById("wrongIDPrompt").innerHTML= "This user is not a clinician"
+            }
+            else{
+                var patientInformation = { patient_id: patientInformationArray[currentPatient].patient_id, user_id: patientInformationArray[currentPatient].user_id,
+                    diagnosis: patientInformationArray[currentPatient].diagnosis, ic_number: patientInformationArray[currentPatient].ic_number, date_of_birth: patientInformationArray[currentPatient].date_of_birth,
+                    gender: patientInformationArray[currentPatient].gender, blood_type: patientInformationArray[currentPatient].blood_type, timestamp: patientInformationArray[currentPatient].timestamp,
+                    doctor_id: newClinicianID};
+                $.ajax({
+                    type: 'PUT',
+                    url: patientURI +'/'+ patientInformationArray[currentPatient].patient_id,
+                    data: JSON.stringify(patientInformation),
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    success: function (data) {
+                        console.log("success")
+                    }
+                });
+            }
         }
-        else{
+        else if(i == (userInfoArray.length - 1) && newClinicianID != userInfoArray[i].user_id){
             document.getElementById("wrongIDPrompt").style.display = "";
             document.getElementById("wrongIDPrompt").innerHTML= "Wrong ID";
         }
@@ -169,12 +174,8 @@ $(document).on("click", "#patientDetailsBtn", function () {
 
 });
 
-//$(document).on("click","#abandonPatientBtn", function (){
-    //document.getElementById('abandonPatientModal').style.display='block';
-//})
 
 $(document).on("click","#openGraphModalBtn", function () {
-    document.getElementById('graphModal').style.display='block'
     var ctx = document.getElementById('displayGraph').getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'line',
