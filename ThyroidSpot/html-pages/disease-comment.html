@@ -110,13 +110,13 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel">Post New Thread</h4>
+                            <h4 class="modal-title" id="myModalLabel">New Comment</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Comment</label>
-                                <input type="text" class="form-control" id="newComment" placeholder="Enter Title">
+                                <!-- <label for="exampleInputPassword1">Comment</label> -->
+                                <input type="text" class="form-control" id="newComment" placeholder="...">
                             </div>
 
                         </div>
@@ -129,12 +129,12 @@
             </div>
 
 
-            <!-- Update Thread -->
+            <!-- Update Comment -->
             <div class="modal fade" id="updateCommentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel">Update Thread</h4>
+                            <h4 class="modal-title" id="myModalLabel">Update Comment</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         </div>
                         <div class="modal-body">
@@ -151,6 +151,30 @@
                     </div>
                 </div>
             </div>
+
+
+
+            <!-- Delete Comment -->
+            <div class="modal fade" id="deleteCommentModal" tabindex="-1" role="dialog" aria-labelledby="deleteCommentModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="deleteCommentModal">Delete Comment</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure you want to delete this comment?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-danger" onclick="deleteComment(currentCommentID);">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
             <div id="footer-html"></div>
     </main>
 

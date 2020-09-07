@@ -222,23 +222,23 @@ function updateComment() {
 
     //console.log(comment_data)
 
-    var t = confirm("Save changes?")
-    if (t == true) {
-        $.ajax({
-            type: 'PUT',
-            url: forumcommentURI + "/" + currentCommentID,
-            data: JSON.stringify(comment_data),
-            dataType: 'json',
-            contentType: 'application/json',
-            success: function (data) {
-                $('#updateThreadModal').modal('hide');
-                return window.location.reload();
-            }
-        });
-    }
-    else {
-        //console.log("function was not run")
-    }
+    // var t = confirm("Save changes?")
+    // if (t == true) {
+    $.ajax({
+        type: 'PUT',
+        url: forumcommentURI + "/" + currentCommentID,
+        data: JSON.stringify(comment_data),
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            $('#updateThreadModal').modal('hide');
+            return window.location.reload();
+        }
+    });
+    // }
+    // else {
+    //     //console.log("function was not run")
+    // }
 }
 
 //delete comment itself
@@ -251,7 +251,7 @@ function deleteComment(comtid) {
         dataType: 'json',
         contentType: 'application/json',
         success: function (data) {
-            alert("Your comment has been deleted.")
+            // alert("Your comment has been deleted.")
             window.location.reload();
         }
     });
@@ -290,13 +290,15 @@ $(document).on("click", "#updComt", function () {
 //onclick call delete function when delete btn is clicked
 $(document).on("click", "#delComt", function () {
     currentCommentID = $(this).attr('num');
-    var check = confirm("Are you sure you want to delete your comment?")
-    if (check == true) {
-        deleteComment(currentCommentID)
-    }
-    else {
-        //console.log("donuts")
-    }
+    $('#deleteCommentModal').modal('show');
+
+    // var check = confirm("Are you sure you want to delete your comment?")
+    // if (check == true) {
+    // deleteComment(currentCommentID)
+    // }
+    // else {
+    //console.log("donuts")
+    // }
 });
 
 

@@ -412,23 +412,23 @@ function updateThread() {
 
     //console.log(thread_data)
 
-    var t = confirm("Save changes?")
-    if (t == true) {
-        $.ajax({
-            type: 'PUT',
-            url: forumpostURI + "/" + currentForumID,
-            data: JSON.stringify(thread_data),
-            dataType: 'json',
-            contentType: 'application/json',
-            success: function (data) {
-                $('#updateThreadModal').modal('hide');
-                return window.location.reload();
-            }
-        });
-    }
-    else {
-        //console.log("function was not run")
-    }
+    // var t = confirm("Save changes?")
+    //     if (t == true) {
+    $.ajax({
+        type: 'PUT',
+        url: forumpostURI + "/" + currentForumID,
+        data: JSON.stringify(thread_data),
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            $('#updateThreadModal').modal('hide');
+            return window.location.reload();
+        }
+    });
+    // }
+    // else {
+    //     //console.log("function was not run")
+    // }
 
 }
 
