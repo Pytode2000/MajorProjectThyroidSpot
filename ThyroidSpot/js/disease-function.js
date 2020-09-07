@@ -13,6 +13,7 @@ function viewDiagnosisDisease() {
         disease_diagnosis_remove_quotes = disease_diagnosis.replace('"', '')
         $.ajax({
             type: 'GET',
+            async: false,
             url: encodeURI(diseaseURI + "/" + disease_diagnosis_remove_quotes),
             dataType: 'json',
             contentType: 'application/json',

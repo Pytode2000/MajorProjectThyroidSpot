@@ -84,7 +84,7 @@ function getAllForumByDisease() {
         success: function (data) {
             //put json data into bookArray
             postArray = data;
-            // postArray1 = data;
+            postArray1 = data; // for update
             secondPostArray = data;
             // //console.log(diseaseInfoArray)
             //clear the tbody of the table so that it will be refreshed everytime
@@ -181,44 +181,59 @@ function filterByActivity(value) {
             d = d.split("-"); return Number(d[2] + d[1] + d[0]);
         }
 
+        appendThreads()
+
         //console.log(secondPostArray)
 
 
-        $('#tableBody').html('');
-        for (i = 0; i < secondPostArray.length; i++) {
-            if (diseasename == secondPostArray[i].disease_name) {
+        // $('#tableBody').html('');
+        // for (i = 0; i < secondPostArray.length; i++) {
+        //     if (diseasename == secondPostArray[i].disease_name) {
 
-                getPostId = secondPostArray[i].idForum
-                getNumberOfComments(getPostId);
-                //console.log("num of comments: " + commentNumber)
+        //         getPostId = secondPostArray[i].idForum
+        //         getNumberOfComments(getPostId);
+        //         //console.log("num of comments: " + commentNumber)
 
-                updateButton = ""
-                // Only creator can update thread.
-                if (uname == secondPostArray[i].user_name) {
-                    updateButton = "<button num='" + secondPostArray[i].idForum + "' id='updateForumbtn' class=' btn-sm btn btn-warning' data-toggle='modal'>Update</button> ";
-                }
+        //         // Only creator can update thread.
+        //         if (uname == secondPostArray[i].user_name) {
+        //             updateButton = "<button num='" + secondPostArray[i].idForum + "' id='updateForumbtn' class='dropdown-item' data-toggle='modal'>Update</button> ";
+        //         }
+        //         else {
+        //             updateButton = ""
+        //         }
 
-                // Only admin and creator can delete the thread.
-                if (uname == secondPostArray[i].user_name || sessionStorage.getItem("user_account_type") == "admin") {
-                    deleteButton = "<button num='" + secondPostArray[i].idForum + "'  id='deleteForumbtn' class=' btn-sm btn btn-danger' data-target='#deleteThreadModal' data-toggle='modal'>Delete</button> ";
-                    console.log(secondPostArray[i].user_name)
-                }
-                else {
-                    deleteButton = ""
-                }
+        //         // Only admin and creator can delete the thread.
+        //         if (uname == secondPostArray[i].user_name || sessionStorage.getItem("user_account_type") == "admin") {
+        //             deleteButton = "<button num='" + secondPostArray[i].idForum + "'  id='deleteForumbtn' class='dropdown-item' data-target='#deleteThreadModal' data-toggle='modal'>Delete</button> ";
+        //             console.log(secondPostArray[i].user_name)
+
+        //             dropdown = "<div class='dropdown' style='float:right'>" +
+        //                 "<button class='btn btn-sm btn-secondary' style='background-color:transparent; border-style: none; ' type='button'" +
+        //                 " id='dropdownMenu2' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>" +
+        //                 "<svg width='1em' height='1em' viewBox='0 0 16 16' class='bi bi-three-dots-vertical' fill='dark-grey' xmlns='http://www.w3.org/2000/svg'>" +
+        //                 "<path fill-rule='evenodd' d='M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z'/>" +
+        //                 "</svg></button><div class='dropdown-menu' aria-labelledby='dropdownMenu2'>" + updateButton + "" +
+        //                 "" + deleteButton + "</div></div>"
+        //         }
+        //         else {
+        //             deleteButton = ""
+        //             dropdown = ""
+        //         }
 
 
-                $('#tableBody').append("<tr num=" + secondPostArray[i].idForum + "><td ><a href='#' id='viewComments' num=" + secondPostArray[i].idForum + ">" + secondPostArray[i].post_title + "</a></td><td>" + secondPostArray[i].user_name + "</td>" +
-                    "<td>" + secondPostArray[i].timestamp + "</td><td>" + commentNumber + "</td><td> " + updateButton + deleteButton + "</td></tr>");
 
-                if (diseasename != secondPostArray[i].disease_name && i == secondPostArray.length - 1) {
 
-                    $('#allPosts').html('')
-                    $('#allPosts').append("<div style='text-align: center'><p>No forum post created yet!</p><button>Create Forum Post</button></div>")
-                    return //console.log("no forum post")
-                }
-            }
-        }
+        //         $('#tableBody').append("<tr num=" + secondPostArray[i].idForum + "><td ><a href='#' id='viewComments' num=" + secondPostArray[i].idForum + ">" + secondPostArray[i].post_title + "</a></td><td>" + secondPostArray[i].user_name + "</td>" +
+        //             "<td>" + secondPostArray[i].timestamp + "</td><td>" + commentNumber + "</td><td> " + dropdown + "</td></tr>");
+
+        //         if (diseasename != secondPostArray[i].disease_name && i == secondPostArray.length - 1) {
+
+        //             $('#allPosts').html('')
+        //             $('#allPosts').append("<div style='text-align: center'><p>No forum post created yet!</p><button>Create Forum Post</button></div>")
+        //             return //console.log("no forum post")
+        //         }
+        //     }
+        // }
 
     }
 
@@ -232,46 +247,98 @@ function filterByActivity(value) {
         function dateToNum(d) {
             d = d.split("-"); return Number(d[2] + d[1] + d[0]);
         }
+        appendThreads()
 
 
-        $('#tableBody').html('');
-        for (i = 0; i < secondPostArray.length; i++) {
-            if (diseasename == secondPostArray[i].disease_name) {
+        //     $('#tableBody').html('');
+        //     for (i = 0; i < secondPostArray.length; i++) {
+        //         if (diseasename == secondPostArray[i].disease_name) {
 
-                getPostId = secondPostArray[i].idForum
-                getNumberOfComments(getPostId);
+        //             getPostId = secondPostArray[i].idForum
+        //             getNumberOfComments(getPostId);
 
-                updateButton = ""
+        //             updateButton = ""
 
-                // Only creator can update thread.
-                if (uname == secondPostArray[i].user_name) {
-                    updateButton = "<button num='" + secondPostArray[i].idForum + "' id='updateForumbtn' class=' btn-sm btn btn-warning' data-toggle='modal'>Update</button> ";
-                }
+        //             // Only creator can update thread.
+        //             if (uname == secondPostArray[i].user_name) {
+        //                 updateButton = "<button num='" + secondPostArray[i].idForum + "' id='updateForumbtn' class=' btn-sm btn btn-warning' data-toggle='modal'>Update</button> ";
+        //             }
 
-                // Only admin and creator can delete the thread.
-                if (uname == secondPostArray[i].user_name || sessionStorage.getItem("user_account_type") == "admin") {
-                    deleteButton = "<button num='" + secondPostArray[i].idForum + "' id='deleteForumbtn' class=' btn-sm btn btn-danger' data-target='#deleteThreadModal' data-toggle='modal'>Delete</button> ";
-                }
-                else {
-                    deleteButton = ""
-                }
+        //             // Only admin and creator can delete the thread.
+        //             if (uname == secondPostArray[i].user_name || sessionStorage.getItem("user_account_type") == "admin") {
+        //                 deleteButton = "<button num='" + secondPostArray[i].idForum + "' id='deleteForumbtn' class=' btn-sm btn btn-danger' data-target='#deleteThreadModal' data-toggle='modal'>Delete</button> ";
+        //             }
+        //             else {
+        //                 deleteButton = ""
+        //             }
 
 
-                $('#tableBody').append("<tr num=" + secondPostArray[i].idForum + "><td ><a href='#' id='viewComments' num=" + secondPostArray[i].idForum + ">" + secondPostArray[i].post_title + "</a></td><td>" + secondPostArray[i].user_name + "</td>" +
-                    "<td>" + secondPostArray[i].timestamp + "</td><td>" + commentNumber + "</td><td> " + updateButton + deleteButton + "</td></tr>");
+        //             $('#tableBody').append("<tr num=" + secondPostArray[i].idForum + "><td ><a href='#' id='viewComments' num=" + secondPostArray[i].idForum + ">" + secondPostArray[i].post_title + "</a></td><td>" + secondPostArray[i].user_name + "</td>" +
+        //                 "<td>" + secondPostArray[i].timestamp + "</td><td>" + commentNumber + "</td><td> " + updateButton + deleteButton + "</td></tr>");
 
-                if (diseasename != secondPostArray[i].disease_name && i == secondPostArray.length - 1) {
+        //             if (diseasename != secondPostArray[i].disease_name && i == secondPostArray.length - 1) {
 
-                    $('#allPosts').html('')
-                    $('#allPosts').append("<div style='text-align: center'><p>No forum post created yet!</p><button>Create Forum Post</button></div>")
-                    return //console.log("no forum post")
-                }
-            }
-        }
+        //                 $('#allPosts').html('')
+        //                 $('#allPosts').append("<div style='text-align: center'><p>No forum post created yet!</p><button>Create Forum Post</button></div>")
+        //                 return //console.log("no forum post")
+        //             }
+        //         }
+        //     }
 
     }
 }
 
+function appendThreads() {
+
+    $('#tableBody').html('');
+    for (i = 0; i < secondPostArray.length; i++) {
+        if (diseasename == secondPostArray[i].disease_name) {
+
+            getPostId = secondPostArray[i].idForum
+            getNumberOfComments(getPostId);
+            //console.log("num of comments: " + commentNumber)
+
+            // Only creator can update thread.
+            if (uname == secondPostArray[i].user_name) {
+                updateButton = "<button num='" + secondPostArray[i].idForum + "' id='updateForumbtn' class='dropdown-item' data-toggle='modal'>Update</button> ";
+            }
+            else {
+                updateButton = ""
+            }
+
+            // Only admin and creator can delete the thread.
+            if (uname == secondPostArray[i].user_name || sessionStorage.getItem("user_account_type") == "admin") {
+                deleteButton = "<button num='" + secondPostArray[i].idForum + "'  id='deleteForumbtn' class='dropdown-item' data-target='#deleteThreadModal' data-toggle='modal'>Delete</button> ";
+                console.log(secondPostArray[i].user_name)
+
+                dropdown = "<div class='dropdown' style='float:right'>" +
+                    "<button class='btn btn-sm btn-secondary' style='background-color:transparent; border-style: none; ' type='button'" +
+                    " id='dropdownMenu2' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>" +
+                    "<svg width='1em' height='1em' viewBox='0 0 16 16' class='bi bi-three-dots-vertical' fill='dark-grey' xmlns='http://www.w3.org/2000/svg'>" +
+                    "<path fill-rule='evenodd' d='M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z'/>" +
+                    "</svg></button><div class='dropdown-menu' aria-labelledby='dropdownMenu2'>" + updateButton + "" +
+                    "" + deleteButton + "</div></div>"
+            }
+            else {
+                deleteButton = ""
+                dropdown = ""
+            }
+
+
+
+
+            $('#tableBody').append("<tr num=" + secondPostArray[i].idForum + "><td ><a href='#' id='viewComments' num=" + secondPostArray[i].idForum + ">" + secondPostArray[i].post_title + "</a></td><td>" + secondPostArray[i].user_name + "</td>" +
+                "<td>" + secondPostArray[i].timestamp + "</td><td>" + commentNumber + "</td><td> " + dropdown + "</td></tr>");
+
+            if (diseasename != secondPostArray[i].disease_name && i == secondPostArray.length - 1) {
+
+                $('#allPosts').html('')
+                $('#allPosts').append("<div style='text-align: center'><p>No forum post created yet!</p><button>Create Forum Post</button></div>")
+                return //console.log("no forum post")
+            }
+        }
+    }
+}
 
 
 
@@ -426,6 +493,7 @@ $(document).on("click", "#addNewThread", function () {
 $(document).on("click", "#updateForumbtn", function () {
     currentForumID = $(this).attr('num');
 
+
     for (y = 0; y < postArray1.length; y++) {
         if (currentForumID == postArray1[y].idForum) {
             //console.log(postArray1[y])
@@ -436,6 +504,8 @@ $(document).on("click", "#updateForumbtn", function () {
 
         }
     }
+    $('#updateThreadModal').modal('show');
+
 });
 
 $(document).on("click", "#deleteForumbtn", function () {
