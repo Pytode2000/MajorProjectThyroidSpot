@@ -51,7 +51,7 @@ function checkDiseaseName() {
                 if (disease_id == x) {
                     //console.log(diseaseInfoArray[x].disease)
                     diseasename = diseaseInfoArray[x].disease
-                    $('#getDiseaseName').text("Showing Forum Posts for: " + diseasename)
+                    $('#getDiseaseName').append("<h4>" + diseasename+"</h4>")
                     getAllForumByDisease(diseasename); //call all forum posts by disease name
                 }
             }

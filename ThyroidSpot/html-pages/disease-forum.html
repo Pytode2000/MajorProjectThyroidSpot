@@ -36,69 +36,91 @@
 
 
 <body>
+
+    <style>
+        .hide {
+            display: none;
+        }
+    </style>
+
+    <button class="floating-btn" id="addNewThread" data-toggle="modal" data-target="#newCommentModal">
+        <i class="fas fa-plus"></i>
+    </button>
+
+    <script>
+        if (sessionStorage.getItem("user_logged_in") != "y") {
+            document.getElementById("addNewThread").classList.add("hide");
+        }
+    </script>
+
     <div id="navbar-html"></div>
+
+
     <main>
-        <div class="content">
-            <!-- <h1 style="text-align: center;">Thyroid Disease Page</h1> -->
-            <h1 style="text-align: center;">Forum</h1>
+            <div class="content">
+                <h1 style="text-align: center;">Forum</h1>
+                <div class="container" style="background: rgb(231, 231, 231); border: 1px solid darkgray; border-radius: 6px;">
+                    <!-- <h1 style="text-align: center;">Thyroid Disease Page</h1> -->
+                   
 
 
-            <div class="container">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <div id="redirectdiv">
+                                    <button id="redirect">
+                                        <i class="fas fa-arrow-circle-left fa-1x"></i>
+                                    </button>
+                                    <span>
+                                        Back to disease page
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="offset-sm-2">
 
-                <div style="text-align: center; margin-top: 20px">
-                    <button type="button" class="btn btn-sm btn-primary" id="redirect">
-                        Back to Disease Page
-                    </button>
-                </div>
-                <br/>
-                <br/>
-                <div id="headerfucntions">
-                    <style>
-                        .hide {
-                            display: none;
-                        }
-                    </style>
-                    <button type="button" class="btn btn-info" id="addNewThread" data-toggle="modal" data-target="#newBookModal">
-                        New Thread
-                    </button>
+                            </div>
+                        </div>
+                        <br id="displaybr"/>
+                        <div id="headerfucntions" class="row">
+                            <div class="col-sm-5">
+                                <div id="diseasenamedisplay">
+                                    <label>Showing Threads For:</label>
+                                        <div id="getDiseaseName">
+                                        </div>
+                                    </thead>
+                                </div>
+                            </div>
+                            <div class="offset-sm-2">
 
-                    <script>
-                        if (sessionStorage.getItem("user_logged_in") != "y") {
-                            document.getElementById("addNewThread").classList.add("hide");
-                        }
-                    </script>
-                    <div id="sortSearch">
-                        <input id="postSearch" placeholder="Search Post Title...">
-                        <select name="unitselection" id="newFilterDDL" onchange="filterByActivity(this.value);">
-                            <!-- <option disabled selected hidden value>--Filter By Activity--</option> -->
-                            <option selected value="Latest">Latest</option>
-                            <option value="Oldest">Oldest</option>
-                        </select>
+                            </div>
+                            <div class="col-sm-5 custom-col">
+                                <div id="sortSearch">
+                                    <input id="postSearch" placeholder="Search Post Title...">
+                                    <select name="unitselection" id="newFilterDDL" onchange="filterByActivity(this.value);">
+                                        <!-- <option disabled selected hidden value>--Filter By Activity--</option> -->
+                                        <option selected value="Latest">Latest</option>
+                                        <option value="Oldest">Oldest</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                        <div id="allPosts" class="row">
+                            <table id="check" class="table td-responsive">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 55%">Post</th>
+                                        <th>By</th>
+                                        <th>Date Posted</th>
+                                        <th>Replies</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tableBody"></tbody>
+                            </table>
+                        </div>
+
                     </div>
                 </div>
-                <br/>
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th id="getDiseaseName"></th>
-                        </tr>
-                    </thead>
-                </table>
-
-                <div id="allPosts">
-                    <table id="check" class="table table-hover td-responsive">
-                        <thead>
-                            <tr>
-                                <th style="width: 55%">Post</th>
-                                <th>By</th>
-                                <th>Date Posted</th>
-                                <th>Replies</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tableBody"></tbody>
-                    </table>
-                </div>
-
             </div>
 
             <!-- New Thread -->
