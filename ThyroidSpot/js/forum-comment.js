@@ -26,9 +26,21 @@ function showPostDetails() {
             postDetails = data;
             //console.log(postDetails)
             //Iterate through the bookArray to generate rows to populate the table
-            $('#tableBody').html('');
-            $('#tableBody').append("<p>Posted by: " + postDetails.user_name + "</p><h4>" + postDetails.post_title + "</h4>" +
-                "<br/><p>" + postDetails.post_description + "</p>");
+            $('#headPostedBy').html('');
+            $('#headPostedBy').append("<small>" + postDetails.user_name + " · " + postDetails.timestamp + "" + "</small>");
+            console.log(postDetails)
+
+            $('#descriptionBody').html('');
+            $('#descriptionBody').append("<p>" + postDetails.post_description + "</p>");
+
+            $('#headDisease').html('');
+            $('#headDisease').append("<small>" + postDetails.disease_name + "</small>");
+
+            $('#headTitle').html('');
+            $('#headTitle').append("<h5>" + postDetails.post_title + "</h5>");
+            // headDescription
+
+            // + "<br/><p>" + postDetails.post_description + "</p>"
 
 
             //TODO: check if username still exists in database, else insert [deleteduser]
@@ -133,7 +145,7 @@ function getCommentByID(id) {
 
 
                         // if (matchingname == commentArray[i].username) {
-                        $('#allComments').append("<div class='list-group'><div class='list-group-item list-group-item-action flex-column align-items-start'><div>" +
+                        $('#allComments').append("<div class='list-group'><div class='list-group-item mt-1 list-group-item-light flex-column align-items-start'><div>" +
                             "<small id='comUsname'>" + commentArray[i].username + "</small><small> · " + commentArray[i].timestamp + "</small>" + dropdown + "</div><p class='mb-1'>" + commentArray[i].comment + "</p></div></div>");
                         // }
                         // else {
@@ -269,6 +281,13 @@ $(document).on("click", "#redirectBack", function () {
     sessionStorage.removeItem("forID");
     window.location.href = "disease-forum.html";
 });
+
+$(document).on("click", "#headDisease", function () {
+    sessionStorage.removeItem("forID");
+    window.location.href = "disease-forum.html";
+});
+
+
 
 //onclick call update function when update btn is clicked
 $(document).on("click", "#updComt", function () {

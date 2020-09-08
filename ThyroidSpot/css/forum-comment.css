@@ -1,0 +1,50 @@
+/*** <FLOATING ACTION BUTTON> ***/
+.floating-btn {
+    width: 80px;
+    height: 80px;
+    /* background: #007b5e6c; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border-radius: 50%;
+    color: black;
+    /*if using text*/
+    font-size: 40px;
+    position: fixed;
+
+    bottom: 20px;
+    /*For the hover animation*/
+    -webkit-transition-duration: var(--transition-speed);
+    transition-duration: var(--transition-speed);
+    z-index: 1000;
+
+    /*<button>*/
+    outline: black;
+    border: none;
+    cursor: pointer;
+}
+
+.floating-btn:focus {
+    outline: 0;
+}
+
+#addNewComment {
+    background: white;
+    color: black;
+    right: 20px;
+}
+
+#addNewComment:hover {
+    background: black;
+    color: white;
+}
+
+#redirectBack {
+    background: none;
+    border: none;
+}
+
+#headDisease {
+    cursor: pointer;
+}

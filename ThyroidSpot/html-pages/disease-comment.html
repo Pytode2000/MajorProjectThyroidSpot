@@ -31,51 +31,113 @@
 
 
 <body>
+    <style>
+        .hide {
+            display: none;
+        }
+    </style>
+    <!-- Floating action button -->
+    <button class="floating-btn" id="addNewComment" data-toggle="modal" data-target="#newCommentModal">
+        <i class="fas fa-plus"></i>
+    </button>
+    <script>
+        if (sessionStorage.getItem("user_logged_in") != "y") {
+            document.getElementById("addNewComment").classList.add("hide");
+        }
+    </script>
+
+
     <div id="navbar-html"></div>
     <main>
         <div class="content">
-            <!-- <h1 style="text-align: center;">Thyroid Disease Page</h1> -->
-            <h1 style="text-align: center;">Forum</h1>
 
 
-            <div class="container">
+            <!-- <div class="container" style="border: 5px solid rgb(228, 228, 228); padding: 0;"> -->
+            <!-- <div class="container" style="background: rgb(231, 231, 231);"> -->
+            <div class="container" style="background: rgb(231, 231, 231); border: 1px solid darkgray; border-radius: 6px;">
+                <div class="container">
+                    <style>
+                        @media (max-width: 768px) {
 
-                <div style="text-align: center; margin-top: 20px">
-                    <button type="button" class="btn btn-sm btn-primary" id="redirectBack">
-                        Back to Forum Page
-                    </button>
+                            [class*="col-sm-5"] {
+                                text-align: center !important;
+                            }
+
+                        }
+                    </style>
+
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <button id="redirectBack">
+                                <i class="fas fa-arrow-circle-left fa-1x"></i>
+                            </button>
+                            <span id="headDisease">
+
+                            </span>
+                        </div>
+
+                        <div class="offset-sm-2">
+
+                        </div>
+
+                        <!-- posted by ... (timestamp) -->
+                        <div class="col-sm-5 text-right">
+                            <div id="headPostedBy">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div id="headTitle">
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-                <br/>
+
+
+                <div class="container">
+
+                    <div id="descriptionBody" style="margin: 0% 2%;">
+
+                    </div>
+
+                </div>
+                <hr style="background: black">
+
+
+
+
+
+
+
+                <div class="container">
+
+                    <!-- <div style="text-align: center; margin-top: 20px"> -->
+
+                    <!-- </div> -->
+                    <!-- <br/>
                 <br/>
                 <div id="headerfucntions">
 
                 </div>
-                <br/>
-                <div>
-                    <div id="tableBody">
+                <br/> -->
 
 
-                    </div>
+
                     <!-- <div >
                     <h3>testing title</h3>
                     <p>testing subtitle</p>
                 </div> -->
                     <div id="commentSection">
-                        <style>
-                            .hide {
-                                display: none;
-                            }
-                        </style>
-                        <div>
+
+                        <!-- <div>
                             <button type="button" class="btn btn-info" id="addNewComment" data-toggle="modal" data-target="#newCommentModal">
                                 Add Comment
                             </button>
-                        </div>
-                        <script>
-                            if (sessionStorage.getItem("user_logged_in") != "y") {
-                                document.getElementById("addNewComment").classList.add("hide");
-                            }
-                        </script>
+                        </div> -->
+
                         <div id="allComments" class="list-group">
                             <!-- <table id="check" class="table table-hover td-responsive">
                         <tbody id="commentsTabl"></tbody> -->
@@ -100,9 +162,11 @@
                             </div>
                         </div>
                     </div>
+
+
                 </div>
 
-
+                <br>
             </div>
 
             <!-- New Comment -->
