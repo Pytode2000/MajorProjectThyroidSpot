@@ -123,6 +123,14 @@ a:hover {
   text-align: right;
 }
 
+/* showing post divs in mobile/desktop */
+#allPostsMobile{
+  display: none;
+}
+#allPosts{
+  display: block;
+}
+
 
 @media only screen and (max-width: 600px) {
   /* header and search div settings */
@@ -144,5 +152,13 @@ a:hover {
 
   .custom-col{
     text-align: center;
+  }
+
+  /* showing post divs in mobile/desktop */
+  #allPostsMobile{
+    display: block;
+  }
+  #allPosts{
+    display: none;
   }
 }

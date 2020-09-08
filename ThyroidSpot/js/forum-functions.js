@@ -165,7 +165,7 @@ function getAllForumByDisease() {
 }
 
 
-//TODO: filter posts by recent date
+//filter posts by recent date
 function filterByActivity(value) {
     //console.log("test")
     //console.log(secondPostArray.timestamp)
@@ -290,7 +290,8 @@ function filterByActivity(value) {
 
 function appendThreads() {
 
-    $('#tableBody').html('');
+    $('#tableBody').html(''); //clear desktop view of anything
+    $('#allPostsMobile').html(''); //clear mobile view as well
     for (i = 0; i < secondPostArray.length; i++) {
         if (diseasename == secondPostArray[i].disease_name) {
 
@@ -326,9 +327,16 @@ function appendThreads() {
 
 
 
-
+            //for desktop view
             $('#tableBody').append("<tr num=" + secondPostArray[i].idForum + "><td ><a href='#' id='viewComments' num=" + secondPostArray[i].idForum + ">" + secondPostArray[i].post_title + "</a></td><td>" + secondPostArray[i].user_name + "</td>" +
                 "<td>" + secondPostArray[i].timestamp + "</td><td>" + commentNumber + "</td><td> " + dropdown + "</td></tr>");
+
+            //for mobile view
+            $('#allPostsMobile').append("<div num=" + secondPostArray[i].idForum + " class='list-group-item list-group-item-action flex-column align-items-start'>"+
+            "<div><small id='comUsname'>" + secondPostArray[i].user_name + "</small><small> · " + secondPostArray[i].timestamp + "</small>" +dropdown+ 
+            "</div><h5 class='mb-1'><a href='#' id='viewComments' num=" + secondPostArray[i].idForum + 
+            ">" + secondPostArray[i].post_title + "</a></h5><p class='mb-1'>"+commentNumber+" Replies</p></div><br/>");
+
 
             if (diseasename != secondPostArray[i].disease_name && i == secondPostArray.length - 1) {
 

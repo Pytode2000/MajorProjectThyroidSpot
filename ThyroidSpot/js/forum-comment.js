@@ -221,10 +221,10 @@ function addComment(getname) {
 
 var dateOfComment
 var usename
-//TODO: update comment (user can only update their own comment)
+//update comment (user can only update their own comment)
 function updateComment() {
 
-    //TODO: get timestamp and forumId info
+    //get timestamp and forumId info
     comment_data = {
         username: usename,
         comment: $('#updateComment').val(),
