@@ -532,5 +532,12 @@ $(document).on("click", "#redirect", function () {
     window.location.href = "disease.html";
 });
 
+$(document).on("click", "#redirectBackText", function () {
+    window.location.href = "disease.html";
+});
+
+
+
+
 getUserName();
 checkDiseaseName();

@@ -162,3 +162,16 @@ a:hover {
     display: none;
   }
 }
+
+
+/***** <Small Screens> *****/
+@media only screen and (max-width: 600px) {
+  .floating-btn {
+    bottom: 90px;
+  }
+}
+
+
+#redirectBackText {
+  cursor: pointer;
+}

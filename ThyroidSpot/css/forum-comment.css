@@ -12,7 +12,6 @@
     /*if using text*/
     font-size: 40px;
     position: fixed;
-
     bottom: 20px;
     /*For the hover animation*/
     -webkit-transition-duration: var(--transition-speed);
@@ -47,4 +46,11 @@
 
 #headDisease {
     cursor: pointer;
+}
+
+/***** <Small Screens> *****/
+@media only screen and (max-width: 600px) {
+    .floating-btn {
+        bottom: 90px;
+    }
 }
