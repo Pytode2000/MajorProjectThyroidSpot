@@ -48,7 +48,7 @@
                 <div class="col-5 align-baseline">
                     <div class="input-group input-group-sm mb-3 align-baseline">
                         <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Small</span>
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Search</span>
                         </div>
                         <input id="searchInput" type="text" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
                     </div>
@@ -140,13 +140,15 @@
                 <div class="grid-container">
                     <div class="grid_item">
                         <p>Are you sure you want to abandon this patient?</p>
-                        <button id="confirmAbandonPatientBtn">Confirm Abandon Patient</button>
+                        <button id="confirmAbandonPatientBtn" class="btn btn-primary">Confirm Abandon Patient</button>
                     </div>
                     <div class="grid_item">
                         <p>Transfer Patient</p>
-                        <input id="newClinicianID" type="text" placeholder="New Clinician UID">
-                        <p id="wrongIDPrompt" style="display: none;"></p>
-                        <button id="transferPatientBtn">Tranfer Patient</button>
+                        <input id="newClinicianID" type="text" placeholder="New Clinician UID"><br><br>
+                        <div id="wrongIDPrompt" style="display: none;" class="alert alert-danger" role="alert">
+                            This is a danger alert—check it out!
+                          </div>
+                        <button id="transferPatientBtn" class="btn btn-primary">Transfer Patient</button>
                     </div>
 
                 </div>

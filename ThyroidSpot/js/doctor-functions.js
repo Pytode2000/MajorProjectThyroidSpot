@@ -24,6 +24,11 @@ function getPatientName() {
         contentType: 'application/json',
         success: function (data) {
             userInfoArray = data;
+            for(i=0; i < userInfoArray.length; i++) {
+                if (userInfoArray[i].user_id == doctorID){
+                    document.getElementById('displayClinicianName').innerHTML = "Dr. "+userInfoArray[i].full_name
+                }
+            }
         }
     });
 }
@@ -47,24 +52,21 @@ function getAllPatientUnderClinician() {
                     var userInfoArray = data;
                     $('#patientCard').html('');
                     for (i = 0; i < patientInformationArray.length; i++) { 
-                        console.log("hhhi"+patientInformationArray[i].user_id)
-                                console.log("bye"+patientInformationArray[i].user_id)
-                                var reportArray = data;
-                                for (j = 0; j < userInfoArray.length; j++){
-                                    console.log("hdi"+patientInformationArray[i].user_id)
-                                    if(patientInformationArray[i].user_id == userInfoArray[j].user_id){
-                                        $('#patientCard').append("<div id='singlePatientCard' class='card patient-card' data-string='"+userInfoArray[j].full_name+"'><div class='card-body'>"+
-                                        "<h5 id='patientName' class='card-title text-center'>"+userInfoArray[j].full_name+"</h5>"+
-                                        "<p class='card-text text-center'>Gender : "+patientInformationArray[i].gender+"</p>"+
-                                        "<p class='card-text text-center'>FT4 :</p>"+
-                                        "<p class='card-text text-center'>TSH :</p>"+
-                                        "<button id='patientDetailsBtn' num='"+patientInformationArray[i].patient_id+"' index='"+patientInformationArray[i].user_id +"'"+
-                                        "class='btn btn-secondary btn-block'>More Details</button>"+
-                                        "<button id='openGraphModalBtn' class='btn btn-secondary btn-block' data-toggle='modal' data-target='#graphModal'>Graph</button>"+
-                                        "<button id='abandonPatientBtn' index='"+i+"' num='"+ patientInformationArray[i].patient_id +"' class='btn btn-secondary btn-block' data-toggle='modal' data-target='#abandonPatientModal'>Abandon Patient</button>"+
-                                        "</div><div class='card-footer'>"+
-                                        "<small class='text-muted'>Last Updated :</small></div></div>")
-                                        totalPatient += 1;
+                        //Insert Ajax call for Report ID does not work
+                        for (j = 0; j < userInfoArray.length; j++){
+                            if(patientInformationArray[i].user_id == userInfoArray[j].user_id){
+                                $('#patientCard').append("<div id='singlePatientCard' class='card patient-card' data-string='"+userInfoArray[j].full_name+"'><div class='card-body'>"+
+                                "<h5 id='patientName' class='card-title text-center'>"+userInfoArray[j].full_name+"</h5>"+
+                                "<p class='card-text text-center'>Gender : "+patientInformationArray[i].gender+"</p>"+
+                                "<p class='card-text text-center'>FT4 :</p>"+
+                                "<p class='card-text text-center'>TSH :</p>"+
+                                "<button id='patientDetailsBtn' num='"+patientInformationArray[i].patient_id+"' index='"+patientInformationArray[i].user_id +"'"+
+                                "class='btn btn-secondary btn-block'>More Details</button>"+
+                                "<button id='openGraphModalBtn' class='btn btn-secondary btn-block' data-toggle='modal' data-target='#graphModal'>Graph</button>"+
+                                "<button id='abandonPatientBtn' index='"+i+"' num='"+ patientInformationArray[i].patient_id +"' class='btn btn-secondary btn-block' data-toggle='modal' data-target='#abandonPatientModal'>Abandon Patient</button>"+
+                                "</div><div class='card-footer'>"+
+                                "<small class='text-muted'>Last Updated :"+reportArray[i].timestamp+"</small></div></div>")
+                                totalPatient += 1;
                                                                                         
                                     }   
                                         
@@ -300,7 +302,7 @@ function getPatientReport() {
 
 
 
-
+getPatientName();
 getAllPatientUnderClinician();
 
 
