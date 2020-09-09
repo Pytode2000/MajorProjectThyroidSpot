@@ -34,7 +34,7 @@ function showPostDetails() {
             $('#descriptionBody').append("<p>" + postDetails.post_description + "</p>");
 
             $('#headDisease').html('');
-            $('#headDisease').append("<small>" + postDetails.disease_name + "</small>");
+            $('#headDisease').append("<small>Back to " + postDetails.disease_name + " threads</small>");
 
             $('#headTitle').html('');
             $('#headTitle').append("<h5>" + postDetails.post_title + "</h5>");
@@ -145,7 +145,7 @@ function getCommentByID(id) {
 
 
                         // if (matchingname == commentArray[i].username) {
-                        $('#allComments').append("<div class='list-group'><div class='list-group-item mt-1 list-group-item-light flex-column align-items-start'><div>" +
+                        $('#allComments').append("<div class='list-group'><div class='list-group-item mt-1 flex-column align-items-start'><div>" +
                             "<small id='comUsname'>" + commentArray[i].username + "</small><small> · " + commentArray[i].timestamp + "</small>" + dropdown + "</div><p class='mb-1'>" + commentArray[i].comment + "</p></div></div>");
                         // }
                         // else {
