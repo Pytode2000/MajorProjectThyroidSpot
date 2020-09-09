@@ -21,6 +21,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 
             $.ajax({
                 type: 'GET',
+                async: false,
                 url: userURI + firebaseUser.uid,
                 dataType: 'json',
                 contentType: 'application/json',

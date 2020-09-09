@@ -3,7 +3,12 @@
 
 <head>
     <title>Thyroid-SPOT App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+        crossorigin="anonymous"></script>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <!-- <script src="../js/functions.js"></script> -->
@@ -31,129 +36,195 @@
 
 
 <body>
+
+    <style>
+        .hide {
+            display: none;
+        }
+    </style>
+
+    <button class="floating-btn" id="addNewThread" data-toggle="modal" data-target="#newCommentModal">
+        <i class="fas fa-plus"></i>
+    </button>
+
+    <script>
+        if (sessionStorage.getItem("user_logged_in") != "y") {
+            document.getElementById("addNewThread").classList.add("hide");
+        }
+    </script>
+
     <div id="navbar-html"></div>
+
+
     <main>
         <div class="content">
-            <!-- <h1 style="text-align: center;">Thyroid Disease Page</h1> -->
-            <h1 style="text-align: center;">Forum</h1>
+            <!-- <h1 style="text-align: center;">Forum</h1> -->
+            <h1 class="text-center page-heading"> <i class="svg-inline--fa fas fa-comments fa-primary fa-w-16"></i> Forum</h1>
+
+            <div class="container" style="background: rgb(231, 231, 231); border: 1px solid darkgray; border-radius: 6px;">
+                <!-- <h1 style="text-align: center;">Thyroid Disease Page</h1> -->
 
 
-            <div class="container">
 
-                <div style="text-align: center; margin-top: 20px">
-                    <button type="button" class="btn btn-sm btn-primary" id="redirect">
-                        Back to Disease Page
-                    </button>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div id="redirectdiv">
+                                <button id="redirect">
+                                    <i class="fas fa-arrow-circle-left fa-1x"></i>
+                                </button>
+                                <span id="redirectBackText">
+                                    Back to disease page
+                                </span>
+                            </div>
+                        </div>
+                        <div class="offset-sm-2">
+
+                        </div>
+                    </div>
+                    <br id="displaybr" />
+                    <div id="headerfucntions" class="row">
+                        <div class="col-sm-5">
+                            <div id="diseasenamedisplay">
+                                <label>Showing Threads For:</label>
+                                <div id="getDiseaseName">
+                                </div>
+                                </thead>
+                            </div>
+                        </div>
+                        <div class="offset-sm-2">
+
+                        </div>
+                        <div class="col-sm-5 custom-col">
+                            <div id="sortSearch">
+                                <input id="postSearch" placeholder="Search Post Title...">
+                                <select name="unitselection" id="newFilterDDL" onchange="filterByActivity(this.value);">
+                                    <!-- <option disabled selected hidden value>--Filter By Activity--</option> -->
+                                    <option selected value="Latest">Latest</option>
+                                    <option value="Oldest">Oldest</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div id="allPosts" class="row">
+                        <table id="check" class="table td-responsive">
+                            <thead>
+                                <tr>
+                                    <th style="width: 55%">Post</th>
+                                    <th>By</th>
+                                    <th>Date Posted</th>
+                                    <th>Replies</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody"></tbody>
+                        </table>
+                    </div>
+
+                    <div id="allPostsMobile" class="row">
+                        <div class='list-group-item list-group-item-action flex-column align-items-start'>
+                            <div>
+                                <small id='comUsname'>Posted by test</small><small> · today</small>
+                                <div class="dropdown" style='float:right'>
+                                    <button class="btn btn-sm btn-secondary" style="background-color:transparent; border-style: none; " type="button" id="dropdownMenu2"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-three-dots-vertical" fill="dark-grey" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+                                            />
+                                        </svg>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                        <button class="dropdown-item" type="button">Update</button>
+                                        <button class="dropdown-item" type="button">Delete Comment</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <h5 class='mb-1'>test comment</h5>
+                            <p class='mb-1'>5 Replies</p>
+                        </div>
+                    </div>
+
                 </div>
-                <br/>
-                <br/>
-                <div id="headerfucntions">
-                    <style>
-                        .hide {
-                            display: none;
-                        }
-                    </style>
-                    <button type="button" class="btn btn-info" id="addNewThread" data-toggle="modal" data-target="#newBookModal">
-                        New Thread
-                    </button>
+            </div>
+        </div>
 
-                    <script>
-                        if (sessionStorage.getItem("user_logged_in") != "y") {
-                            document.getElementById("addNewThread").classList.add("hide");
-                        }
-                    </script>
-                    <div id="sortSearch">
-                        <input id="postSearch" placeholder="Search Post Title...">
-                        <select name="unitselection" id="newFilterDDL" onmousedown="this.value='';" onchange="filterByActivity(this.value);">
-                            <option disabled selected hidden value>--Filter By Activity--</option>
-                            <option value="Latest">Latest</option>
-                            <option value="Oldest">Oldest</option>
-                        </select>
+        <!-- New Thread -->
+        <div class="modal fade" id="newThreadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Post New Thread</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Title:</label>
+                            <input type="text" class="form-control" id="newThreadName" placeholder="Enter Title">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Description:</label>
+                            <textarea class="form-control" id="newThreadDesc" placeholder="Write your description here..." rows="5"></textarea>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="createNewThread();" id="newProductBtn">Post</button>
                     </div>
                 </div>
-                <br/>
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th id="getDiseaseName"></th>
-                        </tr>
-                    </thead>
-                </table>
-
-                <div id="allPosts">
-                    <table id="check" class="table table-hover td-responsive">
-                        <thead>
-                            <tr>
-                                <th style="width: 55%">Post</th>
-                                <th>By</th>
-                                <th>Date Posted</th>
-                                <th>Replies</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tableBody"></tbody>
-                    </table>
-                </div>
-
             </div>
+        </div>
 
-            <!-- New Thread -->
-            <div class="modal fade" id="newThreadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel">Post New Thread</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        </div>
-                        <div class="modal-body">
+
+        <!-- Update Thread -->
+        <div class="modal fade" id="updateThreadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Update Thread</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="updating">
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Title:</label>
-                                <input type="text" class="form-control" id="newThreadName" placeholder="Enter Title">
+                                <input type="text" class="form-control" id="updateThreadName" placeholder="Enter Title">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Description:</label>
-                                <textarea class="form-control" id="newThreadDesc" placeholder="Write your description here..." rows="5"></textarea>
+                                <textarea class="form-control" id="updateThreadDesc" placeholder="Write your description here..." rows="5"></textarea>
                             </div>
 
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" onclick="createNewThread();" id="newProductBtn">Post</button>
-                        </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="updateThread();">Update</button>
                     </div>
                 </div>
             </div>
+        </div>
 
-
-            <!-- Update Thread -->
-            <div class="modal fade" id="updateThreadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel">Update Thread</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        </div>
-                        <div class="modal-body">
-                            <form id="updating">
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Title:</label>
-                                    <input type="text" class="form-control" id="updateThreadName" placeholder="Enter Title">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Description:</label>
-                                    <textarea class="form-control" id="updateThreadDesc" placeholder="Write your description here..." rows="5"></textarea>
-                                </div>
-
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" onclick="updateThread();">Update</button>
-                            <button type="button" class="btn btn-danger" onclick="deleteThread();">Delete</button>
-                        </div>
+        <!-- Delete Thread -->
+        <div class="modal fade" id="deleteThreadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="deleteThreadModal">Delete Thread</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete this thread?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" onclick="deleteThread();">Delete</button>
                     </div>
                 </div>
             </div>
-            <div id="footer-html"></div>
+        </div>
+
+        <div id="footer-html"></div>
     </main>
 
 

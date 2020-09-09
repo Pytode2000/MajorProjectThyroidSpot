@@ -140,6 +140,11 @@
 }
 
 
+.custom-card{
+  width: 18rem; margin-bottom: 2em;
+}
+
+
 
 /*** </FLOATING ACTION BUTTON> ***/
 
@@ -152,6 +157,12 @@
   .custom-class{
     width: 100%; 
     display:block; 
+  }
+
+  .custom-card{
+    width: 18rem; margin-bottom: 2em;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .headers{

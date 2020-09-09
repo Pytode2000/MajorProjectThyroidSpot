@@ -18,26 +18,38 @@
   background: #555; 
 }
 
-#allPosts{
-    overflow: auto;
-    height:300px;
+/* header and search div settings */
+/* #headerfucntions{
+  display: inline-block;
+  width: 100%;
 }
-
-#headerfucntions{
-    display: block
-}
-
+#diseasenamedisplay{
+  float: left;
+} */
 #sortSearch{
-    float:right;
+  margin-top: 2em;
 }
 #postSearch{
     margin-right: 10px;
 }
 
+/* post thread div settings */
+#allPosts{
+  overflow: auto;
+  height:300px;
+}
+
+/* thread post table settings */
+#check{
+  background: white;
+}
+
+/* modal new thread settings */
 #newThreadDesc{
   resize: none;
 }
 
+/* modal update thread settings */
 #updateThreadDesc{
   resize: none;
 }
@@ -47,4 +59,119 @@ a:link {
 }
 a:hover {
   color: blue;
+}
+
+
+
+/*** <FLOATING ACTION BUTTON> ***/
+.floating-btn {
+  width: 80px;
+  height: 80px;
+  /* background: #007b5e6c; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border-radius: 50%;
+  color: black;
+  /*if using text*/
+  font-size: 40px;
+  position: fixed;
+
+  bottom: 20px;
+  /*For the hover animation*/
+  -webkit-transition-duration: var(--transition-speed);
+  transition-duration: var(--transition-speed);
+  z-index: 1000;
+
+  /*<button>*/
+  outline: black;
+  border: none;
+  cursor: pointer;
+}
+
+.floating-btn:focus {
+  outline: 0;
+}
+
+/* add new thread button settings */
+#addNewThread {
+  background: white;
+  color: black;
+  right: 20px;
+}
+#addNewThread:hover {
+  background: black;
+  color: white;
+}
+
+
+/* return to disease page button */
+#redirect {
+  background: none;
+  border: none;
+}
+#redirectdiv{
+  text-align: left; 
+  margin-top: 20px
+}
+
+#displaybr{
+  display: block;
+}
+.custom-col{
+  text-align: right;
+}
+
+/* showing post divs in mobile/desktop */
+#allPostsMobile{
+  display: none;
+}
+#allPosts{
+  display: block;
+}
+
+
+@media only screen and (max-width: 600px) {
+  /* header and search div settings */
+  #headerfucntions{
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+  }
+  #sortSearch{
+    float: none;
+  }
+  #redirectdiv{
+    text-align: center; 
+    margin-top: 10px;
+  }
+  #displaybr{
+    display: none;
+  }
+
+  .custom-col{
+    text-align: center;
+  }
+
+  /* showing post divs in mobile/desktop */
+  #allPostsMobile{
+    display: block;
+  }
+  #allPosts{
+    display: none;
+  }
+}
+
+
+/***** <Small Screens> *****/
+@media only screen and (max-width: 600px) {
+  .floating-btn {
+    bottom: 90px;
+  }
+}
+
+
+#redirectBackText {
+  cursor: pointer;
 }
