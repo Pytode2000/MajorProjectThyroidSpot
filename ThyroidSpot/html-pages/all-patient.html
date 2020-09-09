@@ -18,7 +18,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
 
-    <script src="../js/patient-information-function.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js" integrity="sha512-G8JE1Xbr0egZE5gNGyUm1fF764iHVfRXshIoUWCTPAbKkkItp/6qal5YAHXrxEu4HNfPTQs6HOu3D5vCGS1j3w==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js" integrity="sha512-vBmx0N/uQOXznm/Nbkp7h0P1RfLSj0HQrFSzV8m7rOGyj30fYAOKHYvCNez+yM8IrfnW0TCodDEjRqf6fodf/Q==" crossorigin="anonymous"></script>
@@ -51,27 +50,27 @@
                         <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Small</span>
                         </div>
-                        <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                        <input id="searchInput" type="text" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
                     </div>
                 </div>
 
                 <!--Filter Button-->
                 <div class="col-4">
                   <div class="dropdown align-middle">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Filter By
+                    <button class="btn btn-secondary" onclick="sortListDir()" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Sort By Alphabetical Order
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                   <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                       <a class="dropdown-item" href="#">Action</a>
                       <a class="dropdown-item" href="#">Another action</a>
                       <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
+                    </div>-->
                   </div>
                 </div>
 
                 <!--Adopt Patient Button-->
                 <div class="col-3">
-                  <button type="button" class="btn btn-secondary float-right align-middle">Add Patient</button>
+                  <button data-toggle='modal' data-target='#adoptPatientModal' type="button" class="btn btn-secondary float-right align-middle">Add Patient</button>
                 </div>
 
             </div>
@@ -115,9 +114,8 @@
             </button>
             </div>
             <div class="modal-body">
-                <h1 id="diseaseName" class="centerText">Enter Patient Information</h1>
-                <label for="lname">Patient IC</label>
-                <input type="text" id="patientICInput" ><br><br>
+                <label for="lname">Enter Patient IC: </label>
+                <input type="text" id="patientICInput" placeholder="Patient IC"><br><br>
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

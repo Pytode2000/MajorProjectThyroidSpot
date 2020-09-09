@@ -12,9 +12,17 @@ var currentUser = [];
 var secondReportArray = [] // for search function
 var storeReports = [] //second array for search function
 
+FT4Array = []; //array to store FT4 readings of patient
+TSHArray = []; //array to store TSH readings of patient
+TreatmentArray = []; //FT4 + TSH array
+ExportationArray = []; //FT4 + TSH array for export
+
+storediagnosis = [];
 var diagnosis;
 var currentDiagnosis;
+var createreport;
 
+var viewdiagnosisbutton;
 var diagnosisInformation = [];
 var patientInfo = [];
 currentPatientUserId = localStorage.getItem("currentPatientUserId");
@@ -50,6 +58,11 @@ function getSpecificPatientInfo(){
                 dataType: 'json',
                 contentType: 'application/json',
                 success: function (data) {
+                    viewdiagnosisbutton = "<button id='diagnosisbtn' class=' btn btn-info btn-sm custom-class' index='" + patientInfo.patient_id + "'>View Diagnosis</button>"
+
+                    viewreportbutton = "<button id='forumdescbtn' class=' btn btn-info btn-sm' index='" + patientInfo.patient_id + "'>View Report</button>"
+                   
+                    createreport = "<button id='createrptbtn' onclick='document.getElementById('newReportModal').style.display='block'' class=' btn btn-info btn-sm custom-class'>Add Results</button>"
                     diagnosisInformation = data
                     console.log(diagnosisInformation.diagnosis1)
                     $('#patient-ic-number').text("IC Number: "+ patientInfo.ic_number)
@@ -65,12 +78,31 @@ function getSpecificPatientInfo(){
 });
 }
 
+function getDiagnosisDetails(){
+    $.ajax({
+        type: 'GET',
+        url: diagnosisURI +"/"+currentPatientId,
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            //put json data into bookArray
+            storediagnosis = data;
+            //console.log(storediagnosis)
+            //clear the tbody of the table so that it will be refreshed everytime
+            $('#diagnosisDisplay').html('');
+            //Iterate through the diseaseInfoArray to generate rows to populate the table
+            return getPatientReport();
+        }
+    });
+}
+
 
 
 function getPatientReport() {
     console.log("retrieving all patient report...")
 
-    console.log(currentPatientId)
+    //console.log(currentPatientID)
+    //console.log(storediagnosis)
     
     $.ajax({
         type: 'GET',
@@ -82,9 +114,10 @@ function getPatientReport() {
             reportArray = data;
             secondReportArray = data;
             //clear the tbody of the table so that it will be refreshed everytime
-            console.log(reportArray)
+            //console.log(reportArray)
             // $('#reportContent').html('');
             $('#dosagehist').html('');
+            $('#prescriptionButton').html('')
             //Iterate through the diseaseInfoArray to generate rows to populate the table
             if (reportArray == ""){
                 $('#searchRPTcontain').html('');
@@ -98,27 +131,150 @@ function getPatientReport() {
                     
                     var report = {report_id: reportArray[i].report_id, patient_id: reportArray[i].patient_id, drug_name: reportArray[i].drug_name, FT4: reportArray[i].FT4, TSH: reportArray[i].TSH, drug_dose: reportArray[i].drug_dose, timestamp: reportArray[i].timestamp}
                     storeReports.push(report)
-                    viewdosagebtn = "<button id='viewdosage' num="+reportArray[i].report_id+" class=' btn btn-info btn-sm'>View / Edit Prescription</button>";
+                    FT4Array.push(report.FT4)
+                    TSHArray.push(report.TSH)
+                    TreatmentArray.push({TSH: report.TSH, FT4: report.FT4, timestamp: report.timestamp})
+                    ExportationArray.push({TSH: report.TSH, FT4: report.FT4, timestamp: report.timestamp})
+                    viewdosagebtn = "<button id='viewdosage' num="+storeReports[storeReports.length-1].report_id+" class='btn btn-info btn-sm custom-class'>View Prescription</button>";
+                    aptdate = storeReports[storeReports.length-1].timestamp;
 
-                    //TODO: onclick on button to view report in a modal (then can add on a button to export it as PDF)
-                    $('#dosagehist').append("<div style='margin-bottom: 0.5em;'><table class='dosageTable'>"+
-                    "<tr><td class='reportTD'>"+report.timestamp+"</td><td class='reportFT'>"+report.FT4+"</td><td class='reportTSH'>"+
-                    ""+report.TSH+"</td><td class='reportDRNA'>"+viewdosagebtn+"</td></tr></table></div>");
                     
+                    $('#dosagehist').append("<tr style='margin-bottom: 0.5em;'>"+
+                    "<tr><td>"+report.timestamp+"</td><td>"+report.FT4+"</td><td>"+
+                    ""+report.TSH+"</td></tr></tr>");
+                    
+                    if (currentPatientId != reportArray[i].patient_id && i == reportArray.length-1){
+                        $('#searchRPTcontain').html('');
+                        $('#reportcontainer').html('');
+                        createreportbtn = "<button id='rpt' class=' btn btn-info btn-sm'>Create Report</button>"
+                        $('#reportcontainer').append("<div style='text-align: center; margin-top: 10%; margin-left: auto; margin-right: auto;'><h3>No patient report found</h3><div>"+createreportbtn+"<div></div>");
+                        return console.log("no report history")
+                    }
 
                 }
-                else if (currentPatientId != reportArray[i].patient_id && i == reportArray.length-1){
-                    $('#searchRPTcontain').html('');
-                    $('#reportcontainer').html('');
-                    createreportbtn = "<button id='rpt' class=' btn btn-info btn-sm'>Create Report</button>"
-                    $('#reportcontainer').append("<div style='text-align: center; margin-top: 10%; margin-left: auto; margin-right: auto;'><h3>No patient report found</h3><div>"+createreportbtn+"<div></div>");
-                    return console.log("no report history")
+                //console.log(reportArray.length)
+                if (i == reportArray.length-1){
+
+                    $('#prescriptionButton').append(viewdiagnosisbutton+"<br class='divider'>"+viewdosagebtn +"<br class='divider'>" +createreport);
+                    return startCalc();
                 }
             }
         }
         }
     });
 }
+
+//function for getting patient report without affecting graph
+function regetPatientReport() {
+    console.log("retrieving all patient report...")
+    
+    $.ajax({
+        type: 'GET',
+        url: reportURI,
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            //put json data into bookArray
+            reportArray = data;
+            secondReportArray = data;
+            //clear the tbody of the table so that it will be refreshed everytime
+           
+            // $('#reportContent').html('');
+            $('#dosagehist').html('');
+            $('#prescriptionButton').html('')
+            //Iterate through the diseaseInfoArray to generate rows to populate the table
+            if (reportArray == ""){
+                $('#searchRPTcontain').html('');
+                $('#reportcontainer').html('');
+                createreportbtn = "<button id='rpt' class=' btn btn-info btn-sm'>Create Report</button>"
+                $('#reportcontainer').append("<div style='text-align: center; margin-top: 10%; margin-left: auto; margin-right: auto;'><h3 >No patient report found</h3><div>"+createreportbtn+"<div></div>");
+            }
+            else{
+            for (i = 0; i < reportArray.length; i++) {
+                if (currentPatientID == reportArray[i].patient_id){
+                    
+                    var report = {report_id: reportArray[i].report_id, patient_id: reportArray[i].patient_id, drug_name: reportArray[i].drug_name, FT4: reportArray[i].FT4, TSH: reportArray[i].TSH, drug_dose: reportArray[i].drug_dose, timestamp: reportArray[i].timestamp}
+                    storeReports.push(report)
+                    FT4Array.push(report.FT4)
+                    TSHArray.push(report.TSH)
+                    TreatmentArray.push({TSH: report.TSH, FT4: report.FT4, timestamp: report.timestamp})
+                    viewdosagebtn = "<button id='viewdosage' num="+storeReports[storeReports.length-1].report_id+" class='btn btn-info btn-sm custom-class'>View Prescription</button>";
+                    aptdate = storeReports[storeReports.length-1].timestamp;
+
+                    
+                    $('#dosagehist').append("<tr style='margin-bottom: 0.5em;'>"+
+                    "<tr><td>"+report.timestamp+"</td><td>"+report.FT4+"</td><td>"+
+                    ""+report.TSH+"</td></tr></tr>");
+                    
+                    if (currentPatientID != reportArray[i].patient_id && i == reportArray.length-1){
+                        $('#searchRPTcontain').html('');
+                        $('#reportcontainer').html('');
+                        createreportbtn = "<button id='rpt' class=' btn btn-info btn-sm'>Create Report</button>"
+                        $('#reportcontainer').append("<div style='text-align: center; margin-top: 10%; margin-left: auto; margin-right: auto;'><h3>No patient report found</h3><div>"+createreportbtn+"<div></div>");
+                        return console.log("no report history")
+                    }
+
+                }
+                //console.log(reportArray.length)
+                if (i == reportArray.length-1){
+
+                    return $('#prescriptionButton').append(viewdiagnosisbutton+"<br class='divider'>"+viewdosagebtn +"<br class='divider'>" +createreport);
+                }
+            }
+        }
+        }
+    });
+}
+
+var stonks
+function searchPatientReport(){
+    //console.log("hi")
+    const searchTerm = document.getElementById("searchInputBox").value;
+
+    if (searchTerm.length == 0)
+    {  
+        storeReports = []
+        secondReportArray = []
+        //reportArray = []
+       regetPatientReport(); //call function when backspace
+       stonks = ""
+       return false; 
+    }  	
+    
+    if (!searchTerm) {
+        return;
+    }
+    
+    secondReportArray = storeReports.filter(currentGoal => {
+        if (currentGoal.timestamp && searchTerm) {
+            if (currentGoal.timestamp.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
+                    stonks =  currentGoal.timestamp
+                    console.log(currentGoal.timestamp)
+                    return true; 
+            }
+            return false;
+          }
+    });
+
+    console.log(secondReportArray)
+    $('#dosagehist').html('');
+    $('#prescriptionButton').html('');
+    for (i = 0; i < secondReportArray.length; i++){
+        viewdosagebtn = "<button id='viewdosage' num="+secondReportArray[secondReportArray.length-1].report_id+" class=' btn btn-info btn-sm custom-class'>View Prescription</button>";
+        
+        $('#dosagehist').append("<tr style='margin-bottom: 0.5em;'>"+
+        "<tr><td>"+secondReportArray[i].timestamp+"</td><td>"+secondReportArray[i].FT4+"</td><td>"+
+        ""+secondReportArray[i].TSH+"</td></tr></tr>");
+
+        if (i == secondReportArray.length-1){
+
+            return $('#prescriptionButton').append(viewdiagnosisbutton+"<br class='divider'>"+viewdosagebtn+"<br class='divider'>" +createreport);
+            //return startCalc();
+        }
+    }
+}
+
+
 
 //create function for postPatientReport
 function postPatientReport() {
@@ -205,6 +361,10 @@ $(document).on("click", "#updatePrescriptionBtn", function (){
     })
 });
 
+var reportft //store ft4 for pdf
+var reportts //store tsh for pdf
+var reporttime //store timestamp for pdf
+var reportdia = [] //store diagnosis for pdf
 //get one patient info
 function getOneReportInfo(){
     console.log("retrieving all patient report...")
@@ -220,17 +380,29 @@ function getOneReportInfo(){
             //clear the tbody of the table so that it will be refreshed everytime
             console.log(reportArray)
             // $('#reportContent').html('');
+            $('#tdDiagnosis').html('');
             for (i = 0; i < reportArray.length; i++) {
                 if (currentReportID == reportArray[i].report_id){
                     
                     var report = {report_id: reportArray[i].report_id, patient_id: reportArray[i].patient_id, drug_name: reportArray[i].drug_name, FT4: reportArray[i].FT4, TSH: reportArray[i].TSH, drug_dose: reportArray[i].drug_dose, timestamp: reportArray[i].timestamp}
-                    console.log("drugdose:"+report.drug_name)
+                    
                     //for prescription modal:
-                    patientDiagnosis = localStorage.getItem(currentDiagnosis)
-                    $('#tdDiagnosis').text(patientDiagnosis)
+                    
+                    console.log(storediagnosis)
+
+                    reportdia = [] //clear array
+                    for (x = 0; x < storediagnosis.length; x++){
+                        $('#tdDiagnosis').append(storediagnosis[x].diagnosis1+"<br>")
+                        reportdia.push(storediagnosis[x].diagnosis1)
+                    }
                     $('#tdCheckup').text(report.timestamp)
                     $('#tdFt4').text(report.FT4)
                     $('#tdTsh').text(report.TSH)
+
+                    reportft = report.FT4
+                    reportts = report.TSH
+                    reporttime = report.timestamp
+
 
                     getPrescription(); //function to show drug name and drug dose
                 }
@@ -298,5 +470,5 @@ $(document).on("click", "#rpt", function () {
 
 
 getSpecificPatientInfo();
-getPatientReport()
+getDiagnosisDetails();
 getPatientName();

@@ -28,6 +28,15 @@ namespace ThyroidSpotAppServices.Controllers
             }
         }
 
+        //Get report by patient id
+        public IEnumerable<patient_report> GetByPatient(int patientid)
+        {
+            using (ThyroidDataEntities entities = new ThyroidDataEntities())
+            {
+                return entities.patient_report.Where(s => s.patient_id == patientid).ToList();
+            }
+        }
+
         //add new patient report
         public void POST(patient_report report)
         {

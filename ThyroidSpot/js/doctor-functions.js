@@ -2,11 +2,13 @@ var patientURI = 'https://localhost:44395/api/patientInfo';
 var userURI = 'https://localhost:44395/api/user';
 var reportURI = 'https://localhost:44395/api/report';
 var reportArray = [];
+var latestReportArray = [];
 var patientInformationArray = [];
 var userInfoArray = [];
 var patientName;
 var valueFT4;
 var valueTSH;
+var totalPatient;
 var latestUpdate;
 var doctorID = sessionStorage.getItem("user_unique_id");
 var patientUnderClinician = [];
@@ -31,25 +33,28 @@ function getPatientName() {
 function getAllPatientUnderClinician() {
     $.ajax({
         type: 'GET',
-        url: patientURI,
+        url: patientURI+'?doctorid='+doctorID,
         dataType: 'json',
         contentType: 'application/json',
         success: function (data) {
-            patientInformationArray = data;
+            var patientInformationArray = data;
             $.ajax({
                 type: 'GET',
                 url: userURI,
                 dataType: 'json',
                 contentType: 'application/json',
                 success: function (data) {
-                    userInfoArray = data;
+                    var userInfoArray = data;
                     $('#patientCard').html('');
                     for (i = 0; i < patientInformationArray.length; i++) { 
-                        if(patientInformationArray[i].doctor_id == doctorID){
-                            for (j = 0; j < userInfoArray.length; j++){
-                                if(patientInformationArray[i].user_id == userInfoArray[j].user_id){
-                                    $('#patientCard').append("<div class='card patient-card'><div class='card-body'>"+
-                                        "<h5 class='card-title text-center'>"+userInfoArray[j].full_name+"</h5>"+
+                        console.log("hhhi"+patientInformationArray[i].user_id)
+                                console.log("bye"+patientInformationArray[i].user_id)
+                                var reportArray = data;
+                                for (j = 0; j < userInfoArray.length; j++){
+                                    console.log("hdi"+patientInformationArray[i].user_id)
+                                    if(patientInformationArray[i].user_id == userInfoArray[j].user_id){
+                                        $('#patientCard').append("<div id='singlePatientCard' class='card patient-card' data-string='"+userInfoArray[j].full_name+"'><div class='card-body'>"+
+                                        "<h5 id='patientName' class='card-title text-center'>"+userInfoArray[j].full_name+"</h5>"+
                                         "<p class='card-text text-center'>Gender : "+patientInformationArray[i].gender+"</p>"+
                                         "<p class='card-text text-center'>FT4 :</p>"+
                                         "<p class='card-text text-center'>TSH :</p>"+
@@ -59,19 +64,85 @@ function getAllPatientUnderClinician() {
                                         "<button id='abandonPatientBtn' index='"+i+"' num='"+ patientInformationArray[i].patient_id +"' class='btn btn-secondary btn-block' data-toggle='modal' data-target='#abandonPatientModal'>Abandon Patient</button>"+
                                         "</div><div class='card-footer'>"+
                                         "<small class='text-muted'>Last Updated :</small></div></div>")
+                                        totalPatient += 1;
+                                                                                        
+                                    }   
+                                        
                                 }   
                             }
-  
-                        }
-                      
-                    }
-
+                            
+                    
                 }
             });
-            
         }
     });
 }
+
+// Search Patient By Name
+$(document).on("keyup", "#searchInput", function() {
+    var input = $(this).val().toUpperCase();
+  
+    $(".card").each(function() {
+      if ($(this).data("string").toUpperCase().indexOf(input) < 0) {
+        $(this).hide();
+      } else {
+        $(this).show();
+      }
+    })
+  });
+
+function sortListDir() {
+    var list, i, switching, b, shouldSwitch, dir, switchcount = 0;
+    list = document.getElementById("patientCard");
+    switching = true;
+    // Set the sorting direction to ascending:
+    dir = "asc";
+    // Make a loop that will continue until no switching has been done:
+    while (switching) {
+        // Start by saying: no switching is done:
+        switching = false;
+        b = list.getElementsByClassName("card");
+        // Loop through all list-items:
+        for (i = 0; i < (b.length - 1); i++) {
+        // Start by saying there should be no switching:
+        shouldSwitch = false;
+        /* Check if the next item should switch place with the current item,
+        based on the sorting direction (asc or desc): */
+        if (dir == "asc") {
+            if (b[i].innerHTML.toLowerCase() > b[i + 1].innerHTML.toLowerCase()) {
+            /* If next item is alphabetically lower than current item,
+            mark as a switch and break the loop: */
+            shouldSwitch = true;
+            break;
+            }
+        } else if (dir == "desc") {
+            if (b[i].innerHTML.toLowerCase() < b[i + 1].innerHTML.toLowerCase()) {
+            /* If next item is alphabetically higher than current item,
+            mark as a switch and break the loop: */
+            shouldSwitch= true;
+            break;
+            }
+        }
+        }
+        if (shouldSwitch) {
+        /* If a switch has been marked, make the switch
+        and mark that a switch has been done: */
+        b[i].parentNode.insertBefore(b[i + 1], b[i]);
+        switching = true;
+        // Each time a switch is done, increase switchcount by 1:
+        switchcount ++;
+        } else {
+        /* If no switching has been done AND the direction is "asc",
+        set the direction to "desc" and run the while loop again. */
+        if (switchcount == 0 && dir == "asc") {
+            dir = "desc";
+            switching = true;
+        }
+        }
+    }
+    }
+
+
 
 $(document).on("click", "#abandonPatientBtn", function (){
     var currentPatient = $(this).attr('index')
