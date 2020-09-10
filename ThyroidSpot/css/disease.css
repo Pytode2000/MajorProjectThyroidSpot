@@ -1,6 +1,6 @@
 .container {
   display: grid;
-  column-gap: 20px;
+  grid-column-gap: 20px;
   margin-left: 50px;
   margin-right: 50px;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -64,6 +64,20 @@
     padding-right: 0px;
 }
 
+
+#viewmore {
+  color: white;
+}
+#viewForums {
+  color: white;
+}
+
+#viewmore:hover {
+  color: rgb(211, 211, 211);
+}
+#viewForums:hover {
+  color: rgb(211, 211, 211);
+}
 
 @media only screen and (max-width: 600px) {
   ·
@@ -143,6 +157,8 @@
 .custom-card{
   width: 18rem; margin-bottom: 2em;
 }
+
+
 
 
 
