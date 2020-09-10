@@ -9,6 +9,8 @@
 
     <!-- Imports -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -51,18 +53,12 @@
         </div>
         <div id="searchRPTcontain">
             <div id="searchInput">
-            <input id="searchInputBox" onkeyup="searchPatientReport();" placeholder="Search Date...">
+            <input id="searchInputBox" placeholder="Search Date...">
             </div>
         </div>
         <div id="reportcontainer">
             
             <div id="historycontainer">
-                <!-- <table class='centerTable' style="margin-top: 1em;">
-                    <tr><th id="labelDate" >Date</th>
-                        <th id="labelFT4" >FT4</th>
-                        <th id="labelTSH">TSH</th>
-                        <th id="labelDrug">Drug Dose</th>
-                </table> -->
                 <div id="prescriptionButton"></div>
                 <table id="class-report" class="table table-md" style="margin-top: 1em;">
                     <thead>
@@ -199,6 +195,51 @@
                 </div>
             </div>
         </div>
+
+        <!--Modal For Edit Patient Readings-->
+        <div class="modal fade" id="editReportModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <!-- <form id="createnfotable" onsubmit="putPatientReport(); return false;"> -->
+                        <h4 class="modal-title" id="myModalLabel">Updated Test Results</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="updating">
+                            <div class="form-group">
+                                <div style="display: block;">
+                                <label>FT4:</label>
+                                </div>
+                                <input type="text" style="width: 70%; display: inline;" class="form-control" id="updateFT4" placeholder="Updated FT4...">
+                                <select name="unitselection" id="FT4unitDDL" style="float: inherit;">
+                                    <option value="pmol/L" selected>pmol/L</option>
+                                    <option value="mU/L" >mU/L</option>  
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <div style="display: block;">
+                                <label>TSH:</label>
+                                </div>
+                                <input type="text" style="width: 70%; display: inline;" class="form-control" id="updateTSH" placeholder="Updated TSH...">
+                                <select name="unitselection" id="TSHunitDDL" style="float: inherit;">
+                                    <option value="mU/L" selected>mU/L</option>
+                                    <option value="pmol/L">pmol/L</option>
+                                </select>
+                            </div>
+                            <div style="text-align: center">
+                                <button type="button" class="btn btn-primary custom-class" onclick="putPatientReport();">Save Report</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
 
         <!--Modal For Diagnosis-->
         <div id="DiagnosisCardContent" class="w3-modal">
