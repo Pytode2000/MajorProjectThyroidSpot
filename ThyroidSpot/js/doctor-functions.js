@@ -79,7 +79,9 @@ function getAllPatientUnderClinician() {
                                     lastReportTSH = lastReport.TSH;
                                 } catch (err) {
                                     console.log("This user no report.");
-
+                                    lastReportTimestamp = "No Report"
+                                    lastReportFT4 = " -"
+                                    lastReportTSH = " -"
                                 }
 
 

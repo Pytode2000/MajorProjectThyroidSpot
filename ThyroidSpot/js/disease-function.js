@@ -174,9 +174,9 @@ function getAllDiseaseInfo() {
                 }
 
 
-                $('#diseaseCard').append("<div class='card custom-card'><div class='card-header' style='height: 65px;'><h5 class='card-title'>" + diseaseInfoArray[i].disease + "</h5></div><div class='card-body'>" +
+                $('#diseaseCard').append("<div class='card custom-card'><div class='card-header text-white' style='height: 65px; background-color: #545b62;'><h5 class='card-title'>" + diseaseInfoArray[i].disease + "</h5></div><div class='card-body'>" +
                     "<p class='card-text descript-length'>" + diseaseInfoArray[i].description + "</p>" +
-                    "</div><div class='card-footer'><a href='#' id='viewmore' num=" + i + " class='card-link'>View More</a>" +
+                    "</div><div class='card-footer' style='background-color: #6c757d;'><a href='#' id='viewmore' num=" + i + " class='card-link'>View More</a>" +
                     "<a href='#' id='viewForums' num=" + i + " class='card-link'>View Forums</a></div></div>")
 
             }
@@ -263,24 +263,11 @@ function diseaseSearch() {
         // $('#diseaseCard').append("<div id='viewmore' num=" + secondInfoArray[i].id + "  class = 'centerText'>" +
         //     coverImage + "<div class='centerTitle'><b>" + secondInfoArray[i].disease + "</b></div></div>");
 
-        //TODO: gather and limit short description (limit to 94 chars)
-        var limitdesc = secondInfoArray[i].description
-
-        var maxLength = 94 // maximum number of characters to extract
-
-        //Trim and re-trim only when necessary (prevent re-trim when string is shorted than maxLength, it causes last word cut) 
-        if (limitdesc.length > maxLength) {
-            //trim the string to the maximum length
-            var trimmedString = limitdesc.substr(0, maxLength);
-
-            //re-trim if we are in the middle of a word and 
-            trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
-        }
-
-        $('#diseaseCard').append("<div class='card' style='width: 18rem; margin-bottom: 2em'><div class='card-body'><h5 class='card-title'>" + secondInfoArray[i].disease + "</h5>" +
-            "<p class='card-text'>" + trimmedString + "...</p>" +
-            "<a href='#' id='viewmore' num=" + secondInfoArray[i].id + " class='card-link'>View More</a>" +
-            "<a href='#' id='viewForums' num=" + secondInfoArray[i].id + " class='card-link'>View Forums</a></div></div>")
+ 
+        $('#diseaseCard').append("<div class='card custom-card'><div class='card-header text-white' style='height: 65px; background-color: #545b62;'><h5 class='card-title'>" + secondInfoArray[i].disease + "</h5></div><div class='card-body'>" +
+        "<p class='card-text descript-length'>" + secondInfoArray[i].description + "</p>" +
+        "</div><div class='card-footer' style='background-color: #6c757d;'><a href='#' id='viewmore' num=" + i + " class='card-link'>View More</a>" +
+        "<a href='#' id='viewForums' num=" + i + " class='card-link'>View Forums</a></div></div>")
     }
 
 }
