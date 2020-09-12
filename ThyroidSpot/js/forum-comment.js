@@ -75,14 +75,36 @@ function queryName() {
         }
 
     });
+}
 
-
-
-
+var userInfoArray = [];
+var captureusername;
+//LINKED: get number of comments based on post ID
+var getUsernames = [];
+function checkIfUserExist(checkname) {
+    $.ajax({
+        type: 'GET',
+        async: false,
+        url: userURI,
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            getUsernames = data;
+            for (x = 0; x < getUsernames.length; x++){
+                if (checkname == getUsernames[x].full_name){
+                    checkdeleteduser = getUsernames[x].full_name
+                    if (checkname != getUsernames[x].full_name && x == getUsernames.length-1){
+                        checkdeleteduser = "[deleted user]"
+                        return console.log("no more")
+                    }
+                }
+            }
+        }
+    });
 }
 
 
-
+var checkdeleteduser;
 //get comment based on post id
 function getCommentByID(id) {
     //console.log("username: " + matchingname)
@@ -142,11 +164,19 @@ function getCommentByID(id) {
                             dropdown = "";
                         }
 
-
+                        checkIfUserExist(commentArray[i].username)
+                        console.log("user result: "+checkdeleteduser)
+                        //set deleted user from "undefined" to [deleted user]
+                        if (checkdeleteduser == undefined){
+                            checkdeleteduser = "[deleted user]"
+                        }
+                        else{
+                            console.log(checkdeleteduser)
+                        }
 
                         // if (matchingname == commentArray[i].username) {
                         $('#allComments').append("<div class='list-group'><div class='list-group-item mt-1 flex-column align-items-start'><div>" +
-                            "<small id='comUsname'>" + commentArray[i].username + "</small><small> · " + commentArray[i].timestamp + "</small>" + dropdown + "</div><p class='mb-1'>" + commentArray[i].comment + "</p></div></div>");
+                            "<small id='comUsname'>" + checkdeleteduser + "</small><small> · " + commentArray[i].timestamp + "</small>" + dropdown + "</div><p class='mb-1'>" + commentArray[i].comment + "</p></div></div>");
                         // }
                         // else {
                         //     $('#allComments').append("<div class='list-group'><div class='list-group-item list-group-item-action flex-column align-items-start'><div>" +
@@ -172,8 +202,6 @@ function getCommentByID(id) {
 
 
 
-var userInfoArray = [];
-var captureusername;
 //QUERY FOR USERNAME FIRST BEFORE ADD/UPDATE COMMENT
 var userURI = 'https://localhost:44395/api/user';
 function getUserName() {
