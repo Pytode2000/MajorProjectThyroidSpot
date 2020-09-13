@@ -231,7 +231,7 @@ function removeDefaultDiagnosis() {
             $('#deleteDiagnosisModal').modal('hide');
             $('#diagnosisEditBlock').html('');
             $('#profDiagnosis').html('');
-            
+
 
             getPatientInfo();
         }
