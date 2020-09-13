@@ -205,8 +205,7 @@ function getCommentByID(id) {
                         //     // document.getElementById("addNewComment").style.visibility = "hidden";
                         // }
 
-                        //TODO: check if username still exists in database, else insert [deleteduser]
-
+                        
                     }
                     // if (id != commentArray[i].forum_id && i == commentArray.length - 1) {
 

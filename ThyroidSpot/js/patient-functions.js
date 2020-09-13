@@ -251,8 +251,8 @@ function getPatientReport() {
                         ExportationArray.push({TSH: report.TSH, FT4: report.FT4, timestamp: report.timestamp})
 
 
-                        viewdosagebtn = "<button id='viewdosage' num="+storeReports[storeReports.length-1].report_id+" class='btn btn-info btn-sm custom-class'>View Prescription</button>";
-                        aptdate = storeReports[storeReports.length-1].timestamp;
+                        viewdosagebtn = "<button id='viewdosage' num="+storeReports[0].report_id+" class='btn btn-info btn-sm custom-class'>View Prescription</button>";
+                        aptdate = storeReports[0].timestamp;
 
                         // Only creator and clinician can update thread.
                         if (sessionStorage.getItem("user_account_type") == "clinician") {
@@ -295,12 +295,18 @@ function getPatientReport() {
                         }
 
                     }
+                    else{
+                        $('#searchRPTcontain').html('');
+                        $('#reportcontainer').html('');
+                        createreportbtn = "<button id='rpt' class=' btn btn-info btn-sm'>Create Report</button>"
+                        $('#reportcontainer').append("<div style='text-align: center; margin-top: 10%; margin-left: auto; margin-right: auto;'><h3 >No patient report found</h3><div>"+createreportbtn+"<div></div>");
+                    }
                     //console.log(reportArray.length)
                     if (i == reportArray.length-1){
-
                         $('#prescriptionButton').append(viewdiagnosisbutton+"<br class='divider'>"+viewdosagebtn +"<br class='divider'>" +createreport);
                         return startCalc();
                     }
+                    
                 }
             }
         }
@@ -566,8 +572,8 @@ function postPatientReport() {
                         console.log(data)
 
                         getOnePatientInfo();
-                        document.getElementById('newPatientModal').style.display='none'
-                        window.location.reload();
+                        $('#updatemodalImg').modal('hide')
+                        window.location.reload(); //reload page after adding so it shows the newly added report + prescription
                     }
                 });
             }

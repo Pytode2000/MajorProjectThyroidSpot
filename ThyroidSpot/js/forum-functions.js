@@ -86,7 +86,6 @@ function getAllForumByDisease() {
             postArray = data;
             postArray1 = data; // for update
             secondPostArray = data;
-            // //console.log(diseaseInfoArray)
             //clear the tbody of the table so that it will be refreshed everytime
             //     $('#tableBody').html('');
 
@@ -167,8 +166,8 @@ function getAllForumByDisease() {
 
 //filter posts by recent date
 function filterByActivity(value) {
-    //console.log("test")
-    //console.log(secondPostArray.timestamp)
+    console.log(value)
+    console.log(secondPostArray)
 
     //Sort by latest
     if (value == "Latest") {
@@ -178,9 +177,11 @@ function filterByActivity(value) {
             return dateToNum(b.timestamp) - dateToNum(a.timestamp);
         });
         function dateToNum(d) {
-            d = d.split("-"); return Number(d[2] + d[1] + d[0]);
+            d = d.split("-"); 
+            console.log(d)
+            return Number(d[2] + d[1] + d[0]);
         }
-
+        $('#newFilterRepDDL').val('');
         appendThreads()
 
         //console.log(secondPostArray)
@@ -247,6 +248,7 @@ function filterByActivity(value) {
         function dateToNum(d) {
             d = d.split("-"); return Number(d[2] + d[1] + d[0]);
         }
+        $('#newFilterRepDDL').val('');
         appendThreads()
 
 
@@ -288,8 +290,10 @@ function filterByActivity(value) {
     }
 }
 
-function appendThreads() {
 
+var thirdPostArray = []
+function appendThreads() {
+    thirdPostArray = []
     $('#tableBody').html(''); //clear desktop view of anything
     $('#allPostsMobile').html(''); //clear mobile view as well
     for (i = 0; i < secondPostArray.length; i++) {
@@ -299,6 +303,11 @@ function appendThreads() {
             getNumberOfComments(getPostId);
             //console.log("num of comments: " + commentNumber)
 
+            thirdPostArray.push({idForum: secondPostArray[i].idForum, disease_name: secondPostArray[i].disease_name,
+                post_title: secondPostArray[i].post_title, post_description: secondPostArray[i].post_description,
+                user_name: secondPostArray[i].user_name, timestamp: secondPostArray[i].timestamp, repliescount: commentNumber})
+            
+            console.log(thirdPostArray)
             // Only creator can update thread.
             if (uname == secondPostArray[i].user_name) {
                 updateButton = "<button num='" + secondPostArray[i].idForum + "' id='updateForumbtn' class='dropdown-item' data-toggle='modal'>Update</button> ";
@@ -337,7 +346,7 @@ function appendThreads() {
             "</div><h5 class='mb-1'><a href='#' id='viewComments' num=" + secondPostArray[i].idForum + 
             ">" + secondPostArray[i].post_title + "</a></h5><p class='mb-1'>"+commentNumber+" Replies</p></div><br/>");
 
-
+        
             if (diseasename != secondPostArray[i].disease_name && i == secondPostArray.length - 1) {
 
                 $('#allPosts').html('')
@@ -345,6 +354,54 @@ function appendThreads() {
                 return //console.log("no forum post")
             }
         }
+    }
+}
+
+function filterRepliesByActivity(val){
+    console.log(val)
+    if (val == "Reset"){
+        //TODO: ensure filter does not reload
+        location.reload()
+    }
+    else if (val == "Latest"){
+        console.log(thirdPostArray)
+
+        thirdPostArray.sort(function(a, b){
+            return b.repliescount-a.repliescount;
+        });
+        secondPostArray = []
+        // secondPostArray = thirdPostArray
+        console.log(thirdPostArray)
+
+        for(var i = 0; i < thirdPostArray.length; i++) {
+            secondPostArray.push(thirdPostArray[i]);
+            thirdPostArray.splice(i, 1);
+            i--; //decrement i IF we remove an item
+        }
+
+        console.log(secondPostArray)
+        appendThreads()
+
+    }
+    else if (val == "Least"){
+        console.log(thirdPostArray)
+
+        thirdPostArray.sort(function(a, b){
+            return a.repliescount-b.repliescount;
+        });
+        secondPostArray = []
+        // secondPostArray = thirdPostArray
+        console.log(thirdPostArray)
+
+        for(var i = 0; i < thirdPostArray.length; i++) {
+            secondPostArray.push(thirdPostArray[i]);
+            thirdPostArray.splice(i, 1);
+            i--; //decrement i IF we remove an item
+        }
+
+        console.log(secondPostArray)
+        appendThreads()
+
     }
 }
 
