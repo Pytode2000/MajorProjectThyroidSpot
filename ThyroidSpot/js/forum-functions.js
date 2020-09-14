@@ -46,7 +46,7 @@ function checkDiseaseName() {
         contentType: 'application/json',
         success: function (data) {
             diseaseInfoArray = data
-
+            $('#getDiseaseName').html('')
             for (x = 0; x < diseaseInfoArray.length; x++) {
                 if (disease_id == x) {
                     //console.log(diseaseInfoArray[x].disease)
@@ -78,6 +78,7 @@ function getAllForumByDisease() {
 
     $.ajax({
         type: 'GET',
+        async: true,
         url: forumpostURI,
         dataType: 'json',
         contentType: 'application/json',
@@ -158,14 +159,17 @@ function getAllForumByDisease() {
             //             }
             //         }
             //     }
-            filterByActivity("Latest")
+            return filterByActivity("Latest")
         }
     });
 }
 
 
 //filter posts by recent date
+// var sf =  $('#newFilterDDL').val()
+// console.log("test get: " + sf)
 function filterByActivity(value) {
+    
     console.log(value)
     console.log(secondPostArray)
 
@@ -181,8 +185,9 @@ function filterByActivity(value) {
             console.log(d)
             return Number(d[2] + d[1] + d[0]);
         }
-        $('#newFilterRepDDL').val('');
-        appendThreads()
+        $('#newFilterRepDDL').prop('selectedIndex',0);
+       
+        return appendThreads()
 
         //console.log(secondPostArray)
 
@@ -248,8 +253,8 @@ function filterByActivity(value) {
         function dateToNum(d) {
             d = d.split("-"); return Number(d[2] + d[1] + d[0]);
         }
-        $('#newFilterRepDDL').val('');
-        appendThreads()
+        $('#newFilterRepDDL').prop('selectedIndex',0);
+        return appendThreads()
 
 
         //     $('#tableBody').html('');
@@ -361,7 +366,10 @@ function filterRepliesByActivity(val){
     console.log(val)
     if (val == "Reset"){
         //TODO: ensure filter does not reload
-        location.reload()
+        secondPostArray = []
+        thirdPostArray = []
+        $('#newFilterDDL').prop('selectedIndex',0);
+        return checkDiseaseName();
     }
     else if (val == "Latest"){
         console.log(thirdPostArray)
@@ -380,7 +388,7 @@ function filterRepliesByActivity(val){
         }
 
         console.log(secondPostArray)
-        appendThreads()
+        return appendThreads()
 
     }
     else if (val == "Least"){
@@ -400,7 +408,7 @@ function filterRepliesByActivity(val){
         }
 
         console.log(secondPostArray)
-        appendThreads()
+        return appendThreads()
 
     }
 }
