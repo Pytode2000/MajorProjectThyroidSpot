@@ -131,6 +131,10 @@ a:hover {
   display: block;
 }
 
+/* mobile sort reply */
+#newFilterRepDDLMobile{
+  display: none;
+}
 
 @media only screen and (max-width: 600px) {
   /* header and search div settings */
@@ -160,6 +164,16 @@ a:hover {
   }
   #allPosts{
     display: none;
+  }
+
+
+  /* mobile sort reply */
+  #newFilterRepDDLMobile{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 10em;
+    margin-top: 1em;
   }
 }
 

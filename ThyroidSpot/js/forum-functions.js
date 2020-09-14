@@ -186,7 +186,7 @@ function filterByActivity(value) {
             return Number(d[2] + d[1] + d[0]);
         }
         $('#newFilterRepDDL').prop('selectedIndex',0);
-       
+        $('#newFilterRepDDLMobile').prop('selectedIndex',0);
         return appendThreads()
 
         //console.log(secondPostArray)
@@ -254,6 +254,7 @@ function filterByActivity(value) {
             d = d.split("-"); return Number(d[2] + d[1] + d[0]);
         }
         $('#newFilterRepDDL').prop('selectedIndex',0);
+        $('#newFilterRepDDLMobile').prop('selectedIndex',0);
         return appendThreads()
 
 

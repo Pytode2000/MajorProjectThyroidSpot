@@ -105,6 +105,14 @@
                                     <option value="Oldest">Oldest</option>
                                 </select>
                             </div>
+                            <div id="mobilesort">
+                                <select name="unitselection" id="newFilterRepDDLMobile" onchange="filterRepliesByActivity(this.value);">
+                                    <option disabled selected hidden value>Sort by Replies</option>
+                                    <option value="Reset">--Clear Filter--</option>
+                                    <option value="Latest">Most Replies</option>
+                                    <option value="Least">Least Replies</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <br/>
@@ -116,16 +124,7 @@
                                     <th>By</th>
                                     <th>Date Posted</th>
                                     <th>Replies
-                                        <!-- <div class="dropdown" style="float: right;">
-                                            <button class="btn btn-sm" style="color: black; border-style: none;" type="button" id="dropdownMenu2"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                &#11206;
-                                            </button>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                                <button class="dropdown-item" type="button">Most Replies</button>
-                                                <button class="dropdown-item" type="button">Least Replies</button>
-                                            </div>
-                                        </div> -->
+                                        
                                         <select name="unitselection" id="newFilterRepDDL" style="width: 20px;" onchange="filterRepliesByActivity(this.value);">
                                             <option disabled selected hidden value> </option>
                                             <option value="Reset">--Clear Filter--</option>

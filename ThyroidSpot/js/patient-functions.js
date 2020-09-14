@@ -303,7 +303,7 @@ function getPatientReport() {
                     }
                     //console.log(reportArray.length)
                     if (i == reportArray.length-1){
-                        $('#prescriptionButton').append(viewdiagnosisbutton+"<br class='divider'>"+viewdosagebtn +"<br class='divider'>" +createreport);
+                        $('#prescriptionButton').append(viewdiagnosisbutton+" "+viewdosagebtn +"<br class='divider'>" +createreport);
                         return startCalc();
                     }
                     
