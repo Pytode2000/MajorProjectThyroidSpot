@@ -181,14 +181,11 @@ function filterByActivity(value) {
             console.log(d)
             return Number(d[2] + d[1] + d[0]);
         }
-<<<<<<< HEAD
+
         $('#newFilterRepDDL').prop('selectedIndex',0);
         $('#newFilterRepDDLMobile').prop('selectedIndex',0);
         return appendThreads()
-=======
-        $('#newFilterRepDDL').val('');
-        appendThreads()
->>>>>>> parent of 6dcabdd... Bug fix for thread filters
+
 
         //console.log(secondPostArray)
 
@@ -254,14 +251,10 @@ function filterByActivity(value) {
         function dateToNum(d) {
             d = d.split("-"); return Number(d[2] + d[1] + d[0]);
         }
-<<<<<<< HEAD
+
         $('#newFilterRepDDL').prop('selectedIndex',0);
         $('#newFilterRepDDLMobile').prop('selectedIndex',0);
         return appendThreads()
-=======
-        $('#newFilterRepDDL').val('');
-        appendThreads()
->>>>>>> parent of 6dcabdd... Bug fix for thread filters
 
 
         //     $('#tableBody').html('');

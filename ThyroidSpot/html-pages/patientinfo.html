@@ -42,7 +42,7 @@
 
 <body>
     <div id="navbar-html"></div>
-    <main>
+    <main onload="getUserName();">
         <!--Patient Cards-->
     <div class="content">
         <div id="patientCardContent" class="container">
@@ -79,10 +79,10 @@
                 </div> -->
             </div>
             <div id="openGraphModalBtn">
-                <canvas id="graphcontainer" >
+                <canvas id="graphcontainer2" >
                     <!--<h2 style="text-align: center;">Graph over here</h2>-->
                 </canvas>
-                <script src="../js/graph_algorithm.js"></script>
+               
             </div>
         </div>
         
@@ -290,7 +290,7 @@
                         <canvas id="graphcontainer1" >
                             <!--<h2 style="text-align: center;">Graph over here</h2>-->
                         </canvas>
-                        <script src="../js/graph_algorithm.js"></script>
+                        
                         <br>
                         <button class="btn btn-info btn-sm custom-class" id="exportcalc">Export chart calculations</button>
                     </div>
@@ -464,8 +464,6 @@
 
             $("#footer-html").load("../html-components/footer.html");
         });
-
-
     </script>
     <script src="../js/graph_algorithm.js"></script>
 </body>

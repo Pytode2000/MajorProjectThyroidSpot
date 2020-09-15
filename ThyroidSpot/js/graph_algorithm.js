@@ -43,12 +43,12 @@ function startCalc(){
 
     ft4Unit = " pmol/L";
     tshUnit = " mU/L";
-    //console.log(TreatmentArray.length)
+    console.log(TreatmentArray.length)
     
     validArray = treatmentList
 
     
-    //console.log(treatmentList)
+    console.log(treatmentList)
     //console.log(validArray)
     totalNumOfTreatments = treatmentList.length;
     //console.log(totalNumOfTreatments)
@@ -282,7 +282,7 @@ function removeOutliers(){
 
 //TODO: displaying calculated chart (chart hasn't been fully implemented)
 function launchgraph(){
-    var ctx = document.getElementById('graphcontainer').getContext('2d');
+    var ctx = document.getElementById('graphcontainer2').getContext('2d');
     myChart = new Chart(ctx, {
         type: 'line',
         
@@ -432,3 +432,7 @@ $(document).on("click", "#exportcalc", function(){
     document.body.appendChild(link)
     document.querySelector('#download-csv').click()
 })
+
+window.onload = function() {
+    startCalc();
+}

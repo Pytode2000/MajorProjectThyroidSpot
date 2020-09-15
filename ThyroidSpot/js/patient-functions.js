@@ -206,6 +206,7 @@ function getPatientReport() {
     
     $.ajax({
         type: 'GET',
+        async: false,
         url: reportURI,
         dataType: 'json',
         contentType: 'application/json',
@@ -219,13 +220,14 @@ function getPatientReport() {
             $('#dosagehist').html('');
             $('#prescriptionButton').html('')
             //Iterate through the diseaseInfoArray to generate rows to populate the table
+            console.log(reportArray)
             if (reportArray == ""){
                 $('#searchRPTcontain').html('');
                 $('#reportcontainer').html('');
                 createreportbtn = "<button id='rpt' class=' btn btn-info btn-sm'>Create Report</button>"
                 $('#reportcontainer').append("<div style='text-align: center; margin-top: 10%; margin-left: auto; margin-right: auto;'><h3 >No patient report found</h3><div>"+createreportbtn+"<div></div>");
             }
-            else{
+            else if (reportArray != ""){
 
                 reportArray.sort(function (a, b) {
                     //console.log(dateToNum(a.timestamp))
@@ -281,7 +283,7 @@ function getPatientReport() {
                             dropdown = ""
                         }
 
-                        
+                        console.log(report.timestamp)
                         $('#dosagehist').append("<tr style='margin-bottom: 0.5em;'>"+
                         "<tr><td>"+report.timestamp+"</td><td>"+report.FT4+"</td><td>"+
                         ""+report.TSH+"</td><td>"+dropdown+"</td></tr></tr>");
@@ -295,16 +297,16 @@ function getPatientReport() {
                         }
 
                     }
-                    else{
-                        $('#searchRPTcontain').html('');
-                        $('#reportcontainer').html('');
-                        createreportbtn = "<button id='rpt' class=' btn btn-info btn-sm'>Create Report</button>"
-                        $('#reportcontainer').append("<div style='text-align: center; margin-top: 10%; margin-left: auto; margin-right: auto;'><h3 >No patient report found</h3><div>"+createreportbtn+"<div></div>");
-                    }
+                    // else{
+                    //     $('#searchRPTcontain').html('');
+                    //     $('#reportcontainer').html('');
+                    //     createreportbtn = "<button id='rpt' class=' btn btn-info btn-sm'>Create Report</button>"
+                    //     $('#reportcontainer').append("<div style='text-align: center; margin-top: 10%; margin-left: auto; margin-right: auto;'><h3 >No patient report found</h3><div>"+createreportbtn+"<div></div>");
+                    // }
                     //console.log(reportArray.length)
                     if (i == reportArray.length-1){
                         $('#prescriptionButton').append(viewdiagnosisbutton+" "+viewdosagebtn +"<br class='divider'>" +createreport);
-                        return startCalc();
+                        //return startCalc();
                     }
                     
                 }
