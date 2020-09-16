@@ -239,6 +239,13 @@
     overflow: auto;
   }
 
+  #drugTableDesktop{
+    display: block;
+  }
+  #drugTableMobile{
+    display: none;
+  }
+
 
 /* TODO: prescriptionModal, newReportModal for mobile */
 @media only screen and (max-width: 600px) {
@@ -451,5 +458,16 @@
     overflow: scroll;
   }
 
+
+  /* mobile version of drug table */
+  #drugTableDesktop{
+    display: none;
+  }
+  #drugTableMobile{
+    display: block;
+    margin-top: 0.5em;
+    height: 300px;
+    overflow: auto;
+  }
 }
   
