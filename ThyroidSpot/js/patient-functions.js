@@ -73,7 +73,7 @@ function getOnePatientInfo() {
 
                     // createreport = "<button id='createrptbtn1' class=' btn btn-info btn-sm custom-class'>Add Results</button>"
 
-                    createreport = "<button class='btn btn-primary btn-sm' data-toggle='modal' data-target='#createHealthReportModal'>Add Results</button>"
+                    createreport = "<button id='createrptbtn1' class='btn btn-primary btn-sm' data-toggle='modal' data-target='#createHealthReportModal'>Add Results</button>"
 
                     $('#patientCardContent').append("<h2 style='text-align: center'>" + username + "</h2><table class='infoTable table-sm'><tr>" +
                         "<td class='shiftedrow1'><b>IC number: " + patientInfoArray[i].ic_number +
