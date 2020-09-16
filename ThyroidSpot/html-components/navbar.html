@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="../css/navbar.css" />
 
-<nav id="navbar-main" class="navbar-main hide">
+<nav id="navbar-main" class="navbar-main hide animate__animated animate__slideInLeft">
     <ul class="navbar-nav">
         <li class="logo">
             <a href="index.html" class="nav-link">
@@ -87,7 +87,12 @@
     </ul>
 </nav>
 
-
+<!-- <script>
+    if ($(window).width() < 600) {
+        $("#navbar-main").removeClass("animate__slideInLeft");
+        $("#navbar-main").addClass("animate__slideInUp");
+    }
+</script> -->
 
 
 <!-- When loading, this animation will be activated. -->
