@@ -434,6 +434,8 @@ $(document).on("click", "#exportcalc", function(){
     document.querySelector('#download-csv').click()
 })
 
-window.onload = function() {
-    startCalc();
-}
+
+//WORKAROUND: assumed fix for occasional chart duplicate glitches
+// window.onload = function() {
+//     startCalc();
+// }

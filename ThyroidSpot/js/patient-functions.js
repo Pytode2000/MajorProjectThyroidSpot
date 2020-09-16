@@ -210,7 +210,7 @@ function getPatientReport() {
 
     $.ajax({
         type: 'GET',
-        async: false,
+        //async: true,
         url: reportURI,
         dataType: 'json',
         contentType: 'application/json',
@@ -310,7 +310,7 @@ function getPatientReport() {
                     //console.log(reportArray.length)
                     if (i == reportArray.length - 1) {
                         $('#prescriptionButton').append(viewdiagnosisbutton + " " + viewdosagebtn + "<br class='divider'>" + createreport);
-                        //return startCalc();
+                        return startCalc();
                     }
 
                 }

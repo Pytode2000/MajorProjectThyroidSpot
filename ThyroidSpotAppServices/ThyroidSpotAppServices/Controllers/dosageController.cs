@@ -20,14 +20,14 @@ namespace ThyroidSpotAppServices.Controllers
             }
         }
 
-        //get one dosage info via report_id (for debug)
-        public drug_dosage Get(int id)
-        {
-            using (ThyroidDataEntities entities = new ThyroidDataEntities())
-            {
-                return entities.drug_dosage.FirstOrDefault(e => e.report_id == id);
-            }
-        }
+        //get one dosage info via report_id (OBSOLETE)
+        //public drug_dosage Get(int id)
+        //{
+        //    using (ThyroidDataEntities entities = new ThyroidDataEntities())
+       //     {
+       //         return entities.drug_dosage.FirstOrDefault(e => e.report_id == id);
+       //     }
+       // }
 
         //add dosage
         public void POST(drug_dosage drugdoses)
@@ -53,7 +53,6 @@ namespace ThyroidSpotAppServices.Controllers
                 dosage.drug_dose = drug.drug_dose;
                 dosage.drug_days = drug.drug_days;
                 dosage.drug_img = drug.drug_img;
-                dosage.report_id = drug.report_id;
                 dosage.remarks = drug.remarks;
 
                 entities.Entry(dosage).State = System.Data.Entity.EntityState.Modified;

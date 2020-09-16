@@ -45,20 +45,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="drug_dosage">
-      <EntityTypeMapping TypeName="ThyroidDataModel.drug_dosage">
-        <MappingFragment StoreEntitySet="drug_dosage">
-          <ScalarProperty Name="remarks" ColumnName="remarks" />
-          <ScalarProperty Name="drug_img" ColumnName="drug_img" />
-          <ScalarProperty Name="patient_id" ColumnName="patient_id" />
-          <ScalarProperty Name="drug_days" ColumnName="drug_days" />
-          <ScalarProperty Name="report_id" ColumnName="report_id" />
-          <ScalarProperty Name="drug_dose" ColumnName="drug_dose" />
-          <ScalarProperty Name="drug_name" ColumnName="drug_name" />
-          <ScalarProperty Name="idDosage" ColumnName="idDosage" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="patient_information">
       <EntityTypeMapping TypeName="ThyroidDataModel.patient_information">
         <MappingFragment StoreEntitySet="patient_information">
@@ -93,6 +79,19 @@
           <ScalarProperty Name="comment" ColumnName="comment" />
           <ScalarProperty Name="forum_id" ColumnName="forum_id" />
           <ScalarProperty Name="idForumComment" ColumnName="idForumComment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="drug_dosage">
+      <EntityTypeMapping TypeName="ThyroidDataModel.drug_dosage">
+        <MappingFragment StoreEntitySet="drug_dosage">
+          <ScalarProperty Name="remarks" ColumnName="remarks" />
+          <ScalarProperty Name="drug_img" ColumnName="drug_img" />
+          <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+          <ScalarProperty Name="drug_days" ColumnName="drug_days" />
+          <ScalarProperty Name="drug_dose" ColumnName="drug_dose" />
+          <ScalarProperty Name="drug_name" ColumnName="drug_name" />
+          <ScalarProperty Name="idDosage" ColumnName="idDosage" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
