@@ -328,7 +328,8 @@ function launchgraph(){
 
     //onclick function
     $(document).on("click", "#openGraphModalBtn", function(){
-        document.getElementById('GraphModal').style.display='block'
+        // document.getElementById('GraphModal').style.display='block'
+        $('#graphModal').modal('toggle');
         var ctx = document.getElementById('graphcontainer1').getContext('2d');
         myChart = new Chart(ctx, {
             type: 'line',
