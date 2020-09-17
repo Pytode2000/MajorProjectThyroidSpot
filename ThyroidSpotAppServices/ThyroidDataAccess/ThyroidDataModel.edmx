@@ -44,7 +44,6 @@
           <Property Name="idDosage" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="drug_name" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="drug_dose" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="report_id" Type="int" Nullable="false" />
           <Property Name="drug_days" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="patient_id" Type="int" Nullable="false" />
           <Property Name="drug_img" Type="text" />
@@ -124,10 +123,10 @@
           <EntitySet Name="user" EntityType="ThyroidDataModel.user" />
           <EntitySet Name="patient_report" EntityType="ThyroidDataModel.patient_report" />
           <EntitySet Name="diagnosis" EntityType="ThyroidDataModel.diagnosis" />
-          <EntitySet Name="drug_dosage" EntityType="ThyroidDataModel.drug_dosage" />
           <EntitySet Name="patient_information" EntityType="ThyroidDataModel.patient_information" />
           <EntitySet Name="disease_forum" EntityType="ThyroidDataModel.disease_forum" />
           <EntitySet Name="forum_comment" EntityType="ThyroidDataModel.forum_comment" />
+          <EntitySet Name="drug_dosage" EntityType="ThyroidDataModel.drug_dosage" />
         </EntityContainer>
         <EntityType Name="user">
           <Key>
@@ -155,19 +154,6 @@
           <Property Name="diagnosis_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="patient_id" Type="Int32" Nullable="false" />
           <Property Name="diagnosis1" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="drug_dosage">
-          <Key>
-            <PropertyRef Name="idDosage" />
-          </Key>
-          <Property Name="idDosage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="drug_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="drug_dose" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="report_id" Type="Int32" Nullable="false" />
-          <Property Name="drug_days" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="patient_id" Type="Int32" Nullable="false" />
-          <Property Name="drug_img" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="patient_information">
           <Key>
@@ -202,6 +188,18 @@
           <Property Name="comment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="timestamp" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="username" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="drug_dosage">
+          <Key>
+            <PropertyRef Name="idDosage" />
+          </Key>
+          <Property Name="idDosage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="drug_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="drug_dose" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="drug_days" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="patient_id" Type="Int32" Nullable="false" />
+          <Property Name="drug_img" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -253,20 +251,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="drug_dosage">
-            <EntityTypeMapping TypeName="ThyroidDataModel.drug_dosage">
-              <MappingFragment StoreEntitySet="drug_dosage">
-                <ScalarProperty Name="remarks" ColumnName="remarks" />
-                <ScalarProperty Name="drug_img" ColumnName="drug_img" />
-                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
-                <ScalarProperty Name="drug_days" ColumnName="drug_days" />
-                <ScalarProperty Name="report_id" ColumnName="report_id" />
-                <ScalarProperty Name="drug_dose" ColumnName="drug_dose" />
-                <ScalarProperty Name="drug_name" ColumnName="drug_name" />
-                <ScalarProperty Name="idDosage" ColumnName="idDosage" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="patient_information">
             <EntityTypeMapping TypeName="ThyroidDataModel.patient_information">
               <MappingFragment StoreEntitySet="patient_information">
@@ -301,6 +285,19 @@
                 <ScalarProperty Name="comment" ColumnName="comment" />
                 <ScalarProperty Name="forum_id" ColumnName="forum_id" />
                 <ScalarProperty Name="idForumComment" ColumnName="idForumComment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="drug_dosage">
+            <EntityTypeMapping TypeName="ThyroidDataModel.drug_dosage">
+              <MappingFragment StoreEntitySet="drug_dosage">
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+                <ScalarProperty Name="drug_img" ColumnName="drug_img" />
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+                <ScalarProperty Name="drug_days" ColumnName="drug_days" />
+                <ScalarProperty Name="drug_dose" ColumnName="drug_dose" />
+                <ScalarProperty Name="drug_name" ColumnName="drug_name" />
+                <ScalarProperty Name="idDosage" ColumnName="idDosage" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

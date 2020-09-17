@@ -233,18 +233,24 @@
     font-weight: bold;
   }
 
+  #reportdetails{
+    height: 300px;
+    width: 100%;
+    overflow: auto;
+  }
+
+  #drugTableDesktop{
+    display: block;
+  }
+  #drugTableMobile{
+    display: none;
+  }
+
 
 /* TODO: prescriptionModal, newReportModal for mobile */
 @media only screen and (max-width: 600px) {
 /* Adding margin-bottom so that content does not get blocked by the navigation bar*/
-  .container {
-    display: grid;
-    /* column-gap: 30px; */
-    /* margin-left: 50px; */
-    /* margin-right: 50px; */
-    /* margin-bottom: 5rem;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
-  }
+  */
 
   /* Force table to not be like tables anymore */
   .infoTable table,
@@ -269,6 +275,27 @@
     text-align: center;
   }
 
+  .shiftedrow1{
+    /* display: block;
+    padding-left: 5px;
+    margin-top: 0.5em; */
+    float: left; 
+    width: 100%
+  }
+  .shiftedrow2{
+    /* display: block;
+    padding-left: 5px;
+    margin-top: 0.5em; */
+    float: left; 
+    width: 100%
+  }
+  .shiftedrow3{
+    /* display: block;
+    padding-left: 5px;
+    margin-top: 0.5em; */
+    float: left; 
+    width: 100%
+  }
   .shiftedrow{
     /* display: block;
     padding-left: 5px;
@@ -278,12 +305,12 @@
   }
 
   #searchRPTcontain{
-      margin-bottom: 15em; 
+      margin-bottom: 5em; 
       margin-top: 2em; 
       margin-right: auto;
       margin-left: auto;
       width: 90%;
-      position: relative;
+      
       display: block;
   }
   #searchInput{
@@ -301,10 +328,10 @@
 
   #createrpt{
     /* float: right;  */
-    position: relative;
+    
     text-align: center;
     width: 95%;
-    z-index: 1;
+    z-index: 2;
     flex: 1;
   }
   #createrptbtn{
@@ -315,30 +342,30 @@
   /*PATIENT REPORT + GRAPH CSS*/
   #reportcontainer {
     width: 90%;
-    margin-left: 2em;
-    display: flex;
-    flex-direction: column-reverse;
+    margin-left: 1em;
+   
+    display: block;
     position: absolute;
     margin-bottom: 6em;
   }
 
   #historycontainer {
     /* width: 50%; */
-    height: 420px;
+    height: 350px;
+   
     background: rgb(255, 255, 255);
     display: block;
     position: relative;
-    z-index: 2;
   }
 
   #openGraphModalBtn {
-    margin-top: 15em;
+    margin-top: 1em;
+    margin-bottom: 5em;
     margin-right: 5%;
     width: auto;
     height: 300px;
     display: block;
     position: relative;
-    z-index: 1;
   }
       
 
@@ -360,21 +387,6 @@
     width: 100%;
   }
   
-  .reportTD{
-    
-    text-align: left;
-  }
-  .reportFT{
-    padding-left: 1em;
-    text-align: left;
-  }
-  .reportTSH{
-    padding-left: 2em;
-    text-align: left;
-  }
-  .reportDRNA{
-    text-align: left;
-  }
 
   #diseaseName{
     font-size: 28px;
@@ -441,5 +453,21 @@
     margin-bottom: 1em;
   }
 
+  #reportdetails{
+    height: 200px;
+    overflow: scroll;
+  }
+
+
+  /* mobile version of drug table */
+  #drugTableDesktop{
+    display: none;
+  }
+  #drugTableMobile{
+    display: block;
+    margin-top: 0.5em;
+    height: 300px;
+    overflow: auto;
+  }
 }
   

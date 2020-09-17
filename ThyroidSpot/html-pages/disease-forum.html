@@ -104,6 +104,14 @@
                                     <option value="Oldest">Oldest</option>
                                 </select>
                             </div>
+                            <div id="mobilesort">
+                                <select name="unitselection" id="newFilterRepDDLMobile" onchange="filterRepliesByActivity(this.value);">
+                                    <option disabled selected hidden value>Sort by Replies</option>
+                                    <option value="Reset">--Clear Filter--</option>
+                                    <option value="Latest">Most Replies</option>
+                                    <option value="Least">Least Replies</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <br/>
@@ -114,7 +122,15 @@
                                     <th style="width: 55%">Post</th>
                                     <th>By</th>
                                     <th>Date Posted</th>
-                                    <th>Replies</th>
+                                    <th>Replies
+                                        
+                                        <select name="unitselection" id="newFilterRepDDL" style="width: 20px;" onchange="filterRepliesByActivity(this.value);">
+                                            <option disabled selected hidden value> </option>
+                                            <option value="Reset">--Clear Filter--</option>
+                                            <option value="Latest">Most Replies</option>
+                                            <option value="Least">Least Replies</option>
+                                        </select>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody id="tableBody"></tbody>

@@ -43,12 +43,12 @@ function startCalc(){
 
     ft4Unit = " pmol/L";
     tshUnit = " mU/L";
-    //console.log(TreatmentArray.length)
+    console.log(TreatmentArray.length)
     
     validArray = treatmentList
 
     
-    //console.log(treatmentList)
+    console.log(treatmentList)
     //console.log(validArray)
     totalNumOfTreatments = treatmentList.length;
     //console.log(totalNumOfTreatments)
@@ -282,7 +282,7 @@ function removeOutliers(){
 
 //TODO: displaying calculated chart (chart hasn't been fully implemented)
 function launchgraph(){
-    var ctx = document.getElementById('graphcontainer').getContext('2d');
+    var ctx = document.getElementById('graphcontainer2').getContext('2d');
     myChart = new Chart(ctx, {
         type: 'line',
         
@@ -328,7 +328,8 @@ function launchgraph(){
 
     //onclick function
     $(document).on("click", "#openGraphModalBtn", function(){
-        document.getElementById('GraphModal').style.display='block'
+        // document.getElementById('GraphModal').style.display='block'
+        $('#graphModal').modal('toggle');
         var ctx = document.getElementById('graphcontainer1').getContext('2d');
         myChart = new Chart(ctx, {
             type: 'line',
@@ -432,3 +433,9 @@ $(document).on("click", "#exportcalc", function(){
     document.body.appendChild(link)
     document.querySelector('#download-csv').click()
 })
+
+
+//WORKAROUND: assumed fix for occasional chart duplicate glitches
+// window.onload = function() {
+//     startCalc();
+// }

@@ -75,14 +75,49 @@ function queryName() {
         }
 
     });
+}
 
+var userInfoArray = [];
+var captureusername;
+//LINKED: get number of comments based on post ID
+var getUsernames = [];
+var c = 0;
+function checkIfUserExist(checkname) {
+    $.ajax({
+        type: 'GET',
+        async: false,
+        url: userURI,
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            getUsernames = data;
+            for (x = 0; x < getUsernames.length; x++){
+                console.log("db name: " + getUsernames[x].full_name)
+                console.log("input name: " +checkname)
+                if (checkname == getUsernames[x].full_name){
+                   checkdeleteduser = getUsernames[x].full_name
+                    console.log(getUsernames[x].full_name)
+                    if (checkname != getUsernames[x].full_name && x == getUsernames.length-1){
+                        checkdeleteduser = "[deleted user]"
+                        return console.log("no more")
+                    }
 
-
-
+                    return checkdeleteduser = getUsernames[x].full_name
+                    // c = 1
+                    // console.log(checkname)
+                    // return console.log(c)
+                }
+                else{
+                    console.log(getUsernames[x].full_name)
+                    checkdeleteduser = "[deleted user]"
+                }
+            }
+        }
+    });
 }
 
 
-
+var checkdeleteduser;
 //get comment based on post id
 function getCommentByID(id) {
     //console.log("username: " + matchingname)
@@ -111,7 +146,9 @@ function getCommentByID(id) {
                     return dateToNum(b.timestamp) - dateToNum(a.timestamp);
                 });
                 function dateToNum(d) {
-                    d = d.split("-"); return Number(d[2] + d[1] + d[0]);
+                    d = d.split(/[- :]/);
+                    console.log(d) 
+                    return Number(d[5] + d[4] + d[3] + d[2] + d[1] + d[0]);
                 }
 
                 for (i = 0; i < commentArray.length; i++) {
@@ -125,6 +162,11 @@ function getCommentByID(id) {
                         else {
                             updateCommentBtn = ""
                         }
+
+
+                        var stringDate =  commentArray[i].timestamp;
+                        var length = 10;
+                        var trimmedDate= stringDate.substring(0, length);
 
                         // Allow deletion if current user is creator of comment OR admin.
                         if (matchingname == commentArray[i].username || sessionStorage.getItem("user_account_type") == "admin") {
@@ -142,11 +184,19 @@ function getCommentByID(id) {
                             dropdown = "";
                         }
 
-
+                        checkIfUserExist(commentArray[i].username)
+                        console.log("user result: "+checkdeleteduser)
+                        //set deleted user from "undefined" to [deleted user]
+                        // if (checkdeleteduser == undefined){
+                        //     checkdeleteduser = "[deleted user]"
+                        // }
+                        // else{
+                        //     console.log(checkdeleteduser)
+                        // }
 
                         // if (matchingname == commentArray[i].username) {
                         $('#allComments').append("<div class='list-group'><div class='list-group-item mt-1 flex-column align-items-start'><div>" +
-                            "<small id='comUsname'>" + commentArray[i].username + "</small><small> · " + commentArray[i].timestamp + "</small>" + dropdown + "</div><p class='mb-1'>" + commentArray[i].comment + "</p></div></div>");
+                            "<small id='comUsname'>" + checkdeleteduser + "</small><small> · " + trimmedDate + "</small>" + dropdown + "</div><p class='mb-1'>" + commentArray[i].comment + "</p></div></div>");
                         // }
                         // else {
                         //     $('#allComments').append("<div class='list-group'><div class='list-group-item list-group-item-action flex-column align-items-start'><div>" +
@@ -155,8 +205,7 @@ function getCommentByID(id) {
                         //     // document.getElementById("addNewComment").style.visibility = "hidden";
                         // }
 
-                        //TODO: check if username still exists in database, else insert [deleteduser]
-
+                        
                     }
                     // if (id != commentArray[i].forum_id && i == commentArray.length - 1) {
 
@@ -172,8 +221,6 @@ function getCommentByID(id) {
 
 
 
-var userInfoArray = [];
-var captureusername;
 //QUERY FOR USERNAME FIRST BEFORE ADD/UPDATE COMMENT
 var userURI = 'https://localhost:44395/api/user';
 function getUserName() {
@@ -199,7 +246,7 @@ function addComment(getname) {
 
     var inputC = $('#newComment').val()
 
-    var date = moment(new Date()).format("DD-MM-YYYY")
+    var date = moment(new Date()).format("DD-MM-YYYY hh:mm:ss")
 
 
     var submitComment = { forum_id: forumId, comment: inputC, timestamp: date, username: uname }
