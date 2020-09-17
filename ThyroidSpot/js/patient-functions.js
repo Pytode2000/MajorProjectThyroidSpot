@@ -757,26 +757,6 @@ function exportData(){
 
 
 
-//FOR KAILONG:
-// $(document).on('click', '#addMoreRows', function(){
-//     document.getElementById('addon').style.display='block'
-//     var html = "<div class='appended'><div class='form-row col-xs-4  col-md-12'><div class='col-md-6'><label>Drug:</label><div><select name='bloodtype' class='newDrugName'>"+
-//     "<option value='' selected disabled hidden>--Choose here--</option><option value='carbimazole'>carbimazole</option>"+
-//     "<option value='methimazole'>methimazole</option><option value='thiamazole'>thiamazole</option>"+
-//     "<option value='propylthiouracil'>propylthiouracil</option><option value='levothyroxine'>levothyroxine</option>"+
-//     "<option value='liothyronine'>liothyronine</option><option value='propranolol'>propranolol</option>"+
-//     "<option value='others'>others</option></select></div></div><br class='divider'>"+
-//     "<div class='col-md-6'><label>Tablets:</label><div><input type='text' class='newDrugDose' placeholder='Enter No...' required>"+
-//     "</div></div> </div><div class='form-row col-xs-4  col-md-12'><div class='col' style='text-align: left;'><label>Tablets per day:</label><div>"+
-//     "<input type='text' class='form-control newTabletsDay' placeholder='Enter prescription...' required></div></div></div>"+
-//     "<div class='form-row col-xs-4  col-md-12'><div class='col' style='text-align: left;'><label>Remarks:</label><div>"+
-//     "<input type='text' class='form-control newRemarks' placeholder='Enter remarks...'></div></div></div>"+
-//     "<div class='form-row col-xs-4  col-md-12'><div class='col' style='text-align: left;'><label>Medicine image:</label><div>"+
-//     "<input type='file' class='form-control newDrugImage' required></div></div></div></div><br></br>";
-//     $("#addon").append(html);
-// });
-
-
 $(document).on('click', '#closereportmodal', function(){
     $(".appended").remove();
 });
