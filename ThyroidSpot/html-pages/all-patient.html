@@ -14,7 +14,7 @@
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script src="../js/doctor-functions.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
 
@@ -41,9 +41,11 @@
         <div class="container">
             <div class="row row-margin-top-30">
 
-                <!--Show Doctor's Name-->
+                <!--Show Clinician's Name-->
                 <div class="col text-center">
-                    <h3 id="displayClinicianName">Clinician's Name</h3>
+                    <h3 id="displayClinicianName">
+                        <!--Clinician's Name Here-->
+                    </h3>
                 </div>
             </div>
 
@@ -54,7 +56,7 @@
                 <div class="col-5 align-baseline">
                     <div class="input-group input-group-sm mb-3 align-baseline">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-sm">Small</span>
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Search</span>
                         </div>
                         <input id="searchInput" type="text" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
                     </div>
@@ -62,18 +64,18 @@
 
                 <!--Filter Button-->
                 <div class="col-4">
-                    <div class="dropdown align-middle">
-                        <button class="btn btn-secondary" onclick="sortListDir()" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">
-                            Sort By Alphabetical Order
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Sort By
                         </button>
-                        <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </div>-->
+                        <div class="dropdown-menu">
+                          <a class="dropdown-item" onclick="sortListDir()">Alphabetical Order (Name)</a>
+                          <a class="dropdown-item" onclick="sortByFT4Value()">FT4 Value</a>
+                          <a class="dropdown-item" onclick="sortByTSHValue()">TSH Value</a>
+                          <a class="dropdown-item" onclick="sortByDate()">Latest Update</a>
+                        </div>
+                      </div>
                     </div>
-                </div>
 
                 <!--Adopt Patient Button-->
                 <div class="col-3">
@@ -124,6 +126,9 @@
                     <div class="modal-body">
                         <label for="lname">Enter Patient IC: </label>
                         <input type="text" id="patientICInput" placeholder="Patient IC"><br><br>
+                        <div id="wrongPatientIdPrompt" style="display: none;" class="alert alert-danger" role="alert">
+                            
+                          </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -135,29 +140,30 @@
 
 
         <!-- Abandon Patient Modal -->
-        <div class="modal fade" id="abandonPatientModal" tabindex="-1" role="dialog" aria-labelledby="abandonPatientModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="abandonPatientModalLabel">Abandon Patient</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+    <div class="modal fade" id="abandonPatientModal" tabindex="-1" role="dialog" aria-labelledby="abandonPatientModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="abandonPatientModalLabel">Abandon Patient</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <div class="grid-container">
+                    <div class="grid_item">
+                        <p>Are you sure you want to abandon this patient?</p>
+                        <button id="confirmAbandonPatientBtn" class="btn btn-primary">Confirm Abandon Patient</button>
+                    </div><br><br>
+                    <div class="grid_item">
+                        <label>Transfer Patient</label>
+                        <input id="newClinicianID" type="text" placeholder="New Clinician UID"><br><br>
+                        <div id="wrongIDPrompt" style="display: none;" class="alert alert-danger" role="alert">
+                            This is a danger alert—check it out!
+                          </div>
+                        <button id="transferPatientBtn" class="btn btn-primary">Transfer Patient</button>
                     </div>
-                    <div class="modal-body">
-                        <div class="grid-container">
-                            <div class="grid_item">
-                                <p>Are you sure you want to abandon this patient?</p>
-                                <button id="confirmAbandonPatientBtn">Confirm Abandon Patient</button>
-                            </div>
-                            <div class="grid_item">
-                                <p>Transfer Patient</p>
-                                <input id="newClinicianID" type="text" placeholder="New Clinician UID">
-                                <p id="wrongIDPrompt" style="display: none;"></p>
-                                <button id="transferPatientBtn">Tranfer Patient</button>
-                            </div>
-
-                        </div>
+                </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

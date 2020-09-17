@@ -732,7 +732,8 @@ function exportData() {
 }
 
 
-$(document).on('click', '#closereportmodal', function () {
+
+$(document).on('click', '#closereportmodal', function(){
     $(".appended").remove();
 });
 
