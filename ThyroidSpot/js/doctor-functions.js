@@ -185,6 +185,7 @@ function sortByFT4Value() {
     var list, b,switching, i, x, y, shouldSwitch;
     list = document.getElementById("patientCard");
     switching = true;
+    dir = "low";
     /*Make a loop that will continue until
     no switching has been done:*/
     while (switching) {
@@ -318,9 +319,6 @@ function convertDate(d) {
     return +(p[2]+p[1]+p[0]);
   }
   
-
-
-
 
 
 $(document).on("click", "#abandonPatientBtn", function () {
