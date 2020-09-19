@@ -1,11 +1,20 @@
-/* FOOTER */
+/*** <General> ***/
 .footer {
     width: 100%;
     display: block;
     margin-top: 1rem;
 }
 
+.footer-bottom {
+    padding: 10px;
+    color: var(--text-primary);
+    font-size: 1em;
+    text-align: center;
+}
 
+/*** </General> ***/
+
+/*** <Social Media Icons> ***/
 .social-media {
     width: 100%;
     text-align: center;
@@ -29,15 +38,9 @@
     transform: scale(2);
 }
 
-.footer-bottom {
-    padding: 10px;
-    color: var(--text-primary);
-    font-size: 1em;
-    text-align: center;
-}
+/*** </Social Media Icons> ***/
 
-/* for mobile screen view */
-
+/* Spacing for mobile screen view. */
 @media screen and (max-width: 600px) {
     .space {
         margin-bottom: 15%;
