@@ -1,14 +1,10 @@
-
-
-
 // GET DOM
-
 const patientBox = document.getElementById("patientBox");
 const staffBox = document.getElementById("staffBox");
 const togglePatientBtn = document.getElementById("togglePatientBtn");
 const toggleStaffBtn = document.getElementById("toggleStaffBtn");
 
-// SHOW Patient, HIDE STAFF
+// SHOW PATIENT GUIDE, HIDE STAFF GUIDE. 
 function togglePatient() {
     staffBox.classList.add("hide");
     patientBox.classList.remove("hide");
@@ -17,7 +13,7 @@ function togglePatient() {
     toggleStaffBtn.classList.remove("active");
 }
 
-// SHOW LOGIN FORM, HIDE REGISTER FORM. 
+// SHOW STAFF GUIDE, HIDE PATIENT GUIDE. 
 function toggleStaff() {
     patientBox.classList.add("hide");
     staffBox.classList.remove("hide");
