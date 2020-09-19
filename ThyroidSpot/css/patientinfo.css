@@ -1,3 +1,26 @@
+/* Scrollbar settings */
+::-webkit-scrollbar {
+  width: 3px;
+  display: inherit;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #fff; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #fff; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+
+/* patient info page */
 .container {
     column-gap: 30px;
     margin-left: auto;
@@ -19,7 +42,7 @@
   }
 
   #searchInput{
-    margin-left: 2em;
+    margin-left: 2.3em;
     flex: 0 0 50%;
   }
 
@@ -32,7 +55,7 @@
 
   #class-report{
     margin-bottom: 1em;
-    overflow: auto;
+    width: 100%;
   }
 
   #rpt{
@@ -67,7 +90,7 @@
   }
 
   .btn-SaveReport{
-    width: 45%;
+    width: 40%;
   }
 
   /* #drugInput{
@@ -180,9 +203,14 @@
   
   #openGraphModalBtn {
     
-    height: 450px;
+    height: 440px;
     width: 320px;
     flex: 1;
+  }
+
+  #chartgraph{
+    height: 450px;
+    width: 500px;
   }
   
   .container > div > img {
@@ -221,11 +249,12 @@
   }
 
   #createrptbtn1{
-    margin-left: 1em;
+    margin-right: 2em;
+    margin-left: 2em;
     float: right;
   }
   #viewdosage{
-    margin-left: 1em;
+    margin-left: 2em;
     float:left; 
     margin-bottom: 1em;
   }
@@ -234,21 +263,76 @@
   }
 
   #reportdetails{
-    height: 300px;
+    height: 350px;
     width: 100%;
-    overflow: auto;
+    overflow-y: auto;
   }
+  /* show scrollbar colours when hovered */
+  #reportdetails:hover::-webkit-scrollbar-thumb, #reportdetails:active::-webkit-scrollbar-thumb{
+    background: #888;  
+  }
+  /* show scrollbar background colours when hovered */
+  #reportdetails:hover::-webkit-scrollbar-track, #reportdetails:active::-webkit-scrollbar-track{
+    background: #f1f1f1; 
+  }
+
 
   #drugTableDesktop{
     display: block;
+    height: 150px;
+    overflow-y: auto;
   }
+  /* show scrollbar colours when hovered */
+  #drugTableDesktop:hover::-webkit-scrollbar-thumb, #drugTableDesktop:active::-webkit-scrollbar-thumb{
+    background: #888;  
+  }
+  /* show scrollbar background colours when hovered */
+  #drugTableDesktop:hover::-webkit-scrollbar-track, #drugTableDesktop:active::-webkit-scrollbar-track{
+    background: #f1f1f1; 
+  }
+
   #drugTableMobile{
     display: none;
   }
 
 
-/* TODO: prescriptionModal, newReportModal for mobile */
+  /* export to pdf button */
+  #btnexport{
+    float: right;
+    margin-bottom: 0.5em;
+    margin-right: 1.5em;
+  }
+
+  /* medicine image container */
+  #newImageModal{
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
+  
 @media only screen and (max-width: 600px) {
+    /* Scrollbar settings */
+  ::-webkit-scrollbar {
+    width: 5px;
+    display: inherit;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+
 /* Adding margin-bottom so that content does not get blocked by the navigation bar*/
   */
 
@@ -414,6 +498,7 @@
 
   #newFT4{
     display: inline-block;
+    width: 60%;
   }
   #newUnitDDL{
     display: inline-block;
@@ -450,6 +535,7 @@
 
 
   #createrptbtn1{
+    margin-right: 0em;
     margin-bottom: 1em;
   }
 
@@ -457,6 +543,7 @@
     height: 200px;
     overflow: scroll;
   }
+ 
 
 
   /* mobile version of drug table */

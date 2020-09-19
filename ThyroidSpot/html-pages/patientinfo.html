@@ -9,13 +9,14 @@
 
     <!-- Imports -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/patientinfo.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" />
@@ -109,7 +110,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="createHealthReportModalLabel">Create Health Report</h5>
+                    <h4 class="modal-title" id="createHealthReportModalLabel">Create Health Report</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -145,8 +146,8 @@
                         <br>
                     </div>
                     <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary btn-SaveReport">Save Report</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary btn-SaveReport custom-class bold">Save Report</button>
                     </div>
                 </form>
             </div>
@@ -268,7 +269,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <!-- <form id="createnfotable" onsubmit="putPatientReport(); return false;"> -->
-                    <h4 class="modal-title" id="myModalLabel">Updated Test Results</h4>
+                    <h4 class="modal-title" id="myModalLabel">Update Test Results</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
@@ -294,7 +295,7 @@
                             </select>
                         </div>
                         <div style="text-align: center">
-                            <button type="button" class="btn btn-primary custom-class" onclick="putPatientReport();">Save
+                            <button type="button" class="btn btn-info custom-class" onclick="putPatientReport();">Save
                                 Report
                             </button>
                         </div>
@@ -336,7 +337,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="diagnosisCardModalLabel">Diagnosis</h5>
+                    <h4 class="modal-title" id="diagnosisCardModalLabel">Diagnosis</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -410,24 +411,25 @@
     </div> -->
 
     <div class="modal fade" id="graphModal" tabindex="-1" role="dialog" aria-labelledby="graphModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="graphModalLabel">Chart</h5>
+                    <h4 class="modal-title" id="graphModalLabel">Chart</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
 
-                <div class="modal-body">
-                    <canvas id="graphcontainer1">
-                    </canvas>
-
+                <div class="modal-body text-center">
+                    <div id="chartgraph">
+                        <canvas id="graphcontainer1">
+                        </canvas>
+                    </div>
                     <br>
                 </div>
                 <div class="modal-footer">
+                    <button class="btn btn-outline-success custom-class" id="exportcalc"><i class="fa fa-download"></i> Export chart calculations</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button class="btn btn-info custom-class" id="exportcalc">Export chart calculations</button>
                 </div>
             </div>
         </div>
@@ -457,7 +459,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Medicine Image</h5>
+                    <h4 class="modal-title">Medicine Image</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -466,9 +468,8 @@
                     <p>.</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" id="closeImageBtn" data-dismiss="modal">Close</button>
-
-                    <button type="button" class="btn btn-primary" id="editImageBtn">Edit Image</button>
+                    <button type="button" class="btn btn-info " id="editImageBtn">Edit Image</button>
+                    <button type="button" class="btn btn-secondary " id="closeImageBtn" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -479,7 +480,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Medicine Image</h5>
+                    <h4 class="modal-title">Medicine Image</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -488,17 +489,16 @@
                     <form id="submitImage" onsubmit="updateMedicineImg(); return false;">
                         <div class="form-row col-xs-4  col-md-12">
                             <div class="col" style="text-align: left;">
-                                <label>Medicine image:</label>
                                 <div>
                                     <input type="file" name="resume" class="form-control newDrugImage" required>
                                 </div>
                             </div>
                         </div>
                         <br/>
-                        <button class="btn btn-primary custom-class">Save Image</button>
                     </form>
                 </div>
                 <div class="modal-footer">
+                    <button class="btn btn-info">Upload Image</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -507,16 +507,17 @@
 
 
     <div class="modal fade" id="prescriptionModal" tabindex="-1" role="dialog" aria-labelledby="prescriptionModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="prescriptionModalLabel">Prescription</h5>
+                    <h4 class="modal-title">Prescription</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
 
                 <div class="modal-body">
+                   
                     <div id="export">
                         <table class="table table-sm" style="width: 95%; margin-left: auto; margin-right: auto;">
                             <tr>
@@ -573,7 +574,7 @@
                             <div class="card" style="width: auto;">
                                 <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
                                 <div class="card-body">
-                                  <h5 class="card-title">Card title</h5>
+                                  <h4 class="card-title">Card title</h4>
                                   <p class="card-text">Total dosage: 110</p>
                                   <p class="card-text">Dose per day: 2 pills a day, preferably after dinner</p>
                                 </div>
@@ -585,8 +586,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <button class="btn btn-outline-success custom-class" onclick="exportData()"><i class="fa fa-download"></i> Export to PDF</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button class="btn btn-info custom-class" onclick="exportData()"> Export to PDF </button>
                 </div>
                 <br>
                 <div style="display: none;">
@@ -625,107 +626,7 @@
 
 
 
-    <!--Modal For Prescriptions-->
-    <!-- <div id="prescriptionModal" class="w3-modal">
-        <div class="w3-modal-content">
-            <div class="w3-container">
-                <span onclick="document.getElementById('prescriptionModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                <h2 style="text-align: center;">Prescription</h2>
-                <div id="export">
-                    <table class="table table-sm" style="width: 95%; margin-left: auto; margin-right: auto;">
-                        <tr>
-                            <td style=" text-align:left; width: 60%;">Diagnosis:</td>
-                            <td id="tdDiagnosis"></td>
-                        </tr>
-                        <tr>
-                            <td style="text-align:left;">Checkup date:</td>
-                            <td id="tdCheckup"></td>
-                        </tr>
-                        <tr>
-                            <td style="text-align:left;">FT4:</td>
-                            <td id="tdFt4"></td>
-                        </tr>
-                        <tr>
-                            <td style="text-align:left;">TSH:</td>
-                            <td id="tdTsh"></td>
-                        </tr>
-                    </table>
-
-                    <div class="table-responsive-sm">
-                        <table class="table" style="background-color: none"> -->
-
-    <!--Table head-->
-    <!-- <thead>
-                                <tr>
-                                    <th style="width: 20%;">Drug Name</th>
-
-                                    <th class="th-md">Pills</th>
-
-                                    <th class="th-md">Prescription</th>
-
-                                    <th style="width: 20%;">Image</th>
-
-                                    <th class="th-md">Remarks</th>
-
-                                </tr>
-                            </thead> -->
-    <!--Table head-->
-
-    <!--Table body-->
-    <!-- <tbody id="prescriptionTable" class="table-light">
-
-                            </tbody> -->
-    <!--Table body-->
-
-
-    <!-- </table> -->
-    <!--Table-->
-    <!-- </div>
-                </div>
-                <div style="text-align: center;">
-                    <button class="btn btn-info custom-class" onclick="exportData()"> Export to PDF </button>
-                </div>
-
- -->
-
-
-    <!-- WARNING: exported data div, do not show, keep it display:none at all times -->
-    <div style="display: none;">
-                    <div id="export1">
-                        <h2 style="text-align: center;">Test Results</h2>
-                        <table class="table table-sm" style="width: 50%; margin-left: auto; margin-right: auto; margin-bottom: 50px;">
-                            <tr>
-                                <td style=" text-align:left; vertical-align: top; width: 60%;">Diagnosis:</td>
-                                <td id="exDiagnosis"></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align:left;">Checkup date:</td>
-                                <td id="exCheckup"></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align:left;">FT4:</td>
-                                <td id="exFt4"></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align:left;">TSH:</td>
-                                <td id="exTsh"></td>
-                            </tr>
-                        </table>
-
-                        <div class="table-responsive-sm">
-                            <h2 style="text-align: center;">Prescription</h2>
-                            <table id="exportDoseTable" class="table" style="width: 70%; margin-left: auto; margin-right: auto;">
-                            </table>
-                            </div>
-                            </div>
-                            </div>
-    <!--Table-->
-    <!-- </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
+   
 
 
    

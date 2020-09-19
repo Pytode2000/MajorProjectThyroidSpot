@@ -67,9 +67,9 @@ function getOnePatientInfo() {
                     bt = patientInfoArray[i].blood_type;
                     gender = patientInfoArray[i].gender
 
-                    viewdiagnosisbutton = "<button id='diagnosisbtn' class=' btn btn-info btn-sm custom-class' index='" + patientInfoArray[i].patient_id + "'>View Diagnosis</button>"
+                    viewdiagnosisbutton = "<button id='diagnosisbtn' class=' btn btn-dark btn-sm custom-class' index='" + patientInfoArray[i].patient_id + "'>View Diagnosis</button>"
 
-                    viewreportbutton = "<button id='forumdescbtn' class=' btn btn-info btn-sm' index='" + patientInfoArray[i].patient_id + "'>View Report</button>"
+                    viewreportbutton = "<button id='forumdescbtn' class=' btn btn-dark btn-sm' index='" + patientInfoArray[i].patient_id + "'>View Report</button>"
 
                     // createreport = "<button id='createrptbtn1' class=' btn btn-info btn-sm custom-class'>Add Results</button>"
 
@@ -257,7 +257,7 @@ function getPatientReport() {
                         ExportationArray.push({ TSH: report.TSH, FT4: report.FT4, timestamp: report.timestamp })
 
 
-                        viewdosagebtn = "<button id='viewdosage' num=" + storeReports[0].report_id + " class='btn btn-info btn-sm custom-class'>View Prescription</button>";
+                        viewdosagebtn = "<button id='viewdosage' num=" + storeReports[0].report_id + " class='btn btn-dark btn-sm custom-class'>View Prescription</button>";
                         aptdate = storeReports[0].timestamp;
 
                         // Only creator and clinician can update thread.
@@ -409,11 +409,16 @@ function getPrescription() {
                         drug_days: doseArray[i].drug_days, drug_img: doseArray[i].drug_img, remarks: doseArray[i].remarks
                     }
 
+                    if (prescription.remarks == null)
+                    {
+                        prescription.remarks = "no remarks"
+                    }
+
                     console.log(prescription)
 
 
                     coverImage = "<img id='expandImg' data-toggle='modal' num=" + doseArray[i].idDosage + " style='width:100px' src='data:image/jpeg;base64," + prescription.drug_img + "'/>";
-                    mobilecoverImage="<img class='card-img-top' style='width: 120px; height: 120px; margin-left:auto; margin-right: auto;' id='expandImg' data-toggle='modal' num=" + doseArray[i].idDosage + " src='data:image/jpeg;base64," + prescription.drug_img + " alt='Card image cap'>"
+                    mobilecoverImage="<img class='card-img-top' style='width: 140px; height: 120px; margin-left:auto; margin-right: auto;' id='expandImg' data-toggle='modal' num=" + doseArray[i].idDosage + " src='data:image/jpeg;base64," + prescription.drug_img + " alt='Card image cap'>"
 
                     $('#prescriptionTable').append("<tr><td>" + prescription.drug_name + "</td>" +
                         "<td>" + prescription.drug_dose + "</td><td>" + prescription.drug_days + "</td>" +
@@ -457,7 +462,7 @@ function getMedicineImg() {
 
 
                     currentDosageID = doseArray[i].idDosage
-                    var medImage = "<img style='width:100%; height:300px' src='data:image/jpeg;base64," + getDosageInfo.drug_img + "'/>";
+                    var medImage = "<img style='width:300px; height:300px; margin-left:auto; margin-right:auto;' src='data:image/jpeg;base64," + getDosageInfo.drug_img + "'/>";
 
                     $('#newImageModal').append(medImage)
                    

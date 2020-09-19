@@ -357,8 +357,8 @@ function launchgraph(){
                 }]
             },
             options: {
-                //responsive: true,
-                //maintainAspectRatio: false,
+                responsive: true,
+                maintainAspectRatio: false,
                 scales: {
                     // yAxes: [{
                     //     ticks: {
