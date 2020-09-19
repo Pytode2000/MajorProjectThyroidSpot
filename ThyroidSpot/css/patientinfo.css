@@ -529,8 +529,9 @@
     margin-bottom: 1em;
   }
 
-  #graphcontainer{
-    height: 250px;
+  #graphcontainer1{
+    width:350px !important;
+    height:350px !important;
   }
 
 

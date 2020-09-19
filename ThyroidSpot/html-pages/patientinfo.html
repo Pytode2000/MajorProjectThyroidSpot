@@ -7,22 +7,29 @@
 
     <link rel="shortcut icon" href="../assets/images/thyroidspot-logo.png" />
 
-    <!-- Imports -->
+    <!-- Imports --> 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
         crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-        crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-    
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/patientinfo.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" />
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX"
+        crossorigin="anonymous">
+
+
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
-
+    <!--Chart methods-->
     <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://printjs-4de6.kxcdn.com/print.min.css">
 
@@ -40,10 +47,10 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w=="
         crossorigin="anonymous" />
-
-
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+
+
     <script type="text/javascript" src="../js/patient-functions.js"></script>
 
     <title>Thyroid-SPOT</title>
@@ -119,23 +126,25 @@
                     <div class="modal-body">
                         <div class="form-row col-xs-4  col-md-12">
                             <div class="col" style="text-align: left;">
-                                <label>FT4:</label>
-                                <div>
-                                    <input type="text" class="form-control" id="newFT4" style="display: inline;" placeholder="Enter FT4..." required>
-                                    <select name="unitselection" id="newUnitDDL" style="float: inherit;">
-                                        <option value="mU/L">mU/L</option>
-                                        <option value="pmol/L" selected>pmol/L</option>
-                                    </select>
+                                <div style="display: block;">
+                                    <label>FT4:</label>
                                 </div>
+                                <input type="text" style="width: 70%; display: inline;" class="form-control" id="newFT4" placeholder="Enter FT4..." required>
+                                <select name="unitselection" id="newUnitDDL" style="float: inherit;">
+                                    <option value="pmol/L" selected>pmol/L</option>
+                                    <option value="mU/L">mU/L</option>
+                                </select>
                             </div>
                         </div>
 
                         <br>
                         <div class="form-row col-xs-4  col-md-12">
                             <div class="col" style="text-align: left;">
-                                <label>TSH:</label>
+                                <div style="display: block;">
+                                    <label>TSH:</label>
+                                </div>
                                 <div>
-                                    <input type="text" class="form-control" id="newTSH" style="display: inline;" placeholder="Enter TSH..." required>
+                                    <input type="text" style="width: 70%; display: inline;" class="form-control" id="newTSH" placeholder="Enter TSH..." required>
                                     <select name="unitselection" id="newUnit1DDL" style="float: inherit;">
                                         <option value="mU/L" selected>mU/L</option>
                                         <option value="pmol/L">pmol/L</option>
@@ -155,114 +164,6 @@
     </div>
 
 
-    <!--Modal For Create Patient Report-->
-    <!-- <div id="newReportModal" class="w3-modal">
-                <div class="w3-modal-content">
-                    <div class="w3-container">
-                        <span id="closereportmodal" onclick="document.getElementById('newReportModal').style.display='none' " class="w3-button w3-display-topright">&times;</span>
-                        <h2 id="diseaseName" style="text-align: center;">Create Health Report</h2>
-                        <hr>
-
-                        <div class="modal-body">
-                            <form id="createnfotable" onsubmit="postPatientReport(); return false;">
-                                <div class="form-row col-xs-4  col-md-12">
-                                    <div class="col" style="text-align: left;">
-                                        <label>FT4:</label>
-                                        <div>
-                                            <input type="text" class="form-control" id="newFT4" style="width: 70%; display: inline;" placeholder="Enter FT4..." required>
-                                            <select name="unitselection" id="newUnitDDL" style="float: inherit;">
-                                                <option value="mU/L">mU/L</option>
-                                                <option value="pmol/L" selected>pmol/L</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <br>
-                                <div class="form-row col-xs-4  col-md-12">
-                                    <div class="col" style="text-align: left;">
-                                        <label>TSH:</label>
-                                        <div>
-                                            <input type="text" class="form-control" id="newTSH" style="width: 70%; display: inline;" placeholder="Enter TSH..." required>
-                                            <select name="unitselection" id="newUnit1DDL" style="float: inherit;">
-                                                <option value="mU/L" selected>mU/L</option>
-                                                <option value="pmol/L">pmol/L</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <br>
-                            -->
-    <!-- FOR KAILONG: to be moved to clinician side -->
-    <!-- <div class="form-row col-xs-4  col-md-12">
-                                <div class="col-md-6">
-                                    <label>Drug:</label>
-                                    <div>
-                                    <select name="bloodtype" class="newDrugName">
-                                        <option value="" selected disabled hidden>--Choose here--</option>
-                                        <option value="carbimazole">carbimazole</option>
-                                        <option value="methimazole">methimazole</option>
-                                        <option value="thiamazole">thiamazole</option>
-                                        <option value="propylthiouracil">propylthiouracil</option>
-                                        <option value="levothyroxine">levothyroxine</option>
-                                        <option value="liothyronine">liothyronine"</option>
-                                        <option value="propranolol">propranolol</option>
-                                        <option value="others">others</option>
-                                    </select>
-                                    </div>
-                                </div>
-
-                                <br class="divider">
-    
-                                <div class="col-md-6">
-                                    <label>Tablets:</label>
-                                    <div>
-                                    <input type="text" class="newDrugDose" placeholder="Enter No..." required>
-                                    </div>
-                                </div> 
-                            </div>
-                            <div class="form-row col-xs-4  col-md-12">
-                                <div class="col" style="text-align: left;">
-                                    <label>Tablets per day:</label>
-                                    <div>
-                                    <input type="text" class="form-control newTabletsDay" placeholder="Enter prescription..." required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-row col-xs-4  col-md-12">
-                                <div class="col" style="text-align: left;">
-                                    <label>Remarks:</label>
-                                    <div>
-                                    <input type="text" class="form-control newRemarks" placeholder="Enter remarks...">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-row col-xs-4  col-md-12">
-                                <div class="col" style="text-align: left;">
-                                    <label>Medicine image:</label>
-                                    <div>
-                                    <input type="file" name="files[]" class="form-control newDrugImage" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                        
-
-                        <div id="addon">
-                        </div> 
-
-        </div>
-         <div style="text-align: center; margin-bottom: 1em;">
-                                <button id="addMoreRows" class="btn btn-secondary custom-class">Add another drug dose</button>
-                            </div> 
-        <div style="text-align: center; padding-bottom: 1em;">
-            <button class="btn btn-dark btn-SaveReport custom-class bold">Save Report</button>
-        </div>
-        </form>
-        </div>
-        </div>
-        </div> -->
-
     <!--Modal For Edit Patient Readings-->
     <div class="modal fade" id="editReportModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -273,12 +174,12 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
-                    <form id="updating">
+                    <form id="updating" onsubmit="putPatientReport(); return false;">
                         <div class="form-group">
                             <div style="display: block;">
                                 <label>FT4:</label>
                             </div>
-                            <input type="text" style="width: 70%; display: inline;" class="form-control" id="updateFT4" placeholder="Updated FT4...">
+                            <input type="text" style="width: 70%; display: inline;" class="form-control" id="updateFT4" placeholder="Updated FT4..." required>
                             <select name="unitselection" id="FT4unitDDL" style="float: inherit;">
                                 <option value="pmol/L" selected>pmol/L</option>
                                 <option value="mU/L">mU/L</option>
@@ -288,16 +189,14 @@
                             <div style="display: block;">
                                 <label>TSH:</label>
                             </div>
-                            <input type="text" style="width: 70%; display: inline;" class="form-control" id="updateTSH" placeholder="Updated TSH...">
+                            <input type="text" style="width: 70%; display: inline;" class="form-control" id="updateTSH" placeholder="Updated TSH..." required>
                             <select name="unitselection" id="TSHunitDDL" style="float: inherit;">
                                 <option value="mU/L" selected>mU/L</option>
                                 <option value="pmol/L">pmol/L</option>
                             </select>
                         </div>
                         <div style="text-align: center">
-                            <button type="button" class="btn btn-info custom-class" onclick="putPatientReport();">Save
-                                Report
-                            </button>
+                            <button type="submit" class="btn btn-info custom-class">Save Report</button>
                         </div>
                     </form>
                 </div>
@@ -309,28 +208,6 @@
 
 
 
-
-
-    <!-- TEMPLATE <div class="modal fade" id="diagnosisCardModal" tabindex="-1" role="dialog" aria-labelledby="diagnosisCardModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="diagnosisCardModalLabel">Diagnosis</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-
-                <div class="modal-body">
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-                </div>
-            </div>
-        </div>
-    </div> -->
 
     <!-- Diagnosis Modal -->
     <div class="modal fade" id="diagnosisCardModal" tabindex="-1" role="dialog" aria-labelledby="diagnosisCardModalLabel" aria-hidden="true">
@@ -377,38 +254,7 @@
         </div>
     </div>
 
-    <!--Modal For Diagnosis-->
-    <!-- <div id="DiagnosisCardContent" class="w3-modal">
-        <div class="w3-modal-content">
-            <div class="w3-container">
-                <span onclick="document.getElementById('DiagnosisCardContent').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                <h2 style="text-align: center;">Diagnosis</h2>
-
-                <table class="table table-sm" style="width: 95%; margin-left: auto; margin-right: auto;">
-                    <tr>
-                        <td style=" text-align:left; width: 60%;">Diagnosis:</td>
-                        <td id="diagnosisDispl">test</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align:left;">Date of Birth:</td>
-                        <td id="tdDOB"></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align:left;">Gender:</td>
-                        <td id="tdGender"></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align:left;">Blood Type:</td>
-                        <td id="tdBloodType"></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align:left;">Most Recent Appointment Date:</td>
-                        <td id="tdAptDate"></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div> -->
+    
 
     <div class="modal fade" id="graphModal" tabindex="-1" role="dialog" aria-labelledby="graphModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -428,7 +274,7 @@
                     <br>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-outline-success custom-class" id="exportcalc"><i class="fa fa-download"></i> Export chart calculations</button>
+                    <button class="btn btn-outline-success" id="exportcalc"><i class="fa fa-download"></i> Export chart calculations</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -436,23 +282,7 @@
     </div>
 
 
-    <!--Modal For Graph-->
-    <!-- <div id="GraphModal" class="w3-modal">
-        <div class="w3-modal-content">
-            <div class="w3-container">
-                <span onclick="document.getElementById('GraphModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                <h2 style="text-align: center;">Dosage Chart</h2>
 
-                <div class="modal-body" style="text-align: center">
-                    <canvas id="graphcontainer1">
-                    </canvas>
-
-                    <br>
-                    <button class="btn btn-info btn-sm custom-class" id="exportcalc">Export chart calculations</button>
-                </div>
-            </div>
-        </div>
-    </div> -->
 
     <!--Drug Image modal-->
     <div id="modalImg" class="modal" tabindex="-1" role="dialog">
@@ -495,10 +325,11 @@
                             </div>
                         </div>
                         <br/>
-                    </form>
+                    
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-info">Upload Image</button>
+                </form>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -586,7 +417,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-outline-success custom-class" onclick="exportData()"><i class="fa fa-download"></i> Export to PDF</button>
+                    <button class="btn btn-outline-success" onclick="exportData()"><i class="fa fa-download"></i> Export to PDF</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
                 <br>

@@ -280,7 +280,7 @@ function removeOutliers(){
 
 
 
-//TODO: displaying calculated chart (chart hasn't been fully implemented)
+//displaying calculated chart (chart hasn't been fully implemented)
 function launchgraph(){
     var ctx = document.getElementById('graphcontainer2').getContext('2d');
     myChart = new Chart(ctx, {
