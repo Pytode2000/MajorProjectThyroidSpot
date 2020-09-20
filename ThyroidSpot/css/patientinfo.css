@@ -206,8 +206,10 @@
   }
 
   #chartgraph{
-    height: 450px;
-    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 350px;
+    width: 100%;
   }
   
   .container > div > img {
@@ -347,6 +349,7 @@
     width: 100%;
     overflow-y: auto;
   }
+
 }
 
 

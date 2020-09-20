@@ -121,7 +121,7 @@ function getPatientDiagnosis() {
             //Iterate through the diseaseInfoArray to generate rows to populate the table
             for (i = 0; i < diagnosisArray.length; i++) {
                 //storediagnosis.push(diagnosis[i].diagnosis1)
-                $('#diagnosisDispl').append(diagnosisArray[i].diagnosis1 + "<br>");
+                $('#diagnosisDispl').append("&bull; "+diagnosisArray[i].diagnosis1 + "<br>");
             }
             $("#tdDOB").text(dob);
             $("#tdGender").text(gender);
@@ -366,7 +366,7 @@ function getOneReportInfo() {
 
                     reportdia = [] //clear array
                     for (x = 0; x < storediagnosis.length; x++) {
-                        $('#tdDiagnosis').append(storediagnosis[x].diagnosis1 + "<br>")
+                        $('#tdDiagnosis').append("&bull; "+storediagnosis[x].diagnosis1 + "<br>")
                         reportdia.push(storediagnosis[x].diagnosis1)
                     }
                     $('#tdCheckup').text(report.timestamp)
@@ -418,7 +418,7 @@ function getPrescription() {
 
 
                     coverImage = "<img id='expandImg' data-toggle='modal' num=" + doseArray[i].idDosage + " style='width:100px' src='data:image/jpeg;base64," + prescription.drug_img + "'/>";
-                    mobilecoverImage="<img class='card-img-top' style='width: 140px; height: 120px; margin-left:auto; margin-right: auto;' id='expandImg' data-toggle='modal' num=" + doseArray[i].idDosage + " src='data:image/jpeg;base64," + prescription.drug_img + " alt='Card image cap'>"
+                    mobilecoverImage="<img class='card-img-top' style='width: 140px; height: 120px; margin-left:auto; margin-right: auto;' id='expandImg' data-toggle='modal' num=" + doseArray[i].idDosage + " src='data:image/jpeg;base64," + prescription.drug_img + "' alt='Card image cap'>"
 
                     $('#prescriptionTable').append("<tr><td>" + prescription.drug_name + "</td>" +
                         "<td>" + prescription.drug_dose + "</td><td>" + prescription.drug_days + "</td>" +
