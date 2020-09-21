@@ -21,10 +21,6 @@
     width: 100%;
 }
 
-/* .nav-item:last-child {
-    margin-top: auto;
-} */
-
 .nav-link {
     display: flex;
     align-items: center;
@@ -46,7 +42,6 @@
     margin-left: 1rem;
     font-size: 1.15rem;
     transition: var(--transition-speed);
-
 }
 
 .nav-link i,
@@ -89,7 +84,6 @@
 /** <Navbar Logo> **/
 .logo {
     font-weight: bold;
-    /* text-transform: uppercase; */
     margin-bottom: 1rem;
     text-align: center;
     color: var(--text-secondary);
@@ -119,7 +113,7 @@
 /*** </Navbar> ***/
 
 
-/***** <Small Screens> *****/
+/*** <Small Screens> ***/
 @media only screen and (max-width: 600px) {
     .navbar-main {
         bottom: 0;
@@ -139,8 +133,6 @@
 
     .nav-link i,
     .nav-link svg {
-        /* width: 2rem; */
-        /* min-width: 2rem; */
         margin: 0;
         padding: 0;
     }
@@ -172,9 +164,9 @@
     }
 }
 
-/***** </Small Screens> *****/
+/*** </Small Screens> ***/
 
-/***** <Large Screens> *****/
+/*** <Large Screens> ***/
 @media only screen and (min-width: 600px) {
     .navbar-main {
         top: 0;
@@ -208,4 +200,4 @@
     }
 }
 
-/***** </Large Screens> *****/
+/*** </Large Screens> ***/
