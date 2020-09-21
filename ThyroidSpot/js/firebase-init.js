@@ -11,3 +11,6 @@ var firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+
+// This JS file is imported by the navbar, so all pages (EXCEPT verify-email) will have this file.
+// This file allows the usage of Firebase Auth functions.

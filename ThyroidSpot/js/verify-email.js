@@ -1,4 +1,4 @@
-// Firebase configuration (THIS PAGE NEEDS THIS BECAUSE navbar.html WILL NOT BE IMPORTED HERE).
+// Firebase configuration (THIS PAGE NEEDS THIS BECAUSE navbar.html WILL NOT BE IMPORTED in this page).
 var firebaseConfig = {
     apiKey: "AIzaSyAJOmgi_23UV7szjryl9Bv6Bd9uK13C0KU",
     authDomain: "thyroidspot.firebaseapp.com",
@@ -18,7 +18,7 @@ function resendVerificationEmail() {
     const user = firebase.auth().currentUser;
 
     user.sendEmailVerification().then(function () {
-        $('#alertEmailModal').modal('toggle');
+        $('#alertEmailModal').modal('toggle'); // Informs user that an email has been sent.
         console.log("Sent email.");
     }).catch(function (error) {
     });
@@ -42,7 +42,9 @@ function refresh() {
 }
 
 // (THIS PAGE NEEDS THIS BECAUSE navbar.html WILL NOT BE IMPORTED HERE).
-// Check state
+// Check state. This only checks if user's email is verified. If it is, then user will be redirected away. If not, user is stuck on this page until they
+// 1. logout.
+// 2. verify their email.
 firebase.auth().onAuthStateChanged(firebaseUser => {
     const text = document.getElementById("welcome-text");
     text.innerHTML = "<b>Verified: </b>" + firebaseUser.emailVerified + "<br><b>Email: </b>" + firebaseUser.email + "<br><b>UID: </b>" + firebaseUser.uid + "<br>";
@@ -50,17 +52,18 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     if (firebaseUser) {
         // User's email is verified.
         if (firebaseUser.emailVerified === true) {
-            // sessionStorage.setItem("user_logged_in", 'y');
-            window.location.href = 'index.html'; // PURPOSELY (TO TEST)
+            window.location.href = 'index.html';
+            // When in index.html, the firebase-log-state.js will be imported. All the states will be tagged to the user then, so I do not 
+            // need to repeat all of the firebase-log-state.js code here. 
         }
         // User's email is not verified.
         else {
-            // sessionStorage.setItem("user_logged_in", 'y');
+            // No action is required.
         }
     }
-    // User not logged in.
+    // User not logged in (not possible, but its ok to leave this else statement here).
     else {
-        // sessionStorage.setItem("user_logged_in", 'n');
+        // No action is required.
     }
 });
 
