@@ -1,0 +1,42 @@
+/* <General> */
+.form-container {
+    background: rgb(84, 91, 98);
+}
+
+label {
+    font-size: 20px;
+}
+
+h5 {
+    font-size: 24px;
+}
+
+/* </General> */
+
+/* <Forgot Password> */
+#forgetPasswordTxt:hover {
+    color: white;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+/* </Forgot Password> */
+
+/* <Add Diagnosis Button in Register> */
+.diagnosisBtn:focus,
+.diagnosisBtn:active {
+    outline: none !important;
+    box-shadow: none;
+}
+
+/* </Add Diagnosis Button in Register> */
+
+/* <Small Screen> */
+@media (max-width: 768px) {
+
+    [class*="col-sm"] {
+        margin-bottom: 15px;
+    }
+}
+
+/* </Small Screen> */

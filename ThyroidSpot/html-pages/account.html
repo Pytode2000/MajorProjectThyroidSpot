@@ -13,7 +13,7 @@
     <!-- FontAwesome (Icons) -->
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
-    <!-- Jquery -->
+    <!-- Bootstrap stuff + Jquery -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -28,6 +28,7 @@
 
     <!-- Local Imports -->
     <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/account.css" />
 
 
     <title>Thyroid-SPOT</title>
@@ -39,23 +40,11 @@
 
     <main>
         <div class="content">
-
+            <!-- Heading -->
             <h1 class="text-center page-heading"> <i class="svg-inline--fa fas fa-user fa-primary fa-w-16"></i> Account</h1>
-            <style>
-                .form-container {
-                    background: rgb(84, 91, 98);
-                }
 
-                label {
-                    font-size: 20px;
-                }
 
-                h5 {
-                    font-size: 24px;
-                }
-            </style>
-
-            <!-- TOGGLER -->
+            <!-- TOGGLER. Switches between sign in and sign up. -->
             <div class="container container-medium container-fluid form-container" style="padding: 0;">
 
                 <div class="btn-group btn-group-toggle" style="width: 100%;">
@@ -85,6 +74,7 @@
                     <br>
                     <br>
                     <form onsubmit="login(); return false;">
+                        <!-- First row is shared between email (1/2) and password (1/2). -->
                         <div class="row">
                             <div class="col-sm">
 
@@ -104,39 +94,23 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <br> -->
                         <br>
+                        <!-- Second row is shared between the login button (1/3) and forget password text (1/3). A spacing of 1/3 in between to separate. -->
                         <div class="row">
-                            <div class="col-md-4">
 
+                            <div class="col-md-4">
                                 <button type="submit" id="btnLogin" class="btn btn-dark btn-block bold"><h4 style="letter-spacing: 2px;">LOGIN</h4></button>
                             </div>
                             <div class="col-md-4 offset-md-4 text-light text-right">
-
-                                <!-- <div class="text-left white-text"> -->
                                 <a id="forgetPasswordTxt" type="button" data-toggle="modal" data-target="#forgotPasswordModal" style="font-size: 20px;">
                                     Forgot your password?
                                 </a>
-                                <!-- </div> -->
                             </div>
 
                         </div>
                     </form>
                     <br>
 
-                    <!-- <div class="text-right white-text" style="margin: 1%;">
-                        <a id="forgetPasswordTxt" type="button" data-toggle="modal" data-target="#forgotPasswordModal">
-                            Forgot your password?
-                        </a>
-                    </div> -->
-
-                    <style>
-                        #forgetPasswordTxt:hover {
-                            color: white;
-                            text-decoration: underline;
-                            font-weight: bold;
-                        }
-                    </style>
 
                     <div id="loginAlert" class="alert alert-danger hide" role="alert">
                         <!-- Error message. -->
@@ -154,6 +128,7 @@
                     <br>
                     <br>
                     <form onsubmit="register(); return false;">
+                        <!-- First row is shared between email (1/2) and full name (1/2). -->
                         <div class="row">
                             <div class="col-sm">
                                 <div class="form-label-group">
@@ -172,6 +147,8 @@
                             </div>
 
                         </div>
+
+                        <!-- Second row is shared between password (1/2) and retype password (1/2). -->
                         <div class="row">
                             <div class="col-sm">
 
@@ -192,11 +169,10 @@
 
                                 </div>
                             </div>
-
                         </div>
+
+                        <!-- Third row is shared between NRIC (1/2) and birthdate (1/2). -->
                         <div class="row">
-
-
                             <div class="col-sm">
 
                                 <div class="form-label-group">
@@ -214,7 +190,7 @@
                                 </div>
                             </div>
                         </div>
-
+                        <!-- Jquery function to for datepicker (opens calendar) -->
                         <script>
                             $(function () {
                                 $("#registerBirthdate").datepicker({
@@ -233,13 +209,14 @@
                             });
                         </script>
 
-
+                        <!-- Diagnosis itself takes up the whole row, so don't have to specify. Fourth row. -->
                         <div style="background: grey; border-radius: 6px; margin-bottom: 15px;">
                             <div style="width: 90%; " class="mx-auto">
 
                                 <div class="white-text text-center">
                                     <h5>Select Diagnosis</h5>
                                 </div>
+                                <!-- Default 1 diagnosis. -->
                                 <select id="registerDiagnosis" class="custom-select diagnosisClass" style="margin-bottom: 10px; font-size: 20px;">
                                     <option>De Quervain's thyroiditis</option>
                                     <option>Differentiated thyroid carcinoma</option>
@@ -255,42 +232,25 @@
                                     <option>Toxic multinodular goitre</option>
                                     <option>Others</option>
                                 </select>
-                                <!-- <button type="button" class="close" >Close -->
 
-                                <!-- </button> -->
-
+                                <!-- When more diagnoses are added, they will be added here in this block. -->
                                 <div id="diagnosisBlock"></div>
 
                                 <div class="text-center">
+                                    <!-- Add diagnoses. -->
                                     <button onclick="addNewDiagnosis()" type="button" class="btn btn-default diagnosisBtn"><i
                                             class="fas fa-plus-circle fa-2x" style="color: rgba(255, 255, 255, 0.789);"></i></button>
                                 </div>
                             </div>
                         </div>
 
-                        <style>
-                            .diagnosisBtn:focus,
-                            .diagnosisBtn:active {
-                                outline: none !important;
-                                box-shadow: none;
-                            }
-                        </style>
-
-                        <!-- GENDER -->
-                        <style>
-                            @media (max-width: 768px) {
-
-                                [class*="col-sm"] {
-                                    margin-bottom: 15px;
-                                }
-
-                            }
-                        </style>
+                        <!-- Fifth row shared between gender (5/12) and blood type (5/12) with a spacing of 2/12 in between. -->
                         <div class="row" style="margin-left: 1px; margin-right: 1px;">
                             <div class="col-sm" style="background: grey; border-radius: 6px;">
                                 <div class="white-text text-center">
                                     <h5>Gender</h5>
                                 </div>
+                                <!-- Radio button. -->
                                 <div style="display: block">
                                     <div class="custom-control custom-radio custom-control-inline" style="margin-left: 15px;">
                                         <input type="radio" id="genderMaleRadio" name="genderMaleRadio" class="custom-control-input" checked>
@@ -306,16 +266,11 @@
                             <!-- BLOOD TYPE -->
 
                             <div class="text-center col-sm offset-md-2" style="background: grey; border-radius: 6px; padding-bottom:5px;">
-                                <!-- SELECT MENU FOR Blood type -->
-                                <!-- <label for="registerBloodType" class="white-text" style="font-size: 1.25em;">Select
-                                    Blood Type
-                                </label> -->
+
                                 <div class="white-text text-center">
                                     <h5>Blood Type</h5>
                                 </div>
-                                <!-- <h5>Select Blood Type</h5> -->
-
-
+                                <!-- Select menu. -->
                                 <select id="registerBloodType" class="custom-select" style="width:60%;">
                                     <option>A-</option>
                                     <option>A+</option>
@@ -331,10 +286,10 @@
                                 </select>
                             </div>
                         </div>
-                        <!--END OF DIV FOR GENDER + BLOOD-->
+
 
                         <br>
-                        <!-- <button id="btnRegister" class="btn btn-dark btn-block bold" onclick="register()">Register</button> -->
+                        <!-- Sixth row for Register button. -->
                         <div class="row">
                             <div class="col-md-4">
                             </div>
@@ -351,7 +306,6 @@
                     <br>
                 </div>
 
-                <!-- <br> -->
             </div>
 
         </div>
@@ -387,8 +341,6 @@
                 <div id="forgotPwAlert" class="alert alert-danger hide" role="alert">
                     <!-- Error message. -->
                 </div>
-                <!-- <br> -->
-
             </div>
         </div>
     </div>

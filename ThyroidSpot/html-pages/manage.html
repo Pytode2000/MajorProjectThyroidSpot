@@ -13,7 +13,7 @@
     <!-- FontAwesome (Icons) -->
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
-    <!-- Jquery -->
+    <!-- Bootstrap + Jquery -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -45,47 +45,37 @@
     <main>
         <div class="content">
             <div class="container container-medium">
+                <!-- Heading. -->
                 <h1 class="text-center page-heading"> <i class="svg-inline--fa fas fa-edit fa-primary fa-w-16"></i> Manage</h1>
 
+                <!-- First row is shared by Seach box (5/12) and Filter (3/12). There is a space of 4/12 in between. -->
                 <div class="row">
+
                     <div class="col-md-5">
-                        <!-- GENDER -->
-                        <style>
-                            @media (max-width: 768px) {
-
-                                [class*="col-md-3"] {
-                                    margin-bottom: 15px;
-                                }
-
-                            }
-                        </style>
-                        <!-- <div style="width:100%; display:inline-block;"> -->
                         <div class="form-label-group">
                             <input type="text" id="searchInput" name="searchInput" class="form-control" placeholder="Search..." required="" autofocus="">
                             <label for="searchInput">Search...
                                 <i class="fas fa-search close" onclick="searchFunction(); clearFilter();"></i>
                                 <i class="fas fa-times close text-secondary" onclick="resetFilterOnSearch()"></i>
                             </label>
-
-                            <!-- </div> -->
                         </div>
                     </div>
+
                     <div class="offset-4">
                     </div>
+
                     <div class="col-md-3">
                         <select id="filterSearch" class="custom-select" onchange="filterByAccountType()">
                             <option value="">All</option>
                             <option value="admin">Admin</option>
                             <option value="clinician">Clinician</option>
                             <option value="patient">Patient</option>
-                            <!-- <option><b>Clear X</b></option> -->
                         </select>
                     </div>
+
                 </div>
 
-                <!-- </div> -->
-
-
+                <!-- Second row. -->
                 <table class="table table-dark table-striped" style="margin-bottom: 0; font-size: 1.25em;">
                     <tr>
                         <th>
@@ -97,15 +87,10 @@
                     </tr>
                 </table>
 
-                <!-- Add a sort function -->
 
                 <ul id="usersUL">
-                    <!-- <li><a href="#">Adele | patient</a></li> -->
-                    <!-- Filled using JS in manage.js -->
+                    <!-- ALL Users will be appended here. -->
                 </ul>
-
-
-
 
             </div>
         </div>
@@ -127,7 +112,6 @@
                 <form onsubmit="createUser(); return false;">
 
                     <div class="modal-body">
-                        <!-- <p>The new email must be verified afterwards!</p> -->
 
                         <div class="form-label-group">
                             <input type="email" id="newUserEmail" class="form-control" placeholder="Enter email address..." required autofocus="">
@@ -151,8 +135,6 @@
                             <label for="newUserFullName">Enter full name...<i class="fas fa-user close"></i></label>
                         </div>
 
-                        <!-- Radio buttons for account type. -->
-                        <!-- typeAdminRadio, typeClinicianRadio -->
                         <label>Select account type: </label>
                         <div class="custom-control custom-radio custom-control-inline" style="left:15%;">
                             <input type="radio" id="typeAdminRadio" name="typeAdminRadio" class="custom-control-input" checked>
@@ -206,7 +188,7 @@
         </div>
     </div>
 
-    <!-- Delete User Modal -->
+    <!-- Delete User Modal (confirmation) -->
     <div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

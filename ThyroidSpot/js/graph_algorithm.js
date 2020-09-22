@@ -280,7 +280,7 @@ function removeOutliers(){
 
 
 
-//TODO: displaying calculated chart (chart hasn't been fully implemented)
+//displaying calculated chart (chart hasn't been fully implemented)
 function launchgraph(){
     console.log("phi:"+phi)
     document.getElementById('phiValue').innerHTML = phi

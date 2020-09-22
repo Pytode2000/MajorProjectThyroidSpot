@@ -43,7 +43,7 @@ function showPostDetails() {
             // + "<br/><p>" + postDetails.post_description + "</p>"
 
 
-            //TODO: check if username still exists in database, else insert [deleteduser]
+
 
             getCommentByID(postDetails.idForum);
         }

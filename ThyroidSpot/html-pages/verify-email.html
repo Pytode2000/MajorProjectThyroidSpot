@@ -13,7 +13,7 @@
     <!-- FontAwesome (Icons) -->
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
-    <!-- Jquery -->
+    <!-- Bootstrap + Jquery -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -30,35 +30,26 @@
     <!-- Local Imports -->
     <link rel="stylesheet" href="../css/style.css" />
 
-    <!-- 
-    <style>
-        html,
-        body {
-            background: var(--bg-secondary);
-            ;
-        }
-    </style> -->
-
     <title>Thyroid-SPOT</title>
 </head>
 
+<!-- Users will be directed to this page if they login to an account that has not been verified. -->
+
 <body>
-
-
-
 
     <main>
         <div class="content">
 
             <div class="container container-small bg-dark" style="margin-top: 9%;">
 
-                <!-- background: var(--bg-secondary); -->
                 <div class="card" style="border: none;">
 
                     <div class="card-header text-center bg-dark" style="color: white;">
+                        <!-- Heading. -->
                         <h1><i class="fas fa-exclamation-triangle"></i> Verify Account <i class="fas fa-exclamation-triangle"></i></h1>
                     </div>
 
+                    <!-- Note for user. -->
                     <div class="card-body">
                         Dear user, the email address used to register this account has <b>not been verified</b> yet. To access
                         <b>Thyroid-SPOT
@@ -73,11 +64,11 @@
                     </div>
 
                     <div class="card-footer text-muted">
-
+                        <!-- Logout properly, otherwise stuck on this page (unlless they verify then refresh). -->
                         <button class="btn btn-secondary bold" style="float: left; width: 40%;" onclick="logout()"><i class="fas fa-sign-out-alt fa-rotate-180"></i>
                             Logout</button>
 
-
+                        <!-- Send another verification email to the user's email account. -->
                         <button class="btn btn-secondary bold" style="float: right;width: 40%;" onclick="resendVerificationEmail()"><i
                                 class="fas fa-envelope"></i> Send
 
@@ -85,6 +76,7 @@
 
                         <br>
                         <br>
+                        <!-- Refresh page. Clicked after verifying email. -->
                         <button class="btn btn-secondary btn-block bold" onclick="refresh()"><i class="fas fa-refresh"></i>
                             Refresh</button>
                     </div>
@@ -125,13 +117,11 @@
 <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script>
 
-<!-- This page will share the same JS file with index.html. -->
 <script src="../js/verify-email.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function () {
-        // $("#navbar-html").load("../html-components/navbar.html");
-
+        // NOTE: NAVBAR not imported in this page! 
         $("#footer-html").load("../html-components/footer.html");
 
     });

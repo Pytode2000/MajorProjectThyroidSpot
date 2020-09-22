@@ -1,3 +1,4 @@
+/*** <General> ***/
 #main-cont {
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 16px;
@@ -7,12 +8,13 @@
     background: rgb(84, 91, 98);
 }
 
+/*** </General> ***/
+
 
 /*** <FLOATING ACTION BUTTON> ***/
 .floating-btn {
     width: 80px;
     height: 80px;
-    /* background: #007b5e6c; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -63,27 +65,47 @@
 
 /*** </FLOATING ACTION BUTTON> ***/
 
-/***** <Small Screens> *****/
-@media only screen and (max-width: 600px) {
-    .floating-btn {
-        bottom: 90px;
-    }
-}
 
-
-/***** </Small Screens> *****/
-
-
+/* MISC */
 .tag-header {
     font-size: 20px;
     letter-spacing: 1px;
     color: rgb(88, 88, 88);
 }
 
-
+/*** <Diagnosis> ***/
 .diagnosis-class {
     cursor: pointer;
 }
+
 .diagnosis-class:hover {
     text-decoration-color: black;
 }
+
+.diagnosisBtn:focus,
+.diagnosisBtn:active {
+    outline: none !important;
+    box-shadow: none;
+}
+
+/*** </Diagnosis> ***/
+
+
+/*** <Small Screens> ***/
+@media only screen and (max-width: 600px) {
+    .floating-btn {
+        bottom: 90px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    [class*="col-sm"] {
+        margin-bottom: 15px;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+}
+
+/*** </Small Screens> ***/

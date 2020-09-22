@@ -1,16 +1,19 @@
+// Store current admin's UID.
 var currentAdminUid = sessionStorage.getItem("user_unique_id");
 
+// URI to manage API.
 var userURI = "https://localhost:44395/api/User";
 var patientInfoURI = "https://localhost:44395/api/patientinfo";
 
+// Store all users.
 var usersArray = [];
 
 var currentSelectedUserUid; // For GET.
-var currentSelectedUserArray;
+var currentSelectedUserArray; // For GET-ting a selected user's information.
 var currentSelectedUserId; // For delete.
-var currentSelectedUserAccountType;
+var currentSelectedUserAccountType; // For delete.
 
-
+// Get all users' "user" information and show all (except for the current admin).
 function getAllUsers() {
     $.ajax({
         type: 'GET',
@@ -31,6 +34,8 @@ function getAllUsers() {
     });
 }
 
+// On selecting a user, call getSelectedUser() function which GETS all the selected user's information and then append to the user modal.
+// Then, open the user modal.
 $(document).on("click", "#userAnchorList", function () {
     currentSelectedUserUid = $(this).attr("index");
     console.log(currentSelectedUserUid);
@@ -52,6 +57,7 @@ function getSelectedUser() {
             document.getElementById("userModalLabel").innerHTML = currentSelectedUserArray.full_name;
             document.getElementById("modalAccountType").innerHTML = currentSelectedUserArray.account_type;
 
+            // If selected user is also an admin, hide the delete button. Admin accounts cannot be removed by other admins.
             deleteBtn = document.getElementById("deleteButton");
             if (currentSelectedUserArray.account_type == "admin") {
                 deleteBtn.classList.add("hide");
@@ -60,17 +66,22 @@ function getSelectedUser() {
                 deleteBtn.classList.remove("hide");
 
             }
-            // For delete.
+            // For deletion of account if admin wants to.
             currentSelectedUserId = currentSelectedUserArray.id;
             currentSelectedUserAccountType = currentSelectedUserArray.account_type;
-
         }
     });
 }
 
 function deleteUser() {
 
-    // Delete from "user" table.
+    // NOTE: FIREBASE AUTH's INSTANCE CANNOT BE DELETED HERE. It will only be deleted after a "deleted" user logs in.
+    // When a deleted user logs in, his/her firebase auth will be then removed. After the Auth instance is removed, user will be redirected out.
+
+    // If the selected user is "patient", delete instances from 5 SQL tables ("user", "patient_information", "diagnosis", "patient_report", "drug_dosage", ) 
+    // Else, only delete from 1 SQL table ("user").
+
+    // Delete instance from "user" table. APPLIES to all types of users.
     $.ajax({
         type: 'DELETE',
         url: userURI + '/' + currentSelectedUserId,
@@ -81,9 +92,11 @@ function deleteUser() {
         }
     });
 
+    // If selected user is patient, delete instances from another 4 SQL tables.
     if (currentSelectedUserAccountType == "patient") {
-        // If user is a patient, delete from the "patient_information" table.
-        // GET patient_id first
+
+        // If selected user is a patient, delete from the "patient_information" table.
+        // GET patient_id first.
         patientArray = [];
         var selectedPatientID;
 
@@ -98,6 +111,7 @@ function deleteUser() {
                 selectedPatientID = patientArray.patient_id;
                 console.log("PATIENT ID" + selectedPatientID)
 
+                // After successfully getting the selected patient's id, delete the patient_information instance by patient_id.
                 $.ajax({
                     type: 'DELETE',
                     url: patientInfoURI + '/' + patientArray.patient_id,
@@ -106,12 +120,11 @@ function deleteUser() {
                     success: function (data) {
                         console.log("Patient instance deleted.")
 
-
-
-                        try {
+                        // Then, try to delete patient's diagnosis/diagnoses (TRY because patient may not have any diagnosis if they removed all in profile).
+                        try {  // This deletes ALL diagnosis that has the selected user's patient_id. 1 AJAX DELETE deletes multiple instances.
                             $.ajax({
                                 type: 'DELETE',
-                                url: diagnosisURI + "?patientid=" + selectedPatientID,//?patientid={patientid}
+                                url: diagnosisURI + "?patientid=" + selectedPatientID,
                                 dataType: 'json',
                                 contentType: 'application/json',
                                 success: function (data) {
@@ -123,10 +136,11 @@ function deleteUser() {
                             console.log("No diagnosis to delete")
                         }
 
+                        // Try to delete patient's report (TRY because patient may not have any report).
                         try {
-                            $.ajax({
+                            $.ajax({ // This deletes ALL reports that has the selected user's patient_id. 1 AJAX DELETE deletes multiple instances.
                                 type: 'DELETE',
-                                url: reportURI + "?patientid=" + selectedPatientID,//?patientid={patientid}
+                                url: reportURI + "?patientid=" + selectedPatientID,
                                 dataType: 'json',
                                 contentType: 'application/json',
                                 success: function (data) {
@@ -138,10 +152,11 @@ function deleteUser() {
                             console.log("No report to delete")
                         }
 
+                        // Try to delete patient's dosage (TRY because patient may not have any dosage).
                         try {
-                            $.ajax({
+                            $.ajax({  // This deletes ALL dosage that has the selected user's patient_id. 1 AJAX DELETE deletes multiple instances.
                                 type: 'DELETE',
-                                url: dosageURI + "?patientid=" + selectedPatientID,//?patientid={patientid}
+                                url: dosageURI + "?patientid=" + selectedPatientID,
                                 dataType: 'json',
                                 contentType: 'application/json',
                                 success: function (data) {
@@ -159,27 +174,29 @@ function deleteUser() {
                 });
             }
         });
-
     }
+    // Hide all modals after deletion.
     $('#deleteUserModal').modal('hide');
     $('#userModal').modal('hide');
 
+    // After deletion, wait 3s before updating the list of users.
     setTimeout(function () {
         getAllUsers()
     }, 3000);
 
 }
 
-
-
+// Admin can use this function to create admin and clinician accounts.
 function createUser() {
     emailTxt = $('#newUserEmail').val();
     passwordTxt = $('#newUserPassword').val();
     rePasswordTxt = $('#newUserRePassword').val()
     fullNameTxt = $('#newUserFullName').val()
 
-    if (passwordTxt === rePasswordTxt) {
+    // Check if the value of password and retype password are the same.
+    if (passwordTxt === rePasswordTxt) { // Same.
 
+        // Variable to store the account type value from radio button.
         var acc_type;
         if (document.getElementById('typeAdminRadio').checked) {
             acc_type = "admin"
@@ -188,6 +205,7 @@ function createUser() {
             acc_type = "clinician"
         }
 
+        // Secondary "app" to create account (workaround).
         var config = {
             apiKey: "AIzaSyAJOmgi_23UV7szjryl9Bv6Bd9uK13C0KU",
             authDomain: "thyroidspot.firebaseapp.com",
@@ -199,19 +217,14 @@ function createUser() {
             measurementId: "G-VLNKVKH5GT"
         };
         var secondaryApp = firebase.initializeApp(config, "Secondary");
-        // var fbUid;
 
         secondaryApp.auth().createUserWithEmailAndPassword(emailTxt, passwordTxt).then(function (firebaseUser) {
-            // fbUid = firebaseUser.uid;
             var uid = firebaseUser.user.uid;
 
             console.log("User " + firebaseUser.uid + " created successfully!");
-            // console.log(uid)
 
-            // var newUserFbId = firebaseUser.uid
-            // console.log(newUserFbId);
-
-            var userInstance = { user_id: uid, full_name: fullNameTxt, account_type: acc_type }; // NOT DONE UID HAVENT ADD
+            // Create user instance.
+            var userInstance = { user_id: uid, full_name: fullNameTxt, account_type: acc_type };
             console.log(userInstance)
             $.ajax({
                 type: 'POST',
@@ -222,34 +235,35 @@ function createUser() {
                 success: function (data) {
                     console.log("User instance created.");
                     $('#newUserModal').modal('hide');
-                    // Send verification email? maybe
-                    // window.location.reload();
                     getAllUsers()
-
                 }
             });
-
+            // Logout of the second app.
             secondaryApp.auth().signOut();
         }).catch(function (error) {
+            // Show error occurred.
             const adminCreateUserAlert = document.getElementById("adminCreateUserAlert");
-
             adminCreateUserAlert.classList.remove("hide");
             adminCreateUserAlert.innerHTML = error.message;
+
+            // Logout of the second app.
             secondaryApp.auth().signOut();
         });
     }
     else {
-        // password and retype passwrong different.
-        const adminCreateUserAlert = document.getElementById("adminCreateUserAlert");
+        // Values of password and retype password are different.
 
+        // Show error.
+        const adminCreateUserAlert = document.getElementById("adminCreateUserAlert");
         adminCreateUserAlert.classList.remove("hide");
         adminCreateUserAlert.innerHTML = "Password and re-type password different! Please try again.";
     }
 }
 
 
+/*** Search and Filter ***/
 
-
+// Search function, called by clicking the magnifying glass.
 function searchFunction() {
     // Declare variables
     var input, filter, ul, li, a, i, txtValue;
@@ -275,6 +289,14 @@ function searchFunction() {
 
 }
 
+// Small "X" icon that clears the seach input box.
+function resetFilterOnSearch() {
+    $("#filterSearch").val("");
+    $('input[type=text]#searchInput').val("");
+    searchFunction();
+}
+
+// Filter function to see all, patients, clinicians, or admins.
 function filterByAccountType() {
     var filter = document.getElementById("filterSearch");
     var filterSelected = filter.options[filterSearch.selectedIndex].value;
@@ -288,15 +310,12 @@ function filterByAccountType() {
     $('input[type=text]#searchInput').val("");
 }
 
-function resetFilterOnSearch() {
-    $("#filterSearch").val("");
-    $('input[type=text]#searchInput').val("");
-    searchFunction();
-}
 
+
+// Clear filter.
 function clearFilter() {
     $("#filterSearch").val("");
 }
 
-
+// Call function onload.
 getAllUsers()

@@ -15,7 +15,6 @@
 
     <!-- Bootstrap stuff -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -35,25 +34,26 @@
 
     <main>
         <div class="content">
+            <!-- Heading -->
             <h1 class="text-center  page-heading"> <i class="svg-inline--fa fas fa-home fa-primary fa-w-16"></i> Home</h1>
 
             <div class="container container-large">
                 <div class="row" style="padding: 0; margin-bottom: 2%;">
+
+                    <!-- Carousel, takes 8/12 of the "content" size on wide screens. On mobile view, takes 12/12. -->
                     <div class="col-sm-12 col-lg-8">
-
-
+                        <!-- Changes slide every 2 seconds. -->
                         <div id="TScarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
 
-                            <!-- Indicators -->
+                            <!-- Round indicators on the bottom side of the carousel. -->
                             <ul class="carousel-indicators">
                                 <li data-target="#TScarousel" data-slide-to="0" class="active"></li>
                                 <li data-target="#TScarousel" data-slide-to="1"></li>
                                 <li data-target="#TScarousel" data-slide-to="2"></li>
                                 <li data-target="#TScarousel" data-slide-to="2"></li>
-
                             </ul>
 
-                            <!-- The slideshow -->
+                            <!-- The 4 slides (hardcoded). -->
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
                                     <img src="../assets/images/astar-food_story_homepage_banner.png" width="1100" height="500" class="img-fluid">
@@ -93,7 +93,7 @@
 
                             </div>
 
-                            <!-- Left and right controls -->
+                            <!-- Left and right controls to view next or prior slide. -->
                             <a class="carousel-control-prev" href="#TScarousel" data-slide="prev">
                                 <span class="carousel-control-prev-icon"></span>
                             </a>
@@ -106,7 +106,7 @@
                     <!--1st Row-->
 
 
-
+                    <!-- Instruction box on the right, takes the remaining 4/12 of the "content" size on wide screens. On mobile view, takes 12/12. -->
                     <div class="col-sm-12 col-lg-4">
 
                         <div class="instructionBox">
@@ -116,9 +116,7 @@
                                 </div>
                                 <div class="card-body">
 
-                                    <!-- TOGGLER -->
-                                    <!-- <div class="container container-small container-fluid form-container"> -->
-
+                                    <!-- TOGGLER to switch between Patient and Staff guide. -->
                                     <div class="btn-group btn-group-toggle" style="width: 100%;">
                                         <label class="btn btn-light active btn-lg" onclick="togglePatient()" id="togglePatientBtn" style=" border: none; border-radius: 0; width: 50%;">
                                             <input type="radio" name="options" id="patientTab" autocomplete="off" checked><b>Patient</b>
@@ -130,10 +128,9 @@
                                         </label>
                                     </div>
 
-                                    <!-- </div> -->
-
-
                                     <div class="container container-small container-fluid form-container text-justify" style="padding-left: 0; padding-right: 0;">
+
+                                        <!-- Guide for patients. -->
                                         <div id="patientBox" style="background: #dae0e5; padding-right: 20px;">
                                             <br>
                                             <div class="text-center" style="font-weight: bold;">Instruction for Patients</div>
@@ -149,6 +146,8 @@
                                             </ol>
                                             <br>
                                         </div>
+
+                                        <!-- Guide for staff. -->
                                         <div id="staffBox" style="background: #dae0e5;  padding-right: 20px;" class="hide">
                                             <br>
                                             <div class="text-center" style="font-weight: bold;">Instruction for Staff</div>
@@ -157,37 +156,34 @@
                                                 <li>Contact the team (refer beneath) should the supposed creation of your
                                                     account is delayed.</li>
                                                 <li>For clinicians, you may add patients using their Identity Card numbers.</li>
-                                                <!-- <li>Putting temporary text as placeholder.</li> -->
                                             </ul>
                                             <br>
                                         </div>
+
                                     </div>
 
                                 </div>
+
+                                <!-- Bottom of instruction box, a few links. -->
                                 <div class="card-footer text-muted">
                                     <ul class="instructionUL">
-
                                         <li>Find out more about A*STAR in <a href="about.html">About Us</a>.</li>
-
                                         <li>
                                             Need help/found a bug? Contact the team <a href="" data-toggle="modal" data-target="#helpModal">here</a>.
                                         </li>
                                         <li>Stay connected with us on our social medias <a onclick="window.scrollBy(0, 5000);"
                                                 style="color: #007bff; cursor: pointer;">below</a>.</li>
-
                                     </ul>
                                 </div>
+
                             </div>
                         </div>
 
-
                     </div>
-
-
 
                 </div>
 
-
+                <!-- Beneath the carousel and guide. A few A*STAR articles. -->
                 <div class="card-deck">
                     <br>
                     <div class="card">
@@ -233,12 +229,7 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
             </div>
-
         </div>
 
 
@@ -257,12 +248,10 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <!-- Clarify if content will be provided. -->
                     <ul>
                         <li>
                             <i class="fas fa-envelope"></i> Email: <a href="mailto:mp.thyroid.spot@gmail.com">
                                 mp.thyroid.spot@gmail.com</a>
-                            <!-- Can probably add a form and then create a page where admins can view.  -->
                         </li>
                     </ul>
                 </div>
@@ -291,9 +280,5 @@
 
     });
 </script>
-
-
-
-
 
 </html>

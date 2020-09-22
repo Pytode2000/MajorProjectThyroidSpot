@@ -17,6 +17,7 @@ body {
   padding: 0;
 }
 
+
 /*** <Scrollbar> ***/
 body::-webkit-scrollbar {
   width: 0.25rem;
@@ -54,11 +55,9 @@ main {
   filter: grayscale(100%) opacity(0.3);
 }
 
-
 /*** </Main> ***/
 
-/*** <Loading Screen> ***/
-
+/*** <Loading Screen> (NOT USED) ***/
 .loader {
   display: inline-block;
   width: 30px;
@@ -150,7 +149,6 @@ main {
   }
 }
 
-
 /***** </Small Screens> *****/
 
 
@@ -230,7 +228,6 @@ main {
   display: block;
   width: 100%;
   margin-bottom: 0;
-  /* Override default `<label>` margin */
   line-height: 1.5;
   color: #495057;
   border: 1px solid transparent;
@@ -273,7 +270,7 @@ main {
 /*** </Bootstrap Floating Label> ***/
 
 
-/*** Misc ***/
+/*** <Misc> ***/
 .bold {
   font-weight: bold;
 }
@@ -295,6 +292,8 @@ button:active {
 .page-heading {
   margin-bottom: 3%;
 }
+
+/*** </Misc> ***/
 
 
 /********** </Global stylesheet> **********/
