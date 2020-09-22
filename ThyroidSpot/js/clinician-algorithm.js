@@ -29,6 +29,11 @@ var maxErrorTreatment;
 var phi;
 var snum;
 
+var setPointFT4;
+var setPointTSH;
+
+var loopGain;
+var r2;
 //setting units for FT4 and TSH
 var ft4Unit;
 var tshUnit;
@@ -103,12 +108,18 @@ function startCalc(){
     var maxToAdd = validmaxX + validxRangeExt;
     bestfitvalidft4List.push(maxToAdd);
 
+    setPointFT4 = Math.log((phi * snum * Math.sqrt(2))) / phi;
+    setPointTSH = 1 / (phi * Math.sqrt(2));
+
     //ACHTUNG: for phi and snum, refer BestFitCurve
     for (var i = 0; i < bestfitvalidft4List.length; i++) {
         var TSH = snum / Math.pow(Math.E, (phi * bestfitvalidft4List[i]));
         bestfitvalidtshList.push(TSH);
     }
 
+    loopGain = 0.58 * Math.log((phi*snum)*Math.sqrt(2.0));
+
+    r2 = rSquared();
 
     bestfitvalidData = [];
     if (bestfitvalidft4List.length != 0) {
@@ -190,7 +201,32 @@ function bestfitCurve(vaz){
 		return averageError;
 }
 
+function rSquared(){
+    var r2;
 
+    var averageY = 0;
+
+    for(var i = 0; i < treatmentList.length; i++){
+        averageY += treatmentList[i].TSH;
+    }
+    averageY = averageY/treatmentList.length;
+
+    var sstotal = 0.0
+    for (var i = 0; i < treatmentList.length; i++){
+        var toSum = treatmentList[i].TSH - averageY;
+        sstotal += Math.pow(toSum, 2);
+    }
+
+    var ssres = 0.0;
+    for(var i = 0; i < treatmentList.length; i++){
+        var predictedTSH = snum / Math.pow(Math.E, (phi * treatmentList[i].FT4));
+        var toSum = Math.pow((treatmentList[i].TSH - predictedTSH), 2);
+        ssres += toSum;
+    }
+
+    r2 = 1-(ssres/sstotal);
+    return r2
+}
 
 
 //removeOutliers seems to be working
@@ -283,8 +319,13 @@ function removeOutliers(){
 //TODO: displaying calculated chart (chart hasn't been fully implemented)
 function launchgraph(){
     console.log("phi:"+phi)
-    document.getElementById('phiValue').innerHTML = phi
-    document.getElementById('sValue').innerHTML = snum
+    document.getElementById('tablePhiValue').innerHTML = phi;
+    document.getElementById('tableSValue').innerHTML = snum;
+    document.getElementById('tableFT4Value').innerHTML = setPointFT4;
+    document.getElementById('tableTSHValue').innerHTML = setPointTSH;
+    document.getElementById('tableR2Value').innerHTML = r2;
+    document.getElementById('tableLoopGainValue').innerHTML = loopGain;
+    
     var ctx = document.getElementById('graphcontainer').getContext('2d');
     myChart = new Chart(ctx, {
         type: 'line',
@@ -325,16 +366,19 @@ function launchgraph(){
                     type: 'linear',
                     position: 'bottom'
                 }]
+            },
+            tooltips: {
+                mode:'nearest'
             }
         }
     });
 
     //onclick function
-    $(document).on("click", "#openGraphModalBtn", function(){
+    $(document).on("click", "#openGraphModalBtn11", function(){
         // document.getElementById('GraphModal').style.display='block'
         $('#graphModal').modal('toggle');
-        var ctx = document.getElementById('graphcontainer1').getContext('2d');
-        myChart = new Chart(ctx, {
+        var ctx1 = document.getElementById('graphcontainer1').getContext('2d');
+        myChart = new Chart(ctx1, {
             type: 'line',
             
             data: {
@@ -379,7 +423,26 @@ function launchgraph(){
     })
 }
 
-
+//document.getElementById("graphcontainer").onclick = function(evt, array) { 
+    //var xLabel = myChart.scales['y-axis-0'].getValueForPixel(evt.y); 
+    //console.log(xLabel)
+    //alert(myChart.config.data.labels[xLabel- 1]);
+//};
+document.getElementById("graphcontainer11").onclick = function(event, elementsAtEvent)
+{
+    console.log(event, elementsAtEvent, this);
+    var valueX = null, valueY = null;
+    for (var scaleName in this.scales) {
+        var scale = this.scales[scaleName];
+        console.log(scale.id, scale.isHorizontal());
+        if (scale.isHorizontal()) {
+            valueX = scale.getValueForPixel(event.offsetX);
+        } else {
+            valueY = scale.getValueForPixel(event.offsetY);
+        }
+    }
+    console.log(event.offsetX, valueX, null, event.offsetY, valueY);
+},
 
 //fucntion to export FT4 and TSH calculation
 $(document).on("click", "#exportcalc", function(){
