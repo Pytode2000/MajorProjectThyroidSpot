@@ -1,10 +1,5 @@
 //THIS WILL BE WHERE THE GRAPH FUNCTION COMES
 
-
-// console.log(FT4Array) //successfully retrieved from patientinfo.html
-// console.log(TSHArray) //successfully retrieved from patientinfo.html
-// console.log(TreatmentArray) //successfully retrieved from patientinfo.html
-
 var treatmentList = [];//set FT4 + TSH array from patient-info 
 var validArray = []; //array for valid treatments
 var outlierArray = [] //array for outlier treatments
@@ -43,15 +38,11 @@ function startCalc(){
 
     ft4Unit = " pmol/L";
     tshUnit = " mU/L";
-    console.log(TreatmentArray.length)
     
     validArray = treatmentList
 
     
-    console.log(treatmentList)
-    //console.log(validArray)
     totalNumOfTreatments = treatmentList.length;
-    //console.log(totalNumOfTreatments)
     removeOutliers(); //call function to remove outliers
     for (var i = 0; i < treatmentList.length; i++) {
         found = false;
@@ -60,12 +51,11 @@ function startCalc(){
                     && treatmentList[i].FT4 == validArray[j].FT4
                     && treatmentList[i].timestamp == validArray[i].timestamp) {
                 found = true;
-                //console.log("owo")
+                
                 break;
             }
         }
         if (found == false) {
-            //console.log("no signs of intelligent life anywhere")
             outlierTreatments.push(treatmentList[i]); //ADD OUTLIER DATA TO OUTLIER ARRAY
         }
     }
@@ -103,13 +93,13 @@ function startCalc(){
     var maxToAdd = validmaxX + validxRangeExt;
     bestfitvalidft4List.push(maxToAdd);
 
-    //ACHTUNG: for phi and snum, refer BestFitCurve
+    //NOTE: for phi and snum, refer BestFitCurve
     for (var i = 0; i < bestfitvalidft4List.length; i++) {
         var TSH = snum / Math.pow(Math.E, (phi * bestfitvalidft4List[i]));
         bestfitvalidtshList.push(TSH);
     }
 
-
+    //storing best fit valid data into array to display the chart with these values
     bestfitvalidData = [];
     if (bestfitvalidft4List.length != 0) {
         for (var i = 0; i < bestfitvalidft4List.length; i++) {
@@ -117,16 +107,15 @@ function startCalc(){
         }
     }
     else{
-        console.log("nada")
+        console.log("no best fit data")
     }
 
-  
-    //console.log(bestfitvalidData)
 
     launchgraph(); //send data to the graph for rendering display
 }
 
 
+//calculating best fit curve function
 function bestfitCurve(vaz){
     console.log("calculating best fit curve...")
 
@@ -134,7 +123,7 @@ function bestfitCurve(vaz){
 
         treatmentROList = [];
 		
-		//getting TSH
+		//getting TSH (valid data)
 		for(var i = 0; i < validArray.length; i++)
 		{
 			var t = validArray[i];
@@ -171,9 +160,7 @@ function bestfitCurve(vaz){
 		phi = roPhi;
 		snum = roSnum;
 
-        //WARNING: for some reason averageError is displaying NaN so there's a small problem to fix
         //determining error list and avg error
-        console.log(validArray)
 		errorList = [];
 		var totalError = 0;
 		var averageError = 0;
@@ -186,14 +173,13 @@ function bestfitCurve(vaz){
 			totalError += iError;
         }
 		averageError = totalError / errorList.length;
-        console.log(errorList)
 		return averageError;
 }
 
 
 
 
-//removeOutliers seems to be working
+//function to remove outliers
 function removeOutliers(){
     console.log("removing outliers...")
 
@@ -287,14 +273,9 @@ function launchgraph(){
         type: 'line',
         
         data: {
-            //labels: ['Ft4', 'TSH'],
             datasets: [{
                 label: 'Best Fit Curve',
                 data: bestfitvalidData,
-                // data: [{
-                //     x: bestfitvalidft4List,
-                //     y: bestfitvalidtshList
-                // }],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -312,12 +293,7 @@ function launchgraph(){
             responsive: true,
             maintainAspectRatio: false,
             scales: {
-                // yAxes: [{
-                //     ticks: {
-                //         beginAtZero: true
-                        
-                //     }
-                // }]
+               
                 xAxes: [{
                     type: 'linear',
                     position: 'bottom'
@@ -326,23 +302,20 @@ function launchgraph(){
         }
     });
 
-    //onclick function
+    //onclick function to show enlarged version of the chart / as well as exporting FT4 and TSH to csv file
     $(document).on("click", "#openGraphModalBtn", function(){
-        // document.getElementById('GraphModal').style.display='block'
+        
         $('#graphModal').modal('toggle');
         var ctx = document.getElementById('graphcontainer1').getContext('2d');
         myChart = new Chart(ctx, {
             type: 'line',
             
             data: {
-                //labels: ['Ft4', 'TSH'],
+        
                 datasets: [{
                     label: 'Best Fit Curve',
                     data: bestfitvalidData,
-                    // data: [{
-                    //     x: bestfitvalidft4List,
-                    //     y: bestfitvalidtshList
-                    // }],
+                  
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -360,12 +333,7 @@ function launchgraph(){
                 responsive: true,
                 maintainAspectRatio: false,
                 scales: {
-                    // yAxes: [{
-                    //     ticks: {
-                    //         beginAtZero: true
-                            
-                    //     }
-                    // }],
+                   
                     xAxes: [{
                         type: 'linear',
                         position: 'bottom'
@@ -384,7 +352,6 @@ $(document).on("click", "#exportcalc", function(){
 
     let csv = ""
     
-    console.log(ExportationArray)
     // Loop the array of objects
     for(let row = 0; row < ExportationArray.length; row++){
         let keysAmount = Object.keys(ExportationArray[row]).length+1
@@ -396,27 +363,20 @@ $(document).on("click", "#exportcalc", function(){
             // Loop each property of the object
             for(let key in ExportationArray[row]){
 
-                // This is to not add a comma at the last cell
-                // The '\r\n' adds a new line
                 csv += key + (keysCounter < keysAmount ? ',' : '\r\n' )
-                // csv += ExportationArray[0][key] + (keysCounter+1 < keysAmount ? ',' : '\r\n' )
-                console.log(csv)
-                //console.log(key)
-                //keysCounter++
+               
             }
             csv += "\r\n"
             for(let key in ExportationArray[0]){
                 csv += ExportationArray[0][key] + (keysCounter < keysAmount ? ',' : '\r\n' )
-                console.log(csv)
+                
                 keysCounter++
             }
             csv += "\r\n"
         }
         else{
             for(let key in ExportationArray[row]){
-                //console.log(ExportationArray[key])
                 csv += ExportationArray[row][key] + (keysCounter+1 < keysAmount ? ',' : '\r\n' )
-                console.log(csv)
                 keysCounter++
             }
             csv += "\r\n"
@@ -434,8 +394,3 @@ $(document).on("click", "#exportcalc", function(){
     document.querySelector('#download-csv').click()
 })
 
-
-//WORKAROUND: assumed fix for occasional chart duplicate glitches
-// window.onload = function() {
-//     startCalc();
-// }

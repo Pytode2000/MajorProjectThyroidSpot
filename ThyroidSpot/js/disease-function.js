@@ -130,7 +130,7 @@ function deleteDisease() {
     });
 }
 
-//This function will consume the disease GET API
+//This function will consume the disease GET API and display all diseases on the page
 function getAllDiseaseInfo() {
     console.log("retrieving all disease info...")
     $.ajax({
@@ -185,7 +185,7 @@ function getAllDiseaseInfo() {
 }
 
 
-//This function will get one disease info
+//This function will get one disease info and display in a modal
 function getOneDiseaseInfo(id) {
     console.log(id);
     $.ajax({
@@ -230,7 +230,7 @@ function getOneDiseaseInfo(id) {
 }
 
 var stonks
-//disease search function
+//disease search function (filter by array)
 function diseaseSearch() {
     const searchTerm = document.getElementById("diseaseSearch").value;
 
@@ -272,26 +272,7 @@ function diseaseSearch() {
 
 }
 
-function call() {
-    //console.log(stonksid)
-
-    $('#diseaseCard').html('');
-    // //Iterate through the diseaseInfoArray to generate rows to populate the table
-    // for (i = 0; i < diseaseInfoArray.length; i++) {
-    //     coverImage = "<img style='width:100px' src='data:image/jpeg;base64," + diseaseInfoArray[i].thumbnail + "'/>";
-
-    //     //use sample image for now:
-    //     coverImage= "<img src='https://www.mei.edu/sites/default/files/2019-01/Virus.jpg'>"
-    //     // viewmorebutton = "document.getElementById('diseaseModal').style.display='block'"
-    // $('#diseaseCard').append("<div onclick="+viewmorebutton+"  class = 'centerText'>" +
-    //     coverImage + "<div class='centerTitle'><b>" + diseaseInfoArray[i].disease + "</b></div></div>");
-    //     $('#diseaseCard').append("<div id='viewmore' num="+stonksid+"  class = 'centerText'>" +
-    //         coverImage + "<div class='centerTitle'><b>" + stonks + "</b></div></div>");
-    //  }
-
-}
-
-
+//doc onclick for "view more" button (button will display a modal that shows details of the thyroid disease)
 $(document).on("click", "#viewmore", function () {
     currentDiseaseID = $(this).attr('num');
     console.log(currentDiseaseID);
@@ -301,6 +282,7 @@ $(document).on("click", "#viewmore", function () {
     //document.getElementById('diseaseModal').style.display = 'block'
 });
 
+//doc onclick for "view forum" button (button will redirect user to the forum page)
 $(document).on("click", "#viewForums", function () {
     //currentDiseaseID = $(this).attr('num');
     if (currentDiseaseID == undefined){
@@ -310,5 +292,4 @@ $(document).on("click", "#viewForums", function () {
     window.location.href = "disease-forum.html";
 });
 
-getAllDiseaseInfo();
-call();
+getAllDiseaseInfo(); //call disease info function to get and display
