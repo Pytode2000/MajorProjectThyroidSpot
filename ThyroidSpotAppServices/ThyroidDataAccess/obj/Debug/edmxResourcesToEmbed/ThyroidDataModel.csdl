@@ -22,6 +22,7 @@
     <EntitySet Name="disease_forum" EntityType="ThyroidDataModel.disease_forum" />
     <EntitySet Name="forum_comment" EntityType="ThyroidDataModel.forum_comment" />
     <EntitySet Name="drug_dosage" EntityType="ThyroidDataModel.drug_dosage" />
+    <EntitySet Name="notification" EntityType="ThyroidDataModel.notification" />
   </EntityContainer>
   <EntityType Name="user">
     <Key>
@@ -95,5 +96,15 @@
     <Property Name="patient_id" Type="Int32" Nullable="false" />
     <Property Name="drug_img" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="notification">
+    <Key>
+      <PropertyRef Name="notification_id" />
+    </Key>
+    <Property Name="notification_id" Type="Int32" Nullable="false" />
+    <Property Name="patient_id" Type="Int32" Nullable="false" />
+    <Property Name="notification_content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="seen" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="timestamp" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

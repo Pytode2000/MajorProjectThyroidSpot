@@ -173,6 +173,7 @@
     <Compile Include="Controllers\forumcommentsController.cs" />
     <Compile Include="Controllers\forumpostController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\notificationController.cs" />
     <Compile Include="Controllers\patientInfoController.cs" />
     <Compile Include="Controllers\reportController.cs" />
     <Compile Include="Controllers\userController.cs" />

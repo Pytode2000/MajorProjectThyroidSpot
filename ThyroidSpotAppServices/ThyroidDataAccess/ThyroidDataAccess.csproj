@@ -72,6 +72,9 @@
     <Compile Include="patient_information.cs">
       <DependentUpon>ThyroidDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="notification.cs">
+      <DependentUpon>ThyroidDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="patient_report.cs">
       <DependentUpon>ThyroidDataModel.tt</DependentUpon>
     </Compile>

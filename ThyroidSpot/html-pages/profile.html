@@ -19,9 +19,9 @@
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-
+    <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX"
         crossorigin="anonymous">
@@ -59,7 +59,20 @@
         <div class="content">
 
             <!-- Heading. -->
-            <h1 class="text-center page-heading"> <i class="svg-inline--fa fas fa-user fa-primary fa-w-16"></i> Profile</h1>
+            
+            <h1 class="text-center page-heading"> <i class="svg-inline--fa fas fa-user fa-primary fa-w-32"></i> Profile</h1>
+            <div class="dropdown">
+                <h1 id="notificationBtn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i  class="notification fas fa-bell fa-w-32">
+                        <span class="badge" id="notificationAmount"></span>
+                    </i>
+                </h1>
+                <div class="dropdown-menu" aria-labelledby="notificationBtn" id="notificationList">
+                    <p class="text-center">No Notifications</p>
+                  </div>
+            </div>
+
+
 
             <!-- TOGGLER. Changes between see User information and see Patient information. Only used when user is patient. 
             Users that are admin or clinciians will not be able to see Patient Information, so they cannot toggle. -->
@@ -385,7 +398,30 @@
         </div>
     </div>
 
+    <!--Notifications Modal-->
+    <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="notificationModalLabel">Notifications</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" >
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary" onclick="deleteAllUserNotifications()">Delete All Notifications</button>
+                </div><br>
+                <div id="allNotifications">
 
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
     <!-- Edit -->
     <div class="modal fade" id="editPatientModal" tabindex="-1" role="dialog" aria-labelledby="editPatientModalLabel" aria-hidden="true">

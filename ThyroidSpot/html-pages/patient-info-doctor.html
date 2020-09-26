@@ -17,6 +17,7 @@
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
 
+
 <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://printjs-4de6.kxcdn.com/print.min.css">
 
@@ -146,11 +147,7 @@
                                 <div class="col" style="text-align: left;">
                                     <label>FT4:</label>
                                     <div>
-                                    <input type="text" class="form-control" id="newFT4" style="width: 70%; display: inline;" placeholder="Enter FT4..." required>
-                                    <select name="unitselection" id="newUnitDDL" style="float: inherit;">
-                                        <option value="mU/L">mU/L</option>
-                                        <option value="pmol/L" selected>pmol/L</option>
-                                    </select>
+                                    <input type="text" class="form-control" id="newFT4" style=" display: inline;" placeholder="Enter FT4 Value" required>
                                     </div>
                                 </div>
                             </div>
@@ -160,85 +157,20 @@
                                 <div class="col" style="text-align: left;">
                                     <label>TSH:</label>
                                     <div>
-                                    <input type="text" class="form-control" id="newTSH" style="width: 70%; display: inline;" placeholder="Enter TSH..." required>
-                                    <select name="unitselection" id="newUnit1DDL" style="float: inherit;">
-                                        <option value="mU/L" selected>mU/L</option>
-                                        <option value="pmol/L">pmol/L</option>
-                                    </select>
+                                    <input type="text" class="form-control" id="newTSH" style=" display: inline;" placeholder="Enter TSH Value" required>
                                     </div>
                                 </div>
                             </div>
                             <br>
-                        
-                            <!-- FOR KAILONG: to be moved to clinician side -->
-                            <div class="form-row col-xs-4  col-md-12">
-                                <div class="col-md-6">
-                                    <label>Drug:</label>
-                                    <div>
-                                    <select name="bloodtype" class="newDrugName">
-                                        <option value="" selected disabled hidden>--Choose here--</option>
-                                        <option value="carbimazole">carbimazole</option>
-                                        <option value="methimazole">methimazole</option>
-                                        <option value="thiamazole">thiamazole</option>
-                                        <option value="propylthiouracil">propylthiouracil</option>
-                                        <option value="levothyroxine">levothyroxine</option>
-                                        <option value="liothyronine">liothyronine"</option>
-                                        <option value="propranolol">propranolol</option>
-                                        <option value="others">others</option>
-                                    </select>
-                                    </div>
-                                </div>
-
-                                <br class="divider">
-
-                                <div class="col-md-6">
-                                    <label>Tablets:</label>
-                                    <div>
-                                    <input type="text" class="newDrugDose" placeholder="Enter No..." required>
-                                    </div>
-                                </div> 
-                            </div>
-                            <div class="form-row col-xs-4  col-md-12">
-                                <div class="col" style="text-align: left;">
-                                    <label>Tablets per day:</label>
-                                    <div>
-                                    <input type="text" class="form-control newTabletsDay" placeholder="Enter prescription..." required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-row col-xs-4  col-md-12">
-                                <div class="col" style="text-align: left;">
-                                    <label>Remarks:</label>
-                                    <div>
-                                    <input type="text" class="form-control newRemarks" placeholder="Enter remarks...">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-row col-xs-4  col-md-12">
-                                <div class="col" style="text-align: left;">
-                                    <label>Medicine image:</label>
-                                    <div>
-                                    <input type="file" name="files[]" class="form-control newDrugImage" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>    
-                            <div id="addon">
-                            </div>
-                        </div>
-                            <div style="text-align: center; margin-bottom: 1em;">
-                                <button id="addMoreRows" class="btn btn-secondary custom-class">Add another drug dose</button>
-                            </div>
-                            <div style="text-align: center; padding-bottom: 1em;">
-                                <button class="btn btn-dark btn-SaveReport custom-class bold">Save Report</button>
-                            </div>
                         </form>
+                    </div>
                         <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" onclick="postPatientReport()">Submit</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
                     </div>
                 </div>                    
             </div>
+        </div>
 
             <!-- Modal For Prescription -->
             <div class="modal fade bd-example-modal-lg" id="prescriptionModal" tabindex="-1" role="dialog" aria-labelledby="prescriptionModalLabel" aria-hidden="true">
@@ -305,11 +237,160 @@
                         </div>
                     </div>
                     <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="openAddPrescriptionModalBtn" data-toggle="modal" data-target="#addPrescriptionModal" >Add Prescription</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
                 </div>
-            </div>    
+            </div>
+            
+            <!--Add Prescription Modal-->
+            <div class="modal fade" id="addPrescriptionModal" tabindex="-1" role="dialog" aria-labelledby="addPrescriptionModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Add New Prescription</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                        <div class="form-row col-xs-4  col-md-12">
+                            <div class="col-md-6">
+                                <label>Drug:</label>
+                                <div>
+                                <select name="bloodtype" class="newDrugName">
+                                    <option value="" selected disabled hidden>--Choose here--</option>
+                                    <option value="carbimazole">carbimazole</option>
+                                    <option value="methimazole">methimazole</option>
+                                    <option value="thiamazole">thiamazole</option>
+                                    <option value="propylthiouracil">propylthiouracil</option>
+                                    <option value="levothyroxine">levothyroxine</option>
+                                    <option value="liothyronine">liothyronine"</option>
+                                    <option value="propranolol">propranolol</option>
+                                    <option value="others">others</option>
+                                </select>
+                                </div>
+                            </div>
+
+                            <br class="divider">
+
+                            <div class="col-md-6">
+                                <label>Tablets:</label>
+                                <div>
+                                <input type="number" class="newDrugDose" placeholder="No. of Tablets" required>
+                                </div>
+                            </div> 
+                        </div>
+                        <div class="form-row col-xs-4  col-md-12">
+                            <div class="col" style="text-align: left;">
+                                <label>Prescription</label>
+                                <div>
+                                <input type="text" class="form-control newPrescription" placeholder="Enter Prescription" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row col-xs-4  col-md-12">
+                            <div class="col" style="text-align: left;">
+                                <label>Remarks:</label>
+                                <div>
+                                <input type="text" class="form-control newRemarks" placeholder="Enter Remarks">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row col-xs-4  col-md-12">
+                            <div class="col" style="text-align: left;">
+                                <label>Medicine image:</label>
+                                <div>
+                                <input type="file" name="files[]" class="form-control newDrugImage" required>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="postDosage()">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+            <!--Edit Prescription Modal-->
+            <div class="modal fade" id="editPrescriptionModal" tabindex="-1" role="dialog" aria-labelledby="editPrescriptionModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Edit Prescription</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-row col-xs-4  col-md-12">
+                                <div class="col-md-6">
+                                    <label>Drug:</label>
+                                    <div>
+                                    <select name="bloodtype" style="width: 100%;" id="currentDrugName">
+                                        <option value="" selected disabled hidden>--Choose here--</option>
+                                        <option value="carbimazole">carbimazole</option>
+                                        <option value="methimazole">methimazole</option>
+                                        <option value="thiamazole">thiamazole</option>
+                                        <option value="propylthiouracil">propylthiouracil</option>
+                                        <option value="levothyroxine">levothyroxine</option>
+                                        <option value="liothyronine">liothyronine"</option>
+                                        <option value="propranolol">propranolol</option>
+                                        <option value="others">others</option>
+                                    </select>
+                                    </div>
+                                </div>
+    
+                                <br class="divider">
+    
+                                <div class="col-md-6">
+                                    <label>Tablets:</label>
+                                    <div>
+                                    <input type="number" style="width: 100%;" id="currentDrugDose" placeholder="No. of Tablets" required>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="form-row col-xs-4  col-md-12">
+                                <div class="col" style="text-align: left;">
+                                    <label>Prescription</label>
+                                    <div>
+                                    <input type="text" id="currentPrescription" class="form-control" style="width: 100%;" placeholder="Enter Prescription" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row col-xs-4  col-md-12">
+                                <div class="col" style="text-align: left;">
+                                    <label>Remarks:</label>
+                                    <div>
+                                    <input type="text" id="currentRemarks" style="width: 100%;" class="form-control" placeholder="Enter Remarks">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row col-xs-4  col-md-12">
+                                <div class="col" style="text-align: left;">
+                                    <label>Medicine image:</label>
+                                    <div>
+                                    <input type="file" name="files[]" id="currentDrugImage" class="form-control " style="width: 100%;" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger mr-auto" onclick="deletePrescription()">Delete</button>
+                        <button type="button" class="btn btn-primary" onclick="updatePrescription()">Update</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
             <!-- Diagnosis Modal -->
             <div class="modal fade" id="diagnosisModal" tabindex="-1" role="dialog" aria-labelledby="diagnosisModalLabel" aria-hidden="true">

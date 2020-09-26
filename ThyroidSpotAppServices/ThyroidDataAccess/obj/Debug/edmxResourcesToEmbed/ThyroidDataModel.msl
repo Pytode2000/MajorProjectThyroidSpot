@@ -95,5 +95,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="notification">
+      <EntityTypeMapping TypeName="ThyroidDataModel.notification">
+        <MappingFragment StoreEntitySet="notification">
+          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+          <ScalarProperty Name="seen" ColumnName="seen" />
+          <ScalarProperty Name="notification_content" ColumnName="notification_content" />
+          <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+          <ScalarProperty Name="notification_id" ColumnName="notification_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

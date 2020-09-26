@@ -4,6 +4,7 @@ var patientInfoURI = "https://localhost:44395/api/patientinfo/";
 var diagnosisURI = "https://localhost:44395/api/diagnosis";
 var dosageURI = "https://localhost:44395/api/dosage";
 var reportURI = "https://localhost:44395/api/report";
+var notificationURI = 'https://localhost:44395/api/notification';
 
 // To store current patient's doctor. If user is not patient, then this variable will not be used.
 var patient_doctor;
@@ -15,6 +16,7 @@ var patient_table_patient_id;
 
 // Stores all current patient's diagnosis (if any). Variable will not be used if user is not a patient.
 var currentPatientDiagnosis = [];
+var notificationsArray = [];
 
 // For selected diagnosis. Used for deleting diagnosis.
 var selectedDiagnosis;
@@ -44,6 +46,7 @@ function toggleProfile() {
     togglePatientBtn.classList.remove("active");
     console.log("Information hidden")
 }
+
 
 // SHOW PATIENT INFORMATION, HIDE USER INFORMATION.
 function toggleInformation() {
@@ -132,7 +135,7 @@ function getPatientInfo() {
                 success: function (data) {
                     currentPatientDiagnosis = data;
 
-
+                    getUserNotification();
                     number_of_original_diagnosis = currentPatientDiagnosis.length
                     for (i = 0; i < currentPatientDiagnosis.length; i++) {
 
@@ -174,6 +177,91 @@ function getPatientInfo() {
             });
         }
     });
+}
+
+function getUserNotification(){
+    var amountOfNotification;
+    var latestNoti;
+    $.ajax({
+        type: 'GET',
+        url: notificationURI + '?patientid=' + patient_table_patient_id,
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            notificationsArray = data
+            amountOfNotification = 0
+            if (notificationsArray.length != 0){
+                $('#notificationList').html('');
+            
+                for(i=0; i < notificationsArray.length; i++){
+                    latestNoti = notificationsArray.length - i - 1;
+                    if (notificationsArray[latestNoti].seen == "False"){
+                        if (i < 2 ){
+                            $('#notificationList').append("<blockquote class='blockquote dropdown-item notification-font'>"+
+                            "<p class='mb-0 newNoti' style='font-weight:bold;'>"+notificationsArray[latestNoti].notification_content+"</p><footer class='blockquote-footer'>"+notificationsArray[latestNoti].timestamp+"</footer></blockquote><hr>")
+                        }
+                        if (i == 2){
+                            $('#notificationList').append("<blockquote class='blockquote dropdown-item notification-font'>"+
+                            "<p class='mb-0 newNoti' style='font-weight:bold;'>"+notificationsArray[latestNoti].notification_content+"</p><footer class='blockquote-footer'>"+notificationsArray[latestNoti].timestamp+"</footer></blockquote><hr>"+
+                            "<a id='seeAllNotificationsBtn' data-toggle='modal' data-target='#notificationModal'>See More</a>")
+                        } 
+                        amountOfNotification += 1
+                        var readNotification = { notification_id: notificationsArray[latestNoti].notification_id,
+                            patient_id: notificationsArray[latestNoti].patient_id, notification_content : notificationsArray[latestNoti].notification_content,
+                            seen: "True", timestamp:notificationsArray[latestNoti].timestamp};
+                        $.ajax({
+                            type: 'PUT',
+                            url: notificationURI + '/' + notificationsArray[latestNoti].notification_id,
+                            data: JSON.stringify(readNotification),
+                            dataType: 'json',
+                            contentType: 'application/json',
+                            success: function (data) {
+                            }
+                        });
+                        
+                    }else{
+                        if(i < 2){
+                            $('#notificationList').append("<blockquote class='blockquote dropdown-item notification-font'>"+
+                            "<p class='mb-0'>"+notificationsArray[latestNoti].notification_content+"</p><footer class='blockquote-footer'>"+notificationsArray[latestNoti].timestamp+"</footer></blockquote><hr>")
+                        }
+                        else if (i == 2){
+                            $('#notificationList').append("<blockquote class='blockquote dropdown-item notification-font'>"+
+                            "<p class='mb-0'>"+notificationsArray[latestNoti].notification_content+"</p><footer class='blockquote-footer'>"+notificationsArray[latestNoti].timestamp+"</footer></blockquote><hr>"+
+                            "<a id='seeAllNotificationsBtn' data-toggle='modal' data-target='#notificationModal'>See More</a>")
+                        } 
+                        
+                    }
+                }
+                document.getElementById('notificationAmount').innerHTML = amountOfNotification;
+            }
+            else {
+                document.getElementById('notificationAmount').style.display = 'none';
+            }
+
+
+        }
+    });
+
+}
+
+function deleteAllUserNotifications(){
+    $.ajax({
+        type: 'DELETE',
+        url: notificationURI + '?patientid=' + patient_table_patient_id,
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            window.location.reload();
+        }
+    });
+}
+
+function getAllUserNotifications(){
+    $('#allNotifications').html('')
+    for (i=0;i < notificationsArray.length;i++){
+        $('#allNotifications').append("<blockquote class='blockquote dropdown-item notification-font'>"+
+        "<p class='mb-0'>"+notificationsArray[i].notification_content+"</p><footer class='blockquote-footer'>"+notificationsArray[i].timestamp+"</footer></blockquote><hr>")
+    }
 }
 
 // This function allows patient users to click their diagnosis (or diagnoses). Onclicking, it redirects them to the 
@@ -347,9 +435,9 @@ getUser() // Called for all types of users.
 
 // If user is patient, then call getPatientInfo( ), and show the edit patient info FAB.
 if (sessionStorage.getItem("user_account_type") == "patient") {
-    getPatientInfo()
+    getPatientInfo();
     const editPatientInfoFAB = document.getElementById("FAB-edit");
-    editPatientInfoFAB.classList.remove("hide")
+    editPatientInfoFAB.classList.remove("hide");
 }
 
 /***** BENEATH ARE FUNCTIONS FOR USER SETTING (FIREBASE AUTH) (logout, change email, change password, and delete account). *****/
@@ -525,4 +613,18 @@ function deleteAccount() {
         deleteAccAlert.innerHTML = error.message;
     });
 }
+
+$(document).on("click", "#notificationBtn", function () {
+    document.getElementById('notificationAmount').style.display = 'none'
+    
+});
+
+$(document).on('hidden.bs.dropdown',"#notificationBtn", function () {
+    document.getElementsByClassName("newNoti").style = ''
+  })
+
+$(document).on("click", "#seeAllNotificationsBtn", function () {
+    getAllUserNotifications();
+    
+});
 

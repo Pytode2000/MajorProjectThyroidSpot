@@ -59,6 +59,16 @@
           <Property Name="timestamp" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="username" Type="nvarchar" MaxLength="70" Nullable="false" />
         </EntityType>
+        <EntityType Name="notification">
+          <Key>
+            <PropertyRef Name="notification_id" />
+          </Key>
+          <Property Name="notification_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patient_id" Type="int" Nullable="false" />
+          <Property Name="notification_content" Type="text" Nullable="false" />
+          <Property Name="seen" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="timestamp" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
         <EntityType Name="patient_information">
           <Key>
             <PropertyRef Name="patient_id" />
@@ -97,6 +107,7 @@
           <EntitySet Name="disease_information" EntityType="Self.disease_information" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="drug_dosage" EntityType="Self.drug_dosage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="forum_comment" EntityType="Self.forum_comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="notification" EntityType="Self.notification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="patient_information" EntityType="Self.patient_information" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="patient_report" EntityType="Self.patient_report" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
@@ -127,6 +138,7 @@
           <EntitySet Name="disease_forum" EntityType="ThyroidDataModel.disease_forum" />
           <EntitySet Name="forum_comment" EntityType="ThyroidDataModel.forum_comment" />
           <EntitySet Name="drug_dosage" EntityType="ThyroidDataModel.drug_dosage" />
+          <EntitySet Name="notification" EntityType="ThyroidDataModel.notification" />
         </EntityContainer>
         <EntityType Name="user">
           <Key>
@@ -200,6 +212,16 @@
           <Property Name="patient_id" Type="Int32" Nullable="false" />
           <Property Name="drug_img" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="notification">
+          <Key>
+            <PropertyRef Name="notification_id" />
+          </Key>
+          <Property Name="notification_id" Type="Int32" Nullable="false" />
+          <Property Name="patient_id" Type="Int32" Nullable="false" />
+          <Property Name="notification_content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="seen" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="timestamp" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -298,6 +320,17 @@
                 <ScalarProperty Name="drug_dose" ColumnName="drug_dose" />
                 <ScalarProperty Name="drug_name" ColumnName="drug_name" />
                 <ScalarProperty Name="idDosage" ColumnName="idDosage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="notification">
+            <EntityTypeMapping TypeName="ThyroidDataModel.notification">
+              <MappingFragment StoreEntitySet="notification">
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+                <ScalarProperty Name="seen" ColumnName="seen" />
+                <ScalarProperty Name="notification_content" ColumnName="notification_content" />
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+                <ScalarProperty Name="notification_id" ColumnName="notification_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -3,13 +3,13 @@ var userURI = 'https://localhost:44395/api/user';
 var reportURI = 'https://localhost:44395/api/report';
 var diagnosisURI = 'https://localhost:44395/api/diagnosis';
 var dosageURI = 'https://localhost:44395/api/dosage';
-
+var notificationURI = 'https://localhost:44395/api/notification';
 var reportArray = [];
 var currentreportID; //this variable will contain the report ID that's selected
 var reportIDArray = [];
 var currentUser = [];
 var diagnosisArray = [];
-
+var currentDosageId;
 var secondReportArray = [] // for search function
 var storeReports = [] //second array for search function
 
@@ -40,6 +40,7 @@ function getPatientName(){
             currentUser = data;
             $('#patient-name').text(currentUser.full_name)
             $('#tableName').text(currentUser.full_name)
+            getSpecificPatientInfo();
 
         }
     })
@@ -60,6 +61,7 @@ function getSpecificPatientInfo(){
                 dataType: 'json',
                 contentType: 'application/json',
                 success: function (data) {
+                    getDiagnosisDetails();
                     dob = patientInfo.date_of_birth;
                     bt = patientInfo.blood_type;
                     gender = patientInfo.gender
@@ -159,8 +161,10 @@ function getPatientReport() {
                         ExportationArray.push({TSH: report.TSH, FT4: report.FT4, timestamp: report.timestamp})
                         viewdosagebtn = "<button id='viewdosage' num='"+storeReports[storeReports.length-1].report_id+"' class='btn btn-info btn-sm custom-class' data-toggle='modal' data-target='#prescriptionModal'>View Prescription</button>";
                         aptdate = storeReports[storeReports.length-1].timestamp;
-                        editDeleteResultBtn = "<button id='openEditDeleteResultModalBtn' class='btn btn-secondary' data-toggle='modal' data-target='#editDeleteResultModal' index='"+i+"' ft4='"+report.FT4+"' tsh='"+report.TSH+"'>Edit / Delete</button>"
-                        
+                        editDeleteResultBtn = "<button id='openEditDeleteResultModalBtn' class='btn btn-info' data-toggle='modal' data-target='#editDeleteResultModal' index='"+i+"' ft4='"+report.FT4+"' tsh='"+report.TSH+"'><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' width='16' height='16'>"+
+                        "<path fill-rule='evenodd' d='M11.013 1.427a1.75 1.75 0 012.474 0l1.086 1.086a1.75 1.75 0 010 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 01-.927-.928l.929-3.25a1.75 1.75 0 01.445-.758l8.61-8.61zm1.414 1.06a.25.25 0 00-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 000-.354l-1.086-1.086zM11.189 6.25L9.75 4.81l-6.286 6.287a.25.25 0 00-.064.108l-.558 1.953 1.953-.558a.249.249 0 00.108-.064l6.286-6.286z'>"+
+                        "</path></svg></button>"
+
                         
                         $('#dosagehist').append("<tr style='margin-bottom: 0.5em;'>"+
                         "<tr><td>"+report.timestamp+"</td><td>"+report.FT4+"</td><td>"+
@@ -262,10 +266,10 @@ $(document).ready(function () {
 
 
 
+
 //create function for postPatientReport
 function postPatientReport() {
     //getting patient id and putting it into a variable
-    var getuser_id = currentPatientId
 
     //TODO: change date format to DD-MM-YYYY instead
     var date =  moment(new Date()).format("DD-MM-YYYY")
@@ -275,7 +279,7 @@ function postPatientReport() {
     var decimalregex = new RegExp('[+-]?([0-9]*[.])?[0-9]+');
    
     
-    var patientinfo = {patient_id: getuser_id, FT4: $('#newFT4').val(), TSH: $('#newTSH').val(), timestamp: date}
+    var patientinfo = {patient_id: currentPatientId, FT4: $('#newFT4').val(), TSH: $('#newTSH').val(), timestamp: date}
     console.log(patientinfo);
 
     //check if FT4 and TSH matches with defined regex
@@ -287,8 +291,7 @@ function postPatientReport() {
                 dataType: 'json',
                 contentType: 'application/json',
                 success: function (data) {
-                    console.log(data)
-                    getReportID();
+                    window.location.reload();
                 }
             });
     }
@@ -315,16 +318,19 @@ function getPrescription(){
             for (i = 0; i < doseArray.length; i++) {
                 if (currentPatientId == doseArray[i].patient_id){
                     
-                    var prescription = {report_id: doseArray[i].report_id, drug_name: doseArray[i].drug_name, drug_dose: doseArray[i].drug_dose, 
+                    var prescription = {dosageId: doseArray[i].idDosage, drug_name: doseArray[i].drug_name, drug_dose: doseArray[i].drug_dose, 
                         drug_days: doseArray[i].drug_days, drug_img: doseArray[i].drug_img, remarks: doseArray[i].remarks}
                     
                     console.log(prescription)
                     
                     coverImage = "<img id='expandImg' data-toggle='modal' data-target='#modalImg' num="+doseArray[i].idDosage+" style='width:100px' src='data:image/jpeg;base64," + prescription.drug_img + "'/>";
+                    editDeletePrescriptionBtn = "<button id='openEditPrescriptionModalBtn' class='btn btn-info' data-toggle='modal' data-target='#editPrescriptionModal' index='"+i+"' dosageId='"+prescription.dosageId+"' '><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' width='16' height='16'>"+
+                    "<path fill-rule='evenodd' d='M11.013 1.427a1.75 1.75 0 012.474 0l1.086 1.086a1.75 1.75 0 010 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 01-.927-.928l.929-3.25a1.75 1.75 0 01.445-.758l8.61-8.61zm1.414 1.06a.25.25 0 00-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 000-.354l-1.086-1.086zM11.189 6.25L9.75 4.81l-6.286 6.287a.25.25 0 00-.064.108l-.558 1.953 1.953-.558a.249.249 0 00.108-.064l6.286-6.286z'>"+
+                    "</path></svg></button>"
                     
                     $('#prescriptionTable').append("<tr><td style='padding:30px;'>"+prescription.drug_name+"</td>"+
                     "<td>"+prescription.drug_dose+"</td><td>"+prescription.drug_days+"</td>"+
-                    "<td>"+coverImage+"</td><td>"+prescription.remarks+"</td></tr>");
+                    "<td>"+coverImage+"</td><td>"+prescription.remarks+"</td><td>"+editDeletePrescriptionBtn+"</td></tr>");
 
                 }
             }
@@ -337,7 +343,7 @@ function getPrescription(){
 
      //NOTE TO KAILONG: u need to get the report id on ur end to make this work,
      //                 furthermore, the input for drug_img has yet to be edited
-     var f = $(".newDrugImage")[0].files[0]; // get image object (WARNING: THIS ONLY TAKES 1 IMAGE)
+     var newDrugImage = $(".newDrugImage")[0].files[0]; // get image object (WARNING: THIS ONLY TAKES 1 IMAGE)
      var reader = new FileReader();
      //This function will be triggered after the code executes reader.readAsBinaryString(f);
      reader.onload = (function (theFile) {
@@ -345,40 +351,113 @@ function getPrescription(){
              var binaryData = e.target.result;
              console.log("calling post dosage")
             
-             send = $('.newDrugName')
-             send2 = $('.newDrugDose')
-             send3= $('.newTabletsDay')
-             send4 = $('.newRemarks')
+             newDrugName = $('.newDrugName').val();
+             newDrugDose = $('.newDrugDose').val();
+             newPrescription= $('.newPrescription').val();
+             newRemarks = $('.newRemarks').val()
+             newImage = window.btoa(binaryData)
 
-             array_to_add = []
-             for (i = 0 ; i < send.length; i++){
-                
-                 //previously I've declared a capturereportid for adding prescription
-                 druginfo = {report_id: captureportid, drug_name: send[i].value, drug_dose: send2[i].value, drug_days: send3[i].value, 
-                 drug_img: window.btoa(binaryData), remarks: send4[i].value}
-                 array_to_add.push(druginfo)
-             }
-            
-             console.log(array_to_add)
-
+            //previously I've declared a capturereportid for adding prescription
+            var newDrugPrescription = {drug_name: newDrugName, drug_dose: newDrugDose, drug_days: newPrescription, 
+            patient_id: currentPatientId, drug_img: newImage, remarks: newRemarks}
             
               $.ajax({
                   type: 'POST',
                   url: dosageURI,
-                  data: JSON.stringify(array_to_add),
+                  data: JSON.stringify(newDrugPrescription),
                   dataType: 'json',
                   contentType: 'application/json',
                   success: function (data) {                    
-                      getSpecificPatientInfo();
-                      //document.getElementById('newPatientModal').style.display='none'
+                      currentNotificationMessage = "There is a new prescription added by the clinician"
+                      postNotification();
                       window.location.reload(); //reload page after adding so it shows the newly added report + prescription
                   }
               });
          };
-     })(f);
+     })(newDrugImage);
      // Read in the image file as a data URL.
-     reader.readAsBinaryString(f);
+     reader.readAsBinaryString(newDrugImage);
  }
+
+ function deletePrescription(){
+    
+    $.ajax({
+        type: 'DELETE',
+        url: dosageURI + '/' + currentDosageId,
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            window.location.reload();
+        }
+    });
+ }
+
+ function updatePrescription(){
+
+    updatedDrugImage = $('#currentDrugImage')[0].files[0];
+    console.log("img:"+updatedDrugImage)
+    if (updatedDrugImage != null){
+        updateImage();
+    }
+    else{
+        updatedDrugImage = doseArray[currentIndex].drug_img;
+        updatedDrugName = $('#currentDrugName').val();
+        updatedDrugDose = $('#currentDrugDose').val();
+        updatedPrescription = $('#currentPrescription').val();
+        updatedRemarks = $('#currentRemarks').val();
+    
+        var updatedDrugPrescription = {idDosage:parseInt(currentDosageId) ,drug_name: updatedDrugName, drug_dose: updatedDrugDose, drug_days: updatedPrescription, 
+            patient_id: parseInt(currentPatientId), drug_img: updatedDrugImage, remarks: updatedRemarks}
+    
+        $.ajax({
+            type: 'PUT',
+            url: dosageURI+"/"+currentDosageId,
+            data: JSON.stringify(updatedDrugPrescription),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {       
+                currentNotificationMessage = "Your prescription has been updated by the clinician";     
+                postNotification();        
+            }
+        });
+    }
+
+ }
+
+ function updateImage(){
+    updatedDrugImage = $('#currentDrugImage')[0].files[0];
+    var reader = new FileReader();
+    reader.onload = (function (theFiles) {
+        return function (x) {
+            var binaryData1 = x.target.result;
+            console.log("calling post dosage")
+           
+            updatedDrugName = $('#currentDrugName').val();
+            updatedDrugDose = $('#currentDrugDose').val();
+            updatedPrescription = $('#currentPrescription').val();
+            updatedRemarks = $('#currentRemarks').val();
+            updatedImage = window.btoa(binaryData1);
+
+           //previously I've declared a capturereportid for adding prescription
+           var updatedDrugPrescription = {idDosage: parseInt(currentDosageId), drug_name: updatedDrugName, drug_dose: updatedDrugDose, drug_days: updatedPrescription, 
+           patient_id: parseInt(currentPatientId), drug_img: updatedImage, remarks: updatedRemarks}
+             $.ajax({
+                 type: 'PUT',
+                 url: dosageURI+"/"+currentDosageId,
+                 data: JSON.stringify(updatedDrugPrescription),
+                 dataType: 'json',
+                 contentType: 'application/json',
+                 success: function (data) {                    
+                     //getSpecificPatientInfo();
+                     window.location.reload(); //reload page after adding so it shows the newly added report + prescription
+                 }
+             });
+        };
+    })(updatedDrugImage);
+    // Read in the image file as a data URL.
+    reader.readAsBinaryString(updatedDrugImage);   
+ }
+
 
 $(document).on("click", "#updatePrescriptionBtn", function (){
     var currentDosageID = $(this).attr('index');
@@ -505,6 +584,8 @@ function updateReport(){
         dataType: 'json',
         contentType: 'application/json',
         success: function (data) {
+            currentNotificationMessage = "Your Health Report has been updated by your clinician" 
+            postNotification();
             window.location.reload();
         }
     });
@@ -525,7 +606,23 @@ function deleteReport(){
 
 }
 
+function postNotification(){
+    var date =  moment(new Date()).format("DD-MM-YYYY")
 
+    var newNotification = {patient_id:currentPatientId, notification_content:currentNotificationMessage,
+        seen: "False",timestamp: date}
+
+    $.ajax({
+        type: 'POST',
+        url: notificationURI,
+        data: JSON.stringify(newNotification),
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) { 
+            window.location.reload();                   
+        }
+    });
+}
 
 
 $(document).on("click", "#viewdosage", function () {
@@ -541,7 +638,7 @@ $(document).on("click", '#openEditDeleteResultModalBtn', function(){
     
 })
 
- $(document).on('click', '#addMoreRows', function(){
+ /*$(document).on('click', '#addMoreRows', function(){
      document.getElementById('addon').style.display='block'
      var html = "<div class='appended'><div class='form-row col-xs-4  col-md-12'><div class='col-md-6'><label>Drug:</label><div><select name='bloodtype' class='newDrugName'>"+
      "<option value='' selected disabled hidden>--Choose here--</option><option value='carbimazole'>carbimazole</option>"+
@@ -558,7 +655,16 @@ $(document).on("click", '#openEditDeleteResultModalBtn', function(){
      "<input type='file' class='form-control newDrugImage' required></div></div></div></div><br></br>";
      $("#addon").append(html);
  });
+*/
 
+$(document).on('click', '#openEditPrescriptionModalBtn', function(){
+    currentIndex = $(this).attr('index')
+    currentDosageId = $(this).attr('dosageId')
+    document.getElementById('currentDrugName').value = doseArray[currentIndex].drug_name;
+    document.getElementById('currentDrugDose').value = doseArray[currentIndex].drug_dose;
+    document.getElementById('currentPrescription').value = doseArray[currentIndex].drug_days;
+    document.getElementById('currentRemarks').value = doseArray[currentIndex].remarks;
+})
 
 $(document).on('click', '#closereportmodal', function(){
     $(".appended").remove();
@@ -585,8 +691,12 @@ $(document).on("click", "#rpt", function () {
     document.getElementById('newReportModal').style.display='block'
 });
 
+$(document).on("click", "#openAddPrescriptionModalBtn", function () {
+    $('#prescriptionModal').modal('hide');
+});
 
 
-getSpecificPatientInfo();
-getDiagnosisDetails();
+
+//getSpecificPatientInfo();
+//getDiagnosisDetails();
 getPatientName();

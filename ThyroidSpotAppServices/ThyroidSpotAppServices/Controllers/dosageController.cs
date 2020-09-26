@@ -52,6 +52,7 @@ namespace ThyroidSpotAppServices.Controllers
                 dosage.drug_name = drug.drug_name;
                 dosage.drug_dose = drug.drug_dose;
                 dosage.drug_days = drug.drug_days;
+                dosage.patient_id = drug.patient_id;
                 dosage.drug_img = drug.drug_img;
                 dosage.remarks = drug.remarks;
 
