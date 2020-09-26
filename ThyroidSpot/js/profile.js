@@ -27,6 +27,7 @@ if (sessionStorage.getItem("user_account_type") != "patient") // Only user_accou
 {
     const togglePatientBtn = document.getElementById("togglePatientBtn");
     togglePatientBtn.classList.add("hide");
+    document.getElementById('notificationDiv').style.display = 'none';
 }
 
 
