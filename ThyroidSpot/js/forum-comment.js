@@ -48,7 +48,7 @@ function showPostDetails() {
 
 var userInfoArray = [];
 var matchingname;
-//QUERY FOR USERNAME FIRST BEFORE ADD COMMENT
+//QUERY FOR USERNAME FIRST BEFORE ADD COMMENT (for security reasons)
 var userURI = 'https://localhost:44395/api/user';
 function queryName() {
     var getuid = sessionStorage.getItem("user_unique_id");
@@ -72,9 +72,12 @@ function queryName() {
     });
 }
 
+
+
+
 var userInfoArray = [];
 var captureusername;
-//LINKED: get number of comments based on post ID
+//LINKED TO getCommentByID: get number of comments based on post ID
 var getUsernames = [];
 var c = 0;
 function checkIfUserExist(checkname) {
@@ -171,7 +174,7 @@ function getCommentByID(id) {
                             dropdown = "";
                         }
 
-                        checkIfUserExist(commentArray[i].username)
+                        checkIfUserExist(commentArray[i].username) //call function to check if the username of the comment exists
             
                      
 
@@ -203,7 +206,7 @@ function getUserName() {
 
             userInfoArray = data;
 
-            addComment(userInfoArray.full_name)
+            addComment(userInfoArray.full_name) //after successful check, call addComment with user_name passed as arguments
         }
 
     });
@@ -279,17 +282,14 @@ function deleteComment(comtid) {
 
 
 
-$(document).on("click", "#viewComments", function () {
-    currentForumID = $(this).attr('num');
-    sessionStorage.setItem("forID", currentForumID)
-    window.location.href = "disease-comment.html";
-});
 
+//onclick call redirect back to thread page
 $(document).on("click", "#redirectBack", function () {
     sessionStorage.removeItem("forID");
     window.location.href = "disease-forum.html";
 });
 
+//onclick call redirect back to thread page
 $(document).on("click", "#headDisease", function () {
     sessionStorage.removeItem("forID");
     window.location.href = "disease-forum.html";
@@ -319,5 +319,5 @@ $(document).on("click", "#delComt", function () {
 });
 
 
-queryName();
-showPostDetails()
+queryName(); //query name to check if add, edit and delete function can be activated or not (if not, only display will be soon)
+showPostDetails() //display thread comments and thread details

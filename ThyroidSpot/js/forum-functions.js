@@ -1,7 +1,7 @@
 //FORUM POST + COMMENT FUNCTIONS
 
 
-//QUERY FOR USERNAME
+//QUERY FOR USERNAME AND GET USERNAME
 var userURI = 'https://localhost:44395/api/user';
 var userInfoArray = [];
 var uname;
@@ -34,7 +34,7 @@ var diseaseInfoArray = [];
 var storage = []; //this array will define the search
 var diseasename;
 
-//QUERY DISEASE NAME
+//QUERY DISEASE NAME AND DISPLAY DISEASE NAME
 function checkDiseaseName() {
     disease_id = sessionStorage.getItem("disID");
 
@@ -66,13 +66,10 @@ var currentForumID;
 var getPostId;
 var commentNumber;
 
-
+//function to get all forum posts by the disease name (stored in the variable 'diseasename')
 function getAllForumByDisease() {
 
-
-
     var dname = diseasename;
-
 
     $.ajax({
         type: 'GET',
@@ -91,14 +88,13 @@ function getAllForumByDisease() {
 }
 
 
-//filter posts by recent date
+//filter forum posts by recent date
 function filterByActivity(value) {
 
     //Sort by latest
     if (value == "Latest") {
         
         secondPostArray.sort(function (a, b) {
-
             return dateToNum(b.timestamp) - dateToNum(a.timestamp);
         });
         function dateToNum(d) {
@@ -109,7 +105,7 @@ function filterByActivity(value) {
 
         $('#newFilterRepDDL').prop('selectedIndex',0);
         $('#newFilterRepDDLMobile').prop('selectedIndex',0);
-        return appendThreads()
+        return appendThreads() //call function to append forum threads 
 
 
 
@@ -118,7 +114,6 @@ function filterByActivity(value) {
     //Sort by oldest
     else {
         
-
         secondPostArray.sort(function (a, b) {
             return dateToNum(a.timestamp) - dateToNum(b.timestamp);
         });
@@ -134,7 +129,8 @@ function filterByActivity(value) {
     }
 }
 
-
+//function to append threads after sorting data based on latest / oldest threads,
+//and least / most no. of comments (known as 'replies')
 var thirdPostArray = []
 function appendThreads() {
     thirdPostArray = []
@@ -144,7 +140,7 @@ function appendThreads() {
         if (diseasename == secondPostArray[i].disease_name) {
 
             getPostId = secondPostArray[i].idForum
-            getNumberOfComments(getPostId);
+            getNumberOfComments(getPostId); //call function to get the no. of comments before moving on to the next functions
             
 
             thirdPostArray.push({idForum: secondPostArray[i].idForum, disease_name: secondPostArray[i].disease_name,
@@ -199,12 +195,15 @@ function appendThreads() {
     }
 }
 
+//filter forum posts by number of comments
 function filterRepliesByActivity(val){
    
     if (val == "Reset"){
         //TODO: ensure filter does not reload
         location.reload()
     }
+
+    //sort by most amount
     else if (val == "Latest"){
   
 
@@ -224,6 +223,8 @@ function filterRepliesByActivity(val){
         appendThreads()
 
     }
+
+    //sort by least amount
     else if (val == "Least"){
        
 
@@ -241,7 +242,7 @@ function filterRepliesByActivity(val){
         }
 
 
-        appendThreads()
+        appendThreads() //return back to the function and display threads based on the sorted
 
     }
 }
@@ -317,9 +318,6 @@ function updateThread() {
     }
 
 
-
-    // var t = confirm("Save changes?")
-    //     if (t == true) {
     $.ajax({
         type: 'PUT',
         url: forumpostURI + "/" + currentForumID,
@@ -336,7 +334,7 @@ function updateThread() {
 }
 
 
-//delete forum + all comments related to post id (YET TO TEST, DO NOT TOUCH)
+//function to delete forum + all comments related to post id 
 var deletingPost
 function deleteThread() {
 
@@ -382,11 +380,12 @@ $(document).ready(function () {
 })
 
 
-
+//onclick function to show modal with inputs to start a new thread
 $(document).on("click", "#addNewThread", function () {
     $('#newThreadModal').modal('show');
 });
 
+//onclick function to show modal with inputs to update a thread detail (only users who added that can edit their own one)
 $(document).on("click", "#updateForumbtn", function () {
     currentForumID = $(this).attr('num');
 
@@ -402,22 +401,24 @@ $(document).on("click", "#updateForumbtn", function () {
 
 });
 
+//onclick function to delete button
 $(document).on("click", "#deleteForumbtn", function () {
     currentForumID = $(this).attr('num');
 });
 
-
+//onclick function to redirect page to forum-comment.js
 $(document).on("click", "#viewComments", function () {
     currentForumID = $(this).attr('num');
     sessionStorage.setItem("forID", currentForumID)
     window.location.href = "disease-comment.html";
 });
 
-
+//onclick function to redirect back to disease.html
 $(document).on("click", "#redirect", function () {
     window.location.href = "disease.html";
 });
 
+//onclick function to redirect back to disease.html
 $(document).on("click", "#redirectBackText", function () {
     window.location.href = "disease.html";
 });
@@ -425,5 +426,5 @@ $(document).on("click", "#redirectBackText", function () {
 
 
 
-getUserName();
-checkDiseaseName();
+getUserName(); //call separate function to check and get username (if don't have, getUserName will not fire)
+checkDiseaseName(); //call separate function to check and get disease name and display threads
