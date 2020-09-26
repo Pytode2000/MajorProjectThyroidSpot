@@ -1,18 +1,104 @@
 /*** <General> ***/
 .footer {
     width: 100%;
+    background: rgb(47, 47, 47);
     display: block;
-    margin-top: 1rem;
+    margin-top: 3rem;
+}
+
+.inner-footer {
+    width: 95%;
+    margin: auto;
+    padding: 10px 10px;
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    justify-content: center;
 }
 
 .footer-bottom {
     padding: 10px;
-    color: var(--text-primary);
+    padding-top: 5px;
+    color: #23232e;
     font-size: 1em;
     text-align: center;
 }
 
 /*** </General> ***/
+
+/*** <Footer Items> ***/
+.footer-items {
+    padding: 10px 20px;
+    box-sizing: border-box;
+    color: #ececec;
+    padding-bottom: 0;
+}
+
+.footer-item-size-l {
+    width: 50%;
+}
+
+.footer-item-size-s {
+    width: 25%;
+}
+
+.footer-items p {
+    font-size: 16px;
+    line-height: 25px;
+    color: #ececec;
+}
+
+.footer-items h1 {
+    color: #fff;
+}
+
+.footer-items h3 {
+    color: #fff;
+}
+
+.footer-items ul li {
+    transition: 0.5s;
+}
+
+.footer-items ul li:hover {
+    transform: scale(1.10);
+    color: #fff;
+    transition: var(--transition-speed);
+}
+
+/*** </Footer Items> ***/
+
+/*** <Dash Under Heading> ***/
+.border1 {
+    height: 3px;
+    width: 40px;
+    background-color: #fff;
+    border: 0px;
+}
+
+.border1 ul {
+    list-style: none;
+    color: #fff;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+}
+
+.border1 ul a {
+    text-decoration: none;
+    outline: none;
+    transition: 0.3s;
+}
+
+.border1 ul li {
+    margin: 10px 0;
+    height: 25px;
+}
+
+.border1 li i {
+    margin-right: 20px;
+}
+
+/*** </Dash Under Heading> ***/
 
 /*** <Social Media Icons> ***/
 .social-media {
@@ -28,9 +114,9 @@
 .social-media i {
     height: 25px;
     width: 25px;
-    margin: 0px 10px;
+    margin: 5px 10px;
     padding: 4px;
-    color: var(--text-primary);
+    color: #23232e;
     transition: 0.5s;
 }
 
@@ -40,9 +126,20 @@
 
 /*** </Social Media Icons> ***/
 
-/* Spacing for mobile screen view. */
-@media screen and (max-width: 600px) {
+/* For tablet mode view */
+@media screen and (max-width: 1275px) {
+    .footer-items {
+        width: 50%;
+    }
+}
+
+/* For mobile screen view */
+@media screen and (max-width: 660px) {
+    .footer-items {
+        width: 100%;
+    }
+
     .space {
-        margin-bottom: 15%;
+        margin-bottom: 5rem;
     }
 }

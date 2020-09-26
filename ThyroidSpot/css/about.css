@@ -1,5 +1,5 @@
 /*** <General> ***/
-h1 {
+.heading1 {
     position: relative;
     margin: 0;
     padding: 40px;
@@ -9,7 +9,7 @@ h1 {
     color: white;
 }
 
-p {
+.para {
     margin: 0 60px;
     font-weight: 600;
 }
