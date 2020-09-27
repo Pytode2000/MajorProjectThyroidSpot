@@ -94,33 +94,33 @@
                     <tbody>
                         <tr>
                             <th scope="row">Name:</th>
-                            <td id="tableName">x</td>
+                            <td id="tableName"></td>
                             <td><b>Phi:</b></td>
                             <td id="tablePhiValue"></td>
                         </tr>
                         <tr>
                             <th scope="row">Birthdate:</th>
-                            <td id="tableBirthDate">x</td>
+                            <td id="tableBirthDate"></td>
                             <td><b>S:</b></td>
-                            <td id="tableSValue" >12.22</td>
+                            <td id="tableSValue" ></td>
                         </tr>
                         <tr>
                             <th scope="row">Gender:</th>
-                            <td id="tableGender">x</td>
+                            <td id="tableGender"></td>
                             <td><b>Set Point FT4:</b></td>
-                            <td id="tableFT4Value">12.22</td>
+                            <td id="tableFT4Value"></td>
                         </tr>
                         <tr>
                             <th scope="row">Diagnosis:</th>
-                            <td id="tableDiagnosis">x</td>
+                            <td id="tableDiagnosis"></td>
                             <td><b>Set Point TSH:</b></td>
-                            <td id="tableTSHValue">12.22</td>
+                            <td id="tableTSHValue"></td>
                         </tr>
                         <tr>
                             <th scope="row">Loop Gain:</th>
-                            <td id="tableLoopGainValue">x</td>
+                            <td id="tableLoopGainValue"></td>
                             <td><b>R2:</b></td>
-                            <td id="tableR2Value">12.22</td>
+                            <td id="tableR2Value"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -147,7 +147,11 @@
                                 <div class="col" style="text-align: left;">
                                     <label>FT4:</label>
                                     <div>
-                                    <input type="text" class="form-control" id="newFT4" style=" display: inline;" placeholder="Enter FT4 Value" required>
+                                    <input type="text" class="form-control" style="width: 70%; display: inline;" id="newFT4"  placeholder="Enter FT4 Value" required>
+                                    <select name="unitselection" id="newFT4Unit" style="float: inherit;">
+                                        <option value="pmol/L" selected>pmol/L</option>
+                                        <option value="mU/L">mU/L</option>
+                                    </select>
                                     </div>
                                 </div>
                             </div>
@@ -157,7 +161,11 @@
                                 <div class="col" style="text-align: left;">
                                     <label>TSH:</label>
                                     <div>
-                                    <input type="text" class="form-control" id="newTSH" style=" display: inline;" placeholder="Enter TSH Value" required>
+                                    <input type="text" class="form-control" style="width: 70%;display: inline;" id="newTSH" style=" display: inline;" placeholder="Enter TSH Value" required>
+                                    <select name="unitselection" id="newTSHUnit" style="float: inherit;">
+                                        <option value="pmol/L" selected>pmol/L</option>
+                                        <option value="mU/L">mU/L</option>
+                                    </select>
                                     </div>
                                 </div>
                             </div>
@@ -382,6 +390,7 @@
                                 </div>
                             </div>
                         </form>
+                        
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger mr-auto" onclick="deletePrescription()">Delete</button>

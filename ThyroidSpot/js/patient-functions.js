@@ -487,7 +487,6 @@ function updateMedicineImg() {
                 return function (e) {
                     var binaryData = e.target.result;
 
-
                     getDosageInfo.drug_img = window.btoa(binaryData)
 
 

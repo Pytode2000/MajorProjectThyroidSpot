@@ -118,12 +118,17 @@
     font-weight: bold;
   }
 
+
 /*** </Notification> ***/  
 
 /*** <Small Screens> ***/
 @media only screen and (max-width: 600px) {
     .floating-btn {
         bottom: 90px;
+    }
+    #allNotifications {
+        overflow-x: hidden;
+        text-overflow: ellipsis;
     }
 }
 

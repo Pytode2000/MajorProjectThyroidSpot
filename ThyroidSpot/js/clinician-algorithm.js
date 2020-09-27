@@ -65,12 +65,10 @@ function startCalc(){
                     && treatmentList[i].FT4 == validArray[j].FT4
                     && treatmentList[i].timestamp == validArray[i].timestamp) {
                 found = true;
-                //console.log("owo")
                 break;
             }
         }
         if (found == false) {
-            //console.log("no signs of intelligent life anywhere")
             outlierTreatments.push(treatmentList[i]); //ADD OUTLIER DATA TO OUTLIER ARRAY
         }
     }
@@ -229,6 +227,7 @@ function rSquared(){
 }
 
 
+
 //removeOutliers seems to be working
 function removeOutliers(){
     console.log("removing outliers...")
@@ -318,10 +317,10 @@ function removeOutliers(){
 
 //TODO: displaying calculated chart (chart hasn't been fully implemented)
 function launchgraph(){
-    console.log("phi:"+phi)
     document.getElementById('tablePhiValue').innerHTML = phi;
     document.getElementById('tableSValue').innerHTML = snum;
     document.getElementById('tableFT4Value').innerHTML = setPointFT4;
+    console.log("FT4 Val:"+ setPointFT4)
     document.getElementById('tableTSHValue').innerHTML = setPointTSH;
     document.getElementById('tableR2Value').innerHTML = r2;
     document.getElementById('tableLoopGainValue').innerHTML = loopGain;
@@ -329,16 +328,15 @@ function launchgraph(){
     var ctx = document.getElementById('graphcontainer').getContext('2d');
     myChart = new Chart(ctx, {
         type: 'line',
-        
         data: {
             //labels: ['Ft4', 'TSH'],
             datasets: [{
                 label: 'Best Fit Curve',
                 data: bestfitvalidData,
-                // data: [{
-                //     x: bestfitvalidft4List,
-                //     y: bestfitvalidtshList
-                // }],
+                 //data: [{
+                     //x: bestfitvalidft4List,
+                     //y: bestfitvalidtshList
+                 //}],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -353,6 +351,23 @@ function launchgraph(){
             }]
         },
         options: {
+            onClick: function(event, elementsAtEvent)
+            {
+              console.log(event, elementsAtEvent, this);
+              var valueX = null, valueY = null;
+              for (var scaleName in this.scales) {
+                var scale = this.scales[scaleName];
+                if (scale.isHorizontal()) {
+                  valueX = scale.getValueForPixel(event.offsetX);
+                } else {
+                  valueY = scale.getValueForPixel(event.offsetY);
+                }
+              }
+              document.getElementById('tableFT4Value').innerHTML = valueX;
+              console.log(event.offsetX, valueX, event.offsetY, valueY);
+            },
+
+            elements: { point: { radius: 0 } },
             responsive: true,
             maintainAspectRatio: false,
             scales: {
@@ -367,82 +382,49 @@ function launchgraph(){
                     position: 'bottom'
                 }]
             },
+            
             tooltips: {
+                enabled:false,
                 mode:'nearest'
             }
+
         }
     });
-
-    //onclick function
-    $(document).on("click", "#openGraphModalBtn11", function(){
-        // document.getElementById('GraphModal').style.display='block'
-        $('#graphModal').modal('toggle');
-        var ctx1 = document.getElementById('graphcontainer1').getContext('2d');
-        myChart = new Chart(ctx1, {
-            type: 'line',
-            
-            data: {
-                //labels: ['Ft4', 'TSH'],
-                datasets: [{
-                    label: 'Best Fit Curve',
-                    data: bestfitvalidData,
-                    // data: [{
-                    //     x: bestfitvalidft4List,
-                    //     y: bestfitvalidtshList
-                    // }],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    // yAxes: [{
-                    //     ticks: {
-                    //         beginAtZero: true
-                            
-                    //     }
-                    // }],
-                    xAxes: [{
-                        type: 'linear',
-                        position: 'bottom'
-                    }]
-                }
-            }
-        });
-    })
 }
+
+    
 
 //document.getElementById("graphcontainer").onclick = function(evt, array) { 
     //var xLabel = myChart.scales['y-axis-0'].getValueForPixel(evt.y); 
     //console.log(xLabel)
     //alert(myChart.config.data.labels[xLabel- 1]);
 //};
-document.getElementById("graphcontainer11").onclick = function(event, elementsAtEvent)
-{
-    console.log(event, elementsAtEvent, this);
-    var valueX = null, valueY = null;
-    for (var scaleName in this.scales) {
-        var scale = this.scales[scaleName];
-        console.log(scale.id, scale.isHorizontal());
-        if (scale.isHorizontal()) {
-            valueX = scale.getValueForPixel(event.offsetX);
-        } else {
-            valueY = scale.getValueForPixel(event.offsetY);
-        }
-    }
-    console.log(event.offsetX, valueX, null, event.offsetY, valueY);
-},
+
+$("#graphcontainer").click(function(e){
+    getPosition(e); 
+});
+
+var pointSize = 3;
+
+function getPosition(event){
+    var rect = graphcontainer.getBoundingClientRect();
+    var x = event.clientX - rect.left;
+    var y = event.clientY - rect.top;
+       
+    drawCoordinates(x,y);
+}
+
+function drawCoordinates(x,y){	
+     var ctx = document.getElementById("graphcontainer").getContext("2d");
+
+
+    ctx.fillStyle = "#ff2626"; // Red color
+
+    ctx.beginPath();
+    ctx.arc(x, y, pointSize, 0, Math.PI * 2, true);
+    ctx.fill();
+}
+
 
 //fucntion to export FT4 and TSH calculation
 $(document).on("click", "#exportcalc", function(){
@@ -501,7 +483,3 @@ $(document).on("click", "#exportcalc", function(){
 })
 
 
-//WORKAROUND: assumed fix for occasional chart duplicate glitches
-// window.onload = function() {
-//     startCalc();
-// }

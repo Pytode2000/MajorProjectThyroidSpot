@@ -22,6 +22,8 @@ storediagnosis = [];
 var diagnosis;
 var currentDiagnosis;
 var createreport;
+var updatedDrugPrescription;
+var updatedImage;
 
 var viewdiagnosisbutton;
 var diagnosisInformation = [];
@@ -65,12 +67,10 @@ function getSpecificPatientInfo(){
                     dob = patientInfo.date_of_birth;
                     bt = patientInfo.blood_type;
                     gender = patientInfo.gender
-                    viewdiagnosisbutton = "<button id='diagnosisbtn' data-toggle='modal' data-target='#diagnosisModal' class=' btn btn-info btn-sm custom-class' index='" + patientInfo.patient_id + "'>View Diagnosis</button>"
-
-                    viewreportbutton = "<button id='forumdescbtn' class=' btn btn-info btn-sm' index='" + patientInfo.patient_id + "'>View Report</button>"
-                   
-                    createreport = "<button id='addResultsBtn' data-toggle='modal' data-target='#addPatientResultModal' class=' btn btn-info btn-sm custom-class'>Add Results</button>"
+                    viewdiagnosisbutton = "<button id='diagnosisbtn' data-toggle='modal' data-target='#diagnosisModal' class='btn btn-dark btn-sm custom-class' index='" + patientInfo.patient_id + "'>View Diagnosis</button>"            
+                    createreport = "<button id='addResultsBtn' data-toggle='modal' data-target='#addPatientResultModal' class=' btn btn-primary btn-sm custom-class'>Add Results</button>"
                     diagnosisInformation = data
+
                     $('#patient-ic-number').text("IC Number: "+ patientInfo.ic_number)
                     $('#patient-date-of-birth').text("Date of Birth: "+ patientInfo.date_of_birth)
                     $('#patient-gender').text("Gender: "+ patientInfo.gender)
@@ -78,8 +78,13 @@ function getSpecificPatientInfo(){
                     $('#tableGender').text(patientInfo.gender)
                     $('#patient-blood-type').text("Blood Type: "+ patientInfo.blood_type)
                     if (diagnosisInformation == ""){
-                        $('#patient-diagnosis').text("Diagnosis: Null")
-                        $('#tableDiagnosis').text("Null")
+                        $('#reportcontainer').html('');
+                        $('#searchRPTcontain').html('');
+                        createinfobutton = "<button id='createnewinfo' data-toggle='modal' data-target='#addPatientResultModal' class=' btn btn-info btn-sm'>Create New Patient Info</button>"
+                        $('#patientCardContent').append("<div id='missingInfo'><div class = 'centerText'>" +
+    
+                            "<div class='centerTitle'></p>No patient info yet" +
+                            "</p><div class='centerContent'><p>Please click on the link to create one</p></div>" + createinfobutton + "</div></div>");
                     }
                     else{
                         $('#patient-diagnosis').text("Diagnosis: "+ diagnosisInformation[0].diagnosis1)
@@ -135,12 +140,10 @@ function getPatientReport() {
             $('#prescriptionButton').html('')
             //Iterate through the diseaseInfoArray to generate rows to populate the table
             if (reportArray == ""){
-                $('#reportcontainer').html('');
                 $('#searchRPTcontain').html('');
-                createinfobutton = "<button id='createnewinfo' class=' btn btn-info btn-sm'>Create New Patient Info</button>"
-                $('#patientCardContent').append("<div id='missingInfo'><div class = 'centerText'>" +
-                    "<div class='centerTitle'></p>No patient info yet" +
-                    "</p><div class='centerContent'><p>Please click on the link to create one</p></div>" + createinfobutton + "</div></div>");
+                $('#reportcontainer').html('');
+                createreportbtn = "<button id='rpt' class=' btn btn-info btn-sm'>Create Report</button>"
+                $('#reportcontainer').append("<div style='text-align: center; margin-top: 10%; margin-left: auto; margin-right: auto;'><h3 >No patient report found</h3><div>" + createreportbtn + "<div></div>");
             }
             else{
                 reportArray.sort(function (a, b) {
@@ -277,13 +280,46 @@ function postPatientReport() {
 
     //regex to check decimals for FT4 and TSH
     var decimalregex = new RegExp('[+-]?([0-9]*[.])?[0-9]+');
-   
     
-    var patientinfo = {patient_id: currentPatientId, FT4: $('#newFT4').val(), TSH: $('#newTSH').val(), timestamp: date}
+    
+    var FT4unit = $('#newUnitDDL').val();
+    var TSHunit = $('#newUnit1DDL').val();
+
+    var FT4value = $('#newFT4').val();
+    var TSHvalue = $('#newTSH').val();
+
+    var FT4string = ""
+    var TSHstring = ""
+
+    //convert FT4 units and round to nearest 1 dp (by default FT4 will be in pmol/L)
+    if (FT4unit == "mU/L") {
+        var convertFT4 = (FT4value / 7.125);
+        FT4value = (Math.round(convertFT4 * 10) / 10).toString();
+        FT4string = "(" + $('#newFT4').val() + "mU/L)"
+    }
+    else {
+        FT4value = (Math.round(FT4value * 10) / 10).toString();
+    }
+
+    //convert TSH units and round to nearest 1 dp (by default TSH will be in mU/L)
+    if (TSHunit == "pmol/L") {
+        var convertTSH = (TSHvalue * 7.125);
+        TSHvalue = (Math.round(convertTSH * 10) / 10).toString();
+        TSHstring = "(" + $('#newTSH').val() + "pmol/L)"
+    }
+    else {
+        TSHvalue = (Math.round(TSHvalue * 10) / 10).toString();
+    }
+    
+    var patientinfo = {patient_id: currentPatientId, FT4: FT4value, TSH: TSHvalue, timestamp: date}
     console.log(patientinfo);
 
     //check if FT4 and TSH matches with defined regex
     if (patientinfo.FT4.match(decimalregex) && patientinfo.TSH.match(decimalregex)){
+        var cfm = confirm("Please confirm your results before saving it to database: \r\n" +
+        "FT4: " + patientinfo.FT4 + "pmol/L " + FT4string + "\r\n" +
+        "TSH: " + patientinfo.TSH + "mU/L " + TSHstring)
+        if(cfm == true){
             $.ajax({
                 type: 'POST',
                 url: reportURI,
@@ -294,6 +330,7 @@ function postPatientReport() {
                     window.location.reload();
                 }
             });
+        }
     }
     //if FT4 and TSH DOES NOT match with defined regex
     else{
@@ -359,8 +396,8 @@ function getPrescription(){
 
             //previously I've declared a capturereportid for adding prescription
             var newDrugPrescription = {drug_name: newDrugName, drug_dose: newDrugDose, drug_days: newPrescription, 
-            patient_id: currentPatientId, drug_img: newImage, remarks: newRemarks}
-            
+            patient_id: parseInt(currentPatientId), drug_img: newImage, remarks: newRemarks}
+            console.log(newDrugPrescription)
               $.ajax({
                   type: 'POST',
                   url: dosageURI,
@@ -393,22 +430,39 @@ function getPrescription(){
  }
 
  function updatePrescription(){
-
     updatedDrugImage = $('#currentDrugImage')[0].files[0];
     console.log("img:"+updatedDrugImage)
+    updatedDrugName = $('#currentDrugName').val();
+    updatedDrugDose = $('#currentDrugDose').val();
+    updatedPrescription = $('#currentPrescription').val();
+    updatedRemarks = $('#currentRemarks').val();
+    updatedDrugPrescription = {idDosage:parseInt(currentDosageId) ,drug_name: updatedDrugName, drug_dose: updatedDrugDose, drug_days: updatedPrescription, 
+        patient_id: parseInt(currentPatientId), drug_img: updatedImage, remarks: updatedRemarks}
     if (updatedDrugImage != null){
-        updateImage();
+        var reader = new FileReader();
+        reader.onload = (function (theFiles) {
+            return function (e) {
+                var binaryData = e.target.result;
+                updatedDrugPrescription.drug_img = window.btoa(binaryData);
+                $.ajax({
+                    type: 'PUT',
+                    url: dosageURI+"/"+currentDosageId,
+                    data: JSON.stringify(updatedDrugPrescription),
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    success: function (data) {       
+                        currentNotificationMessage = "Your prescription has been updated by the clinician";     
+                        postNotification();        
+                    }
+                }); 
+            };
+            
+        })(updatedDrugImage);
+    
+        reader.readAsBinaryString(updatedDrugImage);   
     }
     else{
-        updatedDrugImage = doseArray[currentIndex].drug_img;
-        updatedDrugName = $('#currentDrugName').val();
-        updatedDrugDose = $('#currentDrugDose').val();
-        updatedPrescription = $('#currentPrescription').val();
-        updatedRemarks = $('#currentRemarks').val();
-    
-        var updatedDrugPrescription = {idDosage:parseInt(currentDosageId) ,drug_name: updatedDrugName, drug_dose: updatedDrugDose, drug_days: updatedPrescription, 
-            patient_id: parseInt(currentPatientId), drug_img: updatedDrugImage, remarks: updatedRemarks}
-    
+        updatedDrugPrescription.drug_img = doseArray[currentIndex].drug_img;
         $.ajax({
             type: 'PUT',
             url: dosageURI+"/"+currentDosageId,
@@ -419,42 +473,43 @@ function getPrescription(){
                 currentNotificationMessage = "Your prescription has been updated by the clinician";     
                 postNotification();        
             }
-        });
+        }); 
     }
+
 
  }
 
  function updateImage(){
-    updatedDrugImage = $('#currentDrugImage')[0].files[0];
     var reader = new FileReader();
     reader.onload = (function (theFiles) {
-        return function (x) {
-            var binaryData1 = x.target.result;
+        return function (e) {
+            var binaryData = e.target.result;
             console.log("calling post dosage")
            
             updatedDrugName = $('#currentDrugName').val();
             updatedDrugDose = $('#currentDrugDose').val();
             updatedPrescription = $('#currentPrescription').val();
             updatedRemarks = $('#currentRemarks').val();
-            updatedImage = window.btoa(binaryData1);
+            updatedImage = window.btoa(binaryData);
 
            //previously I've declared a capturereportid for adding prescription
-           var updatedDrugPrescription = {idDosage: parseInt(currentDosageId), drug_name: updatedDrugName, drug_dose: updatedDrugDose, drug_days: updatedPrescription, 
-           patient_id: parseInt(currentPatientId), drug_img: updatedImage, remarks: updatedRemarks}
-             $.ajax({
+           var updatedDrugPrescription = {idDosage:parseInt(currentDosageId) ,drug_name: updatedDrugName, drug_dose: updatedDrugDose, drug_days: updatedPrescription, 
+            patient_id: parseInt(currentPatientId), drug_img: updatedImage, remarks: updatedRemarks}
+
+            $.ajax({
                  type: 'PUT',
                  url: dosageURI+"/"+currentDosageId,
                  data: JSON.stringify(updatedDrugPrescription),
                  dataType: 'json',
                  contentType: 'application/json',
-                 success: function (data) {                    
-                     //getSpecificPatientInfo();
-                     window.location.reload(); //reload page after adding so it shows the newly added report + prescription
+                 success: function (data) { 
+                     console.log("success update pres with pic")                   
+                     //window.location.reload(); //reload page after adding so it shows the newly added report + prescription
                  }
              });
         };
     })(updatedDrugImage);
-    // Read in the image file as a data URL.
+
     reader.readAsBinaryString(updatedDrugImage);   
  }
 

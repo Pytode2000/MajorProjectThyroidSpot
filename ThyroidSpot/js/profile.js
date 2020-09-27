@@ -193,7 +193,6 @@ function getUserNotification(){
             amountOfNotification = 0
             if (notificationsArray.length != 0){
                 $('#notificationList').html('');
-            
                 for(i=0; i < notificationsArray.length; i++){
                     latestNoti = notificationsArray.length - i - 1;
                     if (notificationsArray[latestNoti].seen == "False"){
@@ -233,7 +232,12 @@ function getUserNotification(){
                         
                     }
                 }
-                document.getElementById('notificationAmount').innerHTML = amountOfNotification;
+                if (amountOfNotification == 0){
+                    ocument.getElementById('notificationAmount').style.display = 'none';
+                }
+                else{
+                    document.getElementById('notificationAmount').innerHTML = amountOfNotification;
+                }
             }
             else {
                 document.getElementById('notificationAmount').style.display = 'none';
