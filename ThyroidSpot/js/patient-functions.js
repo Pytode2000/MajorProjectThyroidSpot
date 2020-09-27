@@ -293,7 +293,6 @@ function getPatientReport() {
                             $('#reportcontainer').append("<div style='text-align: center; margin-top: 10%; margin-left: auto; margin-right: auto;'><h3>No patient report found</h3><div>" + createreportbtn + "<div></div>");
                             return console.log("no report history")
                         }
-
                     }
                     else if (currentPatientID !== reportArray[i].patient_id && i == reportArray.length - 1){
                         $('#searchRPTcontain').html('');
