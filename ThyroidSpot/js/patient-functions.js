@@ -293,14 +293,13 @@ function getPatientReport() {
                             $('#reportcontainer').append("<div style='text-align: center; margin-top: 10%; margin-left: auto; margin-right: auto;'><h3>No patient report found</h3><div>" + createreportbtn + "<div></div>");
                             return console.log("no report history")
                         }
-
                     }
-                    // else{
-                    //     $('#searchRPTcontain').html('');
-                    //     $('#reportcontainer').html('');
-                    //     createreportbtn = "<button id='rpt' class=' btn btn-info btn-sm'>Create Report</button>"
-                    //     $('#reportcontainer').append("<div style='text-align: center; margin-top: 10%; margin-left: auto; margin-right: auto;'><h3 >No patient report found</h3><div>"+createreportbtn+"<div></div>");
-                    // }
+                    else if (currentPatientID !== reportArray[i].patient_id && i == reportArray.length - 1){
+                        $('#searchRPTcontain').html('');
+                        $('#reportcontainer').html('');
+                        createreportbtn = "<button id='rpt' class=' btn btn-info btn-sm'>Create Report</button>"
+                        $('#reportcontainer').append("<div style='text-align: center; margin-top: 10%; margin-left: auto; margin-right: auto;'><h3 >No patient report found</h3><div>"+createreportbtn+"<div></div>");
+                    }
                     
                     if (i == reportArray.length - 1) {
                         $('#prescriptionButton').append(viewdiagnosisbutton + " " + viewdosagebtn + "<br class='divider'>" + createreport);
@@ -450,8 +449,8 @@ function getMedicineImg() {
                 if (currentDosageID == doseArray[i].idDosage) {
 
                     getDosageInfo = {
-                        report_id: doseArray[i].report_id, drug_name: doseArray[i].drug_name, drug_dose: doseArray[i].drug_dose,
-                        drug_days: doseArray[i].drug_days, drug_img: doseArray[i].drug_img, remarks: doseArray[i].remarks
+                         drug_name: doseArray[i].drug_name, drug_dose: doseArray[i].drug_dose,
+                        patient_id: doseArray[i].patient_id,drug_days: doseArray[i].drug_days, drug_img: doseArray[i].drug_img, remarks: doseArray[i].remarks
                     }
 
 
