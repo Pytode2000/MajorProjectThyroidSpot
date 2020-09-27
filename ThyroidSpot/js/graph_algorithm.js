@@ -269,8 +269,8 @@ function removeOutliers(){
 //displaying calculated chart (chart hasn't been fully implemented)
 function launchgraph(){
     console.log("phi:"+phi)
-    document.getElementById('phiValue').innerHTML = phi
-    document.getElementById('sValue').innerHTML = snum
+    // document.getElementById('phiValue').innerHTML = phi
+    // document.getElementById('sValue').innerHTML = snum
     var ctx = document.getElementById('graphcontainer').getContext('2d');
     myChart = new Chart(ctx, {
         type: 'line',

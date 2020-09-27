@@ -180,7 +180,7 @@ function getPatientInfo() {
     });
 }
 
-function getUserNotification(){
+function getUserNotification() {
     var amountOfNotification;
     var latestNoti;
     $.ajax({
@@ -191,24 +191,26 @@ function getUserNotification(){
         success: function (data) {
             notificationsArray = data
             amountOfNotification = 0
-            if (notificationsArray.length != 0){
+            if (notificationsArray.length != 0) {
                 $('#notificationList').html('');
                 for(i=0; i < notificationsArray.length; i++){
                     latestNoti = notificationsArray.length - i - 1;
-                    if (notificationsArray[latestNoti].seen == "False"){
-                        if (i < 2 ){
-                            $('#notificationList').append("<blockquote class='blockquote dropdown-item notification-font'>"+
-                            "<p class='mb-0 newNoti' style='font-weight:bold;'>"+notificationsArray[latestNoti].notification_content+"</p><footer class='blockquote-footer'>"+notificationsArray[latestNoti].timestamp+"</footer></blockquote><hr>")
+                    if (notificationsArray[latestNoti].seen == "False") {
+                        if (i < 2) {
+                            $('#notificationList').append("<blockquote class='blockquote dropdown-item notification-font'>" +
+                                "<p class='mb-0 newNoti' style='font-weight:bold;'>" + notificationsArray[latestNoti].notification_content + "</p><footer class='blockquote-footer'>" + notificationsArray[latestNoti].timestamp + "</footer></blockquote><hr>")
                         }
-                        if (i == 2){
-                            $('#notificationList').append("<blockquote class='blockquote dropdown-item notification-font'>"+
-                            "<p class='mb-0 newNoti' style='font-weight:bold;'>"+notificationsArray[latestNoti].notification_content+"</p><footer class='blockquote-footer'>"+notificationsArray[latestNoti].timestamp+"</footer></blockquote><hr>"+
-                            "<a id='seeAllNotificationsBtn' data-toggle='modal' data-target='#notificationModal'>See More</a>")
-                        } 
+                        if (i == 2) {
+                            $('#notificationList').append("<blockquote class='blockquote dropdown-item notification-font'>" +
+                                "<p class='mb-0 newNoti' style='font-weight:bold;'>" + notificationsArray[latestNoti].notification_content + "</p><footer class='blockquote-footer'>" + notificationsArray[latestNoti].timestamp + "</footer></blockquote><hr>" +
+                                "<a id='seeAllNotificationsBtn' data-toggle='modal' data-target='#notificationModal'>See More</a>")
+                        }
                         amountOfNotification += 1
-                        var readNotification = { notification_id: notificationsArray[latestNoti].notification_id,
-                            patient_id: notificationsArray[latestNoti].patient_id, notification_content : notificationsArray[latestNoti].notification_content,
-                            seen: "True", timestamp:notificationsArray[latestNoti].timestamp};
+                        var readNotification = {
+                            notification_id: notificationsArray[latestNoti].notification_id,
+                            patient_id: notificationsArray[latestNoti].patient_id, notification_content: notificationsArray[latestNoti].notification_content,
+                            seen: "True", timestamp: notificationsArray[latestNoti].timestamp
+                        };
                         $.ajax({
                             type: 'PUT',
                             url: notificationURI + '/' + notificationsArray[latestNoti].notification_id,
@@ -218,18 +220,18 @@ function getUserNotification(){
                             success: function (data) {
                             }
                         });
-                        
-                    }else{
-                        if(i < 2){
-                            $('#notificationList').append("<blockquote class='blockquote dropdown-item notification-font'>"+
-                            "<p class='mb-0'>"+notificationsArray[latestNoti].notification_content+"</p><footer class='blockquote-footer'>"+notificationsArray[latestNoti].timestamp+"</footer></blockquote><hr>")
+
+                    } else {
+                        if (i < 2) {
+                            $('#notificationList').append("<blockquote class='blockquote dropdown-item notification-font'>" +
+                                "<p class='mb-0'>" + notificationsArray[latestNoti].notification_content + "</p><footer class='blockquote-footer'>" + notificationsArray[latestNoti].timestamp + "</footer></blockquote><hr>")
                         }
-                        else if (i == 2){
-                            $('#notificationList').append("<blockquote class='blockquote dropdown-item notification-font'>"+
-                            "<p class='mb-0'>"+notificationsArray[latestNoti].notification_content+"</p><footer class='blockquote-footer'>"+notificationsArray[latestNoti].timestamp+"</footer></blockquote><hr>"+
-                            "<a id='seeAllNotificationsBtn' data-toggle='modal' data-target='#notificationModal'>See More</a>")
-                        } 
-                        
+                        else if (i == 2) {
+                            $('#notificationList').append("<blockquote class='blockquote dropdown-item notification-font'>" +
+                                "<p class='mb-0'>" + notificationsArray[latestNoti].notification_content + "</p><footer class='blockquote-footer'>" + notificationsArray[latestNoti].timestamp + "</footer></blockquote><hr>" +
+                                "<a id='seeAllNotificationsBtn' data-toggle='modal' data-target='#notificationModal'>See More</a>")
+                        }
+
                     }
                 }
                 if (amountOfNotification == 0){
@@ -249,7 +251,7 @@ function getUserNotification(){
 
 }
 
-function deleteAllUserNotifications(){
+function deleteAllUserNotifications() {
     $.ajax({
         type: 'DELETE',
         url: notificationURI + '?patientid=' + patient_table_patient_id,
@@ -261,11 +263,11 @@ function deleteAllUserNotifications(){
     });
 }
 
-function getAllUserNotifications(){
+function getAllUserNotifications() {
     $('#allNotifications').html('')
-    for (i=0;i < notificationsArray.length;i++){
-        $('#allNotifications').append("<blockquote class='blockquote dropdown-item notification-font'>"+
-        "<p class='mb-0'>"+notificationsArray[i].notification_content+"</p><footer class='blockquote-footer'>"+notificationsArray[i].timestamp+"</footer></blockquote><hr>")
+    for (i = 0; i < notificationsArray.length; i++) {
+        $('#allNotifications').append("<blockquote class='blockquote dropdown-item notification-font'>" +
+            "<p class='mb-0'>" + notificationsArray[i].notification_content + "</p><footer class='blockquote-footer'>" + notificationsArray[i].timestamp + "</footer></blockquote><hr>")
     }
 }
 
@@ -595,13 +597,32 @@ function deleteAccount() {
                             dataType: 'json',
                             contentType: 'application/json',
                             success: function (data) {
-                                console.log("diagnosis instance deleted.")
+                                console.log("diagnosis instance deleted.");
                             }
                         })
                     }
                     catch (err) {
                         console.log("No dosage to delete")
                     }
+
+                    // Try to delete patient's notification (TRY because patient may not have any notifications).
+                    try {
+                        $.ajax({ // This deletes ALL notification that has the user's patient_id. 1 AJAX DELETE deletes multiple instances.
+                            type: 'DELETE',
+                            url: notificationURI + '?patientid=' + patient_table_patient_id,
+                            dataType: 'json',
+                            contentType: 'application/json',
+                            success: function (data) {
+                                console.log("notification instance deleted.")
+                            }
+                        });
+                    }
+                    catch (err) {
+                        console.log("No notifications to delete");
+                    }
+
+
+
                 }
             });
         }
@@ -621,15 +642,15 @@ function deleteAccount() {
 
 $(document).on("click", "#notificationBtn", function () {
     document.getElementById('notificationAmount').style.display = 'none'
-    
+
 });
 
-$(document).on('hidden.bs.dropdown',"#notificationBtn", function () {
+$(document).on('hidden.bs.dropdown', "#notificationBtn", function () {
     document.getElementsByClassName("newNoti").style = ''
-  })
+})
 
 $(document).on("click", "#seeAllNotificationsBtn", function () {
     getAllUserNotifications();
-    
+
 });
 

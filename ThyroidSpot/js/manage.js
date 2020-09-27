@@ -4,6 +4,7 @@ var currentAdminUid = sessionStorage.getItem("user_unique_id");
 // URI to manage API.
 var userURI = "https://localhost:44395/api/User";
 var patientInfoURI = "https://localhost:44395/api/patientinfo";
+var notificationURI = 'https://localhost:44395/api/notification';
 
 // Store all users.
 var usersArray = [];
@@ -168,7 +169,21 @@ function deleteUser() {
                             console.log("No dosage to delete")
                         }
 
-
+                        // Try to delete patient's notification (TRY because patient may not have any notifications).
+                        try {
+                            $.ajax({ // This deletes ALL notification that has the user's patient_id. 1 AJAX DELETE deletes multiple instances.
+                                type: 'DELETE',
+                                url: notificationURI + '?patientid=' + selectedPatientID,
+                                dataType: 'json',
+                                contentType: 'application/json',
+                                success: function (data) {
+                                    console.log("notification instance deleted.")
+                                }
+                            });
+                        }
+                        catch (err) {
+                            console.log("No notifications to delete");
+                        }
 
                     }
                 });
