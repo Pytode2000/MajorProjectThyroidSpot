@@ -77,21 +77,11 @@ function getSpecificPatientInfo(){
                     $('#tableBirthDate').text(patientInfo.date_of_birth)
                     $('#tableGender').text(patientInfo.gender)
                     $('#patient-blood-type').text("Blood Type: "+ patientInfo.blood_type)
-                    if (diagnosisInformation == ""){
-                        $('#reportcontainer').html('');
-                        $('#searchRPTcontain').html('');
-                        createinfobutton = "<button id='createnewinfo' data-toggle='modal' data-target='#addPatientResultModal' class=' btn btn-info btn-sm'>Create New Patient Info</button>"
-                        $('#patientCardContent').append("<div id='missingInfo'><div class = 'centerText'>" +
-    
-                            "<div class='centerTitle'></p>No patient info yet" +
-                            "</p><div class='centerContent'><p>Please click on the link to create one</p></div>" + createinfobutton + "</div></div>");
-                    }
-                    else{
-                        $('#patient-diagnosis').text("Diagnosis: "+ diagnosisInformation[0].diagnosis1)
-                        $('#tableDiagnosis').text(diagnosisInformation[0].diagnosis1)
-                    }
+                    
+                    $('#patient-diagnosis').text("Diagnosis: "+ diagnosisInformation[0].diagnosis1)
+                    $('#tableDiagnosis').text(diagnosisInformation[0].diagnosis1)
+                    
                     localStorage.setItem(currentDiagnosis,patientInfo.diagnosis)
-
         }
             });
         }
@@ -119,14 +109,10 @@ function getDiagnosisDetails(){
 
 
 function getPatientReport() {
-    console.log("retrieving all patient report...")
-
-    //console.log(currentPatientID)
-    //console.log(storediagnosis)
-    
+ 
     $.ajax({
         type: 'GET',
-        url: reportURI,
+        url: reportURI+"?patientid="+currentPatientId,
         dataType: 'json',
         contentType: 'application/json',
         success: function (data) {
@@ -142,7 +128,7 @@ function getPatientReport() {
             if (reportArray == ""){
                 $('#searchRPTcontain').html('');
                 $('#reportcontainer').html('');
-                createreportbtn = "<button id='rpt' class=' btn btn-info btn-sm'>Create Report</button>"
+                createreportbtn = "<button id='rpt' data-toggle='modal' data-target='#addPatientResultModal' class='btn btn-info btn-sm'>Create Report</button>"
                 $('#reportcontainer').append("<div style='text-align: center; margin-top: 10%; margin-left: auto; margin-right: auto;'><h3 >No patient report found</h3><div>" + createreportbtn + "<div></div>");
             }
             else{
@@ -162,7 +148,7 @@ function getPatientReport() {
                         TSHArray.push(report.TSH)
                         TreatmentArray.push({TSH: report.TSH, FT4: report.FT4, timestamp: report.timestamp})
                         ExportationArray.push({TSH: report.TSH, FT4: report.FT4, timestamp: report.timestamp})
-                        viewdosagebtn = "<button id='viewdosage' num='"+storeReports[storeReports.length-1].report_id+"' class='btn btn-info btn-sm custom-class' data-toggle='modal' data-target='#prescriptionModal'>View Prescription</button>";
+                        viewdosagebtn = "<button id='viewdosage' num='"+storeReports[storeReports.length-1].report_id+"' class='btn btn-dark btn-sm custom-class' data-toggle='modal' data-target='#prescriptionModal' >View Prescription</button>";
                         aptdate = storeReports[storeReports.length-1].timestamp;
                         editDeleteResultBtn = "<button id='openEditDeleteResultModalBtn' class='btn btn-info' data-toggle='modal' data-target='#editDeleteResultModal' index='"+i+"' ft4='"+report.FT4+"' tsh='"+report.TSH+"'><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' width='16' height='16'>"+
                         "<path fill-rule='evenodd' d='M11.013 1.427a1.75 1.75 0 012.474 0l1.086 1.086a1.75 1.75 0 010 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 01-.927-.928l.929-3.25a1.75 1.75 0 01.445-.758l8.61-8.61zm1.414 1.06a.25.25 0 00-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 000-.354l-1.086-1.086zM11.189 6.25L9.75 4.81l-6.286 6.287a.25.25 0 00-.064.108l-.558 1.953 1.953-.558a.249.249 0 00.108-.064l6.286-6.286z'>"+
@@ -173,19 +159,12 @@ function getPatientReport() {
                         "<tr><td>"+report.timestamp+"</td><td>"+report.FT4+"</td><td>"+
                         ""+report.TSH+"</td><td>"+editDeleteResultBtn+"</td></tr></tr>");
                         
-                        if (currentPatientId != reportArray[i].patient_id && i == reportArray.length-1){
-                            $('#searchRPTcontain').html('');
-                            $('#reportcontainer').html('');
-                            createreportbtn = "<button id='rpt' class=' btn btn-info btn-sm'>Create Report</button>"
-                            $('#reportcontainer').append("<div style='text-align: center; margin-top: 10%; margin-left: auto; margin-right: auto;'><h3>No patient report found</h3><div>"+createreportbtn+"<div></div>");
-                            return console.log("no report history")
-                        }
 
                     }
                     //console.log(reportArray.length)
                     if (i == reportArray.length-1){
 
-                        $('#prescriptionButton').append(viewdiagnosisbutton+"<br class='divider'>"+viewdosagebtn +"<br class='divider'>" +createreport);
+                        $('#prescriptionButton').append(viewdiagnosisbutton + " " + viewdosagebtn + "<br class='divider'>" + createreport);
                         return startCalc();
                     }
                 }
@@ -248,7 +227,7 @@ function regetPatientReport() {
                 //console.log(reportArray.length)
                 if (i == reportArray.length-1){
 
-                    return $('#prescriptionButton').append(viewdiagnosisbutton+"<br class='divider'>"+viewdosagebtn +"<br class='divider'>" +createreport);
+                    return  $('#prescriptionButton').append(viewdiagnosisbutton + " " + viewdosagebtn + "<br class='divider'>" + createreport);
                 }
             }
         }
@@ -749,6 +728,15 @@ $(document).on("click", "#rpt", function () {
 $(document).on("click", "#openAddPrescriptionModalBtn", function () {
     $('#prescriptionModal').modal('hide');
 });
+
+$(window).resize(function(){
+    if($(window).width()<601){
+          $("#graphTable").addClass("table-responsive");
+      } 
+      else {
+          $("#graphTable").removeClass("table-responsive");
+      }
+  });
 
 
 

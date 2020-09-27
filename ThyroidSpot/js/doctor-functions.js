@@ -328,11 +328,11 @@ $(document).on("click", "#abandonPatientBtn", function () {
 
 function adoptPatient() {
     for (i = 0; i < allPatientArray.length; i++) {
-        if ($('#patientICInput').val() == allPatientArray[i].ic_number) {
+        if ($('#patientICInput').val() == allPatientArray[i].user_id) {
             var patientInformation = {
                 patient_id: allPatientArray[i].patient_id, user_id: allPatientArray[i].user_id,
-                diagnosis: allPatientArray[i].diagnosis, ic_number: allPatientArray[i].ic_number, date_of_birth: patientInformationArray[i].date_of_birth,
-                gender: allPatientArray[i].gender, blood_type: allPatientArray[i].blood_type, timestamp: patientInformationArray[i].timestamp,
+                diagnosis: allPatientArray[i].diagnosis, ic_number: allPatientArray[i].ic_number, date_of_birth: allPatientArray[i].date_of_birth,
+                gender: allPatientArray[i].gender, blood_type: allPatientArray[i].blood_type, timestamp: allPatientArray[i].timestamp,
                 doctor_id: doctorID
             };
             $.ajax({
@@ -347,7 +347,7 @@ function adoptPatient() {
             });
 
 
-        } else if (i = allPatientArray.length-1) {
+        } else {
             document.getElementById("wrongPatientIdPrompt").style.display = "";
             document.getElementById("wrongPatientIdPrompt").innerHTML = "This Patient Does Not Exist"
         }

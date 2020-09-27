@@ -205,7 +205,7 @@ function getPatientReport() {
     $.ajax({
         type: 'GET',
         //async: true,
-        url: reportURI,
+        url: reportURI+"?patientid="+currentPatientID,
         dataType: 'json',
         contentType: 'application/json',
         success: function (data) {
