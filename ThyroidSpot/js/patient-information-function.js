@@ -306,7 +306,8 @@ function postPatientReport() {
                 dataType: 'json',
                 contentType: 'application/json',
                 success: function (data) {
-                    window.location.reload();
+                    currentNotificationMessage = "There is a new health report added by the clinician"
+                    postNotification();
                 }
             });
         }
@@ -317,6 +318,7 @@ function postPatientReport() {
     }
 }
 
+var prescription;
 
 var doseArray = []//defining array to store all dosages
 function getPrescription(){
@@ -334,19 +336,19 @@ function getPrescription(){
             for (i = 0; i < doseArray.length; i++) {
                 if (currentPatientId == doseArray[i].patient_id){
                     
-                    var prescription = {dosageId: doseArray[i].idDosage, drug_name: doseArray[i].drug_name, drug_dose: doseArray[i].drug_dose, 
+                    prescription = {dosageId: doseArray[i].idDosage, drug_name: doseArray[i].drug_name, drug_dose: doseArray[i].drug_dose, 
                         drug_days: doseArray[i].drug_days, drug_img: doseArray[i].drug_img, remarks: doseArray[i].remarks}
                     
                     console.log(prescription)
                     
-                    coverImage = "<img id='expandImg' data-toggle='modal' data-target='#modalImg' num="+doseArray[i].idDosage+" style='width:100px' src='data:image/jpeg;base64," + prescription.drug_img + "'/>";
+                    coverImage = "<img id='expandImg"+i+"'  class='expandImg' data-toggle='modal' data-target='#modalImg' index = '"+i+"' num="+doseArray[i].idDosage+" style='width:100px' src='data:image/jpeg;base64," + prescription.drug_img + "'/>";
                     editDeletePrescriptionBtn = "<button id='openEditPrescriptionModalBtn' class='btn btn-info' data-toggle='modal' data-target='#editPrescriptionModal' index='"+i+"' dosageId='"+prescription.dosageId+"' '><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' width='16' height='16'>"+
                     "<path fill-rule='evenodd' d='M11.013 1.427a1.75 1.75 0 012.474 0l1.086 1.086a1.75 1.75 0 010 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 01-.927-.928l.929-3.25a1.75 1.75 0 01.445-.758l8.61-8.61zm1.414 1.06a.25.25 0 00-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 000-.354l-1.086-1.086zM11.189 6.25L9.75 4.81l-6.286 6.287a.25.25 0 00-.064.108l-.558 1.953 1.953-.558a.249.249 0 00.108-.064l6.286-6.286z'>"+
                     "</path></svg></button>"
                     
                     $('#prescriptionTable').append("<tr><td style='padding:30px;'>"+prescription.drug_name+"</td>"+
-                    "<td>"+prescription.drug_dose+"</td><td>"+prescription.drug_days+"</td>"+
-                    "<td>"+coverImage+"</td><td>"+prescription.remarks+"</td><td>"+editDeletePrescriptionBtn+"</td></tr>");
+                    "<td style='padding:30px;'>"+prescription.drug_dose+"</td><td style='padding:30px;'>"+prescription.drug_days+"</td>"+
+                    "<td>"+coverImage+"</td><td style='padding:30px;'>"+prescription.remarks+"</td><td style='padding:30px;'>"+editDeletePrescriptionBtn+"</td></tr>");
 
                 }
             }
@@ -386,7 +388,7 @@ function getPrescription(){
                   success: function (data) {                    
                       currentNotificationMessage = "There is a new prescription added by the clinician"
                       postNotification();
-                      window.location.reload(); //reload page after adding so it shows the newly added report + prescription
+                      //reload page after adding so it shows the newly added report + prescription
                   }
               });
          };
@@ -403,7 +405,9 @@ function getPrescription(){
         dataType: 'json',
         contentType: 'application/json',
         success: function (data) {
-            window.location.reload();
+            currentNotificationMessage = "One of your prescription has been deleted"
+            postNotification();
+
         }
     });
  }
@@ -507,6 +511,8 @@ $(document).on("click", "#updatePrescriptionBtn", function (){
         contentType: 'application/json',
         success: function (data) {
             console.log("Sucessfully Updated")
+            currentNotificationMessage = "Your prescription has been updated by clinician"
+            postNotification();
         }
     })
 });
@@ -620,7 +626,6 @@ function updateReport(){
         success: function (data) {
             currentNotificationMessage = "Your Health Report has been updated by your clinician" 
             postNotification();
-            window.location.reload();
         }
     });
 
@@ -634,7 +639,8 @@ function deleteReport(){
         dataType: 'json',
         contentType: 'application/json',
         success: function (data) {
-            window.location.reload();
+            currentNotificationMessage = "Your Health Report has been deleted by your clinician"
+            postNotification();
         }
     });
 
@@ -691,6 +697,43 @@ $(document).on("click", '#openEditDeleteResultModalBtn', function(){
  });
 */
 
+function exportData() {
+    console.log("Exporting data...")
+
+    var titlename = currentUser.full_name.replace(/ /g, "_").toUpperCase();
+    var ch = reporttime
+    var ft = reportft
+    var ts = reportts
+    var di = reportdia
+
+    //Sending data to the hidden div (located in prescription modal)
+    $("#exDiagnosis").html("")
+    for (x = 0; x < reportdia.length; x++) {
+        $("#exDiagnosis").append(reportdia[x] + "<br/>")
+    }
+
+    $("#exCheckup").text(ch)
+    $("#exFt4").text(ft + " pmol/L")
+    $("#exTsh").text(ts + " mU/L")
+    $("#exportDoseTable").html('')
+
+
+    for (x = 0; x < doseArray.length; x++) {
+        stonksImage = "<img style='width:120px; height:120px' src='data:image/jpeg;base64," + doseArray[x].drug_img + "'/>";
+
+        //append to the hidden div that will be used for exporting data into pdf
+        $("#exportDoseTable").append("<tr><td style='font-size: 20px ;text-align:left; width: 40%; font-weight: bold;padding-top: 50px; padding-bottom: 10px;'><u>Prescription no. " + (x + 1) + "</u></td>" +
+            "</tr><tr><td style=' text-align:left; padding-bottom: 10px;  width: 30%; font-weight: bold;'>Drug Name:</td><td>" + doseArray[x].drug_name + "</td></tr>" +
+            "<tr><td style='text-align:left; vertical-align: top; padding-bottom: 10px; font-weight: bold;'>Pills:</td><td>" + doseArray[x].drug_dose + "</td></tr><tr>" +
+            "<td style='text-align:left; vertical-align: top; padding-bottom: 10px; font-weight: bold;'>Prescription:</td><td>" + doseArray[x].drug_days + "</td></tr><tr>" +
+            "<td style='text-align:left; vertical-align: top; padding-bottom: 10px; font-weight: bold;'>Image:</td><td>" + stonksImage + "</td></tr><tr>" +
+            "<td style='text-align:left; vertical-align: top; font-weight: bold;'>Remarks:</td><td>" + doseArray[x].remarks + "</td></tr><br/>")
+    }
+
+    //Export selected div class as PDF
+    printJS({ printable: "export1", type: 'html' })
+}
+
 $(document).on('click', '#openEditPrescriptionModalBtn', function(){
     currentIndex = $(this).attr('index')
     currentDosageId = $(this).attr('dosageId')
@@ -728,6 +771,11 @@ $(document).on("click", "#rpt", function () {
 $(document).on("click", "#openAddPrescriptionModalBtn", function () {
     $('#prescriptionModal').modal('hide');
 });
+
+$(document).on("click", ".expandImg", function (){
+    currentIndex = $(this).attr('index')
+    document.getElementById('largeDrugImageView').src = "data:image/jpeg;base64," + doseArray[currentIndex].drug_img;
+})
 
 $(window).resize(function(){
     if($(window).width()<601){

@@ -25,3 +25,16 @@
   margin-top: 50px;
 }
 
+.margin-btm-2{
+  margin-bottom: 10px;
+}
+
+@media (min-width: 34em) {
+  .card-columns {
+      -webkit-column-count: 2;
+      -moz-column-count: 2;
+      column-count: 2;
+  }
+}
+
+

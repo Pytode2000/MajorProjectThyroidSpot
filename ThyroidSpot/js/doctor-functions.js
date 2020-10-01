@@ -32,6 +32,7 @@ function getAllPatientDetails() {
                 contentType: 'application/json',
                 success: function(patientData){
                     allPatientArray = patientData
+                    getAllPatientUnderClinician();
                     for(i=0; i < userInfoArray.length; i++) {
                         if (userInfoArray[i].user_id == doctorID){
                             document.getElementById('displayClinicianName').innerHTML = "Dr. "+userInfoArray[i].full_name
@@ -53,7 +54,7 @@ function getAllPatientUnderClinician() {
         dataType: 'json',
         contentType: 'application/json',
         success: function (data) {
-            var patientUnderClinicianArray = data;
+            patientUnderClinicianArray = data;
             $.ajax({
                 type: 'GET',
                 url: userURI,
@@ -90,15 +91,14 @@ function getAllPatientUnderClinician() {
                                 }
 
 
-                                $('#patientCard').append("<div id='singlePatientCard' class='card patient-card' data-string='" + userInfoArray[j].full_name + "'><div class='card-body'>" +
+                                $('#patientCard').append("<div id='singlePatientCard"+i+"' class='card patient-card' data-string='" + userInfoArray[j].full_name + "'><div class='card-body'>" +
                                     "<h5 id='patientName' class='card-title text-center'>" + userInfoArray[j].full_name + "</h5>" +
                                     "<p class='card-text text-center'>Gender : " + patientUnderClinicianArray[i].gender + "</p>" +
                                     "<p class='card-text text-center'>FT4 : <a class='ft4'>" + lastReportFT4 + "</a></p>" +
                                     "<p class='card-text text-center'>TSH : <a class='tsh'>" + lastReportTSH + "</a></p>" +
                                     "<button id='patientDetailsBtn' num='" + patientUnderClinicianArray[i].patient_id + "' index='" +patientUnderClinicianArray[i].user_id + "'" +
-                                    "class='btn btn-secondary btn-block'>More Details</button>" +
-                                    "<button id='openGraphModalBtn' class='btn btn-secondary btn-block' data-toggle='modal' data-target='#graphModal'>Graph</button>" +
-                                    "<button id='abandonPatientBtn' index='" + i + "' num='" + patientUnderClinicianArray[i].patient_id + "' class='btn btn-secondary btn-block' data-toggle='modal' data-target='#abandonPatientModal'>Abandon Patient</button>" +
+                                    "class='btn btn-dark btn-block'>More Details</button>" +
+                                    "<button id='abandonPatientBtn' index='" + i + "' num='" + patientUnderClinicianArray[i].patient_id + "' class='btn btn-dark btn-block' data-toggle='modal' data-target='#abandonPatientModal'>Abandon Patient</button>" +
                                     "</div><div class='card-footer'>" +
                                     "<small class='text-muted'>Last Updated: <a class='timestamp'>" + lastReportTimestamp + "</a></small></div></div>")
                                 totalPatient += 1;
@@ -181,94 +181,7 @@ function sortListDir() {
 }
 
 
-function sortByFT4Value() {
-    var list, b,switching, i, x, y, shouldSwitch;
-    list = document.getElementById("patientCard");
-    switching = true;
-    dir = "low";
-    /*Make a loop that will continue until
-    no switching has been done:*/
-    while (switching) {
-      //start by saying: no switching is done:
-      switching = false;
-      b = list.getElementsByClassName("card");
-      /*Loop through all table rows (except the
-      first, which contains table headers):*/
-      for (i = 0; i < (b.length - 1); i++) {
-        //start by saying there should be no switching:
-        /*Get the two elements you want to compare,
-        one from current row and one from the next:*/
-        x = b[i].getElementsByClassName("ft4")[0];
-        y = b[i + 1].getElementsByClassName("ft4")[0];
-        innerX = x.innerHTML;
-        innerY = y.innerHTML;
-        if (isNaN(innerX)){
-            innerX = 0;
-        }
-        if (isNaN(innerY)){
-            innerY = 0;
-        }
-        console.log(Number(innerY))
-        console.log(Number(innerX))
-        //check if the two rows should switch place:
-        if (Number(innerX) < Number(innerY)) {
-          //if so, mark as a switch and break the loop:
-          shouldSwitch = true;
-          break;
-        }
-      }
-      if (shouldSwitch) {
-        /*If a switch has been marked, make the switch
-        and mark that a switch has been done:*/
-        b[i].parentNode.insertBefore(b[i + 1], b[i]);
-        switching = true;
-      }
-    }
-  }
 
-function sortByTSHValue() {
-var list, b,switching, i, x, y, shouldSwitch;
-list = document.getElementById("patientCard");
-switching = true;
-/*Make a loop that will continue until
-no switching has been done:*/
-while (switching) {
-    //start by saying: no switching is done:
-    switching = false;
-    b = list.getElementsByClassName("card");
-    /*Loop through all table rows (except the
-    first, which contains table headers):*/
-    for (i = 0; i < (b.length - 1); i++) {
-    //start by saying there should be no switching:
-    /*Get the two elements you want to compare,
-    one from current row and one from the next:*/
-    x = b[i].getElementsByClassName("tsh")[0];
-    y = b[i + 1].getElementsByClassName("tsh")[0];
-    innerX = x.innerHTML;
-    innerY = y.innerHTML;
-    if (isNaN(innerX)){
-        innerX = 0;
-    }
-    if (isNaN(innerY)){
-        innerY = 0;
-    }
-    console.log(Number(innerY))
-    console.log(Number(innerX))
-    //check if the two rows should switch place:
-    if (Number(innerX) < Number(innerY)) {
-        //if so, mark as a switch and break the loop:
-        shouldSwitch = true;
-        break;
-    }
-    }
-    if (shouldSwitch) {
-    /*If a switch has been marked, make the switch
-    and mark that a switch has been done:*/
-    b[i].parentNode.insertBefore(b[i + 1], b[i]);
-    switching = true;
-    }
-}
-}
 
 function sortByDate() {
     var list, b,switching, i, x, y, shouldSwitch;
@@ -343,11 +256,12 @@ function adoptPatient() {
                 contentType: 'application/json',
                 success: function (data) {
                     console.log("success")
+                    window.location.reload();
                 }
             });
+            break;
 
-
-        } else {
+        } else if (i == allPatientArray.length-1 && $('#patientICInput').val() != allPatientArray[i].user_id) {
             document.getElementById("wrongPatientIdPrompt").style.display = "";
             document.getElementById("wrongPatientIdPrompt").innerHTML = "This Patient Does Not Exist"
         }
@@ -371,48 +285,55 @@ $(document).on("click", "#transferPatientBtn", function () {
             }
             else {
                 var patientInformation = {
-                    patient_id: patientInformationArray[currentPatient].patient_id, user_id: patientInformationArray[currentPatient].user_id,
-                    diagnosis: patientInformationArray[currentPatient].diagnosis, ic_number: patientInformationArray[currentPatient].ic_number, date_of_birth: patientInformationArray[currentPatient].date_of_birth,
-                    gender: patientInformationArray[currentPatient].gender, blood_type: patientInformationArray[currentPatient].blood_type, timestamp: patientInformationArray[currentPatient].timestamp,
+                    patient_id: patientUnderClinicianArray[currentPatient].patient_id, user_id: patientUnderClinicianArray[currentPatient].user_id,
+                    diagnosis: patientUnderClinicianArray[currentPatient].diagnosis, ic_number: patientUnderClinicianArray[currentPatient].ic_number, date_of_birth: patientUnderClinicianArray[currentPatient].date_of_birth,
+                    gender: patientUnderClinicianArray[currentPatient].gender, blood_type: patientUnderClinicianArray[currentPatient].blood_type, timestamp: patientUnderClinicianArray[currentPatient].timestamp,
                     doctor_id: newClinicianID
                 };
                 $.ajax({
                     type: 'PUT',
-                    url: patientURI + '/' + patientInformationArray[currentPatient].patient_id,
+                    url: patientURI + '/' + patientUnderClinicianArray[currentPatient].patient_id,
                     data: JSON.stringify(patientInformation),
                     dataType: 'json',
                     contentType: 'application/json',
                     success: function (data) {
                         console.log("success")
+                        window.location.reload();
+                        
                     }
                 });
+                break;
             }
         }
-        else if (i == (userInfoArray.length - 1) && newClinicianID != userInfoArray[i].user_id) {
+        else if (newClinicianID != userInfoArray[i].user_id && i == userInfoArray.length - 1){
             document.getElementById("wrongIDPrompt").style.display = "";
-            document.getElementById("wrongIDPrompt").innerHTML = "Wrong ID";
+            document.getElementById("wrongIDPrompt").innerHTML = "This UID Does not exist"
         }
     }
 
 });
 
+var patientInformation;
+
 $(document).on("click", "#confirmAbandonPatientBtn", function () {
     var currentPatient = document.getElementById("confirmAbandonPatientBtn").val
     console.log(currentPatient)
-    var patientInformation = {
-        patient_id: patientInformationArray[currentPatient].patient_id, user_id: patientInformationArray[currentPatient].user_id,
-        diagnosis: patientInformationArray[currentPatient].diagnosis, ic_number: patientInformationArray[currentPatient].ic_number, date_of_birth: patientInformationArray[currentPatient].date_of_birth,
-        gender: patientInformationArray[currentPatient].gender, blood_type: patientInformationArray[currentPatient].blood_type, timestamp: patientInformationArray[currentPatient].timestamp,
+    patientInformation = {
+        patient_id: patientUnderClinicianArray[currentPatient].patient_id, user_id: patientUnderClinicianArray[currentPatient].user_id,
+        diagnosis: patientUnderClinicianArray[currentPatient].diagnosis, ic_number: patientUnderClinicianArray[currentPatient].ic_number, date_of_birth: patientUnderClinicianArray[currentPatient].date_of_birth,
+        gender: patientUnderClinicianArray[currentPatient].gender, blood_type: patientUnderClinicianArray[currentPatient].blood_type, timestamp: patientUnderClinicianArray[currentPatient].timestamp,
         doctor_id: ""
     };
     $.ajax({
         type: 'PUT',
-        url: patientURI + '/' + patientInformationArray[currentPatient].patient_id,
+        url: patientURI + '/' + patientUnderClinicianArray[currentPatient].patient_id,
         data: JSON.stringify(patientInformation),
         dataType: 'json',
         contentType: 'application/json',
         success: function (data) {
             console.log("success")
+            window.location.reload();
+            
         }
     });
 
@@ -487,9 +408,21 @@ function getPatientReport() {
 }
 
 
+$(window).resize(function(){
+    if($(window).width()<601){
+          $("#adoptPatientBtn").addClass("btn-block");
+          $("#sortByBtn").addClass("margin-btm-2");
+      } 
+      else {
+          $("#adoptPatientBtn").removeClass("btn-block");
+          $("#sortByBtn").removeClass("margin-btm-2");
+      }
+  });
+
+
 
 
 getAllPatientDetails();
-getAllPatientUnderClinician();
+//getAllPatientUnderClinician();
 
 

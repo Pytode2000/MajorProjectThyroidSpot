@@ -51,42 +51,37 @@
 
             <!-- Show Search / Filter / Add Patient-->
             <div class="row row-margin-top-50">
-
                 <!--Search Button-->
-                <div class="col-5 align-baseline">
+                <div class="col-sm-4 col-md-4 col-xs-12 align-baseline">
                     <div class="input-group input-group-sm mb-3 align-baseline">
                         <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Search</span>
                         </div>
-                        <input id="searchInput" type="text" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                        <input id="searchInput" type="text" placeholder="Search.." aria-label="Small" aria-describedby="inputGroup-sizing-sm">
                     </div>
                 </div>
 
                 <!--Filter Button-->
-                <div class="col-4">
+                <div class="col-sm-4 col-md-4 col-xs-12">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button id="sortByBtn" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           Sort By
                         </button>
                         <div class="dropdown-menu">
                           <a class="dropdown-item" onclick="sortListDir()">Alphabetical Order (Name)</a>
-                          <a class="dropdown-item" onclick="sortByFT4Value()">FT4 Value</a>
-                          <a class="dropdown-item" onclick="sortByTSHValue()">TSH Value</a>
                           <a class="dropdown-item" onclick="sortByDate()">Latest Update</a>
                         </div>
                       </div>
                     </div>
 
                 <!--Adopt Patient Button-->
-                <div class="col-3">
-                    <button data-toggle='modal' data-target='#adoptPatientModal' type="button" class="btn btn-secondary float-right align-middle">Add
-                        Patient</button>
+                <div class="col-sm-4 col-md-4 col-xs-12">
+                    <button id="adoptPatientBtn" data-toggle='modal' data-target='#adoptPatientModal' type="button" class="btn btn-secondary float-right align-middle ">Add Patient</button>
                 </div>
 
             </div>
 
             <div>
-                <div id="patientCard" class="col card-deck row-margin-top-30" style="padding-left: 0px;">
+                <div id="patientCard" class="col card-deck row-margin-top-30 card-columns" style="padding-left: 0px;">
                 </div>
             </div>
         </div>
@@ -124,8 +119,8 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <label for="lname">Enter Patient IC: </label>
-                        <input type="text" id="patientICInput" placeholder="Patient IC"><br><br>
+                        <label for="lname">Enter Patient UID: </label>
+                        <input type="text" id="patientICInput" placeholder="Patient UID"><br><br>
                         <div id="wrongPatientIdPrompt" style="display: none;" class="alert alert-danger" role="alert">
                             
                           </div>
@@ -153,15 +148,15 @@
                 <div class="grid-container">
                     <div class="grid_item">
                         <p>Are you sure you want to abandon this patient?</p>
-                        <button id="confirmAbandonPatientBtn" class="btn btn-primary">Confirm Abandon Patient</button>
+                        <button id="confirmAbandonPatientBtn" class="btn btn-danger">Confirm Abandon Patient</button>
                     </div><br><br>
                     <div class="grid_item">
                         <label>Transfer Patient</label>
                         <input id="newClinicianID" type="text" placeholder="New Clinician UID"><br><br>
                         <div id="wrongIDPrompt" style="display: none;" class="alert alert-danger" role="alert">
-                            This is a danger alert—check it out!
+                            
                           </div>
-                        <button id="transferPatientBtn" class="btn btn-primary">Transfer Patient</button>
+                        <button id="transferPatientBtn" class="btn btn-danger">Transfer Patient</button>
                     </div>
                 </div>
                     </div>

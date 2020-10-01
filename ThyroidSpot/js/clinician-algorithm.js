@@ -331,21 +331,21 @@ function launchgraph(){
         data: {
             //labels: ['Ft4', 'TSH'],
             datasets: [{
-                label: 'Best Fit Curve',
+                label: 'Valid Data',
                 data: bestfitvalidData,
                  //data: [{
                      //x: bestfitvalidft4List,
                      //y: bestfitvalidtshList
                  //}],
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)'
+                    'rgba(255, 99, 132, 0.2)'
+                    //'rgba(54, 162, 235, 0.2)',
+                    //'rgba(255, 206, 86, 0.2)'
                 ],
                 borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)'
+                    'rgba(255, 99, 132, 1)'
+                    //'rgba(54, 162, 235, 1)',
+                    //'rgba(255, 206, 86, 1)'
                 ],
                 borderWidth: 1
             }]
@@ -364,10 +364,11 @@ function launchgraph(){
                 }
               }
               document.getElementById('tableFT4Value').innerHTML = valueX;
+              document.getElementById('tableTSHValue').innerHTML = valueY;
               console.log(event.offsetX, valueX, event.offsetY, valueY);
             },
 
-            elements: { point: { radius: 0 } },
+            //elements: { point: { radius: 0 } },
             responsive: true,
             maintainAspectRatio: false,
             scales: {
@@ -384,21 +385,20 @@ function launchgraph(){
             },
             
             tooltips: {
-                enabled:false,
+                //enabled:false,
                 mode:'nearest'
             }
 
         }
     });
+    for(i=0; i < bestfitvalidData.length;i++){
+        drawCoordinates(bestfitvalidData.FT4[i],bestfitvalidData.TSH[i])
+
+    }
+
 }
 
     
-
-//document.getElementById("graphcontainer").onclick = function(evt, array) { 
-    //var xLabel = myChart.scales['y-axis-0'].getValueForPixel(evt.y); 
-    //console.log(xLabel)
-    //alert(myChart.config.data.labels[xLabel- 1]);
-//};
 
 $("#graphcontainer").click(function(e){
     getPosition(e); 
