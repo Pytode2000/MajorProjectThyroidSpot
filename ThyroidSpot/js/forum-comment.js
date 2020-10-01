@@ -133,15 +133,15 @@ function getCommentByID(id) {
             }
             else {
 
-                //sort by latest
+                var pattern = /(\d{2})\-(\d{2})\-(\d{4})\s(\d{2}):(\d{2}):(\d{2})/;
                 commentArray.sort(function (a, b) {
-                    return dateToNum(b.timestamp) - dateToNum(a.timestamp);
+                    var dateA = +new Date(a.timestamp.replace(pattern,'$3-$2-$1T$4:$5:$6'));
+                    var dateB = +new Date(b.timestamp.replace(pattern,'$3-$2-$1T$4:$5:$6'));
+                    return dateB - dateA;
                 });
-                function dateToNum(d) {
-                    d = d.split(/[- :]/);
-                    return Number(d[5] + d[4] + d[3] + d[2] + d[1] + d[0]);
-                }
+                console.log(commentArray)
 
+                
                 for (i = 0; i < commentArray.length; i++) {
                     if (id == commentArray[i].forum_id) {
 
